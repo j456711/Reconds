@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c0d-jA-mBK">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="6" id="Pno-7G-2Jx">
                                     <size key="itemSize" width="50" height="50"/>
@@ -84,12 +84,34 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="did-eV-HBA"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="我的影片" image="Icon_Film" id="vXO-4D-dJ9"/>
                     <navigationItem key="navigationItem" title="我的影片" id="Qd6-rz-zyc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uP-fg-TKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3556" y="-644"/>
+            <point key="canvasLocation" x="4495.1999999999998" y="-644.52773613193403"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pc7-Pi-dug">
+            <objects>
+                <navigationController storyboardIdentifier="MyVideoNavigationContoller" automaticallyAdjustsScrollViewInsets="NO" id="ygg-kj-qnV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="Icon_Film" id="vXO-4D-dJ9"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="ZNc-2M-4jb">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TVG-cD-mTb">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="C3R-xI-Sa8" kind="relationship" relationship="rootViewController" id="lrZ-nf-XXB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X4L-G8-xF2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3556" y="-644.52773613193403"/>
         </scene>
     </scenes>
     <resources>

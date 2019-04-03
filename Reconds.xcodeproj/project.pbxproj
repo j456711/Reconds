@@ -50,7 +50,6 @@
 		1E419A3D2251BAB1009B4F49 = {
 			isa = PBXGroup;
 			children = (
-				1E419A71225378F0009B4F49 /* .gitignore */,
 				1E419A482251BAB1009B4F49 /* Reconds */,
 				1E419A472251BAB1009B4F49 /* Products */,
 			);
@@ -73,6 +72,7 @@
 				1E419A5F2253683D009B4F49 /* Model */,
 				1E419A492251BAB1009B4F49 /* AppDelegate.swift */,
 				1E419A552251BAB6009B4F49 /* Info.plist */,
+				1E419A71225378F0009B4F49 /* .gitignore */,
 			);
 			path = Reconds;
 			sourceTree = "<group>";

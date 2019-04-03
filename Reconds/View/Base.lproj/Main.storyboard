@@ -20,10 +20,45 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
+                    <connections>
+                        <segue destination="zRB-t4-eDX" kind="relationship" relationship="viewControllers" id="d55-la-yxk"/>
+                        <segue destination="V7C-vW-gsT" kind="relationship" relationship="viewControllers" id="Bkn-u0-XkN"/>
+                        <segue destination="YhJ-8c-XKX" kind="relationship" relationship="viewControllers" id="qeB-e9-BOu"/>
+                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfU-BX-58z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2885.5999999999999" y="133.5832083958021"/>
+        </scene>
+        <!--MyVideoNavigationContoller-->
+        <scene sceneID="V41-be-JjE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyVideos" referencedIdentifier="MyVideoNavigationContoller" id="zRB-t4-eDX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="NoJ-Uv-Nlp"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NI7-TX-n9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2289" y="588"/>
+        </scene>
+        <!--HomeNavigationController-->
+        <scene sceneID="iWT-fu-qwo">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="HomeNavigationController" id="V7C-vW-gsT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="rZD-BT-Eqz"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fe4-po-e9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2885" y="587"/>
+        </scene>
+        <!--SettingsNavigationController-->
+        <scene sceneID="j5P-xl-4Ff">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsNavigationController" id="YhJ-8c-XKX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="S2T-ec-4IN"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7lE-7a-srr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3484" y="587"/>
         </scene>
     </scenes>
 </document>

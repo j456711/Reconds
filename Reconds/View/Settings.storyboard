@@ -10,21 +10,41 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--View Controller-->
         <scene sceneID="QxC-n3-ZNu">
             <objects>
                 <viewController id="jJ8-CG-t7K" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gcS-vb-3cG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="IMy-Zv-gd9"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Rln-gZ-cJx"/>
+                    <navigationItem key="navigationItem" id="lOm-UT-YhT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HHx-ps-YOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3825" y="882"/>
+            <point key="canvasLocation" x="4764" y="881.10944527736137"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xU9-rc-6CL">
+            <objects>
+                <navigationController storyboardIdentifier="SettingsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="9TK-zs-LLJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" id="Rln-gZ-cJx"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="7vH-jg-gkz">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jJ8-CG-t7K" kind="relationship" relationship="rootViewController" id="QPN-dR-iyH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="biI-uk-gl8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3824.8000000000002" y="881.10944527736137"/>
         </scene>
     </scenes>
 </document>
