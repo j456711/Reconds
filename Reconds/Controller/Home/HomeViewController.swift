@@ -24,15 +24,28 @@ class HomeViewController: UIViewController {
     
     func createProjectNameAlert() {
         
-        let alert = UIAlertController(title: "請輸入影片名稱", message: "命名後仍可更改。", preferredStyle: .alert)
+        let alert = UIAlertController(title: "請輸入影片名稱", message: "命名後仍可更改，若未輸入名稱將預設為「未命名」。", preferredStyle: .alert)
         
         alert.addTextField(configurationHandler: { textField in
             
             textField.placeholder = "未命名"
         })
         
-        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: nil)
-        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
+        let confirmAction = UIAlertAction(title: "確定", style: .default) { (_) in
+            
+            guard let textField = alert.textFields?.first,
+                  let text = textField.text else { return }
+            
+            if text.isEmpty {
+                
+                self.navigationItem.title = textField.placeholder
+                
+            } else {
+                
+                self.navigationItem.title = text
+            }
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         
         alert.addAction(confirmAction)
         alert.addAction(cancelAction)

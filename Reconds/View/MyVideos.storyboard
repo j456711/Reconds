@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ygg-kj-qnV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -93,8 +93,8 @@
         <!--Navigation Controller-->
         <scene sceneID="pc7-Pi-dug">
             <objects>
-                <navigationController storyboardIdentifier="MyVideoNavigationContoller" automaticallyAdjustsScrollViewInsets="NO" id="ygg-kj-qnV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Icon_Film" id="vXO-4D-dJ9"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ygg-kj-qnV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="Icon_Film" id="mpr-fD-hKv"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="ZNc-2M-4jb">

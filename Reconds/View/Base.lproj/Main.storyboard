@@ -30,35 +30,35 @@
             </objects>
             <point key="canvasLocation" x="2885.5999999999999" y="133.5832083958021"/>
         </scene>
-        <!--MyVideoNavigationContoller-->
+        <!--MyVideos-->
         <scene sceneID="V41-be-JjE">
             <objects>
-                <viewControllerPlaceholder storyboardName="MyVideos" referencedIdentifier="MyVideoNavigationContoller" id="zRB-t4-eDX" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="MyVideos" id="zRB-t4-eDX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="NoJ-Uv-Nlp"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NI7-TX-n9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2289" y="588"/>
+            <point key="canvasLocation" x="3614" y="-127"/>
         </scene>
-        <!--HomeNavigationController-->
+        <!--Home-->
         <scene sceneID="iWT-fu-qwo">
             <objects>
-                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="HomeNavigationController" id="V7C-vW-gsT" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Home" id="V7C-vW-gsT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="rZD-BT-Eqz"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fe4-po-e9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2885" y="587"/>
+            <point key="canvasLocation" x="3614" y="133"/>
         </scene>
-        <!--SettingsNavigationController-->
+        <!--Settings-->
         <scene sceneID="j5P-xl-4Ff">
             <objects>
-                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsNavigationController" id="YhJ-8c-XKX" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Settings" id="YhJ-8c-XKX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="S2T-ec-4IN"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7lE-7a-srr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3484" y="587"/>
+            <point key="canvasLocation" x="3615" y="377"/>
         </scene>
     </scenes>
 </document>
