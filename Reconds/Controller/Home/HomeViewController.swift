@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Reconds
 //
 //  Created by 渡邊君 on 2019/4/1.
@@ -10,16 +10,39 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        
+        didSet {
+            
+            collectionView.delegate = self
+            collectionView.dataSource = self
+            
+            collectionView.isHidden = true
+        }
+    }
     
     @IBAction func addVideoButtonPressed(_ sender: UIBarButtonItem) {
         
-        createProjectNameAlert()
+        if collectionView.isHidden == true {
+            
+            createProjectNameAlert()
+            
+        } else {
+            
+            let alert = UIAlertController(title: "無法新增影片", message: "尚未開放一次可編輯多支影片的功能，敬請期待！", preferredStyle: .alert)
+            
+            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: nil)
+            
+            alert.addAction(confirmAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
     }
     
     func createProjectNameAlert() {
@@ -37,10 +60,14 @@ class HomeViewController: UIViewController {
                   let text = textField.text else { return }
             
             if text.isEmpty {
+            
+                self.collectionView.isHidden = false
                 
                 self.navigationItem.title = textField.placeholder
                 
             } else {
+                
+                self.collectionView.isHidden = false
                 
                 self.navigationItem.title = text
             }
@@ -55,3 +82,21 @@ class HomeViewController: UIViewController {
 
 }
 
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HomeCollectionViewCell.self), for: indexPath)
+        
+        guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
+        
+        
+        return homeCell
+    }
+
+}

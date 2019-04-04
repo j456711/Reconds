@@ -30,9 +30,11 @@
         <scene sceneID="xU9-rc-6CL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9TK-zs-LLJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="Rln-gZ-cJx"/>
+                    <tabBarItem key="tabBarItem" title="" image="Icon_Export" id="o1u-kM-2XQ">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="7vH-jg-gkz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -47,4 +49,7 @@
             <point key="canvasLocation" x="3824.8000000000002" y="881.10944527736137"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon_Export" width="32" height="32"/>
+    </resources>
 </document>

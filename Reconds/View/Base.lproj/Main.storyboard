@@ -12,7 +12,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="zWS-Tu-yzq">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="NXR-6K-TYS" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="NXR-6K-TYS" customClass="TabBarController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eMM-Mz-iG7">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -30,20 +30,20 @@
             </objects>
             <point key="canvasLocation" x="2885.5999999999999" y="133.5832083958021"/>
         </scene>
-        <!--MyVideos-->
+        <!--Home-->
         <scene sceneID="V41-be-JjE">
             <objects>
-                <viewControllerPlaceholder storyboardName="MyVideos" id="zRB-t4-eDX" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Home" id="zRB-t4-eDX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="NoJ-Uv-Nlp"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NI7-TX-n9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3614" y="-127"/>
         </scene>
-        <!--Home-->
+        <!--Record-->
         <scene sceneID="iWT-fu-qwo">
             <objects>
-                <viewControllerPlaceholder storyboardName="Home" id="V7C-vW-gsT" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Record" id="V7C-vW-gsT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="rZD-BT-Eqz"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fe4-po-e9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
