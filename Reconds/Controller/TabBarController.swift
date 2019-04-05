@@ -17,10 +17,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         delegate = self
     }
     
-//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//
-//        if viewController is RecordViewController {
-//
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+
+        if viewController is RecordViewController {
+
+            let cameraController = CameraViewController()
+            
+            present(cameraController, animated: true, completion: nil)
 //            let imagePicker = UIImagePickerController()
 //
 //            imagePicker.delegate = self
@@ -36,14 +39,14 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 //            imagePicker.videoMaximumDuration = 1.0
 //
 //            present(imagePicker, animated: true, completion: nil)
-//
-//            return false
-//
-//        } else {
-//
-//            return true
-//        }
-//    }
+
+            return false
+
+        } else {
+
+            return true
+        }
+    }
 
 }
 

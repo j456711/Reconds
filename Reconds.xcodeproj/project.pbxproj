@@ -20,6 +20,7 @@
 		1E419A72225378F1009B4F49 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1E419A71225378F0009B4F49 /* .gitignore */; };
 		1E419A742254B261009B4F49 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A732254B261009B4F49 /* HomeCollectionViewCell.swift */; };
 		1E419A762254D749009B4F49 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A752254D749009B4F49 /* TabBarController.swift */; };
+		1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A7822563FCA009B4F49 /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		1E419A71225378F0009B4F49 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1E419A732254B261009B4F49 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E419A752254D749009B4F49 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		1E419A7822563FCA009B4F49 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				1E419A67225372CF009B4F49 /* RecordViewController.swift */,
+				1E419A7822563FCA009B4F49 /* CameraViewController.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				1E419A4C2251BAB1009B4F49 /* HomeViewController.swift in Sources */,
 				1E419A68225372D0009B4F49 /* RecordViewController.swift in Sources */,
 				1E419A4A2251BAB1009B4F49 /* AppDelegate.swift in Sources */,
+				1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */,
 				1E419A762254D749009B4F49 /* TabBarController.swift in Sources */,
 				1E419A6E22537645009B4F49 /* SettingsViewController.swift in Sources */,
 			);
