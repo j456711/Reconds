@@ -39,19 +39,22 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EOb-ob-rzI"/>
                     </view>
+                    <connections>
+                        <segue destination="bBr-pZ-qkV" kind="show" identifier="showVideoPlayback" id="HXo-Fw-13o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B9V-f0-TQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5373.6000000000004" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Video Playback View Controller-->
         <scene sceneID="B6M-bg-2kq">
             <objects>
-                <viewController id="bBr-pZ-qkV" sceneMemberID="viewController">
+                <viewController id="bBr-pZ-qkV" customClass="VideoPlaybackViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oxa-8W-Khg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="jDg-As-Zsa"/>
                     </view>
                 </viewController>
