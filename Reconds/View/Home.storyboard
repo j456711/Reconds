@@ -118,7 +118,7 @@
         <!--Reconds-->
         <scene sceneID="696-q4-TEk">
             <objects>
-                <viewController id="Dty-Hw-4cZ" customClass="HomeViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="Dty-Hw-4cZ" customClass="HomeViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Svg-fk-ATz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

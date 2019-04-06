@@ -10,6 +10,14 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    var videoUrl: URL? {
+        
+        didSet {
+            
+            print(videoUrl!)
+        }
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView! {
         
         didSet {

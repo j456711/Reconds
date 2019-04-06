@@ -40,7 +40,7 @@
                         <viewLayoutGuide key="safeArea" id="EOb-ob-rzI"/>
                     </view>
                     <connections>
-                        <segue destination="bBr-pZ-qkV" kind="show" identifier="showVideoPlayback" id="HXo-Fw-13o"/>
+                        <segue destination="bBr-pZ-qkV" kind="show" identifier="ShowVideoPlayback" id="HXo-Fw-13o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B9V-f0-TQa" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,7 +10,12 @@ import UIKit
 import AVFoundation
 
 class CameraViewController: UIViewController {
-
+    
+    private struct Segue {
+        
+        static let showVideoPlayback = "ShowVideoPlayback"
+    }
+    
     let cameraButton = UIView()
     
     let captureSession = AVCaptureSession()
@@ -34,9 +39,9 @@ class CameraViewController: UIViewController {
             
             setUpVideoLayer()
             
-//            setUpProgressBar()
+            setUpProgressBar()
             
-            setUpCameraButton()
+//            setUpCameraButton()
             
             setUpCancelButton()
             
@@ -45,38 +50,38 @@ class CameraViewController: UIViewController {
         
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        guard let touch = touches.first else { return }
+
+        let point = touch.location(in: self.view)
+
+        if cameraButtonLayer.path!.contains(point) {
+
+            cameraButtonLayerTapped()
+
+            startRecording()
+        }
+    }
+    
+//    func setUpCameraButton() {
 //
-//        guard let touch = touches.first else { return }
+//        cameraButton.isUserInteractionEnabled = true
+//        let cameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(startCapture))
 //
-//        let point = touch.location(in: self.view)
+//        cameraButton.addGestureRecognizer(cameraButtonRecognizer)
 //
-//        if cameraButtonLayer.path!.contains(point) {
+//        cameraButton.frame = CGRect(x: (UIScreen.main.bounds.width / 2) - 25, y: UIScreen.main.bounds.height - 70, width: 50, height: 50)
 //
-//            cameraButtonLayerTapped()
+//        cameraButton.backgroundColor = .red
 //
-//            startRecording()
-//        }
+//        self.view.addSubview(cameraButton)
 //    }
     
-    func setUpCameraButton() {
-        
-        cameraButton.isUserInteractionEnabled = true
-        let cameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(startCapture))
-        
-        cameraButton.addGestureRecognizer(cameraButtonRecognizer)
-        
-        cameraButton.frame = CGRect(x: (UIScreen.main.bounds.width / 2) - 25, y: UIScreen.main.bounds.height - 70, width: 50, height: 50)
-        
-        cameraButton.backgroundColor = .red
-        
-        self.view.addSubview(cameraButton)
-    }
-    
-    @objc func startCapture() {
-     
-        startRecording()
-    }
+//    @objc func startCapture() {
+//
+//        startRecording()
+//    }
     
     func setUpCancelButton() {
         
@@ -95,9 +100,12 @@ class CameraViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let videoPlaybackVC = segue.destination as? VideoPlaybackViewController else { return }
+        if segue.identifier == Segue.showVideoPlayback {
         
-        videoPlaybackVC.videoUrl = sender as? URL
+            guard let videoPlaybackVC = segue.destination as? VideoPlaybackViewController else { return }
+        
+            videoPlaybackVC.videoUrl = sender as? URL
+        }
     }
 }
 
@@ -218,7 +226,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
         
         if directory != "" {
             
-            let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
+            let path = directory.appendingPathComponent(NSUUID().uuidString + ".mov")
             
             return URL(fileURLWithPath: path)
         }
@@ -229,8 +237,13 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func startRecording() {
         
         if movieOutput.isRecording == false {
-            
+        
             guard let connection = movieOutput.connection(with: AVMediaType.video) else { return }
+            
+            if connection.isVideoOrientationSupported {
+                
+                connection.videoOrientation = currentVideoOrientation()
+            }
             
             if connection.isVideoStabilizationSupported {
                 
@@ -256,10 +269,6 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
             outputUrl = tempUrl()
             
             movieOutput.startRecording(to: outputUrl!, recordingDelegate: self)
-        
-        } else {
-            
-            stopRecording()
         }
     }
     
@@ -280,16 +289,24 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
             
         } else {
             
-            guard let videoRecorded = outputUrl else { return }
+            guard let videoUrl = outputUrl else { return }
             
-            self.performSegue(withIdentifier: "showVideoPlayback", sender: videoRecorded)
+            self.dismiss(animated: true, completion: {
+                
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                
+                guard let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
+                
+                homeVC.videoUrl = videoUrl
+            })
+//            self.performSegue(withIdentifier: Segue.showVideoPlayback, sender: videoRecorded)
         }
     }
     
 }
 
 // MARK: - Animation
-extension CameraViewController {
+extension CameraViewController: CAAnimationDelegate {
     
     func setUpProgressBar() {
         
@@ -333,18 +350,24 @@ extension CameraViewController {
     
     //紅線動畫
     func cameraButtonLayerTapped() {
+                
+        let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
         
-        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        strokeAnimation.delegate = self
         
-        basicAnimation.toValue = 1
+        strokeAnimation.toValue = 1
         
-        basicAnimation.duration = 1 //動畫維持
+        strokeAnimation.duration = 1 //動畫維持
         
-        basicAnimation.fillMode = .forwards
+        strokeAnimation.fillMode = .forwards
         
-        basicAnimation.isRemovedOnCompletion = false //動畫完成後不要移除紅線
+        strokeAnimation.isRemovedOnCompletion = false //動畫完成後不要移除紅線
         
-        cameraButtonLayer.add(basicAnimation, forKey: "basic")
+        cameraButtonLayer.add(strokeAnimation, forKey: "basic")
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         
+        stopRecording()
     }
 }
