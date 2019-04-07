@@ -10,4 +10,12 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var removeButton: UIButton! {
+        
+        didSet {
+            
+            removeButton.isHidden = true
+        }
+    }
+
 }

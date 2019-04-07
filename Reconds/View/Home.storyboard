@@ -146,8 +146,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ej9-NO-yTV">
-                                                    <rect key="frame" x="5" y="5" width="64" height="64"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uln-iO-RJs">
+                                                    <rect key="frame" x="9" y="9" width="56" height="56"/>
                                                     <state key="normal" image="Icon_Remove"/>
                                                 </button>
                                             </subviews>
@@ -155,11 +155,14 @@
                                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Ej9-NO-yTV" secondAttribute="bottom" constant="5" id="JgT-bo-iON"/>
-                                            <constraint firstItem="Ej9-NO-yTV" firstAttribute="top" secondItem="PGs-dL-7wn" secondAttribute="top" constant="5" id="Qum-Cp-swu"/>
-                                            <constraint firstItem="Ej9-NO-yTV" firstAttribute="leading" secondItem="PGs-dL-7wn" secondAttribute="leading" constant="5" id="jc7-Or-dbg"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ej9-NO-yTV" secondAttribute="trailing" constant="5" id="mJg-9k-yXK"/>
+                                            <constraint firstAttribute="bottom" secondItem="Uln-iO-RJs" secondAttribute="bottom" constant="9" id="4HD-AM-xHy"/>
+                                            <constraint firstAttribute="trailing" secondItem="Uln-iO-RJs" secondAttribute="trailing" constant="9" id="4NJ-XQ-u2U"/>
+                                            <constraint firstItem="Uln-iO-RJs" firstAttribute="top" secondItem="PGs-dL-7wn" secondAttribute="top" constant="9" id="A7m-AF-GLl"/>
+                                            <constraint firstItem="Uln-iO-RJs" firstAttribute="leading" secondItem="PGs-dL-7wn" secondAttribute="leading" constant="9" id="pks-gR-F1z"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="removeButton" destination="Uln-iO-RJs" id="8MD-qp-9A3"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -167,14 +170,27 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="194"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frN-1r-8Zr">
+                                <rect key="frame" x="16" y="538" width="343" height="43"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="22"/>
+                                <state key="normal" title="完成">
+                                    <color key="titleColor" red="0.12549019607843137" green="0.72156862745098038" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="Dty-Hw-4cZ" eventType="touchUpInside" id="MfC-CL-gaS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hDo-ON-gQT" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" id="2eU-eI-bvU"/>
+                            <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="frN-1r-8Zr" secondAttribute="trailing" constant="16" id="8Fe-tW-omU"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" id="Cba-mj-hdK"/>
+                            <constraint firstItem="frN-1r-8Zr" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" constant="16" id="H2f-MT-4CA"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="OPo-7H-Lef"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="top" secondItem="kSC-F8-r8y" secondAttribute="bottom" constant="25" id="PHl-SQ-8FO"/>
                             <constraint firstItem="kSC-F8-r8y" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="Rox-GV-mzO"/>
+                            <constraint firstItem="frN-1r-8Zr" firstAttribute="top" secondItem="fhU-yD-8eU" secondAttribute="bottom" constant="8" id="cmN-bx-MC9"/>
                             <constraint firstItem="kSC-F8-r8y" firstAttribute="top" secondItem="Kde-7M-CNW" secondAttribute="top" id="ge5-rF-e0e"/>
                             <constraint firstItem="kSC-F8-r8y" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" id="hQs-2E-Xaq"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="bottom" secondItem="fhU-yD-8eU" secondAttribute="bottom" constant="88" id="ulF-CQ-o2X"/>
@@ -199,6 +215,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="fhU-yD-8eU" id="vYQ-NB-QpV"/>
+                        <outlet property="doneButton" destination="frN-1r-8Zr" id="Ocu-KZ-E5F"/>
                         <outlet property="videoView" destination="kSC-F8-r8y" id="83v-bo-Fd9"/>
                         <segue destination="lfP-wx-OQs" kind="show" identifier="show" id="o4H-VK-G5q"/>
                     </connections>

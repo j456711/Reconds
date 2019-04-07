@@ -17,14 +17,22 @@ class HomeViewController: UIViewController {
         
         didSet {
 
-            print(videoUrl!)
-            videoUrls.append(videoUrl!)
-            print("------", videoUrls, "-------")
+//            print(videoUrl!)
+//            videoUrls.append(videoUrl!)
+//            print("------", videoUrls, "-------")
 
         }
     }
     
-    var videoUrls: [URL] = []
+    var videoUrls: [Int] = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4] {
+        
+        didSet {
+            
+            print(videoUrls)
+        }
+    }
+    
+    var longPressedEnabled = true
     
     @IBOutlet weak var videoView: UIView!
     
@@ -37,6 +45,27 @@ class HomeViewController: UIViewController {
             
             collectionView.isHidden = true
         }
+    }
+    
+    @IBOutlet weak var doneButton: UIButton! {
+        
+        didSet {
+            
+            doneButton.isHidden = true
+            
+            doneButton.layer.borderWidth = 1
+            doneButton.layer.borderColor = UIColor(red: 32 / 255, green: 184 / 255, blue: 221 / 255, alpha: 1).cgColor
+            doneButton.layer.cornerRadius = 18
+        }
+    }
+    
+    @IBAction func doneButtonPressed(_ sender: UIButton) {
+    
+        doneButton.isHidden = true
+        
+        longPressedEnabled = false
+        
+        collectionView.reloadData()
     }
     
     @IBAction func addVideoButtonPressed(_ sender: UIBarButtonItem) {
@@ -108,11 +137,11 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 24
+        return videoUrls.count + (30 - videoUrls.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -121,8 +150,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
         
+        homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
         
+        if longPressedEnabled {
 
+            homeCell.removeButton.isHidden = false
+
+        } else {
+
+            homeCell.removeButton.isHidden = true
+        }
+        
 //        if videoUrl == nil {
 //
 //            return homeCell
@@ -135,8 +173,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return homeCell
     }
 
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        print("Start index: - \(sourceIndexPath.item)")
+        print("End index: - \(destinationIndexPath.item)")
+        
+        let tmp = videoUrls[sourceIndexPath.item]
+        videoUrls[sourceIndexPath.item] = videoUrls[destinationIndexPath.item]
+        videoUrls[destinationIndexPath.item] = tmp
+        
+        collectionView.reloadData()
+    }
+    
 }
 
+// MARK: - Long Press Gesture
 extension HomeViewController {
     
     @objc func longPress(_ gesture: UIGestureRecognizer) {
@@ -157,9 +213,26 @@ extension HomeViewController {
             
             collectionView.endInteractiveMovement()
             
+            doneButton.isHidden = false
+            
+            longPressedEnabled = true
+            
+            collectionView.reloadData()
+            
         default:
             
             collectionView.cancelInteractiveMovement()
         }
+    }
+    
+    @objc func removeButtonPressed(_ sender: UIButton) {
+        
+        let hitPoint = sender.convert(CGPoint.zero, to: collectionView)
+        
+        guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
+        
+        videoUrls.remove(at: hitIndex.item)
+        
+        collectionView.reloadData()
     }
 }
