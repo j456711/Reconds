@@ -94,7 +94,7 @@
         <scene sceneID="pc7-Pi-dug">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ygg-kj-qnV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Icon_Film" id="mpr-fD-hKv">
+                    <tabBarItem key="tabBarItem" title="" image="Icon_Film" selectedImage="Icon_FilmSelected" id="mpr-fD-hKv">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -133,21 +133,33 @@
                                 <rect key="frame" x="0.0" y="283" width="375" height="247"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="qLB-iJ-eOg">
-                                    <size key="itemSize" width="72" height="72"/>
+                                    <size key="itemSize" width="74" height="74"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionViewCell" id="PGs-dL-7wn" customClass="HomeCollectionViewCell" customModule="Reconds" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ej9-NO-yTV">
+                                                    <rect key="frame" x="5" y="5" width="64" height="64"/>
+                                                    <state key="normal" image="Icon_Remove"/>
+                                                </button>
+                                            </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="1" green="0.61900724959999998" blue="0.18942028" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Ej9-NO-yTV" secondAttribute="bottom" constant="5" id="JgT-bo-iON"/>
+                                            <constraint firstItem="Ej9-NO-yTV" firstAttribute="top" secondItem="PGs-dL-7wn" secondAttribute="top" constant="5" id="Qum-Cp-swu"/>
+                                            <constraint firstItem="Ej9-NO-yTV" firstAttribute="leading" secondItem="PGs-dL-7wn" secondAttribute="leading" constant="5" id="jc7-Or-dbg"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ej9-NO-yTV" secondAttribute="trailing" constant="5" id="mJg-9k-yXK"/>
+                                        </constraints>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -274,5 +286,7 @@
     <resources>
         <image name="Icon_Check" width="64" height="64"/>
         <image name="Icon_Film" width="32" height="32"/>
+        <image name="Icon_FilmSelected" width="32" height="32"/>
+        <image name="Icon_Remove" width="64" height="64"/>
     </resources>
 </document>

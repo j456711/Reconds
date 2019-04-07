@@ -56,6 +56,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
+
+        collectionView.addGestureRecognizer(longPressGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,22 +80,22 @@ class HomeViewController: UIViewController {
             textField.placeholder = "未命名"
         })
 
-        let confirmAction = UIAlertAction(title: "確定", style: .default) { (_) in
+        let confirmAction = UIAlertAction(title: "確定", style: .default) { [weak self] (_) in
 
             guard let textField = alert.textFields?.first,
                   let text = textField.text else { return }
 
             if text.isEmpty {
 
-                self.collectionView.isHidden = false
+                self?.collectionView.isHidden = false
 
-                self.navigationItem.title = textField.placeholder
+                self?.navigationItem.title = textField.placeholder
 
             } else {
 
-                self.collectionView.isHidden = false
+                self?.collectionView.isHidden = false
 
-                self.navigationItem.title = text
+                self?.navigationItem.title = text
             }
         }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -132,4 +135,31 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return homeCell
     }
 
+}
+
+extension HomeViewController {
+    
+    @objc func longPress(_ gesture: UIGestureRecognizer) {
+        
+        switch gesture.state {
+            
+        case .began:
+            
+            guard let selectedIndexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else { return }
+            
+            collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
+            
+        case .changed:
+            
+            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+            
+        case .ended:
+            
+            collectionView.endInteractiveMovement()
+            
+        default:
+            
+            collectionView.cancelInteractiveMovement()
+        }
+    }
 }
