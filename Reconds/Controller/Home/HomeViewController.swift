@@ -7,16 +7,26 @@
 //
 
 import UIKit
+import AVFoundation
 
 class HomeViewController: UIViewController {
 
+    let rcVideoPlayer = RCVideoPlayer()
+    
     var videoUrl: URL? {
         
         didSet {
-            
+
             print(videoUrl!)
+            videoUrls.append(videoUrl!)
+            print("------", videoUrls, "-------")
+
         }
     }
+    
+    var videoUrls: [URL] = []
+    
+    @IBOutlet weak var videoView: UIView!
     
     @IBOutlet weak var collectionView: UICollectionView! {
         
@@ -37,11 +47,7 @@ class HomeViewController: UIViewController {
             
         } else {
             
-            let alert = UIAlertController(title: "無法新增影片", message: "尚未開放一次可編輯多支影片的功能，敬請期待！", preferredStyle: .alert)
-            
-            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: nil)
-            
-            alert.addAction(confirmAction)
+            let alert = UIAlertController.confirmationAlertAddedWith(alertTitle: "無法新增影片", alertMessage: "尚未開放一次可編輯多支影片的功能，敬請期待！", actionHandler: nil)
             
             present(alert, animated: true, completion: nil)
         }
@@ -50,38 +56,47 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if videoUrl != nil {
+            
+            rcVideoPlayer.showVideoWith(view, url: videoUrl!)
+        }
+        
+        collectionView.reloadData()
     }
     
     func createProjectNameAlert() {
         
         let alert = UIAlertController(title: "請輸入影片名稱", message: "命名後仍可更改，若未輸入名稱將預設為「未命名」。", preferredStyle: .alert)
-        
+
         alert.addTextField(configurationHandler: { textField in
-            
+
             textField.placeholder = "未命名"
         })
-        
+
         let confirmAction = UIAlertAction(title: "確定", style: .default) { (_) in
-            
+
             guard let textField = alert.textFields?.first,
                   let text = textField.text else { return }
-            
+
             if text.isEmpty {
-            
+
                 self.collectionView.isHidden = false
-                
+
                 self.navigationItem.title = textField.placeholder
-                
+
             } else {
-                
+
                 self.collectionView.isHidden = false
-                
+
                 self.navigationItem.title = text
             }
         }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        
+
         alert.addAction(confirmAction)
         alert.addAction(cancelAction)
         
@@ -104,6 +119,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
         
         
+
+//        if videoUrl == nil {
+//
+//            return homeCell
+//
+//        } else {
+//
+//            rcVideoPlayer.showVideoWith(homeCell, url: videoUrl!)
+//        }
+
         return homeCell
     }
 

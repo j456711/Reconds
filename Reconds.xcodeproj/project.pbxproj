@@ -22,6 +22,8 @@
 		1E419A762254D749009B4F49 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A752254D749009B4F49 /* TabBarController.swift */; };
 		1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A7822563FCA009B4F49 /* CameraViewController.swift */; };
 		1E419A7B22588465009B4F49 /* VideoPlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A7A22588465009B4F49 /* VideoPlaybackViewController.swift */; };
+		1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */; };
+		1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		1E419A752254D749009B4F49 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1E419A7822563FCA009B4F49 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		1E419A7A22588465009B4F49 /* VideoPlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaybackViewController.swift; sourceTree = "<group>"; };
+		1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCVideoPlayer.swift; sourceTree = "<group>"; };
+		1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 		1E419A482251BAB1009B4F49 /* Reconds */ = {
 			isa = PBXGroup;
 			children = (
+				1EF18FDD2259D016001FEFCA /* Extension */,
 				1E419A642253714E009B4F49 /* Resource */,
 				1E419A612253686A009B4F49 /* View */,
 				1E419A602253685D009B4F49 /* Controller */,
@@ -88,6 +93,7 @@
 		1E419A5F2253683D009B4F49 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,6 +154,14 @@
 				1E419A7A22588465009B4F49 /* VideoPlaybackViewController.swift */,
 			);
 			path = Record;
+			sourceTree = "<group>";
+		};
+		1EF18FDD2259D016001FEFCA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,8 +242,10 @@
 				1E419A742254B261009B4F49 /* HomeCollectionViewCell.swift in Sources */,
 				1E419A4C2251BAB1009B4F49 /* HomeViewController.swift in Sources */,
 				1E419A68225372D0009B4F49 /* RecordViewController.swift in Sources */,
+				1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */,
 				1E419A7B22588465009B4F49 /* VideoPlaybackViewController.swift in Sources */,
 				1E419A4A2251BAB1009B4F49 /* AppDelegate.swift in Sources */,
+				1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */,
 				1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */,
 				1E419A762254D749009B4F49 /* TabBarController.swift in Sources */,
 				1E419A6E22537645009B4F49 /* SettingsViewController.swift in Sources */,

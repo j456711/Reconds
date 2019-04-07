@@ -40,9 +40,7 @@ class CameraViewController: UIViewController {
             setUpVideoLayer()
             
             setUpProgressBar()
-            
-//            setUpCameraButton()
-            
+                        
             setUpCancelButton()
             
             startSession()
@@ -63,25 +61,6 @@ class CameraViewController: UIViewController {
             startRecording()
         }
     }
-    
-//    func setUpCameraButton() {
-//
-//        cameraButton.isUserInteractionEnabled = true
-//        let cameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(startCapture))
-//
-//        cameraButton.addGestureRecognizer(cameraButtonRecognizer)
-//
-//        cameraButton.frame = CGRect(x: (UIScreen.main.bounds.width / 2) - 25, y: UIScreen.main.bounds.height - 70, width: 50, height: 50)
-//
-//        cameraButton.backgroundColor = .red
-//
-//        self.view.addSubview(cameraButton)
-//    }
-    
-//    @objc func startCapture() {
-//
-//        startRecording()
-//    }
     
     func setUpCancelButton() {
         
@@ -350,7 +329,7 @@ extension CameraViewController: CAAnimationDelegate {
     
     //紅線動畫
     func cameraButtonLayerTapped() {
-                
+        
         let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
         
         strokeAnimation.delegate = self

@@ -18,12 +18,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-
+        
         if viewController is RecordViewController {
+                
+                let cameraVC = CameraViewController()
+                
+                present(cameraVC, animated: true, completion: nil)
 
-            let cameraController = CameraViewController()
-            
-            present(cameraController, animated: true, completion: nil)
 //            let imagePicker = UIImagePickerController()
 //
 //            imagePicker.delegate = self
