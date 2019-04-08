@@ -17,9 +17,22 @@ class VideoPlaybackViewController: UIViewController {
     
     var videoUrl: URL!
     
+    @IBOutlet weak var controlView: UIView!
+    
+    @IBAction func retakeButtonPressed(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func useButtonPressed(_ sender: UIButton) {
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         avPlayerlayer = AVPlayerLayer(player: avPlayer)
         avPlayerlayer.frame = self.view.bounds
         avPlayerlayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -32,6 +45,9 @@ class VideoPlaybackViewController: UIViewController {
         avPlayer.replaceCurrentItem(with: playerItem)
         
         avPlayer.play()
+        
+        view.bringSubviewToFront(controlView)
+
     }
 
 

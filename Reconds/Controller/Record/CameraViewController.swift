@@ -344,9 +344,7 @@ extension CameraViewController: CAAnimationDelegate {
         strokeAnimation.duration = 1 //動畫維持
         
         strokeAnimation.fillMode = .forwards
-        
-        strokeAnimation.isRemovedOnCompletion = false //動畫完成後不要移除紅線
-        
+                
         cameraButtonLayer.add(strokeAnimation, forKey: "basic")
     }
     
