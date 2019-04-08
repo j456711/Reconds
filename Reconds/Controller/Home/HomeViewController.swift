@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
         
         didSet {
 
-//            print(videoUrl!)
+            print(videoUrl!)
 //            videoUrls.append(videoUrl!)
 //            print("------", videoUrls, "-------")
 
@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    var longPressedEnabled = true
+    var longPressedEnabled = false
     
     @IBOutlet weak var videoView: UIView!
     
@@ -141,7 +141,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return videoUrls.count + (30 - videoUrls.count)
+        return videoUrls.count + (24 - videoUrls.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

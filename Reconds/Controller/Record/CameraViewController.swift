@@ -178,24 +178,24 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     }
     
     func currentVideoOrientation() -> AVCaptureVideoOrientation {
-        
+
         var orientation: AVCaptureVideoOrientation
-        
+
         switch UIDevice.current.orientation {
-            
+
         case .portrait:
             orientation = AVCaptureVideoOrientation.portrait
-            
+
         case .landscapeRight:
             orientation = AVCaptureVideoOrientation.landscapeLeft
-            
+
         case .portraitUpsideDown:
             orientation = AVCaptureVideoOrientation.portraitUpsideDown
-            
+
         default:
             orientation = AVCaptureVideoOrientation.landscapeRight
         }
-        
+
         return orientation
     }
     
@@ -205,7 +205,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
         
         if directory != "" {
             
-            let path = directory.appendingPathComponent(NSUUID().uuidString + ".mov")
+            let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
             
             return URL(fileURLWithPath: path)
         }
@@ -220,7 +220,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
             guard let connection = movieOutput.connection(with: AVMediaType.video) else { return }
             
             if connection.isVideoOrientationSupported {
-                
+
                 connection.videoOrientation = currentVideoOrientation()
             }
             
@@ -270,17 +270,22 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
             
             guard let videoUrl = outputUrl else { return }
             
-            self.dismiss(animated: true, completion: {
-                
-                let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                
-                guard let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
-                
-                homeVC.videoUrl = videoUrl
-            })
-//            self.performSegue(withIdentifier: Segue.showVideoPlayback, sender: videoRecorded)
+//            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            
+//            if let tabbar = appDelegate.window?.rootViewController as? TabBarController {
+//
+//                guard let navVC = tabbar.viewControllers?.first as? UINavigationController,
+//                    let homeVC = navVC.viewControllers.first as? HomeViewController else { return }
+//
+//                homeVC.videoUrl = videoUrl
+//
+//                self.dismiss(animated: true, completion: nil)
+//            }
+
+            self.performSegue(withIdentifier: Segue.showVideoPlayback, sender: videoUrl)
         }
     }
+    
     
 }
 

@@ -20,26 +20,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
         if viewController is RecordViewController {
-                
-                let cameraVC = CameraViewController()
-                
+                            
+                let storyboard = UIStoryboard(name: "Record", bundle: nil)
+            
+                let cameraVC = storyboard.instantiateViewController(withIdentifier: "CameraViewController")
+            
                 present(cameraVC, animated: true, completion: nil)
-
-//            let imagePicker = UIImagePickerController()
-//
-//            imagePicker.delegate = self
-//
-//            imagePicker.sourceType = .camera
-//
-//            imagePicker.mediaTypes = [kUTTypeMovie as String]
-//
-//            imagePicker.cameraCaptureMode = .video
-//
-//            imagePicker.allowsEditing = false
-//
-//            imagePicker.videoMaximumDuration = 1.0
-//
-//            present(imagePicker, animated: true, completion: nil)
 
             return false
 
