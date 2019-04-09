@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 import AVFoundation
 
 class CameraViewController: UIViewController {
@@ -281,7 +282,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 //
 //                self.dismiss(animated: true, completion: nil)
 //            }
-
+            
             self.performSegue(withIdentifier: Segue.showVideoPlayback, sender: videoUrl)
         }
     }
@@ -349,7 +350,7 @@ extension CameraViewController: CAAnimationDelegate {
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        
+            
         stopRecording()
     }
 }

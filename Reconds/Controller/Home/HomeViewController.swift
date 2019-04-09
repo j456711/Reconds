@@ -18,13 +18,10 @@ class HomeViewController: UIViewController {
         didSet {
 
             print(videoUrl!)
-//            videoUrls.append(videoUrl!)
-//            print("------", videoUrls, "-------")
-
         }
     }
     
-    var videoUrls: [Int] = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4] {
+    var videoUrls: [URL] = [] {
         
         didSet {
             
@@ -34,7 +31,13 @@ class HomeViewController: UIViewController {
     
     var longPressedEnabled = false
     
-    @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var videoView: UIView! {
+        
+        didSet {
+            
+            videoView.isHidden = true
+        }
+    }
     
     @IBOutlet weak var collectionView: UICollectionView! {
         
@@ -91,11 +94,6 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        if videoUrl != nil {
-            
-            rcVideoPlayer.showVideoWith(view, url: videoUrl!)
-        }
         
         collectionView.reloadData()
     }
@@ -160,15 +158,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
             homeCell.removeButton.isHidden = true
         }
-        
-//        if videoUrl == nil {
-//
-//            return homeCell
-//
-//        } else {
-//
-//            rcVideoPlayer.showVideoWith(homeCell, url: videoUrl!)
-//        }
 
         return homeCell
     }

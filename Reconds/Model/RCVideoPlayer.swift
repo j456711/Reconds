@@ -12,24 +12,24 @@ import AVFoundation
 
 class RCVideoPlayer {
     
-    var player: AVPlayer?
+    let avPlayer = AVPlayer()
     
-    var playerItem: AVPlayerItem?
+    var avPlayerlayer: AVPlayerLayer!
     
-    var playerlayer: AVPlayerLayer?
-    
-    func showVideoWith(_ view: UIView, url: URL) {
+    func setUpAVPlayer(with view: UIView, videoUrl: URL) {
         
-        player = AVPlayer(url: url)
+        avPlayerlayer = AVPlayerLayer(player: avPlayer)
+        avPlayerlayer.frame = view.bounds
+        avPlayerlayer.videoGravity = AVLayerVideoGravity.resizeAspect
         
-        playerlayer = AVPlayerLayer(player: player)
+        view.layer.addSublayer(avPlayerlayer)
         
-        playerlayer?.frame = view.bounds
-        
-        view.layer.addSublayer(playerlayer!)
-        
-        player!.play()
-
+        let playerItem = AVPlayerItem(url: videoUrl)
+        avPlayer.replaceCurrentItem(with: playerItem)
     }
     
+    func play() {
+        
+        avPlayer.play()
+    }
 }
