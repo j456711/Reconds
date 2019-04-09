@@ -55,7 +55,18 @@ class VideoPlaybackViewController: UIViewController {
     
     @IBAction func controlButtonPressed(_ sender: UIButton) {
         
-        rcVideoPlayer.pause()
+        if controlButton.imageView?.image == UIImage.assets(.Icon_PauseController) {
+            
+            rcVideoPlayer.pause()
+            
+            controlButton.setImage(UIImage.assets(.Icon_PlayController), for: .normal)
+            
+        } else {
+            
+            rcVideoPlayer.play()
+            
+            controlButton.setImage(UIImage.assets(.Icon_PauseController), for: .normal)
+        }
     }
     
     
@@ -108,7 +119,9 @@ class VideoPlaybackViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 
         rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl)
-
+        rcVideoPlayer.fetchDuration(disPlayOn: endTimeLabel, setMaximumValueOn: slider)
+        rcVideoPlayer.fetchCurrentTime(disPlayOn: startTimeLabel, setValueOn: slider)
+        
         view.bringSubviewToFront(playButton)
         view.bringSubviewToFront(controlView)
         view.bringSubviewToFront(rcVideoPlayerView)
@@ -121,5 +134,7 @@ class VideoPlaybackViewController: UIViewController {
         controlView.isHidden = false
         
         rcVideoPlayerView.isHidden = true
+        
+        rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
     }
 }

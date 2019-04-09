@@ -330,7 +330,7 @@ extension CameraViewController: CAAnimationDelegate {
         
         strokeAnimation.toValue = 1
         
-        strokeAnimation.duration = 1 //動畫維持
+        strokeAnimation.duration = 1.0 //動畫維持
         
         strokeAnimation.fillMode = .forwards
                 
