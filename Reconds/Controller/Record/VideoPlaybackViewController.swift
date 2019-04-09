@@ -10,24 +10,64 @@ import UIKit
 import AVFoundation
 
 class VideoPlaybackViewController: UIViewController {
-//
-//    let avPlayer = AVPlayer()
-//
-//    var avPlayerlayer: AVPlayerLayer!
     
     let rcVideoPlayer = RCVideoPlayer()
     
     var videoUrl: URL!
     
-    @IBOutlet weak var controlView: UIView! 
+    @IBOutlet weak var controlView: UIView!
     
     @IBOutlet weak var playButton: UIButton!
+    
+    
+    @IBOutlet weak var rcVideoPlayerView: UIView! {
+        
+        didSet {
+            
+            rcVideoPlayerView.layer.cornerRadius = 10
+            
+            rcVideoPlayerView.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var startTimeLabel: UILabel!
+    
+    @IBOutlet weak var endTimeLabel: UILabel!
+    
+    @IBOutlet weak var slider: UISlider! {
+        
+        didSet {
+            
+            slider.setThumbImage(UIImage.assets(.Slider_Thumb), for: .normal)
+        }
+    }
+    
+    @IBAction func sliderMoved(_ sender: UISlider) {
+        
+        let seconds = Int64(slider.value)
+        
+        let targetTime = CMTimeMake(value: seconds, timescale: 1)
+        
+        rcVideoPlayer.avPlayer.seek(to: targetTime)
+    }
+    
+    @IBOutlet weak var controlButton: UIButton!
+    
+    @IBAction func controlButtonPressed(_ sender: UIButton) {
+        
+        rcVideoPlayer.pause()
+    }
+    
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
 
         rcVideoPlayer.play()
         
         playButton.isHidden = true
+        
+        controlView.isHidden = true
+        
+        rcVideoPlayerView.isHidden = false
     }
     
     @IBAction func retakeButtonPressed(_ sender: UIButton) {
@@ -62,20 +102,24 @@ class VideoPlaybackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: rcVideoPlayer.avPlayer.currentItem)
     }
 
     override func viewDidAppear(_ animated: Bool) {
 
         rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl)
 
-        view.bringSubviewToFront(controlView)
         view.bringSubviewToFront(playButton)
-
+        view.bringSubviewToFront(controlView)
+        view.bringSubviewToFront(rcVideoPlayerView)
     }
     
     @objc func videoDidFinishPlaying() {
         
         playButton.isHidden = false
+        
+        controlView.isHidden = false
+        
+        rcVideoPlayerView.isHidden = true
     }
 }

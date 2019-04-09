@@ -92,38 +92,44 @@
                                 <rect key="frame" x="16" y="593" width="343" height="58"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rkb-d2-uyj">
-                                        <rect key="frame" x="60" y="20" width="223" height="31"/>
+                                        <rect key="frame" x="60" y="18" width="223" height="31"/>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="219" id="1wc-x6-ruL"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="sliderMoved:" destination="bBr-pZ-qkV" eventType="valueChanged" id="7GH-hn-0HJ"/>
+                                        </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTt-Pg-e5b">
-                                        <rect key="frame" x="8" y="24.5" width="46" height="21"/>
+                                        <rect key="frame" x="8" y="22.5" width="46" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyU-JC-sSt">
-                                        <rect key="frame" x="289" y="24.5" width="46" height="21"/>
+                                        <rect key="frame" x="289" y="22.5" width="46" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csL-zi-ePa">
-                                        <rect key="frame" x="156.5" y="8" width="30" height="30"/>
+                                        <rect key="frame" x="160.5" y="8" width="22" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="Fbh-gU-eDi"/>
-                                            <constraint firstAttribute="height" constant="30" id="JSf-hT-FaZ"/>
+                                            <constraint firstAttribute="width" constant="22" id="Fbh-gU-eDi"/>
+                                            <constraint firstAttribute="height" constant="22" id="JSf-hT-FaZ"/>
                                         </constraints>
-                                        <state key="normal" image="Icon_PlayController"/>
+                                        <state key="normal" image="Icon_PauseController"/>
+                                        <connections>
+                                            <action selector="controlButtonPressed:" destination="bBr-pZ-qkV" eventType="touchUpInside" id="FbQ-xS-e1Q"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.11865903253424658" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="yyU-JC-sSt" firstAttribute="centerY" secondItem="rkb-d2-uyj" secondAttribute="centerY" id="3Z6-Aj-MOZ"/>
                                     <constraint firstAttribute="trailing" secondItem="yyU-JC-sSt" secondAttribute="trailing" constant="8" id="EP3-6y-3Ql"/>
-                                    <constraint firstAttribute="bottom" secondItem="rkb-d2-uyj" secondAttribute="bottom" constant="8" id="F6X-GM-DIh"/>
+                                    <constraint firstAttribute="bottom" secondItem="rkb-d2-uyj" secondAttribute="bottom" constant="10" id="F6X-GM-DIh"/>
                                     <constraint firstItem="csL-zi-ePa" firstAttribute="top" secondItem="F3t-5J-ssQ" secondAttribute="top" constant="8" id="YLL-5I-DrF"/>
                                     <constraint firstItem="rkb-d2-uyj" firstAttribute="centerX" secondItem="F3t-5J-ssQ" secondAttribute="centerX" id="hi1-B8-d3v"/>
                                     <constraint firstItem="tTt-Pg-e5b" firstAttribute="centerY" secondItem="rkb-d2-uyj" secondAttribute="centerY" id="mLH-53-JTH"/>
@@ -154,8 +160,13 @@
                         <viewLayoutGuide key="safeArea" id="jDg-As-Zsa"/>
                     </view>
                     <connections>
+                        <outlet property="controlButton" destination="csL-zi-ePa" id="hKN-s9-p4n"/>
                         <outlet property="controlView" destination="usc-9b-ZEa" id="75p-7l-f57"/>
+                        <outlet property="endTimeLabel" destination="yyU-JC-sSt" id="OdY-yy-cdF"/>
                         <outlet property="playButton" destination="yER-fU-bjx" id="XdT-W7-TP2"/>
+                        <outlet property="rcVideoPlayerView" destination="F3t-5J-ssQ" id="PCY-qa-Fsb"/>
+                        <outlet property="slider" destination="rkb-d2-uyj" id="mrT-UG-GWK"/>
+                        <outlet property="startTimeLabel" destination="tTt-Pg-e5b" id="N6A-gE-bsd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddp-Z8-5BB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -164,8 +175,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon_PauseController" width="64" height="64"/>
         <image name="Icon_Play" width="64" height="64"/>
-        <image name="Icon_PlayController" width="64" height="64"/>
         <image name="Icon_Shoot" width="64" height="64"/>
     </resources>
 </document>

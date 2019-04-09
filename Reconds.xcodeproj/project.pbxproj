@@ -25,6 +25,7 @@
 		1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */; };
 		1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */; };
 		1EF18FE12259D967001FEFCA /* LongPressGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FE02259D967001FEFCA /* LongPressGesture.swift */; };
+		1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF19008225C8689001FEFCA /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCVideoPlayer.swift; sourceTree = "<group>"; };
 		1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		1EF18FE02259D967001FEFCA /* LongPressGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressGesture.swift; sourceTree = "<group>"; };
+		1EF19008225C8689001FEFCA /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */,
+				1EF19008225C8689001FEFCA /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				1E419A742254B261009B4F49 /* HomeCollectionViewCell.swift in Sources */,
 				1EF18FE12259D967001FEFCA /* LongPressGesture.swift in Sources */,
 				1E419A4C2251BAB1009B4F49 /* HomeViewController.swift in Sources */,
+				1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */,
 				1E419A68225372D0009B4F49 /* RecordViewController.swift in Sources */,
 				1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */,
 				1E419A7B22588465009B4F49 /* VideoPlaybackViewController.swift in Sources */,

@@ -271,18 +271,6 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
             
             guard let videoUrl = outputUrl else { return }
             
-//            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            
-//            if let tabbar = appDelegate.window?.rootViewController as? TabBarController {
-//
-//                guard let navVC = tabbar.viewControllers?.first as? UINavigationController,
-//                    let homeVC = navVC.viewControllers.first as? HomeViewController else { return }
-//
-//                homeVC.videoUrl = videoUrl
-//
-//                self.dismiss(animated: true, completion: nil)
-//            }
-            
             self.performSegue(withIdentifier: Segue.showVideoPlayback, sender: videoUrl)
         }
     }
@@ -350,7 +338,7 @@ extension CameraViewController: CAAnimationDelegate {
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-            
-        stopRecording()
+        
+            stopRecording()
     }
 }

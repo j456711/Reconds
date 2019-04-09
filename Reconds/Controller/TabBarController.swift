@@ -36,7 +36,3 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 
 }
-
-extension TabBarController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-}

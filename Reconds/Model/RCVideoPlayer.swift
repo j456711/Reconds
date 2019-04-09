@@ -32,4 +32,11 @@ class RCVideoPlayer {
         
         avPlayer.play()
     }
+    
+    func pause() {
+        
+        avPlayer.pause()
+    }
+    
+    
 }
