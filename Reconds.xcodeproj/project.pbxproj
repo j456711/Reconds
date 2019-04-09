@@ -26,9 +26,12 @@
 		1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */; };
 		1EF18FE12259D967001FEFCA /* LongPressGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FE02259D967001FEFCA /* LongPressGesture.swift */; };
 		1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF19008225C8689001FEFCA /* UIImage+Extension.swift */; };
+		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reconds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		050571E9D4904CCA58775BED /* Pods-Reconds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.release.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.release.xcconfig"; sourceTree = "<group>"; };
 		1E419A462251BAB1009B4F49 /* Reconds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reconds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E419A492251BAB1009B4F49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E419A4B2251BAB1009B4F49 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 		1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		1EF18FE02259D967001FEFCA /* LongPressGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressGesture.swift; sourceTree = "<group>"; };
 		1EF19008225C8689001FEFCA /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,18 +61,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EB57E45D23C87AA74EB4F9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */,
+				050571E9D4904CCA58775BED /* Pods-Reconds.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		1E419A3D2251BAB1009B4F49 = {
 			isa = PBXGroup;
 			children = (
 				1E419A71225378F0009B4F49 /* .gitignore */,
 				1E419A482251BAB1009B4F49 /* Reconds */,
 				1E419A472251BAB1009B4F49 /* Products */,
+				0EB57E45D23C87AA74EB4F9D /* Pods */,
+				C9E2E0CA29339BF3F85861F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,6 +186,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		C9E2E0CA29339BF3F85861F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -177,9 +201,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E419A582251BAB6009B4F49 /* Build configuration list for PBXNativeTarget "Reconds" */;
 			buildPhases = (
+				184D64C6E8C78990E190DAB1 /* [CP] Check Pods Manifest.lock */,
 				1E419A422251BAB1009B4F49 /* Sources */,
 				1E419A432251BAB1009B4F49 /* Frameworks */,
 				1E419A442251BAB1009B4F49 /* Resources */,
+				1E813218225C993800482841 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -239,6 +265,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		184D64C6E8C78990E190DAB1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reconds-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1E813218225C993800482841 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1E419A422251BAB1009B4F49 /* Sources */ = {
@@ -400,6 +469,7 @@
 		};
 		1E419A592251BAB6009B4F49 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -418,6 +488,7 @@
 		};
 		1E419A5A2251BAB6009B4F49 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 050571E9D4904CCA58775BED /* Pods-Reconds.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

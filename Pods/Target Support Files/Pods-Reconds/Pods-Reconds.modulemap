@@ -1,0 +1,6 @@
+framework module Pods_Reconds {
+  umbrella header "Pods-Reconds-umbrella.h"
+
+  export *
+  module * { export * }
+}

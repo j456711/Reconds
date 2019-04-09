@@ -10,19 +10,15 @@ import UIKit
 import AVFoundation
 
 class RecordViewController: UIViewController {
-    
-    
+
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
-        
+
     }
-    
-    
+
 }
 
-
 extension RecordViewController {
- 
-    
+
 }
