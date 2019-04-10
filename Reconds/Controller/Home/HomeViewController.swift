@@ -13,22 +13,6 @@ class HomeViewController: UIViewController {
 
     let rcVideoPlayer = RCVideoPlayer()
 
-    var videoUrl: URL? {
-
-        didSet {
-
-            print(videoUrl!)
-        }
-    }
-
-    var videoUrls: [URL] = [] {
-
-        didSet {
-
-            print(videoUrls)
-        }
-    }
-
     var longPressedEnabled = false
 
     @IBOutlet weak var videoView: UIView! {
@@ -79,7 +63,9 @@ class HomeViewController: UIViewController {
 
         } else {
 
-            let alert = UIAlertController.confirmationAlertAddedWith(alertTitle: "無法新增影片", alertMessage: "尚未開放一次可編輯多支影片的功能，敬請期待！", actionHandler: nil)
+            let alert = UIAlertController.confirmationAlertAddedWith(alertTitle: "無法新增影片",
+                                                                     alertMessage: "尚未開放一次可編輯多支影片的功能，敬請期待！",
+                                                                     actionHandler: nil)
 
             present(alert, animated: true, completion: nil)
         }
@@ -139,12 +125,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return videoUrls.count + (24 - videoUrls.count)
+        guard let videoUrls = UserDefaults.standard.stringArray(forKey: "VideoUrls") else { return 1 }
+        
+        return videoUrls.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HomeCollectionViewCell.self), for: indexPath)
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: String(describing: HomeCollectionViewCell.self), for: indexPath)
 
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
 
@@ -159,6 +149,15 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             homeCell.removeButton.isHidden = true
         }
 
+        if let userDefaultsVideoUrls = UserDefaults.standard.stringArray(forKey: "VideoUrls") {
+            
+            let videoUrls = userDefaultsVideoUrls.map { URL(string: $0) }
+            
+            rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: videoUrls[indexPath.item]!, videoGravity: .resizeAspectFill)
+            
+            rcVideoPlayer.play()
+        }
+
         return homeCell
     }
 
@@ -167,17 +166,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return true
     }
 
-    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
-        print("Start index: - \(sourceIndexPath.item)")
-        print("End index: - \(destinationIndexPath.item)")
-
-        let tmp = videoUrls[sourceIndexPath.item]
-        videoUrls[sourceIndexPath.item] = videoUrls[destinationIndexPath.item]
-        videoUrls[destinationIndexPath.item] = tmp
-
-        collectionView.reloadData()
-    }
+//    func collectionView(_ collectionView: UICollectionView,
+//                        moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//
+//        print("Start index: - \(sourceIndexPath.item)")
+//        print("End index: - \(destinationIndexPath.item)")
+//
+//        let tmp = videoUrls[sourceIndexPath.item]
+//        videoUrls[sourceIndexPath.item] = videoUrls[destinationIndexPath.item]
+//        videoUrls[destinationIndexPath.item] = tmp
+//
+//        collectionView.reloadData()
+//    }
 
 }
 
@@ -190,7 +190,8 @@ extension HomeViewController {
 
         case .began:
 
-            guard let selectedIndexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else { return }
+            guard let selectedIndexPath =
+                collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else { return }
 
             collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
 
@@ -220,7 +221,7 @@ extension HomeViewController {
 
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
 
-        videoUrls.remove(at: hitIndex.item)
+//        videoUrls.remove(at: hitIndex.item)
 
         collectionView.reloadData()
     }

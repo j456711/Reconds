@@ -17,7 +17,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         delegate = self
     }
 
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController,
+                          shouldSelect viewController: UIViewController) -> Bool {
 
         if viewController is RecordViewController {
 

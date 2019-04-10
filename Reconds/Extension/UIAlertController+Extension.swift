@@ -13,7 +13,9 @@ extension UIAlertController {
 
     typealias UIAlertActionHandler = ((UIAlertAction) -> Void)?
 
-    static func confirmationAlertAddedWith(alertTitle: String?, alertMessage: String?, actionHandler: UIAlertActionHandler) -> UIAlertController {
+    static func confirmationAlertAddedWith(alertTitle: String?,
+                                           alertMessage: String?,
+                                           actionHandler: UIAlertActionHandler) -> UIAlertController {
 
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
 

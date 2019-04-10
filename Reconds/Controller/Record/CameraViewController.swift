@@ -21,8 +21,8 @@ class CameraViewController: UIViewController {
 
     let captureSession = AVCaptureSession()
 
-    let movieOutput = AVCaptureMovieFileOutput()
-
+    var movieOutput = AVCaptureMovieFileOutput()
+    
     var activeInput: AVCaptureDeviceInput?
 
     var outputUrl: URL?
@@ -146,7 +146,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
         // Movie Output
         if captureSession.canAddOutput(movieOutput) {
-
+            
             captureSession.addOutput(movieOutput)
         }
 
@@ -259,7 +259,10 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     }
 
     // AVCaptureFileOutputRecordingDelegate Method
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+    func fileOutput(_ output: AVCaptureFileOutput,
+                    didFinishRecordingTo outputFileURL: URL,
+                    from connections: [AVCaptureConnection],
+                    error: Error?) {
 
         if error != nil {
 
@@ -282,7 +285,11 @@ extension CameraViewController: CAAnimationDelegate {
 
         let center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 70)  //設定圖案的位置
 
-        let circularPath = UIBezierPath(arcCenter: center, radius: 30, startAngle: -(.pi / 2), endAngle: (.pi * 2), clockwise: true)  //使用UIBezierPath製作圓形
+        let circularPath = UIBezierPath(arcCenter: center,
+                                        radius: 30,
+                                        startAngle: -(.pi / 2),
+                                        endAngle: (.pi * 2),
+                                        clockwise: true)  //使用UIBezierPath製作圓形
 
         cameraButtonLayer.path = circularPath.cgPath
 
@@ -303,7 +310,10 @@ extension CameraViewController: CAAnimationDelegate {
 
         let center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 70)  //設定圖案的位置
 
-        let circularPath = UIBezierPath(arcCenter: center, radius: 30, startAngle: -(.pi / 2), endAngle: (.pi * 2), clockwise: true)  //使用UIBezierPath製作圓形
+        let circularPath = UIBezierPath(arcCenter: center,
+                                        radius: 30, startAngle: -(.pi / 2),
+                                        endAngle: (.pi * 2),
+                                        clockwise: true)  //使用UIBezierPath製作圓形
 
         let trackLayer = CAShapeLayer()
 
@@ -336,6 +346,6 @@ extension CameraViewController: CAAnimationDelegate {
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
 
-            stopRecording()
+        stopRecording()
     }
 }

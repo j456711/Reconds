@@ -85,25 +85,44 @@ class VideoPlaybackViewController: UIViewController {
     }
 
     @IBAction func useButtonPressed(_ sender: UIButton) {
+        
+        //Data
+        guard let videoData = try? Data(contentsOf: videoUrl) else { return }
+        
+        //Path
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
-        let videoData = NSData(contentsOf: videoUrl)
+        guard let documentsDirectory = paths.first else { return }
 
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-
-        let documentsDirectory = paths[0] as NSString
-
-        let dataPath = documentsDirectory.appendingPathComponent(videoUrl.path)
-
-        videoData?.write(toFile: dataPath, atomically: false)
-
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-            let tabbar = appDelegate.window?.rootViewController as? TabBarController,
-            let navVC = tabbar.viewControllers?.first as? UINavigationController,
-            let homeVC = navVC.viewControllers.first as? HomeViewController {
-
-            homeVC.videoUrl = self.videoUrl
-            homeVC.videoUrls.append(videoUrl)
+        let time = String(Int(Date().timeIntervalSince1970))
+        
+        let dataPath = documentsDirectory.appendingPathComponent("\(time).mp4")
+        
+        do {
+            
+            try videoData.write(to: dataPath)
+            
+            guard var videoUrls = UserDefaults.standard.array(forKey: "VideoUrls") as? [String] else { return }
+            
+            videoUrls.append(dataPath.absoluteString)
+            
+            print(videoUrls)
+            
+            UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
+            
+        } catch {
+            
+            print(error)
         }
+
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+//            let tabbar = appDelegate.window?.rootViewController as? TabBarController,
+//            let navVC = tabbar.viewControllers?.first as? UINavigationController,
+//            let homeVC = navVC.viewControllers.first as? HomeViewController {
+//
+//            homeVC.videoUrl = self.videoUrl
+//            homeVC.videoUrls.append(videoUrl)
+//        }
 
         self.dismiss(animated: true, completion: nil)
     }
@@ -111,12 +130,15 @@ class VideoPlaybackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(videoDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: rcVideoPlayer.avPlayer.currentItem)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(videoDidFinishPlaying),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: rcVideoPlayer.avPlayer.currentItem)
     }
 
     override func viewDidAppear(_ animated: Bool) {
 
-        rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl)
+        rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
         rcVideoPlayer.fetchDuration(disPlayOn: endTimeLabel, setMaximumValueOn: slider)
         rcVideoPlayer.fetchCurrentTime(disPlayOn: startTimeLabel, setValueOn: slider)
 

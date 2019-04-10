@@ -16,11 +16,11 @@ class RCVideoPlayer {
 
     var avPlayerlayer: AVPlayerLayer!
 
-    func setUpAVPlayer(with view: UIView, videoUrl: URL) {
+    func setUpAVPlayer(with view: UIView, videoUrl: URL, videoGravity: AVLayerVideoGravity) {
 
         avPlayerlayer = AVPlayerLayer(player: avPlayer)
         avPlayerlayer.frame = view.bounds
-        avPlayerlayer.videoGravity = AVLayerVideoGravity.resizeAspect
+        avPlayerlayer.videoGravity = videoGravity
 
         view.layer.addSublayer(avPlayerlayer)
 
@@ -48,6 +48,8 @@ class RCVideoPlayer {
 
         slider.maximumValue = Float(second)
 
+        print(slider.maximumValue)
+        
         slider.isContinuous = true
     }
 
@@ -76,11 +78,11 @@ extension RCVideoPlayer {
     //Helper Method
     func timeFormatConversion(time: Float64) -> String {
 
-        let songLength = Int(time)
+        let videoLength = Int(time)
 
-        let minutes = Int(songLength / 60) // 求 songLength 的商，為分鐘數
+        let minutes = Int(videoLength / 60) // 求 songLength 的商，為分鐘數
 
-        let seconds = Int(songLength % 60) // 求 songLength 的餘數，為秒數
+        let seconds = Int(videoLength % 60) // 求 songLength 的餘數，為秒數
 
         var time = ""
 

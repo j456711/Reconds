@@ -24,7 +24,6 @@
 		1E419A7B22588465009B4F49 /* VideoPlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A7A22588465009B4F49 /* VideoPlaybackViewController.swift */; };
 		1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */; };
 		1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */; };
-		1EF18FE12259D967001FEFCA /* LongPressGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FE02259D967001FEFCA /* LongPressGesture.swift */; };
 		1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF19008225C8689001FEFCA /* UIImage+Extension.swift */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
@@ -51,7 +50,6 @@
 		1E419A7A22588465009B4F49 /* VideoPlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaybackViewController.swift; sourceTree = "<group>"; };
 		1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCVideoPlayer.swift; sourceTree = "<group>"; };
 		1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
-		1EF18FE02259D967001FEFCA /* LongPressGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressGesture.swift; sourceTree = "<group>"; };
 		1EF19008225C8689001FEFCA /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */,
-				1EF18FE02259D967001FEFCA /* LongPressGesture.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -315,7 +312,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E419A742254B261009B4F49 /* HomeCollectionViewCell.swift in Sources */,
-				1EF18FE12259D967001FEFCA /* LongPressGesture.swift in Sources */,
 				1E419A4C2251BAB1009B4F49 /* HomeViewController.swift in Sources */,
 				1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */,
 				1E419A68225372D0009B4F49 /* RecordViewController.swift in Sources */,
