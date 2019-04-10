@@ -27,7 +27,7 @@ class RCVideoPlayer {
         let playerItem = AVPlayerItem(url: videoUrl)
         avPlayer.replaceCurrentItem(with: playerItem)
     }
-
+    
     func play() {
 
         avPlayer.play()

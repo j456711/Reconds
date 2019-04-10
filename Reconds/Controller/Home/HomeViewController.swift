@@ -151,9 +151,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         if let userDefaultsVideoUrls = UserDefaults.standard.stringArray(forKey: "VideoUrls") {
             
-            let videoUrls = userDefaultsVideoUrls.map { URL(string: $0) }
-            
-            rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: videoUrls[indexPath.item]!, videoGravity: .resizeAspectFill)
+//            let videoUrls = userDefaultsVideoUrls.map { URL(string: $0) }
             
             rcVideoPlayer.play()
         }
