@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
 
     let rcVideoPlayer = RCVideoPlayer()
 
+    var videoUrls: [String] = []
+    
     var longPressedEnabled = false
 
     @IBOutlet weak var videoView: UIView! {
@@ -151,7 +153,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         if let userDefaultsVideoUrls = UserDefaults.standard.stringArray(forKey: "VideoUrls") {
             
-//            let videoUrls = userDefaultsVideoUrls.map { URL(string: $0) }
+            let videoUrls = userDefaultsVideoUrls.map { URL(string: $0) }
             
             rcVideoPlayer.play()
         }
@@ -164,18 +166,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return true
     }
 
-//    func collectionView(_ collectionView: UICollectionView,
-//                        moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//
-//        print("Start index: - \(sourceIndexPath.item)")
-//        print("End index: - \(destinationIndexPath.item)")
-//
-//        let tmp = videoUrls[sourceIndexPath.item]
-//        videoUrls[sourceIndexPath.item] = videoUrls[destinationIndexPath.item]
-//        videoUrls[destinationIndexPath.item] = tmp
-//
-//        collectionView.reloadData()
-//    }
+    func collectionView(_ collectionView: UICollectionView,
+                        moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+
+        print("Start index: - \(sourceIndexPath.item)")
+        print("End index: - \(destinationIndexPath.item)")
+
+        let tmp = videoUrls[sourceIndexPath.item]
+        videoUrls[sourceIndexPath.item] = videoUrls[destinationIndexPath.item]
+        videoUrls[destinationIndexPath.item] = tmp
+
+        collectionView.reloadData()
+    }
 
 }
 
@@ -218,9 +220,13 @@ extension HomeViewController {
         let hitPoint = sender.convert(CGPoint.zero, to: collectionView)
 
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
-
-//        videoUrls.remove(at: hitIndex.item)
-
+        
+        videoUrls.remove(at: hitIndex.item)
+        
+        UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
+        
+        print("HomeVC", videoUrls)
+        
         collectionView.reloadData()
     }
 }

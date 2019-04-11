@@ -106,24 +106,23 @@ class VideoPlaybackViewController: UIViewController {
             
             videoUrls.append(dataPath.absoluteString)
             
-            print(videoUrls)
+            print("VideoPlaybackVC", videoUrls)
             
             UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
             
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                let tabbar = appDelegate.window?.rootViewController as? TabBarController,
+                let navVC = tabbar.viewControllers?.first as? UINavigationController,
+                let homeVC = navVC.viewControllers.first as? HomeViewController {
+                
+                homeVC.videoUrls = videoUrls
+            }
+
         } catch {
             
             print(error)
         }
-
-//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-//            let tabbar = appDelegate.window?.rootViewController as? TabBarController,
-//            let navVC = tabbar.viewControllers?.first as? UINavigationController,
-//            let homeVC = navVC.viewControllers.first as? HomeViewController {
-//
-//            homeVC.videoUrl = self.videoUrl
-//            homeVC.videoUrls.append(videoUrl)
-//        }
-
+        
         self.dismiss(animated: true, completion: nil)
     }
 
