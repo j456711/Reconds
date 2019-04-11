@@ -17,6 +17,6 @@ extension VideoData {
         return NSFetchRequest<VideoData>(entityName: "VideoData")
     }
 
-    @NSManaged public var dataPath: String?
+    @NSManaged public var dataPath: String
 
 }

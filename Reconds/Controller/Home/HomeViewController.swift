@@ -15,7 +15,14 @@ class HomeViewController: UIViewController {
 
     var videoUrls: [String] = []
     
-    var dataPath: String!
+    var videoData: [VideoData] = [] {
+        
+        didSet {
+            
+            print("-----------------------------")
+            print(videoData)
+        }
+    }
     
     var longPressedEnabled = false
 
@@ -67,9 +74,8 @@ class HomeViewController: UIViewController {
 
         } else {
 
-            let alert = UIAlertController.confirmationAlertAddedWith(alertTitle: "無法新增影片",
-                                                                     alertMessage: "尚未開放一次可編輯多支影片的功能，敬請期待！",
-                                                                     actionHandler: nil)
+            let alert = UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片",
+                                                                     alertMessage: "尚未開放一次可編輯多支影片的功能，敬請期待！")
 
             present(alert, animated: true, completion: nil)
         }
@@ -129,7 +135,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return fetchCoreData().count
+        fetchData()
+        
+        return videoData.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -165,10 +173,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         print("Start index: - \(sourceIndexPath.item)")
         print("End index: - \(destinationIndexPath.item)")
 
-        let tmp = videoUrls[sourceIndexPath.item]
-        videoUrls[sourceIndexPath.item] = videoUrls[destinationIndexPath.item]
-        videoUrls[destinationIndexPath.item] = tmp
+//        let tmp = videoUrls[sourceIndexPath.item]
+//        videoUrls[sourceIndexPath.item] = videoUrls[destinationIndexPath.item]
+//        videoUrls[destinationIndexPath.item] = tmp
 
+        let tmp = videoData[sourceIndexPath.item].dataPath
+        videoData[sourceIndexPath.item].dataPath = videoData[destinationIndexPath.item].dataPath
+        videoData[destinationIndexPath.item].dataPath = tmp
+        
+        VideoDataManager.shared.save()
+        
         collectionView.reloadData()
     }
 
@@ -216,7 +230,11 @@ extension HomeViewController {
         
         do {
             
-            guard let videoUrl = URL(string: videoUrls[hitIndex.item]) else { return }
+            let alert = UIAlertController.addConfirmAndCancelAlertWith(alertTitle: "確定要刪除影片嗎？", alertMessage: "刪除後則不可回復。")
+            
+            present(alert, animated: true, completion: nil)
+            
+            guard let videoUrl = URL(string: videoData[hitIndex.item].dataPath) else { return }
             
             try FileManager.default.removeItem(at: videoUrl)
             
@@ -227,24 +245,32 @@ extension HomeViewController {
             print("Remove fail", error)
         }
         
-        videoUrls.remove(at: hitIndex.item)
+        deleteData(at: hitIndex)
         
-        UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
+//        videoUrls.remove(at: hitIndex.item)
         
-        print("HomeVC", videoUrls)
+//        UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
+        
+//        print("HomeVC", videoUrls)
         
         collectionView.reloadData()
     }
 }
 
+// MARK: - CoreData Function
 extension HomeViewController {
     
-    func fetchCoreData() -> [VideoData] {
+    func fetchData() {
         
         let videoData = VideoDataManager.shared.fetch(VideoData.self)
+
+        self.videoData = videoData
+    }
+    
+    func deleteData(at hitIndex: IndexPath) {
         
-        videoData.forEach({ print($0.dataPath) })
+        VideoDataManager.shared.context.delete(self.videoData[hitIndex.item])
         
-        return videoData
+        VideoDataManager.shared.save()
     }
 }

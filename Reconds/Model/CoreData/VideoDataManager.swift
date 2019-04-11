@@ -16,11 +16,11 @@ final class VideoDataManager {
     static let shared = VideoDataManager()
     
     lazy var context = persistantContainer.viewContext
-    
+        
     lazy var persistantContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "VideoDataModel")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             
             if let error = error as NSError? {
                 
@@ -40,9 +40,7 @@ final class VideoDataManager {
                 try context.save()
                 
                 print("saved successfully")
-                
-                print("Core data file path: \(NSPersistentContainer.defaultDirectoryURL())")
-                
+                                
             } catch {
                 
                 let nserror = error as NSError
@@ -71,4 +69,5 @@ final class VideoDataManager {
             return [T]()
         }
     }
+    
 }

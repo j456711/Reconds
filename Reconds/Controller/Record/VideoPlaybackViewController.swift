@@ -114,7 +114,7 @@ class VideoPlaybackViewController: UIViewController {
 //
 //            print("VideoPlaybackVC", videoUrls)
 
-            saveData(dataPathString: dataPath.absoluteString)
+            saveData(dataPath.absoluteString)
             
 //            UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
             
@@ -166,9 +166,10 @@ class VideoPlaybackViewController: UIViewController {
     }
 }
 
+// MARK: - CoreData Function
 extension VideoPlaybackViewController {
     
-    func saveData(dataPathString: String) {
+    func saveData(_ dataPathString: String) {
         
         let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
         
