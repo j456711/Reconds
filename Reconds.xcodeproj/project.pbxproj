@@ -25,6 +25,10 @@
 		1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */; };
 		1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */; };
 		1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF19008225C8689001FEFCA /* UIImage+Extension.swift */; };
+		348FBD69225F1EAE000F53F6 /* VideoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD68225F1EAE000F53F6 /* VideoDataManager.swift */; };
+		348FBD6E225F1F20000F53F6 /* VideoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* VideoDataModel.xcdatamodeld */; };
+		348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */; };
+		348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +55,10 @@
 		1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCVideoPlayer.swift; sourceTree = "<group>"; };
 		1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		1EF19008225C8689001FEFCA /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		348FBD68225F1EAE000F53F6 /* VideoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDataManager.swift; sourceTree = "<group>"; };
+		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
+		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */,
+				348FBD59225F1D0D000F53F6 /* CoreData */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,6 +190,17 @@
 				1EF19008225C8689001FEFCA /* UIImage+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		348FBD59225F1D0D000F53F6 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				348FBD68225F1EAE000F53F6 /* VideoDataManager.swift */,
+				348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */,
+				348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */,
+				348FBD6C225F1F20000F53F6 /* VideoDataModel.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		C9E2E0CA29339BF3F85861F5 /* Frameworks */ = {
@@ -319,10 +339,14 @@
 				1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */,
 				1E419A7B22588465009B4F49 /* VideoPlaybackViewController.swift in Sources */,
 				1E419A4A2251BAB1009B4F49 /* AppDelegate.swift in Sources */,
+				348FBD6E225F1F20000F53F6 /* VideoDataModel.xcdatamodeld in Sources */,
 				1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */,
+				348FBD69225F1EAE000F53F6 /* VideoDataManager.swift in Sources */,
 				1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */,
+				348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */,
 				1E419A762254D749009B4F49 /* TabBarController.swift in Sources */,
 				1E419A6E22537645009B4F49 /* SettingsViewController.swift in Sources */,
+				348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +550,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		348FBD6C225F1F20000F53F6 /* VideoDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */,
+			);
+			currentVersion = 348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */;
+			path = VideoDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1E419A3E2251BAB1009B4F49 /* Project object */;
 }

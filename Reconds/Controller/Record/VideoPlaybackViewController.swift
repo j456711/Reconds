@@ -14,7 +14,9 @@ class VideoPlaybackViewController: UIViewController {
     let rcVideoPlayer = RCVideoPlayer()
 
     var videoUrl: URL!
-
+    
+    var videoUrls: [String] = []
+    
     @IBOutlet weak var controlView: UIView!
 
     @IBOutlet weak var playButton: UIButton!
@@ -102,13 +104,19 @@ class VideoPlaybackViewController: UIViewController {
             
             try videoData.write(to: dataPath)
             
-            guard var videoUrls = UserDefaults.standard.array(forKey: "VideoUrls") as? [String] else { return }
+//            guard var videoUrls = UserDefaults.standard.array(forKey: "VideoUrls") as? [String] else {
+//
+//                print("no data")
+//
+//                return }
+//
+//            videoUrls.append(dataPath.absoluteString)
+//
+//            print("VideoPlaybackVC", videoUrls)
+
+            saveData(dataPathString: dataPath.absoluteString)
             
-            videoUrls.append(dataPath.absoluteString)
-            
-            print("VideoPlaybackVC", videoUrls)
-            
-            UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
+//            UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
             
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                 let tabbar = appDelegate.window?.rootViewController as? TabBarController,
@@ -155,5 +163,17 @@ class VideoPlaybackViewController: UIViewController {
         rcVideoPlayerView.isHidden = true
 
         rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
+    }
+}
+
+extension VideoPlaybackViewController {
+    
+    func saveData(dataPathString: String) {
+        
+        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
+        
+        videoData.dataPath = dataPathString
+        
+        VideoDataManager.shared.save()
     }
 }

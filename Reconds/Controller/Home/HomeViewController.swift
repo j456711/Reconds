@@ -15,6 +15,8 @@ class HomeViewController: UIViewController {
 
     var videoUrls: [String] = []
     
+    var dataPath: String!
+    
     var longPressedEnabled = false
 
     @IBOutlet weak var videoView: UIView! {
@@ -127,9 +129,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        guard let videoUrls = UserDefaults.standard.stringArray(forKey: "VideoUrls") else { return 1 }
-        
-        return videoUrls.count
+        return fetchCoreData().count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -149,13 +149,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
 
             homeCell.removeButton.isHidden = true
-        }
-
-        if let userDefaultsVideoUrls = UserDefaults.standard.stringArray(forKey: "VideoUrls") {
-            
-            let videoUrls = userDefaultsVideoUrls.map { URL(string: $0) }
-            
-            rcVideoPlayer.play()
         }
 
         return homeCell
@@ -183,7 +176,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 // MARK: - Long Press Gesture
 extension HomeViewController {
-
+    
     @objc func longPress(_ gesture: UIGestureRecognizer) {
 
         switch gesture.state {
@@ -221,6 +214,19 @@ extension HomeViewController {
 
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
         
+        do {
+            
+            guard let videoUrl = URL(string: videoUrls[hitIndex.item]) else { return }
+            
+            try FileManager.default.removeItem(at: videoUrl)
+            
+            print("Remove successfully")
+        
+        } catch {
+            
+            print("Remove fail", error)
+        }
+        
         videoUrls.remove(at: hitIndex.item)
         
         UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
@@ -228,5 +234,17 @@ extension HomeViewController {
         print("HomeVC", videoUrls)
         
         collectionView.reloadData()
+    }
+}
+
+extension HomeViewController {
+    
+    func fetchCoreData() -> [VideoData] {
+        
+        let videoData = VideoDataManager.shared.fetch(VideoData.self)
+        
+        videoData.forEach({ print($0.dataPath) })
+        
+        return videoData
     }
 }
