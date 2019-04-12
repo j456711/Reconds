@@ -118,13 +118,13 @@ class VideoPlaybackViewController: UIViewController {
             
 //            UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
             
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                let tabbar = appDelegate.window?.rootViewController as? TabBarController,
-                let navVC = tabbar.viewControllers?.first as? UINavigationController,
-                let homeVC = navVC.viewControllers.first as? HomeViewController {
-                
-                homeVC.videoUrls = videoUrls
-            }
+//            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+//                let tabbar = appDelegate.window?.rootViewController as? TabBarController,
+//                let navVC = tabbar.viewControllers?.first as? UINavigationController,
+//                let homeVC = navVC.viewControllers.first as? HomeViewController {
+//                
+//                homeVC.videoUrls = videoUrls
+//            }
 
         } catch {
             

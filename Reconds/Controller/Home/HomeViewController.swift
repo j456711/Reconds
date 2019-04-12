@@ -12,8 +12,6 @@ import AVFoundation
 class HomeViewController: UIViewController {
 
     let rcVideoPlayer = RCVideoPlayer()
-
-    var videoUrls: [String] = []
     
     var videoData: [VideoData] = []
     
@@ -151,7 +149,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
             homeCell.removeButton.isHidden = true
         }
-
+        
+        rcVideoPlayer.setUpAVPlayer(
+            with: homeCell, videoUrl: URL(string: videoData[indexPath.item].dataPath)!, videoGravity: .resizeAspectFill)
+        
         return homeCell
     }
 
