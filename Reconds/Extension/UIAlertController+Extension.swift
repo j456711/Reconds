@@ -14,8 +14,8 @@ extension UIAlertController {
     typealias UIAlertActionHandler = ((UIAlertAction) -> Void)?
 
     static func addConfirmAlertWith(alertTitle: String?,
-                                           alertMessage: String?,
-                                           actionHandler: UIAlertActionHandler = nil) -> UIAlertController {
+                                    alertMessage: String?,
+                                    actionHandler: UIAlertActionHandler = nil) -> UIAlertController {
 
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
 
@@ -28,13 +28,13 @@ extension UIAlertController {
     
     static func addConfirmAndCancelAlertWith(alertTitle: String?,
                                              alertMessage: String?,
-                                             actionHandler: UIAlertActionHandler = nil) -> UIAlertController {
+                                             confirmActionHandler: UIAlertActionHandler = nil) -> UIAlertController {
     
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
-        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: actionHandler)
+        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: confirmActionHandler)
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: actionHandler)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         
         alert.addAction(confirmAction)
         

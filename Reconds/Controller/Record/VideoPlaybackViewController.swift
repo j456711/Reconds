@@ -141,6 +141,7 @@ class VideoPlaybackViewController: UIViewController {
                                                selector: #selector(videoDidFinishPlaying),
                                                name: .AVPlayerItemDidPlayToEndTime,
                                                object: rcVideoPlayer.avPlayer.currentItem)
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {

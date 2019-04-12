@@ -15,14 +15,7 @@ class HomeViewController: UIViewController {
 
     var videoUrls: [String] = []
     
-    var videoData: [VideoData] = [] {
-        
-        didSet {
-            
-            print("-----------------------------")
-            print(videoData)
-        }
-    }
+    var videoData: [VideoData] = []
     
     var longPressedEnabled = false
 
@@ -75,7 +68,7 @@ class HomeViewController: UIViewController {
         } else {
 
             let alert = UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片",
-                                                                     alertMessage: "尚未開放一次可編輯多支影片的功能，敬請期待！")
+                                                              alertMessage: "尚未開放一次可編輯多支影片的功能，敬請期待！")
 
             present(alert, animated: true, completion: nil)
         }
@@ -173,10 +166,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         print("Start index: - \(sourceIndexPath.item)")
         print("End index: - \(destinationIndexPath.item)")
 
-//        let tmp = videoUrls[sourceIndexPath.item]
-//        videoUrls[sourceIndexPath.item] = videoUrls[destinationIndexPath.item]
-//        videoUrls[destinationIndexPath.item] = tmp
-
         let tmp = videoData[sourceIndexPath.item].dataPath
         videoData[sourceIndexPath.item].dataPath = videoData[destinationIndexPath.item].dataPath
         videoData[destinationIndexPath.item].dataPath = tmp
@@ -228,32 +217,28 @@ extension HomeViewController {
 
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
         
-        do {
+        let alert = UIAlertController.addConfirmAndCancelAlertWith(
+            alertTitle: "確定要刪除影片嗎？", alertMessage: "刪除後不可回復。", confirmActionHandler: { [weak self] (_) in
             
-            let alert = UIAlertController.addConfirmAndCancelAlertWith(alertTitle: "確定要刪除影片嗎？", alertMessage: "刪除後則不可回復。")
-            
-            present(alert, animated: true, completion: nil)
-            
-            guard let videoUrl = URL(string: videoData[hitIndex.item].dataPath) else { return }
-            
-            try FileManager.default.removeItem(at: videoUrl)
-            
-            print("Remove successfully")
+            do {
+                
+                guard let videoUrl = URL(string: (self?.videoData[hitIndex.item].dataPath)!) else { return }
+                
+                try FileManager.default.removeItem(at: videoUrl)
+                
+                self?.deleteData(at: hitIndex)
+                
+                print("Remove successfully")
+                
+                self?.collectionView.reloadData()
+                
+            } catch {
+                
+                print("Remove fail", error)
+            }
+        })
         
-        } catch {
-            
-            print("Remove fail", error)
-        }
-        
-        deleteData(at: hitIndex)
-        
-//        videoUrls.remove(at: hitIndex.item)
-        
-//        UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
-        
-//        print("HomeVC", videoUrls)
-        
-        collectionView.reloadData()
+        present(alert, animated: true, completion: nil)
     }
 }
 
