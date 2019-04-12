@@ -81,12 +81,12 @@ class HomeViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-
+        
         collectionView.reloadData()
     }
 
     func createProjectNameAlert() {
-
+        
         let alert = UIAlertController(title: "請輸入影片名稱", message: "命名後仍可更改，若未輸入名稱將預設為「未命名」。", preferredStyle: .alert)
 
         alert.addTextField(configurationHandler: { textField in
@@ -125,14 +125,14 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         fetchData()
         
         return videoData.count
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: String(describing: HomeCollectionViewCell.self), for: indexPath)
@@ -150,8 +150,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             homeCell.removeButton.isHidden = true
         }
         
-        rcVideoPlayer.setUpAVPlayer(
-            with: homeCell, videoUrl: URL(string: videoData[indexPath.item].dataPath)!, videoGravity: .resizeAspectFill)
+        guard let dataPath = URL(string: videoData[indexPath.item].dataPath) else { return homeCell }
+        
+        homeCell.thumbnail.image = rcVideoPlayer.genrateThumbnail(path: dataPath)
         
         return homeCell
     }
@@ -161,8 +162,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return true
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
         print("Start index: - \(sourceIndexPath.item)")
         print("End index: - \(destinationIndexPath.item)")
@@ -199,11 +200,11 @@ extension HomeViewController {
         case .ended:
 
             collectionView.endInteractiveMovement()
-
+            
             doneButton.isHidden = false
 
             longPressedEnabled = true
-
+            
             collectionView.reloadData()
 
         default:
@@ -223,19 +224,20 @@ extension HomeViewController {
             
             do {
                 
-                guard let videoUrl = URL(string: (self?.videoData[hitIndex.item].dataPath)!) else { return }
+                guard let strongSelf = self,
+                      let videoUrl = URL(string: (strongSelf.videoData[hitIndex.item].dataPath)) else { return }
                 
                 try FileManager.default.removeItem(at: videoUrl)
                 
-                self?.deleteData(at: hitIndex)
-                
                 print("Remove successfully")
                 
-                self?.collectionView.reloadData()
+                strongSelf.deleteData(at: hitIndex)
+                
+                strongSelf.collectionView.reloadData()
                 
             } catch {
                 
-                print("Remove fail", error)
+                print("Remove fail", error.localizedDescription)
             }
         })
         
@@ -249,14 +251,14 @@ extension HomeViewController {
     func fetchData() {
         
         let videoData = VideoDataManager.shared.fetch(VideoData.self)
-
+        
         self.videoData = videoData
     }
     
     func deleteData(at hitIndex: IndexPath) {
         
         VideoDataManager.shared.context.delete(self.videoData[hitIndex.item])
-        
+
         VideoDataManager.shared.save()
     }
 }

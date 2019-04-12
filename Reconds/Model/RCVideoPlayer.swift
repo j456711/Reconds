@@ -71,6 +71,28 @@ class RCVideoPlayer {
             }
         })
     }
+    
+    func genrateThumbnail(path: URL) -> UIImage? {
+        
+        do {
+            
+            let asset = AVURLAsset(url: path, options: nil)
+            
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            
+            imageGenerator.appliesPreferredTrackTransform = true
+            
+            let cgImage = try imageGenerator.copyCGImage(at: .zero, actualTime: nil)
+            
+            return UIImage(cgImage: cgImage)
+            
+        } catch {
+            
+            print("Error generating thumbnail: \(error.localizedDescription)")
+            
+            return nil
+        }
+    }
 }
 
 extension RCVideoPlayer {

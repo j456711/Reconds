@@ -6,6 +6,7 @@
 //  Copyright © 2019 Yu-Hsin Yeh. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import AVFoundation
 
@@ -91,33 +92,20 @@ class VideoPlaybackViewController: UIViewController {
         //Data
         guard let videoData = try? Data(contentsOf: videoUrl) else { return }
         
-        //Path
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-
-        guard let documentsDirectory = paths.first else { return }
-
-        let time = String(Int(Date().timeIntervalSince1970))
+        //Document Directory
+        guard let documentDirectory =
+            FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+     
+        let time = Int(Date().timeIntervalSince1970)
         
-        let dataPath = documentsDirectory.appendingPathComponent("\(time).mp4")
+        let dataPath = documentDirectory.appendingPathComponent("\(time).mp4")
         
         do {
             
             try videoData.write(to: dataPath)
             
-//            guard var videoUrls = UserDefaults.standard.array(forKey: "VideoUrls") as? [String] else {
-//
-//                print("no data")
-//
-//                return }
-//
-//            videoUrls.append(dataPath.absoluteString)
-//
-//            print("VideoPlaybackVC", videoUrls)
-
             saveData(dataPath.absoluteString)
-            
-//            UserDefaults.standard.set(videoUrls, forKey: "VideoUrls")
-            
+                        
 //            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
 //                let tabbar = appDelegate.window?.rootViewController as? TabBarController,
 //                let navVC = tabbar.viewControllers?.first as? UINavigationController,
@@ -137,10 +125,9 @@ class VideoPlaybackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(videoDidFinishPlaying),
-                                               name: .AVPlayerItemDidPlayToEndTime,
-                                               object: rcVideoPlayer.avPlayer.currentItem)
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(videoDidFinishPlaying),
+            name: .AVPlayerItemDidPlayToEndTime, object: rcVideoPlayer.avPlayer.currentItem)
         
     }
 

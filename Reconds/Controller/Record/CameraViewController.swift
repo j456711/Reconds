@@ -55,8 +55,6 @@ class CameraViewController: UIViewController {
 
         if cameraButtonLayer.path!.contains(point) {
 
-//            cameraButtonLayerTapped()
-
             startRecording()
         }
     }
@@ -292,13 +290,9 @@ extension CameraViewController: CAAnimationDelegate {
             arcCenter: center, radius: 30, startAngle: -(.pi / 2), endAngle: (.pi * 2), clockwise: true)
         
         cameraButtonLayer.path = circularPath.cgPath
-
         cameraButtonLayer.fillColor = UIColor.clear.cgColor
-
         cameraButtonLayer.strokeColor = UIColor.red.cgColor
-
         cameraButtonLayer.lineWidth = 5
-
         cameraButtonLayer.strokeEnd = 0
 
         setUpTrackLayer()
@@ -316,11 +310,8 @@ extension CameraViewController: CAAnimationDelegate {
         let trackLayer = CAShapeLayer()
 
         trackLayer.path = circularPath.cgPath
-
         trackLayer.fillColor = UIColor.white.cgColor
-
         trackLayer.strokeColor = UIColor.lightGray.cgColor
-
         trackLayer.lineWidth = 5
 
         view.layer.addSublayer(trackLayer)
@@ -332,11 +323,8 @@ extension CameraViewController: CAAnimationDelegate {
         let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
 
         strokeAnimation.delegate = self
-
         strokeAnimation.toValue = 1
-
         strokeAnimation.duration = 1.0 //動畫維持
-
         strokeAnimation.fillMode = .forwards
 
         cameraButtonLayer.add(strokeAnimation, forKey: "basic")

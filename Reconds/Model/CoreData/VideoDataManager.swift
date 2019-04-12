@@ -70,4 +70,23 @@ final class VideoDataManager {
         }
     }
     
+    func deleteData(_ entityName: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            
+            for object in results {
+                
+                guard let objectData = object as? NSManagedObject else {continue}
+                
+                context.delete(objectData)
+            }
+            
+        } catch {
+            
+            print("Delete all data in \(entityName) error :", error)
+        }
+    }
 }
