@@ -18,8 +18,6 @@ class VideoPlaybackViewController: UIViewController {
 
     var videoUrl: URL!
     
-    var videoUrls: [String] = []
-    
     @IBOutlet weak var controlView: UIView!
 
     @IBOutlet weak var retakeButton: UIButton!
@@ -99,19 +97,25 @@ class VideoPlaybackViewController: UIViewController {
         guard let videoData = try? Data(contentsOf: videoUrl) else { return }
         
         //Document Directory
-        guard let documentDirectory =
-            FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
      
         let time = Int(Date().timeIntervalSince1970)
         
-        let dataPath = documentDirectory.appendingPathComponent("\(time).mp4")
+        let fileName = "\(time).mp4"
+        
+        let dataPath = documentDirectory.appendingPathComponent(fileName)
+//        let dataPath = documentDirectory.appendingPathComponent("\(time).mp4")
         
         do {
             
             try videoData.write(to: dataPath)
             
-            saveData(dataPath.absoluteString)
-                        
+            saveData(fileName)
+            
+//            try videoData.write(to: dataPath)
+//
+//            saveData(dataPath.absoluteString)
+            
 //            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
 //                let tabbar = appDelegate.window?.rootViewController as? TabBarController,
 //                let navVC = tabbar.viewControllers?.first as? UINavigationController,

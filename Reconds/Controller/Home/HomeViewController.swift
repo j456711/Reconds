@@ -11,6 +11,8 @@ import AVFoundation
 
 class HomeViewController: UIViewController {
 
+    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
     let rcVideoPlayer = RCVideoPlayer()
     
     var videoData: [VideoData] = []
@@ -154,7 +156,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
         
-        guard let dataPath = URL(string: videoData[indexPath.item].dataPath) else { return homeCell }
+        let dataPath = documentDirectory.appendingPathComponent(videoData[indexPath.item].dataPath)
+        
+//        guard let dataPath = URL(string: videoData[indexPath.item].dataPath) else { return homeCell }
         
 //        rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: dataPath, videoGravity: .resizeAspectFill)
         
@@ -233,7 +237,11 @@ extension HomeViewController {
                 guard let strongSelf = self,
                       let videoUrl = URL(string: (strongSelf.videoData[hitIndex.item].dataPath)) else { return }
                 
-                try FileManager.default.removeItem(at: videoUrl)
+                let dataPath = strongSelf.documentDirectory.appendingPathComponent(strongSelf.videoData[hitIndex.item].dataPath)
+                
+//                try FileManager.default.removeItem(at: videoUrl)
+                
+                try FileManager.default.removeItem(at: dataPath)
                 
                 print("Remove successfully")
                 
@@ -260,7 +268,11 @@ extension HomeViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
         guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
         
-        videoPlaybackVC.videoUrl = URL(string: videoData[hitIndex.item].dataPath)
+        let dataPath = documentDirectory.appendingPathComponent(videoData[hitIndex.item].dataPath)
+        
+//        videoPlaybackVC.videoUrl = URL(string: videoData[hitIndex.item].dataPath)
+        
+        videoPlaybackVC.videoUrl = dataPath
         
         videoPlaybackVC.view.addSubview(videoPlaybackVC.controlView)
         videoPlaybackVC.view.addSubview(videoPlaybackVC.retakeButton)
