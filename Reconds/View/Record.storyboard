@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PnX-aH-SlX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PnX-aH-SlX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,7 +50,7 @@
         <!--Video Playback View Controller-->
         <scene sceneID="B6M-bg-2kq">
             <objects>
-                <viewController id="bBr-pZ-qkV" customClass="VideoPlaybackViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoPlaybackViewController" id="bBr-pZ-qkV" customClass="VideoPlaybackViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oxa-8W-Khg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,7 +145,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="yER-fU-bjx" firstAttribute="centerX" secondItem="oxa-8W-Khg" secondAttribute="centerX" id="7HH-dP-SRA"/>
                             <constraint firstItem="usc-9b-ZEa" firstAttribute="bottom" secondItem="jDg-As-Zsa" secondAttribute="bottom" id="C17-8z-C1y"/>
@@ -165,8 +166,10 @@
                         <outlet property="endTimeLabel" destination="yyU-JC-sSt" id="OdY-yy-cdF"/>
                         <outlet property="playButton" destination="yER-fU-bjx" id="XdT-W7-TP2"/>
                         <outlet property="rcVideoPlayerView" destination="F3t-5J-ssQ" id="PCY-qa-Fsb"/>
+                        <outlet property="retakeButton" destination="79U-qe-t8X" id="2Th-56-SCO"/>
                         <outlet property="slider" destination="rkb-d2-uyj" id="mrT-UG-GWK"/>
                         <outlet property="startTimeLabel" destination="tTt-Pg-e5b" id="N6A-gE-bsd"/>
+                        <outlet property="useButton" destination="Eo0-Qp-7qq" id="6eO-ZV-h0e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddp-Z8-5BB" userLabel="First Responder" sceneMemberID="firstResponder"/>

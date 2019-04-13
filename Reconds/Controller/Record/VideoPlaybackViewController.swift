@@ -12,6 +12,8 @@ import AVFoundation
 
 class VideoPlaybackViewController: UIViewController {
 
+    var initialTouchPoint = CGPoint(x: 0, y: 0)
+    
     let rcVideoPlayer = RCVideoPlayer()
 
     var videoUrl: URL!
@@ -20,6 +22,10 @@ class VideoPlaybackViewController: UIViewController {
     
     @IBOutlet weak var controlView: UIView!
 
+    @IBOutlet weak var retakeButton: UIButton!
+    
+    @IBOutlet weak var useButton: UIButton!
+    
     @IBOutlet weak var playButton: UIButton!
 
     @IBOutlet weak var rcVideoPlayerView: UIView! {
@@ -129,6 +135,9 @@ class VideoPlaybackViewController: UIViewController {
             self, selector: #selector(videoDidFinishPlaying),
             name: .AVPlayerItemDidPlayToEndTime, object: rcVideoPlayer.avPlayer.currentItem)
         
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
+        
+        self.view.addGestureRecognizer(gesture)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -164,5 +173,44 @@ extension VideoPlaybackViewController {
         videoData.dataPath = dataPathString
         
         VideoDataManager.shared.save()
+    }
+}
+
+// MARK: - Gesture
+extension VideoPlaybackViewController {
+    
+    @objc func panAction(_ gesture: UIGestureRecognizer) {
+        
+        let touchPoint = gesture.location(in: self.view.window)
+        
+        switch gesture.state {
+            
+        case .began:
+            initialTouchPoint = touchPoint
+
+        case .changed:
+            if touchPoint.y - initialTouchPoint.y > 0 {
+                
+                self.view.frame =
+                    CGRect(x: 0, y: (touchPoint.y - initialTouchPoint.y),
+                           width: self.view.frame.size.width, height: self.view.frame.size.height)
+            }
+            
+        case .ended, .cancelled:
+            if touchPoint.y - initialTouchPoint.y > 100 {
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            } else {
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+                    self.view.frame =
+                        CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                })
+            }
+
+        default: break
+        }
     }
 }

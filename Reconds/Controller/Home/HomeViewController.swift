@@ -72,12 +72,16 @@ class HomeViewController: UIViewController {
         }
     }
 
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
 
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        
         collectionView.addGestureRecognizer(longPressGesture)
+        collectionView.addGestureRecognizer(tapGesture)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -139,8 +143,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
 
-        homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
-
         if longPressedEnabled {
 
             homeCell.removeButton.isHidden = false
@@ -150,13 +152,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             homeCell.removeButton.isHidden = true
         }
         
+        homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
+        
         guard let dataPath = URL(string: videoData[indexPath.item].dataPath) else { return homeCell }
         
-        homeCell.thumbnail.image = rcVideoPlayer.genrateThumbnail(path: dataPath)
+//        rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: dataPath, videoGravity: .resizeAspectFill)
+        
+        homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
         
         return homeCell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
 
         return true
@@ -179,10 +185,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 }
 
-// MARK: - Long Press Gesture
+// MARK: - Gestures
 extension HomeViewController {
     
-    @objc func longPress(_ gesture: UIGestureRecognizer) {
+    @objc func longPressAction(_ gesture: UIGestureRecognizer) {
 
         switch gesture.state {
 
@@ -243,6 +249,32 @@ extension HomeViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    @objc func tapAction(_ gesture: UIGestureRecognizer) {
+        
+        let hitPoint = gesture.location(in: collectionView)
+        
+        guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
+        
+        let storyboard = UIStoryboard(name: "Record", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
+        guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
+        
+        videoPlaybackVC.videoUrl = URL(string: videoData[hitIndex.item].dataPath)
+        
+        videoPlaybackVC.view.addSubview(videoPlaybackVC.controlView)
+        videoPlaybackVC.view.addSubview(videoPlaybackVC.retakeButton)
+        videoPlaybackVC.view.addSubview(videoPlaybackVC.useButton)
+        
+        videoPlaybackVC.controlView.isHidden = true
+        videoPlaybackVC.retakeButton.isHidden = true
+        videoPlaybackVC.useButton.isHidden = true
+        
+        videoPlaybackVC.modalPresentationStyle = .overFullScreen
+        
+        present(videoPlaybackVC, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: - CoreData Function

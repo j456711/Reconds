@@ -72,7 +72,7 @@ class RCVideoPlayer {
         })
     }
     
-    func genrateThumbnail(path: URL) -> UIImage? {
+    func generateThumbnail(path: URL) -> UIImage? {
         
         do {
             
@@ -97,7 +97,7 @@ class RCVideoPlayer {
 
 extension RCVideoPlayer {
 
-    //Helper Method
+    // Helper Method
     func timeFormatConversion(time: Float64) -> String {
 
         let videoLength = Int(time)

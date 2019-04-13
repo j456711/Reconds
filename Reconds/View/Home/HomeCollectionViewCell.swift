@@ -19,5 +19,5 @@ class HomeCollectionViewCell: UICollectionViewCell {
             removeButton.isHidden = true
         }
     }
-
+    
 }

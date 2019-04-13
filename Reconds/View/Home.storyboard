@@ -191,6 +191,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="hDo-ON-gQT" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" id="2eU-eI-bvU"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="frN-1r-8Zr" secondAttribute="trailing" constant="16" id="8Fe-tW-omU"/>
