@@ -29,6 +29,7 @@
 		348FBD6E225F1F20000F53F6 /* VideoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* VideoDataModel.xcdatamodeld */; };
 		348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */; };
 		348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */; };
+		34A0FE9522648F11009F4D45 /* MergeVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoManager.swift; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF18FDB2258DD12001FEFCA /* RCVideoPlayer.swift */,
+				34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */,
 				348FBD59225F1D0D000F53F6 /* CoreData */,
 			);
 			path = Model;
@@ -336,6 +339,7 @@
 				1E419A4C2251BAB1009B4F49 /* HomeViewController.swift in Sources */,
 				1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */,
 				1E419A68225372D0009B4F49 /* RecordViewController.swift in Sources */,
+				34A0FE9522648F11009F4D45 /* MergeVideoManager.swift in Sources */,
 				1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */,
 				1E419A7B22588465009B4F49 /* VideoPlaybackViewController.swift in Sources */,
 				1E419A4A2251BAB1009B4F49 /* AppDelegate.swift in Sources */,

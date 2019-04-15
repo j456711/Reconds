@@ -15,20 +15,13 @@ class HomeViewController: UIViewController {
     
     let rcVideoPlayer = RCVideoPlayer()
     
-    var videoData: [VideoData] = [] {
-        
-        didSet {
-            
-            print(videoData)
-            print(videoData.count)
-        }
-    }
+    var videoData: [VideoData] = []
     
     var longPressedEnabled = false
     
-    
     var firstAsset: AVAsset?
     var secondAsset: AVAsset?
+    let mergeVideoManager = MergeVideoManager()
     
     
     @IBOutlet weak var videoView: UIView!
@@ -85,7 +78,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
-
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         
         collectionView.addGestureRecognizer(longPressGesture)
@@ -242,13 +235,10 @@ extension HomeViewController {
             
             do {
                 
-                guard let strongSelf = self,
-                      let videoUrl = URL(string: (strongSelf.videoData[hitIndex.item].dataPath)) else { return }
+                guard let strongSelf = self else { return }
                 
                 let dataPath =
                     strongSelf.documentDirectory.appendingPathComponent(strongSelf.videoData[hitIndex.item].dataPath)
-                
-//                try FileManager.default.removeItem(at: videoUrl)
                 
                 try FileManager.default.removeItem(at: dataPath)
                 
@@ -278,8 +268,6 @@ extension HomeViewController {
         guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
         
         let dataPath = documentDirectory.appendingPathComponent(videoData[hitIndex.item].dataPath)
-        
-//        videoPlaybackVC.videoUrl = URL(string: videoData[hitIndex.item].dataPath)
         
         videoPlaybackVC.videoUrl = dataPath
         
@@ -323,87 +311,108 @@ extension HomeViewController {
         merge()
     }
     
+//    func merge() {
+//
+//        let firstDataPath = documentDirectory.appendingPathComponent(videoData[0].dataPath)
+//        let secondDataPath = documentDirectory.appendingPathComponent(videoData[1].dataPath)
+//
+//        firstAsset = AVAsset(url: firstDataPath)
+//        secondAsset = AVAsset(url: secondDataPath)
+//
+//        guard let firstAsset = firstAsset, let secondAsset = secondAsset else { return }
+//
+//        let mixComposition = AVMutableComposition()
+//
+//        guard let firstTrack =
+//            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+//        else { return }
+//
+//        do {
+//
+//            let firstTimeRange = CMTimeRangeMake(start: .zero, duration: firstAsset.duration)
+//
+//            try firstTrack.insertTimeRange(firstTimeRange, of: firstAsset.tracks(withMediaType: .video)[0], at: .zero)
+//
+//        } catch {
+//
+//            print("Failed to load first track, \(error)")
+//        }
+//
+//        guard let secondTrack =
+//            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+//        else { return }
+//
+//        do {
+//
+//            let secondTimeRange = CMTimeRangeMake(start: .zero, duration: secondAsset.duration)
+//
+//            try secondTrack.insertTimeRange(secondTimeRange, of: secondAsset.tracks(withMediaType: .video)[0], at: .zero)
+//
+//        } catch {
+//
+//            print("Failed to load second track, \(error)")
+//        }
+//
+//        let mergedVideoUrl = documentDirectory.appendingPathComponent("merged.mp4")
+//
+//        do {
+//
+//            try FileManager.default.removeItem(at: mergedVideoUrl)
+//
+//        } catch {
+//
+//            print("Can't remove previous file:", error.localizedDescription)
+//        }
+//
+//        guard let exporter =
+//            AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
+//
+//        exporter.outputURL = mergedVideoUrl
+//        exporter.outputFileType = .mp4
+//        exporter.shouldOptimizeForNetworkUse = true
+//
+//        exporter.exportAsynchronously { () -> Void in
+//
+//            switch exporter.status {
+//
+//            case .completed:
+//                DispatchQueue.main.async {
+//
+//                    print("success")
+//
+//                    self.rcVideoPlayer.setUpAVPlayer(with: self.videoView, videoUrl: exporter.outputURL!, videoGravity: .resizeAspect)
+//
+//                    self.rcVideoPlayer.play()
+//                }
+//
+//            case .failed:
+//                print("failed \(exporter.error!)")
+//
+//            case .cancelled:
+//                print("cancelled \(exporter.error!)")
+//
+//            default:
+//                print("complete")
+//            }
+//        }
+//    }
+
     func merge() {
         
-        let firstDataPath = documentDirectory.appendingPathComponent(videoData[2].dataPath)
-        let secondDataPath = documentDirectory.appendingPathComponent(videoData[1].dataPath)
-        
-        firstAsset = AVAsset(url: firstDataPath)
-        secondAsset = AVAsset(url: secondDataPath)
-        
-        guard let firstAsset = firstAsset, let secondAsset = secondAsset else { return }
-        
-        let mixComposition = AVMutableComposition()
-        
-        guard let firstTrack =
-            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid)) else { return }
-        
-        do {
-            
-            try firstTrack.insertTimeRange(CMTimeRangeMake(start: .zero, duration: firstAsset.duration), of: firstAsset.tracks(withMediaType: .video)[0], at: .zero)
-            
-        } catch {
-            
-            print("Failed to load first track, \(error)")
-        }
-        
-        guard let secondTrack =
-            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid)) else { return }
-        
-        do {
-            
-            try secondTrack.insertTimeRange(CMTimeRangeMake(start: .zero, duration: secondAsset.duration), of: secondAsset.tracks(withMediaType: .video)[0], at: .zero)
-            
-        } catch {
-            
-            print("Failed to load first track, \(error)")
-        }
-        
-        let mergedVideoUrl = documentDirectory.appendingPathComponent("merged.mp4")
-        
-        do {
-            
-            try FileManager.default.removeItem(at: mergedVideoUrl)
-            
-        } catch {
-            
-            print(error.localizedDescription)
-        }
-        
-        
-        guard let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
-        
-        exporter.outputURL = mergedVideoUrl
-        exporter.outputFileType = .mp4
-        exporter.shouldOptimizeForNetworkUse = true
-        
-        
-        
-        exporter.exportAsynchronously { () -> Void in
-            
-            switch exporter.status {
-            
-            case .completed:
-                DispatchQueue.main.async {
-                
-                    
-                    
-                    print("success")
-                    
-                    self.rcVideoPlayer.setUpAVPlayer(with: self.videoView, videoUrl: exporter.outputURL!, videoGravity: .resizeAspect)
-                    
-                    self.rcVideoPlayer.play()
-                }
-                
-            case .failed:
-                print("failed \(exporter.error!)")
-                
-            case .cancelled:
-                print("cancelled \(exporter.error!)")
+        let videoDataStringArray = videoData.map({ documentDirectory.absoluteString + $0.dataPath })
 
-            default:
-                print("complete")
-            }
+        guard let videoDataUrlArray = videoDataStringArray.map({ URL(string: $0) }) as? [URL] else { return }
+        
+        let videoDataAVAssetArray = videoDataUrlArray.map({ AVAsset(url: $0) })
+        
+        mergeVideoManager.videoArray = videoDataAVAssetArray
+        
+        print(videoDataAVAssetArray)
+        
+        DispatchQueue.main.async {
+            
+            self.mergeVideoManager.mergeVideoArray(self)
         }
+        
     }
 }
