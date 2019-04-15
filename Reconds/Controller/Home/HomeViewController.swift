@@ -15,17 +15,23 @@ class HomeViewController: UIViewController {
     
     let rcVideoPlayer = RCVideoPlayer()
     
-    var videoData: [VideoData] = []
-    
-    var longPressedEnabled = false
-
-    @IBOutlet weak var videoView: UIView! {
-
+    var videoData: [VideoData] = [] {
+        
         didSet {
-
-            videoView.isHidden = true
+            
+            print(videoData)
+            print(videoData.count)
         }
     }
+    
+    var longPressedEnabled = false
+    
+    
+    var firstAsset: AVAsset?
+    var secondAsset: AVAsset?
+    
+    
+    @IBOutlet weak var videoView: UIView!
 
     @IBOutlet weak var collectionView: UICollectionView! {
 
@@ -87,6 +93,8 @@ class HomeViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        
+        fetchData()
         
         collectionView.reloadData()
     }
@@ -237,7 +245,8 @@ extension HomeViewController {
                 guard let strongSelf = self,
                       let videoUrl = URL(string: (strongSelf.videoData[hitIndex.item].dataPath)) else { return }
                 
-                let dataPath = strongSelf.documentDirectory.appendingPathComponent(strongSelf.videoData[hitIndex.item].dataPath)
+                let dataPath =
+                    strongSelf.documentDirectory.appendingPathComponent(strongSelf.videoData[hitIndex.item].dataPath)
                 
 //                try FileManager.default.removeItem(at: videoUrl)
                 
@@ -304,5 +313,97 @@ extension HomeViewController {
         VideoDataManager.shared.context.delete(self.videoData[hitIndex.item])
 
         VideoDataManager.shared.save()
+    }
+}
+
+extension HomeViewController {
+    
+    @IBAction func pressed(_ sender: UIButton) {
+
+        merge()
+    }
+    
+    func merge() {
+        
+        let firstDataPath = documentDirectory.appendingPathComponent(videoData[2].dataPath)
+        let secondDataPath = documentDirectory.appendingPathComponent(videoData[1].dataPath)
+        
+        firstAsset = AVAsset(url: firstDataPath)
+        secondAsset = AVAsset(url: secondDataPath)
+        
+        guard let firstAsset = firstAsset, let secondAsset = secondAsset else { return }
+        
+        let mixComposition = AVMutableComposition()
+        
+        guard let firstTrack =
+            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid)) else { return }
+        
+        do {
+            
+            try firstTrack.insertTimeRange(CMTimeRangeMake(start: .zero, duration: firstAsset.duration), of: firstAsset.tracks(withMediaType: .video)[0], at: .zero)
+            
+        } catch {
+            
+            print("Failed to load first track, \(error)")
+        }
+        
+        guard let secondTrack =
+            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid)) else { return }
+        
+        do {
+            
+            try secondTrack.insertTimeRange(CMTimeRangeMake(start: .zero, duration: secondAsset.duration), of: secondAsset.tracks(withMediaType: .video)[0], at: .zero)
+            
+        } catch {
+            
+            print("Failed to load first track, \(error)")
+        }
+        
+        let mergedVideoUrl = documentDirectory.appendingPathComponent("merged.mp4")
+        
+        do {
+            
+            try FileManager.default.removeItem(at: mergedVideoUrl)
+            
+        } catch {
+            
+            print(error.localizedDescription)
+        }
+        
+        
+        guard let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
+        
+        exporter.outputURL = mergedVideoUrl
+        exporter.outputFileType = .mp4
+        exporter.shouldOptimizeForNetworkUse = true
+        
+        
+        
+        exporter.exportAsynchronously { () -> Void in
+            
+            switch exporter.status {
+            
+            case .completed:
+                DispatchQueue.main.async {
+                
+                    
+                    
+                    print("success")
+                    
+                    self.rcVideoPlayer.setUpAVPlayer(with: self.videoView, videoUrl: exporter.outputURL!, videoGravity: .resizeAspect)
+                    
+                    self.rcVideoPlayer.play()
+                }
+                
+            case .failed:
+                print("failed \(exporter.error!)")
+                
+            case .cancelled:
+                print("cancelled \(exporter.error!)")
+
+            default:
+                print("complete")
+            }
+        }
     }
 }

@@ -17,6 +17,8 @@ class CameraViewController: UIViewController {
         static let showVideoPlayback = "ShowVideoPlayback"
     }
 
+    let generator = UIImpactFeedbackGenerator(style: .heavy)
+    
     let cameraButton = UIView()
 
     let captureSession = AVCaptureSession()
@@ -328,6 +330,8 @@ extension CameraViewController: CAAnimationDelegate {
         strokeAnimation.fillMode = .forwards
 
         cameraButtonLayer.add(strokeAnimation, forKey: "basic")
+        
+        generator.impactOccurred()
     }
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
