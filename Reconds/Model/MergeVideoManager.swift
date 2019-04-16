@@ -13,11 +13,13 @@ import UIKit
 
 class MergeVideoManager {
     
+    static let shared = MergeVideoManager()
+    
     let defaultSize = CGSize(width: 1920, height: 1080)
     
     typealias ExportUrlHandler = (URL?, Error?) -> Void
     
-    func doMerge(arrayVideos: [AVAsset], completion: @escaping ExportUrlHandler) -> Void {
+    func doMerge(arrayVideos: [AVAsset], completion: @escaping ExportUrlHandler) {
         
         var insertTime = CMTime.zero
         
@@ -77,10 +79,12 @@ class MergeVideoManager {
             
             // Init video & audio composition track
             let videoCompositionTrack =
-                mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+                mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
+                                               preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             
             let audioCompositionTrack =
-                mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+                mixComposition.addMutableTrack(withMediaType: AVMediaType.audio,
+                                               preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             
             do {
                 
@@ -161,7 +165,8 @@ class MergeVideoManager {
 
 extension MergeVideoManager {
     
-    fileprivate func exportDidFinish(exporter: AVAssetExportSession?, videoURL:URL, completion: @escaping ExportUrlHandler) -> Void {
+    fileprivate func exportDidFinish(exporter: AVAssetExportSession?,
+                                     videoURL: URL, completion: @escaping ExportUrlHandler) {
         
         if exporter?.status == AVAssetExportSession.Status.completed {
         
@@ -175,7 +180,8 @@ extension MergeVideoManager {
         }
     }
     
-    fileprivate func orientationFromTransform(transform: CGAffineTransform) -> (orientation: UIImage.Orientation, isPortrait: Bool) {
+    fileprivate func orientationFromTransform(transform: CGAffineTransform) ->
+                    (orientation: UIImage.Orientation, isPortrait: Bool) {
         
         var assetOrientation = UIImage.Orientation.up
         
@@ -206,8 +212,10 @@ extension MergeVideoManager {
         return (assetOrientation, isPortrait)
     }
     
-    fileprivate func videoCompositionInstructionForTrack(
-        track: AVCompositionTrack, asset: AVAsset, standardSize: CGSize, atTime: CMTime) -> AVMutableVideoCompositionLayerInstruction {
+    fileprivate func videoCompositionInstructionForTrack(track: AVCompositionTrack,
+                                                         asset: AVAsset,
+                                                         standardSize: CGSize,
+                                                         atTime: CMTime) -> AVMutableVideoCompositionLayerInstruction {
        
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         let assetTrack = asset.tracks(withMediaType: AVMediaType.video)[0]
@@ -234,7 +242,8 @@ extension MergeVideoManager {
             let posY = standardSize.height / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
             let moveFactor = CGAffineTransform(translationX: posX, y: posY)
             
-            instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor), at: atTime)
+            instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor),
+                                     at: atTime)
             
         } else {
             

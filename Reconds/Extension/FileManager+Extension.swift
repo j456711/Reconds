@@ -8,10 +8,11 @@
 
 import Foundation
 
-
 extension FileManager {
     
-    func removeItemIfExisted(_ url: URL) -> Void {
+    static let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
+    func removeItemIfExisted(_ url: URL) {
         
         if FileManager.default.fileExists(atPath: url.path) {
         
@@ -21,7 +22,7 @@ extension FileManager {
             
             } catch {
               
-                print("Failed to delete file")
+                print("Failed to delete file: \(error.localizedDescription)")
             }
         }
     }

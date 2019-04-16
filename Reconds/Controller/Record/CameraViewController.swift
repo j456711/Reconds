@@ -109,6 +109,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
         guard let camera = AVCaptureDevice.default(for: .video) else { return false }
 
         do {
+            
             let input = try AVCaptureDeviceInput(device: camera)
 
             if captureSession.canAddInput(input) {
@@ -288,8 +289,8 @@ extension CameraViewController: CAAnimationDelegate {
 
         let center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 70)  //設定圖案的位置
 
-        let circularPath = UIBezierPath(
-            arcCenter: center, radius: 30, startAngle: -(.pi / 2), endAngle: (.pi * 2), clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: center,
+                                        radius: 30, startAngle: -(.pi / 2), endAngle: (.pi * 2), clockwise: true)
         
         cameraButtonLayer.path = circularPath.cgPath
         cameraButtonLayer.fillColor = UIColor.clear.cgColor
@@ -306,8 +307,8 @@ extension CameraViewController: CAAnimationDelegate {
 
         let center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 70)  //設定圖案的位置
 
-        let circularPath = UIBezierPath(
-            arcCenter: center, radius: 30, startAngle: -(.pi / 2), endAngle: (.pi * 2), clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: center,
+                                        radius: 30, startAngle: -(.pi / 2), endAngle: (.pi * 2), clockwise: true)
 
         let trackLayer = CAShapeLayer()
 

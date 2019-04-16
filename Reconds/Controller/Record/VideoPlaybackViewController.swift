@@ -96,14 +96,11 @@ class VideoPlaybackViewController: UIViewController {
         //Data
         guard let videoData = try? Data(contentsOf: videoUrl) else { return }
         
-        //Document Directory
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-     
         let time = Int(Date().timeIntervalSince1970)
         
         let fileName = "\(time).mp4"
         
-        let dataPath = documentDirectory.appendingPathComponent(fileName)
+        let dataPath = FileManager.documentDirectory.appendingPathComponent(fileName)
         
         do {
             
@@ -134,9 +131,10 @@ class VideoPlaybackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(videoDidFinishPlaying),
-            name: .AVPlayerItemDidPlayToEndTime, object: rcVideoPlayer.avPlayer.currentItem)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(videoDidFinishPlaying),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: rcVideoPlayer.avPlayer.currentItem)
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
         
@@ -194,9 +192,10 @@ extension VideoPlaybackViewController {
         case .changed:
             if touchPoint.y - initialTouchPoint.y > 0 {
                 
-                self.view.frame =
-                    CGRect(x: 0, y: (touchPoint.y - initialTouchPoint.y),
-                           width: self.view.frame.size.width, height: self.view.frame.size.height)
+                self.view.frame = CGRect(x: 0,
+                                         y: (touchPoint.y - initialTouchPoint.y),
+                                         width: self.view.frame.size.width,
+                                         height: self.view.frame.size.height)
             }
             
         case .ended, .cancelled:
@@ -208,8 +207,10 @@ extension VideoPlaybackViewController {
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     
-                    self.view.frame =
-                        CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                    self.view.frame = CGRect(x: 0,
+                                             y: 0,
+                                             width: self.view.frame.size.width,
+                                             height: self.view.frame.size.height)
                 })
             }
 

@@ -11,19 +11,12 @@ import AVFoundation
 import Photos
 
 class HomeViewController: UIViewController {
-
-    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     let rcVideoPlayer = RCVideoPlayer()
     
     var videoData: [VideoData] = []
     
     var longPressedEnabled = false
-    
-    var firstAsset: AVAsset?
-    var secondAsset: AVAsset?
-    let mergeVideoManager = MergeVideoManager()
-    
     
     @IBOutlet weak var videoView: UIView!
 
@@ -139,8 +132,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return videoData.count
     }
 
-    func collectionView(
-        _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: String(describing: HomeCollectionViewCell.self), for: indexPath)
@@ -158,7 +151,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
         
-        let dataPath = documentDirectory.appendingPathComponent(videoData[indexPath.item].dataPath)
+        let dataPath = FileManager.documentDirectory.appendingPathComponent(videoData[indexPath.item].dataPath)
         
 //        guard let dataPath = URL(string: videoData[indexPath.item].dataPath) else { return homeCell }
         
@@ -174,8 +167,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return true
     }
 
-    func collectionView(
-        _ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
         print("Start index: - \(sourceIndexPath.item)")
         print("End index: - \(destinationIndexPath.item)")
@@ -231,15 +224,16 @@ extension HomeViewController {
 
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
         
-        let alert = UIAlertController.addConfirmAndCancelAlertWith(
-            alertTitle: "確定要刪除影片嗎？", alertMessage: "刪除後不可回復。", confirmActionHandler: { [weak self] (_) in
+        let alert = UIAlertController.addConfirmAndCancelAlertWith(alertTitle: "確定要刪除影片嗎？",
+                                                                   alertMessage: "刪除後不可回復。",
+                                                                   confirmActionHandler: { [weak self] (_) in
             
             do {
                 
                 guard let strongSelf = self else { return }
                 
                 let dataPath =
-                    strongSelf.documentDirectory.appendingPathComponent(strongSelf.videoData[hitIndex.item].dataPath)
+                    FileManager.documentDirectory.appendingPathComponent(strongSelf.videoData[hitIndex.item].dataPath)
                 
                 try FileManager.default.removeItem(at: dataPath)
                 
@@ -268,7 +262,7 @@ extension HomeViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
         guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
         
-        let dataPath = documentDirectory.appendingPathComponent(videoData[hitIndex.item].dataPath)
+        let dataPath = FileManager.documentDirectory.appendingPathComponent(videoData[hitIndex.item].dataPath)
         
         videoPlaybackVC.videoUrl = dataPath
         
@@ -314,7 +308,7 @@ extension HomeViewController {
 
     func merge() {
         
-        let videoDataStringArray = videoData.map({ documentDirectory.absoluteString + $0.dataPath })
+        let videoDataStringArray = videoData.map({ FileManager.documentDirectory.absoluteString + $0.dataPath })
 
         guard let videoDataUrlArray = videoDataStringArray.map({ URL(string: $0) }) as? [URL] else { return }
         
@@ -322,7 +316,10 @@ extension HomeViewController {
         
         DispatchQueue.main.async {
             
-            self.mergeVideoManager.doMerge(arrayVideos: videoDataAVAssetArray, completion: { (outputUrl, error) in
+            MergeVideoManager.shared.doMerge(arrayVideos: videoDataAVAssetArray,
+                                             completion: { [weak self] (outputUrl, error) in
+                
+                guard let strongSelf = self else { return }
                 
                 if let error = error {
                     
@@ -331,14 +328,19 @@ extension HomeViewController {
                 } else {
                     
                     if let url = outputUrl {
-                    
-                        PHPhotoLibrary.shared().performChanges({
-                    
-                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-                    
-                            print("success")
-                    
-                        }, completionHandler: nil)
+                        
+                        strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
+                                                               videoUrl: url,
+                                                               videoGravity: .resizeAspect)
+                        
+                        strongSelf.rcVideoPlayer.play()
+//                        PHPhotoLibrary.shared().performChanges({
+//
+//                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+//
+//                            print("success")
+//
+//                        }, completionHandler: nil)
                     }
                 }
             })
