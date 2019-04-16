@@ -30,6 +30,7 @@
 		348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */; };
 		348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */; };
 		34A0FE9522648F11009F4D45 /* MergeVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */; };
+		34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE962265B694009F4D45 /* FileManager+Extension.swift */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoManager.swift; sourceTree = "<group>"; };
+		34A0FE962265B694009F4D45 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,6 +193,7 @@
 			children = (
 				1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */,
 				1EF19008225C8689001FEFCA /* UIImage+Extension.swift */,
+				34A0FE962265B694009F4D45 /* FileManager+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				348FBD6E225F1F20000F53F6 /* VideoDataModel.xcdatamodeld in Sources */,
 				1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */,
 				348FBD69225F1EAE000F53F6 /* VideoDataManager.swift in Sources */,
+				34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */,
 				1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */,
 				348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */,
 				1E419A762254D749009B4F49 /* TabBarController.swift in Sources */,

@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Photos
 
 class HomeViewController: UIViewController {
 
@@ -310,92 +311,6 @@ extension HomeViewController {
 
         merge()
     }
-    
-//    func merge() {
-//
-//        let firstDataPath = documentDirectory.appendingPathComponent(videoData[0].dataPath)
-//        let secondDataPath = documentDirectory.appendingPathComponent(videoData[1].dataPath)
-//
-//        firstAsset = AVAsset(url: firstDataPath)
-//        secondAsset = AVAsset(url: secondDataPath)
-//
-//        guard let firstAsset = firstAsset, let secondAsset = secondAsset else { return }
-//
-//        let mixComposition = AVMutableComposition()
-//
-//        guard let firstTrack =
-//            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-//        else { return }
-//
-//        do {
-//
-//            let firstTimeRange = CMTimeRangeMake(start: .zero, duration: firstAsset.duration)
-//
-//            try firstTrack.insertTimeRange(firstTimeRange, of: firstAsset.tracks(withMediaType: .video)[0], at: .zero)
-//
-//        } catch {
-//
-//            print("Failed to load first track, \(error)")
-//        }
-//
-//        guard let secondTrack =
-//            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-//        else { return }
-//
-//        do {
-//
-//            let secondTimeRange = CMTimeRangeMake(start: .zero, duration: secondAsset.duration)
-//
-//            try secondTrack.insertTimeRange(secondTimeRange, of: secondAsset.tracks(withMediaType: .video)[0], at: .zero)
-//
-//        } catch {
-//
-//            print("Failed to load second track, \(error)")
-//        }
-//
-//        let mergedVideoUrl = documentDirectory.appendingPathComponent("merged.mp4")
-//
-//        do {
-//
-//            try FileManager.default.removeItem(at: mergedVideoUrl)
-//
-//        } catch {
-//
-//            print("Can't remove previous file:", error.localizedDescription)
-//        }
-//
-//        guard let exporter =
-//            AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
-//
-//        exporter.outputURL = mergedVideoUrl
-//        exporter.outputFileType = .mp4
-//        exporter.shouldOptimizeForNetworkUse = true
-//
-//        exporter.exportAsynchronously { () -> Void in
-//
-//            switch exporter.status {
-//
-//            case .completed:
-//                DispatchQueue.main.async {
-//
-//                    print("success")
-//
-//                    self.rcVideoPlayer.setUpAVPlayer(with: self.videoView, videoUrl: exporter.outputURL!, videoGravity: .resizeAspect)
-//
-//                    self.rcVideoPlayer.play()
-//                }
-//
-//            case .failed:
-//                print("failed \(exporter.error!)")
-//
-//            case .cancelled:
-//                print("cancelled \(exporter.error!)")
-//
-//            default:
-//                print("complete")
-//            }
-//        }
-//    }
 
     func merge() {
         
@@ -405,13 +320,28 @@ extension HomeViewController {
         
         let videoDataAVAssetArray = videoDataUrlArray.map({ AVAsset(url: $0) })
         
-        mergeVideoManager.videoArray = videoDataAVAssetArray
-        
-        print(videoDataAVAssetArray)
-        
         DispatchQueue.main.async {
             
-            self.mergeVideoManager.mergeVideoArray(self)
+            self.mergeVideoManager.doMerge(arrayVideos: videoDataAVAssetArray, completion: { (outputUrl, error) in
+                
+                if let error = error {
+                    
+                    print("Error: \(error.localizedDescription)")
+                
+                } else {
+                    
+                    if let url = outputUrl {
+                    
+                        PHPhotoLibrary.shared().performChanges({
+                    
+                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+                    
+                            print("success")
+                    
+                        }, completionHandler: nil)
+                    }
+                }
+            })
         }
         
     }

@@ -104,7 +104,6 @@ class VideoPlaybackViewController: UIViewController {
         let fileName = "\(time).mp4"
         
         let dataPath = documentDirectory.appendingPathComponent(fileName)
-//        let dataPath = documentDirectory.appendingPathComponent("\(time).mp4")
         
         do {
             

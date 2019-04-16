@@ -9,112 +9,252 @@
 import Foundation
 import AVFoundation
 import Photos
+import UIKit
 
 class MergeVideoManager {
     
-    var videoArray = [AVAsset]() //Videos Array
-    var atTimeM: CMTime = CMTimeMake(value: 0, timescale: 0)
-    var lastAsset: AVAsset!
-    var layerInstructionsArray = [AVVideoCompositionLayerInstruction]()
-    var completeTrackDuration: CMTime = CMTimeMake(value: 0, timescale: 1)
-    var videoSize: CGSize = CGSize(width: 0.0, height: 0.0)
-    var totalTime = CMTimeMake(value: 0, timescale: 0)
+    let defaultSize = CGSize(width: 1920, height: 1080)
     
-    func mergeVideoArray(_ viewController: UIViewController) {
+    typealias ExportUrlHandler = (URL?, Error?) -> Void
+    
+    func doMerge(arrayVideos: [AVAsset], completion: @escaping ExportUrlHandler) -> Void {
         
-        let mixComposition = AVMutableComposition()
+        var insertTime = CMTime.zero
         
-        for videoAsset in videoArray {
+        var arrayLayerInstructions: [AVMutableVideoCompositionLayerInstruction] = []
+        
+        var outputSize = CGSize.init(width: 0, height: 0)
+        
+        // Determine video output size
+        for videoAsset in arrayVideos {
             
-            guard let videoTrack =
-                mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid)) else { return }
+            let videoTrack = videoAsset.tracks(withMediaType: AVMediaType.video)[0]
+            
+            let assetInfo = orientationFromTransform(transform: videoTrack.preferredTransform)
+            
+            var videoSize = videoTrack.naturalSize
+            
+            if assetInfo.isPortrait == true {
+            
+                videoSize.width = videoTrack.naturalSize.height
+                videoSize.height = videoTrack.naturalSize.width
+            }
+            
+            if videoSize.height > outputSize.height {
+                
+                outputSize = videoSize
+            }
+        }
+        
+        if outputSize.width == 0 || outputSize.height == 0 {
+            
+            outputSize = defaultSize
+        }
+        
+        // Silence sound (in case of video has no sound track)
+//        let silenceURL = Bundle.main.url(forResource: "silence", withExtension: "mp3")
+//        let silenceAsset = AVAsset(url:silenceURL!)
+//        let silenceSoundTrack = silenceAsset.tracks(withMediaType: AVMediaType.audio).first
+        
+        // Init composition
+        let mixComposition = AVMutableComposition.init()
+        
+        for videoAsset in arrayVideos {
+            
+            // Get video track
+            guard let videoTrack = videoAsset.tracks(withMediaType: AVMediaType.video).first else { continue }
+            
+            // Get audio track
+            var audioTrack: AVAssetTrack?
+            
+            if videoAsset.tracks(withMediaType: AVMediaType.audio).count > 0 {
+            
+                audioTrack = videoAsset.tracks(withMediaType: AVMediaType.audio).first
+            }
+//            else {
+//                audioTrack = silenceSoundTrack
+//            }
+            
+            // Init video & audio composition track
+            let videoCompositionTrack =
+                mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            
+            let audioCompositionTrack =
+                mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             
             do {
                 
-                if videoAsset == videoArray.first {
+                let startTime = CMTime.zero
+                let duration = videoAsset.duration
+                
+                // Add video track to video composition at specific time
+                try videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: startTime, duration: duration),
+                                                           of: videoTrack,
+                                                           at: insertTime)
+                
+                // Add audio track to audio composition at specific time
+                if let audioTrack = audioTrack {
                     
-                    atTimeM = CMTime.zero
-                    
-                } else {
-                    
-                    atTimeM = totalTime
+                    try audioCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: startTime, duration: duration),
+                                                               of: audioTrack,
+                                                               at: insertTime)
                 }
                 
-                let cmTimeRange = CMTimeRangeMake(start: CMTime.zero, duration: videoAsset.duration)
+                // Add instruction for video track
+                let layerInstruction = videoCompositionInstructionForTrack(track: videoCompositionTrack!,
+                                                                           asset: videoAsset,
+                                                                           standardSize: outputSize,
+                                                                           atTime: insertTime)
                 
-                try videoTrack.insertTimeRange(cmTimeRange, of: videoAsset.tracks(withMediaType: AVMediaType.video)[0], at: completeTrackDuration)
+                // Hide video track before changing to new track
+                let endTime = CMTimeAdd(insertTime, duration)
                 
-                videoSize = videoTrack.naturalSize
+                layerInstruction.setOpacity(0.0, at: endTime)
                 
-            } catch let error as NSError {
+                arrayLayerInstructions.append(layerInstruction)
                 
-                print("error: \(error)")
+                // Increase the insert time
+                insertTime = CMTimeAdd(insertTime, duration)
+                
+            } catch {
+                
+                print("Load track error")
             }
-            
-            totalTime = CMTimeAdd(totalTime, videoAsset.duration)
-            
-            completeTrackDuration = CMTimeAdd(completeTrackDuration, videoAsset.duration)
-            let videoInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
-            
-            if videoAsset != videoArray.last {
-                
-                videoInstruction.setOpacity(0.0, at: completeTrackDuration)
-            }
-            
-            layerInstructionsArray.append(videoInstruction)
-            lastAsset = videoAsset
         }
         
+        // Main video composition instruction
         let mainInstruction = AVMutableVideoCompositionInstruction()
-        mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: completeTrackDuration)
-        mainInstruction.layerInstructions = layerInstructionsArray
+        mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: insertTime)
+        mainInstruction.layerInstructions = arrayLayerInstructions
         
+        // Main video composition
         let mainComposition = AVMutableVideoComposition()
         mainComposition.instructions = [mainInstruction]
         mainComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
-        mainComposition.renderSize = CGSize(width: videoSize.width, height: videoSize.height)
+        mainComposition.renderSize = outputSize
         
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        let date = dateFormatter.string(from: NSDate() as Date)
-        let savePath = (documentDirectory as NSString).appendingPathComponent("mergedVideo-\(date).mp4")
-        let url = NSURL(fileURLWithPath: savePath)
+        // Export to file
+        let path = NSTemporaryDirectory().appending("mergedVideo.mp4")
+        let exportURL = URL.init(fileURLWithPath: path)
         
-        guard let exporter =
-            AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
-        exporter.outputURL = url as URL
-        exporter.outputFileType = .mp4
-        exporter.shouldOptimizeForNetworkUse = true
-        exporter.videoComposition = mainComposition
+        // Remove file if existed
+        FileManager.default.removeItemIfExisted(exportURL)
         
-        exporter.exportAsynchronously {
+        // Init exporter
+        let exporter = AVAssetExportSession.init(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)
+        exporter?.outputURL = exportURL
+        exporter?.outputFileType = AVFileType.mp4
+        exporter?.shouldOptimizeForNetworkUse = true
+        exporter?.videoComposition = mainComposition
+        
+        // Do export
+        exporter?.exportAsynchronously(completionHandler: {
             
             DispatchQueue.main.async {
                 
-                PHPhotoLibrary.shared().performChanges({
-                    
-                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: exporter.outputURL!)
-                    
-                }) { saved, error in
-                    
-                    if saved {
-                        
-                        let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        alertController.addAction(defaultAction)
-                        
-                        viewController.present(alertController, animated: true, completion: nil)
-                    
-                    } else {
-                        
-                        print("video error: \(error!)")
-                        
-                    }
-                }
+                self.exportDidFinish(exporter: exporter, videoURL: exportURL, completion: completion)
+            }
+        })
+    }
+    
+}
+
+extension MergeVideoManager {
+    
+    fileprivate func exportDidFinish(exporter: AVAssetExportSession?, videoURL:URL, completion: @escaping ExportUrlHandler) -> Void {
+        
+        if exporter?.status == AVAssetExportSession.Status.completed {
+        
+            print("Exported file: \(videoURL.absoluteString)")
+            
+            completion(videoURL, nil)
+        
+        } else if exporter?.status == AVAssetExportSession.Status.failed {
+          
+            completion(videoURL, exporter?.error)
+        }
+    }
+    
+    fileprivate func orientationFromTransform(transform: CGAffineTransform) -> (orientation: UIImage.Orientation, isPortrait: Bool) {
+        
+        var assetOrientation = UIImage.Orientation.up
+        
+        var isPortrait = false
+        
+        if transform.a == 0 && transform.b == 1.0 && transform.c == -1.0 && transform.d == 0 {
+        
+            assetOrientation = .right
+            
+            isPortrait = true
+        
+        } else if transform.a == 0 && transform.b == -1.0 && transform.c == 1.0 && transform.d == 0 {
+        
+            assetOrientation = .left
+            
+            isPortrait = true
+        
+        } else if transform.a == 1.0 && transform.b == 0 && transform.c == 0 && transform.d == 1.0 {
+        
+            assetOrientation = .up
+        
+        } else if transform.a == -1.0 && transform.b == 0 && transform.c == 0 && transform.d == -1.0 {
+        
+            assetOrientation = .down
+        
+        }
+        
+        return (assetOrientation, isPortrait)
+    }
+    
+    fileprivate func videoCompositionInstructionForTrack(
+        track: AVCompositionTrack, asset: AVAsset, standardSize: CGSize, atTime: CMTime) -> AVMutableVideoCompositionLayerInstruction {
+       
+        let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
+        let assetTrack = asset.tracks(withMediaType: AVMediaType.video)[0]
+        
+        let transform = assetTrack.preferredTransform
+        let assetInfo = orientationFromTransform(transform: transform)
+        
+        var aspectFillRatio: CGFloat = 1
+        
+        if assetTrack.naturalSize.height < assetTrack.naturalSize.width {
+        
+            aspectFillRatio = standardSize.height / assetTrack.naturalSize.height
+        
+        } else {
+          
+            aspectFillRatio = standardSize.width / assetTrack.naturalSize.width
+        }
+        
+        if assetInfo.isPortrait {
+            
+            let scaleFactor = CGAffineTransform(scaleX: aspectFillRatio, y: aspectFillRatio)
+            
+            let posX = standardSize.width / 2 - (assetTrack.naturalSize.height * aspectFillRatio) / 2
+            let posY = standardSize.height / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
+            let moveFactor = CGAffineTransform(translationX: posX, y: posY)
+            
+            instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor), at: atTime)
+            
+        } else {
+            
+            let scaleFactor = CGAffineTransform(scaleX: aspectFillRatio, y: aspectFillRatio)
+            
+            let posX = standardSize.width / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
+            let posY = standardSize.height / 2 - (assetTrack.naturalSize.height * aspectFillRatio) / 2
+            let moveFactor = CGAffineTransform(translationX: posX, y: posY)
+            
+            var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor)
+            
+            if assetInfo.orientation == .down {
+                
+                let fixUpsideDown = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+                concat = fixUpsideDown.concatenating(scaleFactor).concatenating(moveFactor)
             }
             
+            instruction.setTransform(concat, at: atTime)
         }
+        
+        return instruction
     }
 }
