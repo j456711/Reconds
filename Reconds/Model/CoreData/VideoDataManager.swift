@@ -59,6 +59,8 @@ final class VideoDataManager {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
+        fetchRequest.returnsObjectsAsFaults = false
+        
         do {
             
             let fetchedObject = try context.fetch(fetchRequest) as? [T]

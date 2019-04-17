@@ -83,6 +83,25 @@ class HomeViewController: UIViewController {
         
         fetchData()
         
+        if videoData[0].dataPathArray.count == 1 {
+        
+            collectionView.isHidden = false
+            
+            guard let videoUrl =
+                URL(string: FileManager.documentDirectory.absoluteString + videoData[0].dataPathArray[0])
+            else { return }
+            
+            rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
+            
+            rcVideoPlayer.play()
+            
+        } else if videoData[0].dataPathArray.count == 2 {
+            
+            collectionView.isHidden = false
+            
+            merge()
+        }
+        
         collectionView.reloadData()
     }
 
@@ -131,7 +150,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         if videoData.count == 0 {
             
-            return 0
+            return 25
         
         } else {
             
@@ -167,8 +186,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             let dataPath =
                 FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
-                        
-//        rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: dataPath, videoGravity: .resizeAspectFill)
+            
+//            rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: dataPath, videoGravity: .resizeAspectFill)
             
             homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
         
@@ -313,7 +332,7 @@ extension HomeViewController {
         
         self.videoData = videoData
         
-        print("############\(videoData)#######################")
+        print("############\(videoData)##################")
     }
     
 //    func deleteData() {
