@@ -20,6 +20,7 @@ final class VideoDataManager {
     lazy var persistantContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "VideoDataModel")
+        
         container.loadPersistentStores(completionHandler: { (_, error) in
             
             if let error = error as NSError? {
@@ -27,6 +28,8 @@ final class VideoDataManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        
+        container.viewContext.automaticallyMergesChangesFromParent = true
         
         return container
     }()
@@ -38,7 +41,7 @@ final class VideoDataManager {
             do {
                 
                 try context.save()
-                
+                                
                 print("saved successfully")
                                 
             } catch {
@@ -70,8 +73,10 @@ final class VideoDataManager {
         }
     }
     
-    func deleteData(_ entityName: String) {
+    func delete(_ entityName: String) {
+        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
         fetchRequest.returnsObjectsAsFaults = false
         
         do {
@@ -79,14 +84,16 @@ final class VideoDataManager {
             
             for object in results {
                 
-                guard let objectData = object as? NSManagedObject else {continue}
+                guard let objectData = object as? NSManagedObject else { return }
                 
                 context.delete(objectData)
+                
+                save()
             }
             
         } catch {
             
-            print("Delete all data in \(entityName) error :", error)
+            print("Delete all data in \(entityName) error:", error)
         }
     }
 }

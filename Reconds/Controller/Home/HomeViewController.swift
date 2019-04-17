@@ -11,7 +11,7 @@ import AVFoundation
 import Photos
 
 class HomeViewController: UIViewController {
-    
+
     let rcVideoPlayer = RCVideoPlayer()
     
     var videoData: [VideoData] = []
@@ -124,42 +124,56 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         fetchData()
+
+        if videoData.count == 0 {
+            
+            return 0
         
-        return videoData.count
+        } else {
+            
+            return videoData[0].dataPathArray.count
+        }
+        
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: String(describing: HomeCollectionViewCell.self), for: indexPath)
-
+        
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
-
+        
         if longPressedEnabled {
 
             homeCell.removeButton.isHidden = false
-
+            
         } else {
 
             homeCell.removeButton.isHidden = true
         }
-        
+
         homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
-        
-        let dataPath = FileManager.documentDirectory.appendingPathComponent(videoData[indexPath.item].dataPath)
-        
-//        guard let dataPath = URL(string: videoData[indexPath.item].dataPath) else { return homeCell }
-        
+
+        if videoData.count == 0 {
+            
+            return cell
+            
+        } else {
+            
+            let dataPath =
+                FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
+                        
 //        rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: dataPath, videoGravity: .resizeAspectFill)
+            
+            homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
         
-        homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
-        
-        return homeCell
+            return homeCell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
@@ -170,18 +184,22 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView,
                         moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
-        print("Start index: - \(sourceIndexPath.item)")
-        print("End index: - \(destinationIndexPath.item)")
+        print("Start index: \(sourceIndexPath.item)")
+        print("End index: \(destinationIndexPath.item)")
+        
+        let dataString = videoData[0].dataPathArray.remove(at: sourceIndexPath.item)
 
-        let tmp = videoData[sourceIndexPath.item].dataPath
-        videoData[sourceIndexPath.item].dataPath = videoData[destinationIndexPath.item].dataPath
-        videoData[destinationIndexPath.item].dataPath = tmp
-        
-        VideoDataManager.shared.save()
-        
+        videoData[0].dataPathArray.insert(dataString, at: destinationIndexPath.item)
+
         collectionView.reloadData()
     }
-
+    
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        return CGSize(width: self.view.frame.size.width / 5, height: self.view.frame.size.width / 5)
+//    }
 }
 
 // MARK: - Gestures
@@ -233,13 +251,18 @@ extension HomeViewController {
                 guard let strongSelf = self else { return }
                 
                 let dataPath =
-                    FileManager.documentDirectory.appendingPathComponent(strongSelf.videoData[hitIndex.item].dataPath)
+                    FileManager.documentDirectory.appendingPathComponent(
+                        strongSelf.videoData[0].dataPathArray[hitIndex.item])
                 
                 try FileManager.default.removeItem(at: dataPath)
                 
-                print("Remove successfully")
+                strongSelf.videoData[0].dataPathArray.remove(at: hitIndex.item)
                 
-                strongSelf.deleteData(at: hitIndex)
+                VideoDataManager.shared.save()
+                
+                 print("Remove successfully")
+                
+                print(strongSelf.videoData[0].dataPathArray)
                 
                 strongSelf.collectionView.reloadData()
                 
@@ -262,7 +285,7 @@ extension HomeViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
         guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
         
-        let dataPath = FileManager.documentDirectory.appendingPathComponent(videoData[hitIndex.item].dataPath)
+        let dataPath = FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
         
         videoPlaybackVC.videoUrl = dataPath
         
@@ -284,67 +307,74 @@ extension HomeViewController {
 // MARK: - CoreData Function
 extension HomeViewController {
     
+    func createData(videoDataArray: [String]) {
+        
+        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
+        
+        videoData.dataPathArray.append(contentsOf: videoDataArray)
+        
+        VideoDataManager.shared.save()
+    }
+    
     func fetchData() {
         
         let videoData = VideoDataManager.shared.fetch(VideoData.self)
         
         self.videoData = videoData
+        
+        print("############\(videoData)#######################")
     }
     
-    func deleteData(at hitIndex: IndexPath) {
+    func deleteData() {
         
-        VideoDataManager.shared.context.delete(self.videoData[hitIndex.item])
-
+        VideoDataManager.shared.context.delete(self.videoData[0])
+        
         VideoDataManager.shared.save()
     }
 }
 
 extension HomeViewController {
     
-    @IBAction func pressed(_ sender: UIButton) {
-
-        merge()
-    }
-
-    func merge() {
-        
-        let videoDataStringArray = videoData.map({ FileManager.documentDirectory.absoluteString + $0.dataPath })
-
-        guard let videoDataUrlArray = videoDataStringArray.map({ URL(string: $0) }) as? [URL] else { return }
-        
-        let videoDataAVAssetArray = videoDataUrlArray.map({ AVAsset(url: $0) })
-        
-        DispatchQueue.main.async {
-            
-            MergeVideoManager.shared.doMerge(arrayVideos: videoDataAVAssetArray,
-                                             completion: { [weak self] (outputUrl, error) in
-                
-                guard let strongSelf = self else { return }
-                
-                if let error = error {
-                    
-                    print("Error: \(error.localizedDescription)")
-                
-                } else {
-                    
-                    if let url = outputUrl {
-                        
-                        strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
-                                                               videoUrl: url,
-                                                               videoGravity: .resizeAspect)
-                        
-                        strongSelf.rcVideoPlayer.play()
-//                        PHPhotoLibrary.shared().performChanges({
+//    @IBAction func pressed(_ sender: UIButton) {
 //
-//                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+//        merge()
+//    }
 //
-//                            print("success")
+//    func merge() {
 //
-//                        }, completionHandler: nil)
-                    }
-                }
-            })
-        }
-        
-    }
+//        let videoDataStringArray = videoData.map({ FileManager.documentDirectory.absoluteString + $0.dataPath })
+//
+//        guard let videoDataUrlArray = videoDataStringArray.map({ URL(string: $0) }) as? [URL] else { return }
+//
+//        let videoDataAVAssetArray = videoDataUrlArray.map({ AVAsset(url: $0) })
+//
+//            MergeVideoManager.shared.doMerge(arrayVideos: videoDataAVAssetArray,
+//                                             completion: { [weak self] (outputUrl, error) in
+//
+//                guard let strongSelf = self else { return }
+//
+//                if let error = error {
+//
+//                    print("Error: \(error.localizedDescription)")
+//
+//                } else {
+//
+//                    if let url = outputUrl {
+//
+//                        strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
+//                                                               videoUrl: url,
+//                                                               videoGravity: .resizeAspect)
+//
+//                        strongSelf.rcVideoPlayer.play()
+////                        PHPhotoLibrary.shared().performChanges({
+////
+////                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+////
+////                            print("success")
+////
+////                        }, completionHandler: nil)
+//                    }
+//                }
+//            })
+//    }
 }

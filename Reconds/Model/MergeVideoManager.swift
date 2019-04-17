@@ -88,18 +88,17 @@ class MergeVideoManager {
             
             do {
                 
-                let startTime = CMTime.zero
-                let duration = videoAsset.duration
-                
                 // Add video track to video composition at specific time
-                try videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: startTime, duration: duration),
+                try videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                                                                           duration: videoAsset.duration),
                                                            of: videoTrack,
                                                            at: insertTime)
                 
                 // Add audio track to audio composition at specific time
                 if let audioTrack = audioTrack {
                     
-                    try audioCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: startTime, duration: duration),
+                    try audioCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                                                                               duration: videoAsset.duration),
                                                                of: audioTrack,
                                                                at: insertTime)
                 }
@@ -111,14 +110,14 @@ class MergeVideoManager {
                                                                            atTime: insertTime)
                 
                 // Hide video track before changing to new track
-                let endTime = CMTimeAdd(insertTime, duration)
+                let endTime = CMTimeAdd(insertTime, videoAsset.duration)
                 
                 layerInstruction.setOpacity(0.0, at: endTime)
                 
                 arrayLayerInstructions.append(layerInstruction)
                 
                 // Increase the insert time
-                insertTime = CMTimeAdd(insertTime, duration)
+                insertTime = CMTimeAdd(insertTime, videoAsset.duration)
                 
             } catch {
                 

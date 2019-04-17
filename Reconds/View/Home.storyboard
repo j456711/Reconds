@@ -176,7 +176,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSC-F8-r8y">
-                                <rect key="frame" x="0.0" y="64" width="375" height="194"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="209"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frN-1r-8Zr">
@@ -206,7 +206,7 @@
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" id="Cba-mj-hdK"/>
                             <constraint firstItem="frN-1r-8Zr" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" constant="16" id="H2f-MT-4CA"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="OPo-7H-Lef"/>
-                            <constraint firstItem="fhU-yD-8eU" firstAttribute="top" secondItem="kSC-F8-r8y" secondAttribute="bottom" constant="25" id="PHl-SQ-8FO"/>
+                            <constraint firstItem="fhU-yD-8eU" firstAttribute="top" secondItem="kSC-F8-r8y" secondAttribute="bottom" constant="10" id="PHl-SQ-8FO"/>
                             <constraint firstItem="kSC-F8-r8y" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="Rox-GV-mzO"/>
                             <constraint firstItem="frN-1r-8Zr" firstAttribute="top" secondItem="fhU-yD-8eU" secondAttribute="bottom" constant="8" id="cmN-bx-MC9"/>
                             <constraint firstItem="kSC-F8-r8y" firstAttribute="top" secondItem="Kde-7M-CNW" secondAttribute="top" id="ge5-rF-e0e"/>

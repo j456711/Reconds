@@ -106,18 +106,25 @@ class VideoPlaybackViewController: UIViewController {
             
             try videoData.write(to: dataPath)
             
-            saveData(fileName)
+            let videoData = VideoDataManager.shared.fetch(VideoData.self)
             
-//            try videoData.write(to: dataPath)
-//
-//            saveData(dataPath.absoluteString)
+            if videoData.count == 0 {
+                
+                createData(fileName: fileName)
+                
+            } else {
+                
+                videoData[0].dataPathArray.append(fileName)
+                
+                VideoDataManager.shared.save()                
+            }
             
 //            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
 //                let tabbar = appDelegate.window?.rootViewController as? TabBarController,
 //                let navVC = tabbar.viewControllers?.first as? UINavigationController,
 //                let homeVC = navVC.viewControllers.first as? HomeViewController {
-//                
-//                homeVC.videoUrls = videoUrls
+//
+//                homeVC.tmpVideoData.append(fileName)
 //            }
 
         } catch {
@@ -164,19 +171,6 @@ class VideoPlaybackViewController: UIViewController {
     }
 }
 
-// MARK: - CoreData Function
-extension VideoPlaybackViewController {
-    
-    func saveData(_ dataPathString: String) {
-        
-        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
-        
-        videoData.dataPath = dataPathString
-        
-        VideoDataManager.shared.save()
-    }
-}
-
 // MARK: - Gesture
 extension VideoPlaybackViewController {
     
@@ -216,5 +210,18 @@ extension VideoPlaybackViewController {
 
         default: break
         }
+    }
+}
+
+// MARK: - CoreData Function
+extension VideoPlaybackViewController {
+    
+    func createData(fileName: String) {
+        
+        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
+        
+        videoData.dataPathArray.append(fileName)
+        
+        VideoDataManager.shared.save()
     }
 }
