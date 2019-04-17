@@ -262,7 +262,7 @@ extension HomeViewController {
                 
                  print("Remove successfully")
                 
-                print(strongSelf.videoData[0].dataPathArray)
+                print("**********\(strongSelf.videoData[0].dataPathArray)**********")
                 
                 strongSelf.collectionView.reloadData()
                 
@@ -307,15 +307,6 @@ extension HomeViewController {
 // MARK: - CoreData Function
 extension HomeViewController {
     
-    func createData(videoDataArray: [String]) {
-        
-        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
-        
-        videoData.dataPathArray.append(contentsOf: videoDataArray)
-        
-        VideoDataManager.shared.save()
-    }
-    
     func fetchData() {
         
         let videoData = VideoDataManager.shared.fetch(VideoData.self)
@@ -325,56 +316,56 @@ extension HomeViewController {
         print("############\(videoData)#######################")
     }
     
-    func deleteData() {
-        
-        VideoDataManager.shared.context.delete(self.videoData[0])
-        
-        VideoDataManager.shared.save()
-    }
+//    func deleteData() {
+//
+//        VideoDataManager.shared.context.delete(self.videoData[0])
+//
+//        VideoDataManager.shared.save()
+//    }
 }
 
 extension HomeViewController {
     
-//    @IBAction func pressed(_ sender: UIButton) {
+    @IBAction func pressed(_ sender: UIButton) {
+
+        merge()
+    }
+
+    func merge() {
+
+        let videoDataStringArray = videoData[0].dataPathArray.map({ FileManager.documentDirectory.absoluteString + $0 })
+
+        guard let videoDataUrlArray = videoDataStringArray.map({ URL(string: $0) }) as? [URL] else { return }
+
+        let videoDataAVAssetArray = videoDataUrlArray.map({ AVAsset(url: $0) })
+
+            MergeVideoManager.shared.doMerge(arrayVideos: videoDataAVAssetArray,
+                                             completion: { [weak self] (outputUrl, error) in
+
+                guard let strongSelf = self else { return }
+
+                if let error = error {
+
+                    print("Error: \(error.localizedDescription)")
+
+                } else {
+
+                    if let url = outputUrl {
+
+                        strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
+                                                               videoUrl: url,
+                                                               videoGravity: .resizeAspect)
+
+                        strongSelf.rcVideoPlayer.play()
+//                        PHPhotoLibrary.shared().performChanges({
 //
-//        merge()
-//    }
+//                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
 //
-//    func merge() {
+//                            print("success")
 //
-//        let videoDataStringArray = videoData.map({ FileManager.documentDirectory.absoluteString + $0.dataPath })
-//
-//        guard let videoDataUrlArray = videoDataStringArray.map({ URL(string: $0) }) as? [URL] else { return }
-//
-//        let videoDataAVAssetArray = videoDataUrlArray.map({ AVAsset(url: $0) })
-//
-//            MergeVideoManager.shared.doMerge(arrayVideos: videoDataAVAssetArray,
-//                                             completion: { [weak self] (outputUrl, error) in
-//
-//                guard let strongSelf = self else { return }
-//
-//                if let error = error {
-//
-//                    print("Error: \(error.localizedDescription)")
-//
-//                } else {
-//
-//                    if let url = outputUrl {
-//
-//                        strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
-//                                                               videoUrl: url,
-//                                                               videoGravity: .resizeAspect)
-//
-//                        strongSelf.rcVideoPlayer.play()
-////                        PHPhotoLibrary.shared().performChanges({
-////
-////                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-////
-////                            print("success")
-////
-////                        }, completionHandler: nil)
-//                    }
-//                }
-//            })
-//    }
+//                        }, completionHandler: nil)
+                    }
+                }
+            })
+    }
 }
