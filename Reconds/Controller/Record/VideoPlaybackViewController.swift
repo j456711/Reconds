@@ -108,16 +108,29 @@ class VideoPlaybackViewController: UIViewController {
             
             let videoData = VideoDataManager.shared.fetch(VideoData.self)
             
-            if videoData.count == 0 {
+//            if videoData.count == 0 {
+//
+//                createData(fileName: fileName)
+//
+//            } else {
+            
+            let searchToSearch = ".mp4"
+            
+            let index = videoData[0].dataPathArray.filter({ (item: String) -> Bool in
                 
-                createData(fileName: fileName)
+                let stringMatch = item.lowercased().range(of: searchToSearch.lowercased())
                 
-            } else {
+                return stringMatch != nil ? true : false
+            })
+            
+//            videoData[0].dataPathArray.append(fileName)
+            
+            videoData[0].dataPathArray.insert(fileName, at: index.count)
+            
+            videoData[0].dataPathArray.removeLast()
                 
-                videoData[0].dataPathArray.append(fileName)
-                
-                VideoDataManager.shared.save()                
-            }
+            VideoDataManager.shared.save()
+//            }
             
 //            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
 //                let tabbar = appDelegate.window?.rootViewController as? TabBarController,

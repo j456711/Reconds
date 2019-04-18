@@ -89,6 +89,8 @@ class HomeViewController: UIViewController {
         
         if videoData.count != 0 {
         
+            print("#########\(videoData[0].dataPathArray.count)############")
+            
             if videoData[0].dataPathArray.count == 1 {
                 
                 collectionView.isHidden = false
@@ -139,7 +141,7 @@ class HomeViewController: UIViewController {
                 self?.navigationItem.title = text
             }
             
-            if self?.videoData.count != 0 {
+            if self?.videoData.count == 0 {
                 
                 VideoDataManager.shared.createData()
             }
@@ -169,7 +171,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
             return videoData[0].dataPathArray.count
         }
-//        return 25
     }
 
     func collectionView(_ collectionView: UICollectionView,
