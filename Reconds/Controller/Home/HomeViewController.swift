@@ -84,12 +84,10 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-//        fetchData()
-        
+                
         if videoData.count != 0 {
         
-            print("#########\(videoData[0].dataPathArray.count)############")
+            print("----------\(videoData[0].dataPathArray.count)-----------")
             
             if videoData[0].dataPathArray.count == 1 {
                 
@@ -224,6 +222,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         videoData[0].dataPathArray.insert(dataString, at: destinationIndexPath.item)
 
+        VideoDataManager.shared.save()
+        
         collectionView.reloadData()
     }
     

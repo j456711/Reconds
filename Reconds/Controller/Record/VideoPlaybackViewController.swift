@@ -93,7 +93,6 @@ class VideoPlaybackViewController: UIViewController {
 
     @IBAction func useButtonPressed(_ sender: UIButton) {
         
-        //Data
         guard let videoData = try? Data(contentsOf: videoUrl) else { return }
         
         let time = Int(Date().timeIntervalSince1970)
@@ -108,12 +107,6 @@ class VideoPlaybackViewController: UIViewController {
             
             let videoData = VideoDataManager.shared.fetch(VideoData.self)
             
-//            if videoData.count == 0 {
-//
-//                createData(fileName: fileName)
-//
-//            } else {
-            
             let searchToSearch = ".mp4"
             
             let index = videoData[0].dataPathArray.filter({ (item: String) -> Bool in
@@ -122,8 +115,6 @@ class VideoPlaybackViewController: UIViewController {
                 
                 return stringMatch != nil ? true : false
             })
-            
-//            videoData[0].dataPathArray.append(fileName)
             
             videoData[0].dataPathArray.insert(fileName, at: index.count)
             
@@ -227,14 +218,14 @@ extension VideoPlaybackViewController {
 }
 
 // MARK: - CoreData Function
-extension VideoPlaybackViewController {
-    
-    func createData(fileName: String) {
-        
-        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
-        
-        videoData.dataPathArray.append(fileName)
-        
-        VideoDataManager.shared.save()
-    }
-}
+//extension VideoPlaybackViewController {
+//
+//    func createData(fileName: String) {
+//
+//        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
+//
+//        videoData.dataPathArray.append(fileName)
+//
+//        VideoDataManager.shared.save()
+//    }
+//}
