@@ -104,12 +104,28 @@ extension VideoDataManager {
     
     func createData() {
         
-        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
+        let videoData = VideoData(context: persistantContainer.viewContext)
         
         videoData.dataPathArray.append(contentsOf: ["", "", "", "", "", "", "", "", "", "",
                                                     "", "", "", "", "", "", "", "", "", "",
                                                     "", "", "", "", ""])
         
-        VideoDataManager.shared.save()
+        save()
+    }
+    
+    func filterData() -> [String] {
+        
+        let videoData = fetch(VideoData.self)
+        
+        let searchToSearch = ".mp4"
+        
+        let index = videoData[0].dataPathArray.filter({ (item: String) -> Bool in
+            
+            let stringMatch = item.lowercased().range(of: searchToSearch.lowercased())
+            
+            return stringMatch != nil ? true : false
+        })
+        
+        return index
     }
 }

@@ -16,8 +16,6 @@ class CameraViewController: UIViewController {
 
         static let showVideoPlayback = "ShowVideoPlayback"
     }
-
-    let generator = UIImpactFeedbackGenerator(style: .heavy)
     
     let cameraButton = UIView()
 
@@ -46,8 +44,26 @@ class CameraViewController: UIViewController {
 
             startSession()
         }
-
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//
+//        let index = VideoDataManager.shared.filterData()
+//
+//        if index.count == 25 {
+//
+//            let alert =
+//                UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片",
+//                                                      alertMessage: "影片數量已達到上限，快去輸出吧！",
+//                                                      actionHandler: { (_) in
+//
+//                    self.dismiss(animated: true, completion: nil)
+//                })
+//
+//            present(alert, animated: true, completion: nil)
+//        }
+//    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
@@ -57,7 +73,24 @@ class CameraViewController: UIViewController {
 
         if cameraButtonLayer.path!.contains(point) {
 
-            startRecording()
+            let index = VideoDataManager.shared.filterData()
+            
+            if index.count == 25 {
+                
+                let alert =
+                    UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片",
+                                                          alertMessage: "影片數量已達到上限，快去輸出吧！",
+                                                          actionHandler: { [weak self] (_) in
+                                                            
+                        self?.dismiss(animated: true, completion: nil)
+                    })
+                
+                present(alert, animated: true, completion: nil)
+          
+            } else {
+            
+                startRecording()
+            }
         }
     }
 
@@ -331,8 +364,6 @@ extension CameraViewController: CAAnimationDelegate {
         strokeAnimation.fillMode = .forwards
 
         cameraButtonLayer.add(strokeAnimation, forKey: "basic")
-        
-        generator.impactOccurred()
     }
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {

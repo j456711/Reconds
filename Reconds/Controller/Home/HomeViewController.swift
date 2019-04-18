@@ -84,7 +84,8 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-                
+        super.viewWillAppear(animated)
+        
         if videoData.count != 0 {
         
             print("----------\(videoData[0].dataPathArray.count)-----------")
@@ -315,6 +316,8 @@ extension HomeViewController {
                     try FileManager.default.removeItem(at: dataPath)
                     
                     strongSelf.videoData[0].dataPathArray.remove(at: hitIndex.item)
+                    
+                    strongSelf.videoData[0].dataPathArray.insert("", at: 24)
                     
                     VideoDataManager.shared.save()
                     

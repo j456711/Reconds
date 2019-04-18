@@ -107,14 +107,7 @@ class VideoPlaybackViewController: UIViewController {
             
             let videoData = VideoDataManager.shared.fetch(VideoData.self)
             
-            let searchToSearch = ".mp4"
-            
-            let index = videoData[0].dataPathArray.filter({ (item: String) -> Bool in
-                
-                let stringMatch = item.lowercased().range(of: searchToSearch.lowercased())
-                
-                return stringMatch != nil ? true : false
-            })
+            let index = VideoDataManager.shared.filterData()
             
             videoData[0].dataPathArray.insert(fileName, at: index.count)
             

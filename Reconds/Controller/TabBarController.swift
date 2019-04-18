@@ -19,21 +19,45 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
     func tabBarController(_ tabBarController: UITabBarController,
                           shouldSelect viewController: UIViewController) -> Bool {
-
+        
         if viewController is RecordViewController {
-
+            
+            let index = VideoDataManager.shared.filterData()
+            
+            if index.count == 25 {
+                
+                let alert =
+                    UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片", alertMessage: "影片數量已達到上限，快去輸出吧！")
+                
+                present(alert, animated: true, completion: nil)
+            
+            } else {
+            
                 let storyboard = UIStoryboard(name: "Record", bundle: nil)
-
+                
                 let cameraVC = storyboard.instantiateViewController(withIdentifier: "CameraViewController")
-
+                
                 present(cameraVC, animated: true, completion: nil)
-
+            }
+            
             return false
-
+            
         } else {
-
+            
             return true
         }
     }
 
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//
+//        let videoData = VideoDataManager.shared.fetch(VideoData.self)
+//
+//        if tabBarController.selectedIndex == 2 && videoData[0].dataPathArray.count == 25 {
+//
+//            let alert = UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片", alertMessage: "影片數量已達上限，快去輸出吧！")
+//
+//            present(alert, animated: true, completion: nil)
+//        }
+//    }
+//
 }
