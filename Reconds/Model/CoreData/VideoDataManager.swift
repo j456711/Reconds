@@ -99,3 +99,17 @@ final class VideoDataManager {
         }
     }
 }
+
+extension VideoDataManager {
+    
+    func createData() {
+        
+        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
+        
+        videoData.dataPathArray.append(contentsOf: ["", "", "", "", "", "", "", "", "", "",
+                                                    "", "", "", "", "", "", "", "", "", "",
+                                                    "", "", "", "", ""])
+        
+        VideoDataManager.shared.save()
+    }
+}

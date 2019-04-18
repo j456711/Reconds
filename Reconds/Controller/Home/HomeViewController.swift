@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
             collectionView.dataSource = self
 
             collectionView.isHidden = true
+            
+            collectionView.translatesAutoresizingMaskIntoConstraints = false
         }
     }
 
@@ -71,6 +73,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchData()
+        
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
@@ -78,28 +82,31 @@ class HomeViewController: UIViewController {
         collectionView.addGestureRecognizer(longPressGesture)
         collectionView.addGestureRecognizer(tapGesture)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         
-        fetchData()
+//        fetchData()
         
-        if videoData[0].dataPathArray.count == 1 {
+        if videoData.count != 0 {
         
-            collectionView.isHidden = false
-            
-            guard let videoUrl =
-                URL(string: FileManager.documentDirectory.absoluteString + videoData[0].dataPathArray[0])
-            else { return }
-            
-            rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
-            
-            rcVideoPlayer.play()
-            
-        } else if videoData[0].dataPathArray.count == 2 {
-            
-            collectionView.isHidden = false
-            
-            merge()
+            if videoData[0].dataPathArray.count == 1 {
+                
+                collectionView.isHidden = false
+                
+                guard let videoUrl =
+                    URL(string: FileManager.documentDirectory.absoluteString + videoData[0].dataPathArray[0])
+                    else { return }
+                
+                rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
+                
+                rcVideoPlayer.play()
+                
+            } else if videoData[0].dataPathArray.count == 2 {
+                
+                collectionView.isHidden = false
+                
+                merge()
+            }
         }
         
         collectionView.reloadData()
@@ -131,7 +138,13 @@ class HomeViewController: UIViewController {
 
                 self?.navigationItem.title = text
             }
+            
+            if self?.videoData.count != 0 {
+                
+                VideoDataManager.shared.createData()
+            }
         }
+        
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
 
         alert.addAction(confirmAction)
@@ -147,16 +160,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         fetchData()
-
-        if videoData.count == 0 {
-            
-            return 25
         
+        if videoData.count == 0 {
+
+            return 25
+
         } else {
-            
+
             return videoData[0].dataPathArray.count
         }
-        
+//        return 25
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -213,12 +226,35 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         collectionView.reloadData()
     }
     
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        return CGSize(width: self.view.frame.size.width / 5, height: self.view.frame.size.width / 5)
-//    }
+    // MARK: - CollectionViewFlowLayout Method
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        return CGSize(width: (UIScreen.main.bounds.size.width - 4) / 5,
+                      height: (UIScreen.main.bounds.size.width - 4) / 5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 1
+    }
 }
 
 // MARK: - Gestures
@@ -269,21 +305,24 @@ extension HomeViewController {
                 
                 guard let strongSelf = self else { return }
                 
-                let dataPath =
-                    FileManager.documentDirectory.appendingPathComponent(
-                        strongSelf.videoData[0].dataPathArray[hitIndex.item])
+                if strongSelf.videoData.count != 0 {
                 
-                try FileManager.default.removeItem(at: dataPath)
-                
-                strongSelf.videoData[0].dataPathArray.remove(at: hitIndex.item)
-                
-                VideoDataManager.shared.save()
-                
-                 print("Remove successfully")
-                
-                print("**********\(strongSelf.videoData[0].dataPathArray)**********")
-                
-                strongSelf.collectionView.reloadData()
+                    let dataPath =
+                        FileManager.documentDirectory.appendingPathComponent(
+                            strongSelf.videoData[0].dataPathArray[hitIndex.item])
+                    
+                    try FileManager.default.removeItem(at: dataPath)
+                    
+                    strongSelf.videoData[0].dataPathArray.remove(at: hitIndex.item)
+                    
+                    VideoDataManager.shared.save()
+                    
+                    print("Remove successfully")
+                    
+                    print("**********\(strongSelf.videoData[0].dataPathArray)**********")
+                    
+                    strongSelf.collectionView.reloadData()
+                }
                 
             } catch {
                 
@@ -304,21 +343,25 @@ extension HomeViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
         guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
         
-        let dataPath = FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
+        if videoData.count != 0 {
         
-        videoPlaybackVC.videoUrl = dataPath
-        
-        videoPlaybackVC.view.addSubview(videoPlaybackVC.controlView)
-        videoPlaybackVC.view.addSubview(videoPlaybackVC.retakeButton)
-        videoPlaybackVC.view.addSubview(videoPlaybackVC.useButton)
-        
-        videoPlaybackVC.controlView.isHidden = true
-        videoPlaybackVC.retakeButton.isHidden = true
-        videoPlaybackVC.useButton.isHidden = true
-        
-        videoPlaybackVC.modalPresentationStyle = .overFullScreen
-        
-        present(videoPlaybackVC, animated: true, completion: nil)
+            let dataPath =
+                FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
+            
+            videoPlaybackVC.videoUrl = dataPath
+            
+            videoPlaybackVC.view.addSubview(videoPlaybackVC.controlView)
+            videoPlaybackVC.view.addSubview(videoPlaybackVC.retakeButton)
+            videoPlaybackVC.view.addSubview(videoPlaybackVC.useButton)
+            
+            videoPlaybackVC.controlView.isHidden = true
+            videoPlaybackVC.retakeButton.isHidden = true
+            videoPlaybackVC.useButton.isHidden = true
+            
+            videoPlaybackVC.modalPresentationStyle = .overFullScreen
+            
+            present(videoPlaybackVC, animated: true, completion: nil)
+        }
     }
     
 }
@@ -332,7 +375,7 @@ extension HomeViewController {
         
         self.videoData = videoData
         
-        print("############\(videoData)##################")
+        print("#########\(videoData)############")
     }
     
 //    func deleteData() {
