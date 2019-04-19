@@ -12,6 +12,8 @@ import Photos
 
 class HomeViewController: UIViewController {
 
+    var feedbackGenerator: UIImpactFeedbackGenerator?
+    
     let rcVideoPlayer = RCVideoPlayer()
     
     var videoData: [VideoData] = []
@@ -40,8 +42,8 @@ class HomeViewController: UIViewController {
             doneButton.isHidden = true
 
             doneButton.layer.borderWidth = 1
-            doneButton.layer.borderColor = UIColor(red: 32 / 255, green: 184 / 255, blue: 221 / 255, alpha: 1).cgColor
             doneButton.layer.cornerRadius = 18
+            doneButton.layer.borderColor = UIColor(red: 32 / 255, green: 184 / 255, blue: 221 / 255, alpha: 1).cgColor
         }
     }
 
@@ -143,6 +145,8 @@ class HomeViewController: UIViewController {
             if self?.videoData.count == 0 {
                 
                 VideoDataManager.shared.createData()
+                
+                self?.collectionView.reloadData()
             }
         }
         
@@ -192,25 +196,41 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
 
         if videoData.count == 0 {
-            
+
             return cell
-            
+
         } else {
-            
-            let dataPath =
-                FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
-            
+  
+            if videoData[0].dataPathArray[indexPath.item] == "" {
+                
+                homeCell.removeButton.isHidden = true
+                
+                homeCell.thumbnail.image = nil
+                
+            } else {
+                
+                let dataPath =
+                    FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
+                
+                homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
+            }
+
 //            rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: dataPath, videoGravity: .resizeAspectFill)
-            
-            homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
-        
+
             return homeCell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
 
-        return true
+        if videoData[0].dataPathArray[indexPath.item] == "" {
+            
+            return false
+        
+        } else {
+        
+            return true
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -267,18 +287,24 @@ extension HomeViewController {
         switch gesture.state {
 
         case .began:
-
+            
+            feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+            
+            feedbackGenerator?.impactOccurred()
+            
             guard let selectedIndexPath =
                 collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else { return }
 
             collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
 
         case .changed:
-
+            
             collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
 
-        case .ended:
+        case .ended, .cancelled, .failed:
 
+            feedbackGenerator = nil
+            
             collectionView.endInteractiveMovement()
             
             doneButton.isHidden = false
@@ -347,7 +373,7 @@ extension HomeViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
         guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
         
-        if videoData.count != 0 {
+        if videoData[0].dataPathArray[hitIndex.item] != "" {
         
             let dataPath =
                 FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
@@ -367,7 +393,6 @@ extension HomeViewController {
             present(videoPlaybackVC, animated: true, completion: nil)
         }
     }
-    
 }
 
 // MARK: - CoreData Function
@@ -381,13 +406,6 @@ extension HomeViewController {
         
         print("#########\(videoData)############")
     }
-    
-//    func deleteData() {
-//
-//        VideoDataManager.shared.context.delete(self.videoData[0])
-//
-//        VideoDataManager.shared.save()
-//    }
 }
 
 extension HomeViewController {

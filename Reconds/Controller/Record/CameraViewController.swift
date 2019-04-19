@@ -21,6 +21,8 @@ class CameraViewController: UIViewController {
 
     let captureSession = AVCaptureSession()
 
+    var feedbackGenerator: UIImpactFeedbackGenerator?
+    
     var movieOutput = AVCaptureMovieFileOutput()
     
     var activeInput: AVCaptureDeviceInput?
@@ -45,25 +47,6 @@ class CameraViewController: UIViewController {
             startSession()
         }
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        let index = VideoDataManager.shared.filterData()
-//
-//        if index.count == 25 {
-//
-//            let alert =
-//                UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片",
-//                                                      alertMessage: "影片數量已達到上限，快去輸出吧！",
-//                                                      actionHandler: { (_) in
-//
-//                    self.dismiss(animated: true, completion: nil)
-//                })
-//
-//            present(alert, animated: true, completion: nil)
-//        }
-//    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
@@ -247,9 +230,9 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     }
 
     func startRecording() {
-
+        
         if movieOutput.isRecording == false {
-
+            
             guard let connection = movieOutput.connection(with: AVMediaType.video) else { return }
 
             if connection.isVideoOrientationSupported {
@@ -287,7 +270,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func stopRecording() {
 
         if movieOutput.isRecording == true {
-
+            
             movieOutput.stopRecording()
         }
     }
@@ -302,6 +285,8 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput,
                     didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
 
+        feedbackGenerator = nil
+        
         if error != nil {
 
             print("Error recording movie: \(error!.localizedDescription)")

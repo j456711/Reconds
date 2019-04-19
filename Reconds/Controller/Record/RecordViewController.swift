@@ -18,7 +18,3 @@ class RecordViewController: UIViewController {
     }
 
 }
-
-extension RecordViewController {
-
-}
