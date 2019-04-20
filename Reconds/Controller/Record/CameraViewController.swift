@@ -20,8 +20,6 @@ class CameraViewController: UIViewController {
     let cameraButton = UIView()
 
     let captureSession = AVCaptureSession()
-
-    var feedbackGenerator: UIImpactFeedbackGenerator?
     
     var movieOutput = AVCaptureMovieFileOutput()
     
@@ -284,8 +282,6 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
     
     func fileOutput(_ output: AVCaptureFileOutput,
                     didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-
-        feedbackGenerator = nil
         
         if error != nil {
 
