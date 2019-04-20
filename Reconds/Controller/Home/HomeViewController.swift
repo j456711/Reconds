@@ -12,6 +12,11 @@ import Photos
 
 class HomeViewController: UIViewController {
 
+    struct Segue {
+        
+        static let showMusicPage = "showMusicPage"
+    }
+    
     var feedbackGenerator: UIImpactFeedbackGenerator?
     
     let rcVideoPlayer = RCVideoPlayer()
@@ -34,23 +39,30 @@ class HomeViewController: UIViewController {
             collectionView.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-
+    @IBOutlet weak var exportButton: UIButton! {
+        
+        didSet {
+            
+            setUpButtonStyle(for: exportButton)
+        }
+    }
+    
     @IBOutlet weak var doneButton: UIButton! {
 
         didSet {
 
             doneButton.isHidden = true
 
-            doneButton.layer.borderWidth = 1
-            doneButton.layer.cornerRadius = 18
-            doneButton.layer.borderColor = UIColor(red: 32 / 255, green: 184 / 255, blue: 221 / 255, alpha: 1).cgColor
+            setUpButtonStyle(for: doneButton)
         }
     }
-
+    
     @IBAction func doneButtonPressed(_ sender: UIButton) {
 
         doneButton.isHidden = true
 
+        exportButton.isHidden = false
+        
         longPressedEnabled = false
 
         collectionView.reloadData()
@@ -115,6 +127,13 @@ class HomeViewController: UIViewController {
         collectionView.reloadData()
     }
 
+    func setUpButtonStyle(for button: UIButton) {
+        
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 18
+        button.layer.borderColor = UIColor(red: 32 / 255, green: 184 / 255, blue: 221 / 255, alpha: 1).cgColor
+    }
+    
     func createProjectNameAlert() {
         
         let alert = UIAlertController(title: "請輸入影片名稱", message: "命名後仍可更改，若未輸入名稱將預設為「未命名」。", preferredStyle: .alert)
@@ -306,6 +325,8 @@ extension HomeViewController {
             feedbackGenerator = nil
             
             collectionView.endInteractiveMovement()
+            
+            exportButton.isHidden = true
             
             doneButton.isHidden = false
 
