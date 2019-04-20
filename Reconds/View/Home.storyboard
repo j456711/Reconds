@@ -151,7 +151,11 @@
                                                     <color key="backgroundColor" red="1" green="0.93333128099999996" blue="0.25267507099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uln-iO-RJs">
-                                                    <rect key="frame" x="9" y="9" width="56" height="56"/>
+                                                    <rect key="frame" x="46" y="3" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="WwF-tn-R3H"/>
+                                                        <constraint firstAttribute="height" constant="25" id="oxh-AD-6XD"/>
+                                                    </constraints>
                                                     <state key="normal" image="Icon_Remove"/>
                                                 </button>
                                             </subviews>
@@ -159,12 +163,10 @@
                                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Uln-iO-RJs" secondAttribute="bottom" constant="9" id="4HD-AM-xHy"/>
-                                            <constraint firstAttribute="trailing" secondItem="Uln-iO-RJs" secondAttribute="trailing" constant="9" id="4NJ-XQ-u2U"/>
                                             <constraint firstItem="q7G-Jy-SiD" firstAttribute="top" secondItem="PGs-dL-7wn" secondAttribute="top" id="65R-mg-S5A"/>
-                                            <constraint firstItem="Uln-iO-RJs" firstAttribute="top" secondItem="PGs-dL-7wn" secondAttribute="top" constant="9" id="A7m-AF-GLl"/>
+                                            <constraint firstItem="Uln-iO-RJs" firstAttribute="top" secondItem="PGs-dL-7wn" secondAttribute="top" constant="3" id="NSU-Cf-BkB"/>
                                             <constraint firstItem="q7G-Jy-SiD" firstAttribute="leading" secondItem="PGs-dL-7wn" secondAttribute="leading" id="jSc-aM-gpS"/>
-                                            <constraint firstItem="Uln-iO-RJs" firstAttribute="leading" secondItem="PGs-dL-7wn" secondAttribute="leading" constant="9" id="pks-gR-F1z"/>
+                                            <constraint firstAttribute="trailing" secondItem="Uln-iO-RJs" secondAttribute="trailing" constant="3" id="kbp-88-ufL"/>
                                             <constraint firstAttribute="bottom" secondItem="q7G-Jy-SiD" secondAttribute="bottom" id="wV3-rg-llY"/>
                                             <constraint firstAttribute="trailing" secondItem="q7G-Jy-SiD" secondAttribute="trailing" id="xjK-pj-0Wa"/>
                                         </constraints>
