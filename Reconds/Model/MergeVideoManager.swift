@@ -19,7 +19,7 @@ class MergeVideoManager {
     
     typealias ExportUrlHandler = (URL?, Error?) -> Void
     
-    func doMerge(arrayVideos: [AVAsset], completion: @escaping ExportUrlHandler) {
+    func mergeVideos(arrayVideos: [AVAsset], completion: @escaping ExportUrlHandler) {
         
         var insertTime = CMTime.zero
         
@@ -159,7 +159,103 @@ class MergeVideoManager {
             }
         })
     }
-    
+ 
+    func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL) {
+        
+        let mixComposition = AVMutableComposition()
+        var mutableCompositionVideoTrack: [AVMutableCompositionTrack] = []
+        var mutableCompositionAudioTrack: [AVMutableCompositionTrack] = []
+        let totalVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
+        
+        //start merge
+        
+        let aVideoAsset = AVAsset(url: videoUrl)
+        let aAudioAsset = AVAsset(url: audioUrl)
+        
+        mutableCompositionVideoTrack.append(
+            mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
+                                           preferredTrackID: kCMPersistentTrackID_Invalid)!)
+        mutableCompositionAudioTrack.append(
+            mixComposition.addMutableTrack(withMediaType: AVMediaType.audio,
+                                           preferredTrackID: kCMPersistentTrackID_Invalid)!)
+        
+        let aVideoAssetTrack = aVideoAsset.tracks(withMediaType: AVMediaType.video)[0]
+        let aAudioAssetTrack = aAudioAsset.tracks(withMediaType: AVMediaType.audio)[0]
+        
+        do {
+            try mutableCompositionVideoTrack[0].insertTimeRange(
+                CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration),
+                of: aVideoAssetTrack,
+                at: CMTime.zero)
+            
+            //In my case my audio file is longer then video file so i took videoAsset duration
+            //instead of audioAsset duration
+            
+            try mutableCompositionAudioTrack[0].insertTimeRange(
+                CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration),
+                of: aAudioAssetTrack,
+                at: CMTime.zero)
+            
+            //Use this instead above line if your audiofile and video file's playing durations are same
+            
+//            try mutableCompositionAudioTrack[0].insertTimeRange(
+//            CMTimeRangeMake(kCMTimeZero,
+//                            aVideoAssetTrack.timeRange.duration),
+//            ofTrack: aAudioAssetTrack,
+//            atTime: kCMTimeZero)
+            
+        } catch {
+         
+            print(error)
+        }
+        
+        totalVideoCompositionInstruction.timeRange =
+            CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration)
+        
+        let mutableVideoComposition = AVMutableVideoComposition()
+        mutableVideoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
+        
+        mutableVideoComposition.renderSize = CGSize(width: 1280, height: 720)
+        
+        //find your video on this URl
+        let savePathUrl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mov")
+        
+        guard let assetExport = AVAssetExportSession(asset: mixComposition,
+                                                     presetName: AVAssetExportPresetHighestQuality) else { return }
+        assetExport.outputFileType = AVFileType.mov
+        assetExport.outputURL = savePathUrl
+        assetExport.shouldOptimizeForNetworkUse = true
+        
+        assetExport.exportAsynchronously { () -> Void in
+            
+            switch assetExport.status {
+                
+            case AVAssetExportSession.Status.completed:
+                
+                //                Uncomment this if u want to store your video in asset
+                DispatchQueue.main.async {
+//                    let assetsLib = PHPhotoLibrary()
+//                    assetsLib.writeVideoAtPath(toSavedPhotosAlbum: savePathUrl, completionBlock: nil)
+                    
+                    UISaveVideoAtPathToSavedPhotosAlbum(savePathUrl.path, self, nil, nil)
+                    
+                    print("success")
+                }
+                
+            case  AVAssetExportSession.Status.failed:
+                
+                print("failed:", assetExport.error as Any)
+            
+            case AVAssetExportSession.Status.cancelled:
+            
+                print("cancelled", assetExport.error as Any)
+            
+            default:
+                
+                print("complete")
+            }
+        }
+    }
 }
 
 extension MergeVideoManager {

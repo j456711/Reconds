@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     
     let rcVideoPlayer = RCVideoPlayer()
     
-    lazy var outputUrl: URL? = nil
+    lazy var videoUrl: URL? = nil
     
     var videoData: [VideoData] = []
     
@@ -139,7 +139,7 @@ class HomeViewController: UIViewController {
         
         guard let musicVC = segue.destination as? MusicViewController else { return }
         
-        musicVC.outputUrl = outputUrl
+        musicVC.videoUrl = videoUrl
     }
     
     func setUpButtonStyle(for button: UIButton) {
@@ -456,8 +456,8 @@ extension HomeViewController {
 //
         let avAssetArray = urlArray.map({ AVAsset(url: $0) })
 
-        MergeVideoManager.shared.doMerge(arrayVideos: avAssetArray,
-                                         completion: { [weak self] (outputUrl, error) in
+        MergeVideoManager.shared.mergeVideos(arrayVideos: avAssetArray,
+                                         completion: { [weak self] (videoUrl, error) in
 
             guard let strongSelf = self else { return }
 
@@ -467,12 +467,12 @@ extension HomeViewController {
 
             } else {
 
-                if let outputUrl = outputUrl {
+                if let videoUrl = videoUrl {
 
-                    strongSelf.outputUrl = outputUrl
+                    strongSelf.videoUrl = videoUrl
                     
                     strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
-                                                           videoUrl: outputUrl,
+                                                           videoUrl: videoUrl,
                                                            videoGravity: .resizeAspect)
 
                     strongSelf.rcVideoPlayer.play()

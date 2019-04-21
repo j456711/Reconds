@@ -38,6 +38,11 @@ class RCVideoPlayer {
         avPlayer.pause()
     }
 
+    func mute(_ status: Bool) {
+        
+        avPlayer.isMuted = status
+    }
+    
     func fetchDuration(disPlayOn endTimeLabel: UILabel, setMaximumValueOn slider: UISlider) {
 
         guard let duration = avPlayer.currentItem?.asset.duration else { return }

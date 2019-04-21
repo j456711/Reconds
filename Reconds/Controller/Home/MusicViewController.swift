@@ -15,6 +15,7 @@ class MusicViewController: UIViewController {
         
         // swiftlint:disable identifier_name
         
+//        case NoMusic = "No Music"
         case AcousticRock = "Acoustic Rock"
         case Ambler
         case CheeryMonday = "Cheery Monday"
@@ -33,7 +34,9 @@ class MusicViewController: UIViewController {
     
     var player: AVAudioPlayer!
     
-    var outputUrl: URL?
+    var videoUrl: URL?
+    
+    var audioUrl: URL?
     
     var musicFilesArray = MusicFiles.allCases
     
@@ -50,13 +53,19 @@ class MusicViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        rcVideoPlayer.setUpAVPlayer(with: videoView, videoUrl: outputUrl!, videoGravity: .resizeAspect)
+        
+        if let videoUrl = videoUrl {
+            
+            rcVideoPlayer.setUpAVPlayer(with: videoView, videoUrl: videoUrl, videoGravity: .resizeAspect)
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        rcVideoPlayer.play()
+        guard let exportVC = segue.destination as? ExportViewController else { return }
+        
+        exportVC.videoUrl = videoUrl
+        exportVC.audioUrl = audioUrl
     }
     
     func createBundlePath() -> URL? {
@@ -69,7 +78,6 @@ class MusicViewController: UIViewController {
         
         return nil
     }
-    
 }
 
 extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
@@ -96,24 +104,31 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let bundlePath = createBundlePath() {
+        guard let bundlePath = createBundlePath() else { return }
+        
+        var stringArray = musicFilesArray.map({ "\($0)" })
+        
+        let urlString = bundlePath.absoluteString + stringArray[indexPath.row] + ".mp3"
+        
+        guard let audioUrl = URL(string: urlString) else { return }
+        
+        do {
             
-            let stringArray = musicFilesArray.map({ "\($0)" })
+            player = try AVAudioPlayer(contentsOf: audioUrl)
             
-            let urlString = bundlePath.absoluteString + stringArray[indexPath.row] + ".mp3"
+            rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
+            rcVideoPlayer.mute(true)
             
-            guard let url = URL(string: urlString) else { return }
+            player.play()
             
-            do {
-                
-                player = try AVAudioPlayer(contentsOf: url)
-                player.play()
-                
-            } catch {
-                
-                print(error)
-            }
+            self.audioUrl = audioUrl
+            
+        } catch {
+            
+            print(error)
         }
+     
+        rcVideoPlayer.play()
         
     }
 }

@@ -28,6 +28,7 @@
 		3416CDA2226AC396007D9D37 /* Reconds-Music.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */; };
 		3416CDA4226AD5EB007D9D37 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416CDA3226AD5EB007D9D37 /* MusicViewController.swift */; };
 		3416CDA6226C45AA007D9D37 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416CDA5226C45AA007D9D37 /* MusicTableViewCell.swift */; };
+		3416CDA8226CC86B007D9D37 /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416CDA7226CC86B007D9D37 /* ExportViewController.swift */; };
 		348FBD69225F1EAE000F53F6 /* VideoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD68225F1EAE000F53F6 /* VideoDataManager.swift */; };
 		348FBD6E225F1F20000F53F6 /* VideoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* VideoDataModel.xcdatamodeld */; };
 		348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */; };
@@ -63,6 +64,7 @@
 		3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Reconds-Music.bundle"; sourceTree = "<group>"; };
 		3416CDA3226AD5EB007D9D37 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicViewController.swift; path = Reconds/Controller/Home/MusicViewController.swift; sourceTree = SOURCE_ROOT; };
 		3416CDA5226C45AA007D9D37 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
+		3416CDA7226CC86B007D9D37 /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
 		348FBD68225F1EAE000F53F6 /* VideoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDataManager.swift; sourceTree = "<group>"; };
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				1E419A4B2251BAB1009B4F49 /* HomeViewController.swift */,
 				3416CDA3226AD5EB007D9D37 /* MusicViewController.swift */,
+				3416CDA7226CC86B007D9D37 /* ExportViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				348FBD69225F1EAE000F53F6 /* VideoDataManager.swift in Sources */,
 				3416CDA6226C45AA007D9D37 /* MusicTableViewCell.swift in Sources */,
 				34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */,
+				3416CDA8226CC86B007D9D37 /* ExportViewController.swift in Sources */,
 				1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */,
 				348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */,
 				1E419A762254D749009B4F49 /* TabBarController.swift in Sources */,
