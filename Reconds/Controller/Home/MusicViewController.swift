@@ -33,10 +33,8 @@ class MusicViewController: UIViewController {
     
     var player: AVAudioPlayer!
     
-    var musicBundleUrl: URL?
+    var outputUrl: URL?
     
-    var videoData: [VideoData] = []
-       
     var musicFilesArray = MusicFiles.allCases
     
     @IBOutlet weak var videoView: UIView!
@@ -53,27 +51,23 @@ class MusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        createBundlePath()
+        rcVideoPlayer.setUpAVPlayer(with: videoView, videoUrl: outputUrl!, videoGravity: .resizeAspect)
     }
     
-    func createBundlePath() {
+    override func viewWillAppear(_ animated: Bool) {
         
-        guard let musicBundleUrl = Bundle.main.url(forResource: "Reconds-Music",
-                                                   withExtension: "bundle") else { return }
+        rcVideoPlayer.play()
+    }
+    
+    func createBundlePath() -> URL? {
         
-        self.musicBundleUrl = musicBundleUrl
+        if let musicBundleUrl = Bundle.main.url(forResource: "Reconds-Music",
+                                                withExtension: "bundle") {
         
-//        do {
-//
-//            let musicFilesArray =
-//                try FileManager.default.contentsOfDirectory(atPath: Bundle.main.bundlePath + "/Reconds-Music.bundle")
-//
-//            print(musicFilesArray)
-//
-//        } catch {
-//
-//            print(error)
-//        }
+            return musicBundleUrl
+        }
+        
+        return nil
     }
     
 }
@@ -102,11 +96,11 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let musicBundleUrl = musicBundleUrl {
+        if let bundlePath = createBundlePath() {
             
             let stringArray = musicFilesArray.map({ "\($0)" })
             
-            let urlString = musicBundleUrl.absoluteString + stringArray[indexPath.row] + ".mp3"
+            let urlString = bundlePath.absoluteString + stringArray[indexPath.row] + ".mp3"
             
             guard let url = URL(string: urlString) else { return }
             

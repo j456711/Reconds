@@ -21,6 +21,8 @@ class HomeViewController: UIViewController {
     
     let rcVideoPlayer = RCVideoPlayer()
     
+    lazy var outputUrl: URL? = nil
+    
     var videoData: [VideoData] = []
     
     var longPressedEnabled = false
@@ -137,7 +139,7 @@ class HomeViewController: UIViewController {
         
         guard let musicVC = segue.destination as? MusicViewController else { return }
         
-        musicVC.videoData = videoData
+        musicVC.outputUrl = outputUrl
     }
     
     func setUpButtonStyle(for button: UIButton) {
@@ -465,10 +467,12 @@ extension HomeViewController {
 
             } else {
 
-                if let url = outputUrl {
+                if let outputUrl = outputUrl {
 
+                    strongSelf.outputUrl = outputUrl
+                    
                     strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
-                                                           videoUrl: url,
+                                                           videoUrl: outputUrl,
                                                            videoGravity: .resizeAspect)
 
                     strongSelf.rcVideoPlayer.play()
