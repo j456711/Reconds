@@ -21,7 +21,7 @@ enum ImageAssets: String {
     case Icon_Remove
     case Icon_Shoot
 
-    //RCVideoPlayer
+    // RCVideoPlayer
     case Icon_PlayController
     case Icon_PauseController
     case Slider_Thumb

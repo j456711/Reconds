@@ -25,31 +25,31 @@ class MergeVideoManager {
         
         var arrayLayerInstructions: [AVMutableVideoCompositionLayerInstruction] = []
         
-        var outputSize = CGSize.init(width: 0, height: 0)
-        
-        // Determine video output size
+        var outputSize = CGSize(width: 0, height: 0)
+
+//         Determine video output size
         for videoAsset in arrayVideos {
-            
+
             let videoTrack = videoAsset.tracks(withMediaType: AVMediaType.video)[0]
             
             let assetInfo = orientationFromTransform(transform: videoTrack.preferredTransform)
-            
+
             var videoSize = videoTrack.naturalSize
-            
+
             if assetInfo.isPortrait == true {
-            
+
                 videoSize.width = videoTrack.naturalSize.height
                 videoSize.height = videoTrack.naturalSize.width
             }
-            
+
             if videoSize.height > outputSize.height {
-                
+
                 outputSize = videoSize
             }
         }
-        
+
         if outputSize.width == 0 || outputSize.height == 0 {
-            
+
             outputSize = defaultSize
         }
         
@@ -181,33 +181,33 @@ extension MergeVideoManager {
     
     fileprivate func orientationFromTransform(transform: CGAffineTransform) ->
                     (orientation: UIImage.Orientation, isPortrait: Bool) {
-        
+
         var assetOrientation = UIImage.Orientation.up
-        
+
         var isPortrait = false
-        
+
         if transform.a == 0 && transform.b == 1.0 && transform.c == -1.0 && transform.d == 0 {
-        
+
             assetOrientation = .right
-            
+
             isPortrait = true
-        
+
         } else if transform.a == 0 && transform.b == -1.0 && transform.c == 1.0 && transform.d == 0 {
-        
+
             assetOrientation = .left
-            
+
             isPortrait = true
-        
+
         } else if transform.a == 1.0 && transform.b == 0 && transform.c == 0 && transform.d == 1.0 {
-        
+
             assetOrientation = .up
-        
+
         } else if transform.a == -1.0 && transform.b == 0 && transform.c == 0 && transform.d == -1.0 {
-        
+
             assetOrientation = .down
-        
+
         }
-        
+
         return (assetOrientation, isPortrait)
     }
     
@@ -215,54 +215,54 @@ extension MergeVideoManager {
                                                          asset: AVAsset,
                                                          standardSize: CGSize,
                                                          atTime: CMTime) -> AVMutableVideoCompositionLayerInstruction {
-       
+
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
         let assetTrack = asset.tracks(withMediaType: AVMediaType.video)[0]
-        
+
         let transform = assetTrack.preferredTransform
         let assetInfo = orientationFromTransform(transform: transform)
-        
+
         var aspectFillRatio: CGFloat = 1
-        
-        if assetTrack.naturalSize.height < assetTrack.naturalSize.width {
-        
+
+        if assetTrack.naturalSize.height > assetTrack.naturalSize.width {
+          
             aspectFillRatio = standardSize.height / assetTrack.naturalSize.height
         
         } else {
-          
+        
             aspectFillRatio = standardSize.width / assetTrack.naturalSize.width
         }
-        
+
         if assetInfo.isPortrait {
-            
+
             let scaleFactor = CGAffineTransform(scaleX: aspectFillRatio, y: aspectFillRatio)
-            
+
             let posX = standardSize.width / 2 - (assetTrack.naturalSize.height * aspectFillRatio) / 2
             let posY = standardSize.height / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
             let moveFactor = CGAffineTransform(translationX: posX, y: posY)
-            
+
             instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor),
                                      at: atTime)
-            
+
         } else {
-            
+
             let scaleFactor = CGAffineTransform(scaleX: aspectFillRatio, y: aspectFillRatio)
-            
+
             let posX = standardSize.width / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
             let posY = standardSize.height / 2 - (assetTrack.naturalSize.height * aspectFillRatio) / 2
             let moveFactor = CGAffineTransform(translationX: posX, y: posY)
-            
+
             var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor)
-            
+
             if assetInfo.orientation == .down {
-                
+
                 let fixUpsideDown = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
                 concat = fixUpsideDown.concatenating(scaleFactor).concatenating(moveFactor)
             }
-            
+
             instruction.setTransform(concat, at: atTime)
         }
-        
+
         return instruction
     }
 }

@@ -26,6 +26,8 @@
 		1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */; };
 		1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF19008225C8689001FEFCA /* UIImage+Extension.swift */; };
 		3416CDA2226AC396007D9D37 /* Reconds-Music.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */; };
+		3416CDA4226AD5EB007D9D37 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416CDA3226AD5EB007D9D37 /* MusicViewController.swift */; };
+		3416CDA6226C45AA007D9D37 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416CDA5226C45AA007D9D37 /* MusicTableViewCell.swift */; };
 		348FBD69225F1EAE000F53F6 /* VideoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD68225F1EAE000F53F6 /* VideoDataManager.swift */; };
 		348FBD6E225F1F20000F53F6 /* VideoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* VideoDataModel.xcdatamodeld */; };
 		348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */; };
@@ -59,6 +61,8 @@
 		1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		1EF19008225C8689001FEFCA /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Reconds-Music.bundle"; sourceTree = "<group>"; };
+		3416CDA3226AD5EB007D9D37 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MusicViewController.swift; path = Reconds/Controller/Home/MusicViewController.swift; sourceTree = SOURCE_ROOT; };
+		3416CDA5226C45AA007D9D37 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 		348FBD68225F1EAE000F53F6 /* VideoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDataManager.swift; sourceTree = "<group>"; };
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				1E419A4B2251BAB1009B4F49 /* HomeViewController.swift */,
+				3416CDA3226AD5EB007D9D37 /* MusicViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				1E419A732254B261009B4F49 /* HomeCollectionViewCell.swift */,
+				3416CDA5226C45AA007D9D37 /* MusicTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -348,11 +354,13 @@
 				1E419A68225372D0009B4F49 /* RecordViewController.swift in Sources */,
 				34A0FE9522648F11009F4D45 /* MergeVideoManager.swift in Sources */,
 				1EF18FDC2258DD12001FEFCA /* RCVideoPlayer.swift in Sources */,
+				3416CDA4226AD5EB007D9D37 /* MusicViewController.swift in Sources */,
 				1E419A7B22588465009B4F49 /* VideoPlaybackViewController.swift in Sources */,
 				1E419A4A2251BAB1009B4F49 /* AppDelegate.swift in Sources */,
 				348FBD6E225F1F20000F53F6 /* VideoDataModel.xcdatamodeld in Sources */,
 				1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */,
 				348FBD69225F1EAE000F53F6 /* VideoDataManager.swift in Sources */,
+				3416CDA6226C45AA007D9D37 /* MusicTableViewCell.swift in Sources */,
 				34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */,
 				1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */,
 				348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */,

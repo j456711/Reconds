@@ -119,13 +119,13 @@ extension VideoDataManager {
         
         let searchToSearch = ".mp4"
         
-        let index = videoData[0].dataPathArray.filter({ (item: String) -> Bool in
+        let filteredArray = videoData[0].dataPathArray.filter({ (item: String) -> Bool in
             
             let stringMatch = item.lowercased().range(of: searchToSearch.lowercased())
             
             return stringMatch != nil ? true : false
         })
         
-        return index
+        return filteredArray
     }
 }

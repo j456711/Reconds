@@ -43,6 +43,8 @@ class HomeViewController: UIViewController {
         
         didSet {
             
+            exportButton.isHidden = true
+            
             setUpButtonStyle(for: exportButton)
         }
     }
@@ -106,17 +108,21 @@ class HomeViewController: UIViewController {
             
             if videoData[0].dataPathArray.count == 1 {
                 
+                exportButton.isHidden = false
+                
                 collectionView.isHidden = false
                 
                 guard let videoUrl =
                     URL(string: FileManager.documentDirectory.absoluteString + videoData[0].dataPathArray[0])
                     else { return }
                 
-                rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
+                rcVideoPlayer.setUpAVPlayer(with: self.videoView, videoUrl: videoUrl, videoGravity: .resizeAspect)
                 
                 rcVideoPlayer.play()
                 
-            } else if videoData[0].dataPathArray.count == 2 {
+            } else if videoData[0].dataPathArray.count >= 2 {
+                
+                exportButton.isHidden = false
                 
                 collectionView.isHidden = false
                 
@@ -127,6 +133,13 @@ class HomeViewController: UIViewController {
         collectionView.reloadData()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let musicVC = segue.destination as? MusicViewController else { return }
+        
+        musicVC.videoData = videoData
+    }
+    
     func setUpButtonStyle(for button: UIButton) {
         
         button.layer.borderWidth = 1
@@ -431,46 +444,43 @@ extension HomeViewController {
 
 extension HomeViewController {
     
-    @IBAction func pressed(_ sender: UIButton) {
-
-        merge()
-    }
-
     func merge() {
-
-        let videoDataStringArray = videoData[0].dataPathArray.map({ FileManager.documentDirectory.absoluteString + $0 })
-
-        guard let videoDataUrlArray = videoDataStringArray.map({ URL(string: $0) }) as? [URL] else { return }
-
-        let videoDataAVAssetArray = videoDataUrlArray.map({ AVAsset(url: $0) })
-
-            MergeVideoManager.shared.doMerge(arrayVideos: videoDataAVAssetArray,
-                                             completion: { [weak self] (outputUrl, error) in
-
-                guard let strongSelf = self else { return }
-
-                if let error = error {
-
-                    print("Error: \(error.localizedDescription)")
-
-                } else {
-
-                    if let url = outputUrl {
-
-                        strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
-                                                               videoUrl: url,
-                                                               videoGravity: .resizeAspect)
-
-                        strongSelf.rcVideoPlayer.play()
-//                        PHPhotoLibrary.shared().performChanges({
+        
+        let filteredArray = VideoDataManager.shared.filterData()
 //
-//                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+        let stringArray = filteredArray.map({ FileManager.documentDirectory.absoluteString + $0 })
+
+        guard let urlArray = stringArray.map({ URL(string: $0) }) as? [URL] else { return }
 //
-//                            print("success")
-//
-//                        }, completionHandler: nil)
-                    }
+        let avAssetArray = urlArray.map({ AVAsset(url: $0) })
+
+        MergeVideoManager.shared.doMerge(arrayVideos: avAssetArray,
+                                         completion: { [weak self] (outputUrl, error) in
+
+            guard let strongSelf = self else { return }
+
+            if let error = error {
+
+                print("Error: \(error.localizedDescription)")
+
+            } else {
+
+                if let url = outputUrl {
+
+                    strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
+                                                           videoUrl: url,
+                                                           videoGravity: .resizeAspect)
+
+                    strongSelf.rcVideoPlayer.play()
+//                                            PHPhotoLibrary.shared().performChanges({
+//                    
+//                                                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+//                    
+//                                                print("success")
+//                    
+//                                            }, completionHandler: nil)
                 }
-            })
+            }
+        })
     }
 }
