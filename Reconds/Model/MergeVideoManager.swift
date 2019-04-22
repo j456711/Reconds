@@ -218,11 +218,11 @@ class MergeVideoManager {
         mutableVideoComposition.renderSize = CGSize(width: 1280, height: 720)
         
         //find your video on this URl
-        let savePathUrl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mov")
+        let savePathUrl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mp4")
         
         guard let assetExport = AVAssetExportSession(asset: mixComposition,
                                                      presetName: AVAssetExportPresetHighestQuality) else { return }
-        assetExport.outputFileType = AVFileType.mov
+        assetExport.outputFileType = AVFileType.mp4
         assetExport.outputURL = savePathUrl
         assetExport.shouldOptimizeForNetworkUse = true
         

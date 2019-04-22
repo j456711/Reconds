@@ -36,7 +36,7 @@ class MusicViewController: UIViewController {
     
     var videoUrl: URL?
     
-    var audioUrl: URL?
+    lazy var audioUrl: URL? = nil
     
     var musicFilesArray = MusicFiles.allCases
     
@@ -115,10 +115,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         do {
             
             player = try AVAudioPlayer(contentsOf: audioUrl)
-            
-            rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
-            rcVideoPlayer.mute(true)
-            
+
             player.play()
             
             self.audioUrl = audioUrl
@@ -128,6 +125,8 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
             print(error)
         }
      
+        rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
+        rcVideoPlayer.mute(true)
         rcVideoPlayer.play()
         
     }
