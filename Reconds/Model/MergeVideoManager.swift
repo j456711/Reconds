@@ -138,14 +138,14 @@ class MergeVideoManager {
         
         // Export to file
         let path = NSTemporaryDirectory().appending("mergedVideo.mp4")
-        let exportURL = URL.init(fileURLWithPath: path)
+        let exportUrl = URL.init(fileURLWithPath: path)
         
         // Remove file if existed
-        FileManager.default.removeItemIfExisted(exportURL)
+        FileManager.default.removeItemIfExisted(exportUrl)
         
         // Init exporter
         let exporter = AVAssetExportSession.init(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)
-        exporter?.outputURL = exportURL
+        exporter?.outputURL = exportUrl
         exporter?.outputFileType = AVFileType.mp4
         exporter?.shouldOptimizeForNetworkUse = true
         exporter?.videoComposition = mainComposition
@@ -155,20 +155,20 @@ class MergeVideoManager {
             
             DispatchQueue.main.async {
                 
-                self.exportDidFinish(exporter: exporter, videoURL: exportURL, completion: completion)
+                self.exportDidFinish(exporter: exporter, videoURL: exportUrl, completion: completion)
             }
         })
     }
  
     func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL) {
         
+        let audioMix = AVMutableAudioMix()
         let mixComposition = AVMutableComposition()
         var mutableCompositionVideoTrack: [AVMutableCompositionTrack] = []
         var mutableCompositionAudioTrack: [AVMutableCompositionTrack] = []
         let totalVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
         
-        //start merge
-        
+        // Start Merge
         let aVideoAsset = AVAsset(url: videoUrl)
         let aAudioAsset = AVAsset(url: audioUrl)
         
@@ -217,11 +217,20 @@ class MergeVideoManager {
         
         mutableVideoComposition.renderSize = CGSize(width: 1280, height: 720)
         
-        //find your video on this URl
+        // Find video on this URL
         let savePathUrl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mp4")
         
+        // Music Fade Out
+        let audioMixInputParameters = AVMutableAudioMixInputParameters(track: mutableCompositionAudioTrack[0])
+        
+        audioMixInputParameters.setVolumeRamp(fromStartVolume: 1, toEndVolume: 0, timeRange: aVideoAssetTrack.timeRange)
+        
+        audioMix.inputParameters = [audioMixInputParameters]
+        
+        // Export
         guard let assetExport = AVAssetExportSession(asset: mixComposition,
                                                      presetName: AVAssetExportPresetHighestQuality) else { return }
+        assetExport.audioMix = audioMix
         assetExport.outputFileType = AVFileType.mp4
         assetExport.outputURL = savePathUrl
         assetExport.shouldOptimizeForNetworkUse = true
