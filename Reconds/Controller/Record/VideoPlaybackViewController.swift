@@ -77,11 +77,14 @@ class VideoPlaybackViewController: UIViewController {
 
     @IBAction func playButtonPressed(_ sender: UIButton) {
 
+        rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
         rcVideoPlayer.play()
 
+        controlView.alpha = 0.0
+        
+//        controlView.isHidden = true
+        
         playButton.isHidden = true
-
-        controlView.isHidden = true
 
         rcVideoPlayerView.isHidden = false
     }
@@ -105,15 +108,15 @@ class VideoPlaybackViewController: UIViewController {
             
             try videoData.write(to: dataPath)
             
-            let videoData = VideoDataManager.shared.fetch(VideoData.self)
+            let videoData = StorageManager.shared.fetch(VideoData.self)
             
-            let index = VideoDataManager.shared.filterData()
+            let index = StorageManager.shared.filterData()
             
             videoData[0].dataPathArray.insert(fileName, at: index.count)
             
             videoData[0].dataPathArray.removeLast()
                 
-            VideoDataManager.shared.save()
+            StorageManager.shared.save()
 //            }
             
 //            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
@@ -143,28 +146,25 @@ class VideoPlaybackViewController: UIViewController {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
         
         self.view.addGestureRecognizer(gesture)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-
+        
         rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
         rcVideoPlayer.fetchDuration(disPlayOn: endTimeLabel, setMaximumValueOn: slider)
         rcVideoPlayer.fetchCurrentTime(disPlayOn: startTimeLabel, setValueOn: slider)
-
-        view.bringSubviewToFront(playButton)
+        
         view.bringSubviewToFront(controlView)
+        view.bringSubviewToFront(playButton)
         view.bringSubviewToFront(rcVideoPlayerView)
     }
 
     @objc func videoDidFinishPlaying() {
 
+        controlView.alpha = 1.0
+        
+//        controlView.isHidden = false
+
         playButton.isHidden = false
-
-        controlView.isHidden = false
-
+        
         rcVideoPlayerView.isHidden = true
-
-        rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
     }
 }
 
@@ -215,7 +215,7 @@ extension VideoPlaybackViewController {
 //
 //    func createData(fileName: String) {
 //
-//        let videoData = VideoData(context: VideoDataManager.shared.persistantContainer.viewContext)
+//        let videoData = VideoData(context: StorageManager.shared.persistantContainer.viewContext)
 //
 //        videoData.dataPathArray.append(fileName)
 //

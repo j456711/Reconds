@@ -13,13 +13,13 @@
         <!--我的影片-->
         <scene sceneID="zwt-kA-Vm9">
             <objects>
-                <viewController id="C3R-xI-Sa8" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="C3R-xI-Sa8" customClass="MyVideosViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BZw-uN-HY2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c0d-jA-mBK">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="6" id="Pno-7G-2Jx">
                                     <size key="itemSize" width="50" height="50"/>
@@ -28,49 +28,52 @@
                                     <inset key="sectionInset" minX="8" minY="16" maxX="8" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hr6-Vh-91P">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyVideosCollectionViewCell" id="hr6-Vh-91P" customClass="MyVideosCollectionViewCell" customModule="Reconds" customModuleProvider="target">
                                         <rect key="frame" x="8" y="16" width="176" height="160"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="176" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zGZ-He-RPm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="176" height="106"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zGZ-He-RPm">
+                                                    <rect key="frame" x="0.0" y="0.0" width="176" height="160"/>
+                                                    <color key="backgroundColor" red="1" green="0.93333128099999996" blue="0.25267507099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Travel to Tokyo!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6of-fm-LFv">
-                                                    <rect key="frame" x="19" y="116" width="139" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcz-hv-GSf">
+                                                    <rect key="frame" x="0.0" y="116" width="176" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6of-fm-LFv">
+                                                            <rect key="frame" x="8" y="10" width="160" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="6of-fm-LFv" secondAttribute="trailing" constant="8" id="3tv-2L-piP"/>
+                                                        <constraint firstAttribute="bottom" secondItem="6of-fm-LFv" secondAttribute="bottom" constant="10" id="FRe-f3-RJq"/>
+                                                        <constraint firstItem="6of-fm-LFv" firstAttribute="leading" secondItem="Bcz-hv-GSf" secondAttribute="leading" constant="8" id="Mv7-ly-EQJ"/>
+                                                        <constraint firstAttribute="height" constant="44" id="arn-Km-tJe"/>
+                                                        <constraint firstItem="6of-fm-LFv" firstAttribute="top" secondItem="Bcz-hv-GSf" secondAttribute="top" constant="10" id="c53-OZ-Lr8"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Bcz-hv-GSf" secondAttribute="bottom" id="6GD-zo-3Vk"/>
+                                            <constraint firstItem="zGZ-He-RPm" firstAttribute="leading" secondItem="hr6-Vh-91P" secondAttribute="leading" id="ABp-gx-8Wk"/>
+                                            <constraint firstAttribute="trailing" secondItem="Bcz-hv-GSf" secondAttribute="trailing" id="NHk-Uo-3W9"/>
+                                            <constraint firstAttribute="trailing" secondItem="zGZ-He-RPm" secondAttribute="trailing" id="NWO-VW-kdS"/>
+                                            <constraint firstAttribute="bottom" secondItem="zGZ-He-RPm" secondAttribute="bottom" id="Vfv-dG-lEZ"/>
+                                            <constraint firstItem="zGZ-He-RPm" firstAttribute="top" secondItem="hr6-Vh-91P" secondAttribute="top" id="W4i-AH-9hy"/>
+                                            <constraint firstItem="Bcz-hv-GSf" firstAttribute="leading" secondItem="hr6-Vh-91P" secondAttribute="leading" id="prS-Wg-eb1"/>
+                                        </constraints>
                                         <size key="customSize" width="176" height="160"/>
-                                    </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="d05-mo-f7G">
-                                        <rect key="frame" x="191" y="16" width="176" height="160"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="176" height="160"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9uL-G7-nte">
-                                                    <rect key="frame" x="0.0" y="0.0" width="176" height="106"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="來去高雄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZV4-5J-Eb6">
-                                                    <rect key="frame" x="47" y="116" width="82" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </view>
-                                        <size key="customSize" width="176" height="160"/>
+                                        <connections>
+                                            <outlet property="thumbnail" destination="zGZ-He-RPm" id="nW3-e3-Q8e"/>
+                                            <outlet property="titleLabel" destination="6of-fm-LFv" id="CW0-qg-c2x"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -85,10 +88,13 @@
                         <viewLayoutGuide key="safeArea" id="did-eV-HBA"/>
                     </view>
                     <navigationItem key="navigationItem" title="我的影片" id="Qd6-rz-zyc"/>
+                    <connections>
+                        <outlet property="collectionView" destination="c0d-jA-mBK" id="3Nk-7N-2oq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uP-fg-TKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4502" y="166"/>
+            <point key="canvasLocation" x="4501.6000000000004" y="165.06746626686657"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pc7-Pi-dug">

@@ -1,5 +1,5 @@
 //
-//  VideoDataManager.swift
+//  StorageManager.swift
 //  Reconds
 //
 //  Created by YU HSIN YEH on 2019/4/11.
@@ -9,17 +9,17 @@
 import Foundation
 import CoreData
 
-final class VideoDataManager {
+final class StorageManager {
     
     private init() {}
     
-    static let shared = VideoDataManager()
+    static let shared = StorageManager()
     
     lazy var context = persistantContainer.viewContext
         
     lazy var persistantContainer: NSPersistentContainer = {
         
-        let container = NSPersistentContainer(name: "VideoDataModel")
+        let container = NSPersistentContainer(name: "Reconds")
         
         container.loadPersistentStores(completionHandler: { (_, error) in
             
@@ -100,7 +100,7 @@ final class VideoDataManager {
     }
 }
 
-extension VideoDataManager {
+extension StorageManager {
     
     func createData() {
         

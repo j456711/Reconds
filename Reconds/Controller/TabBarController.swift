@@ -22,7 +22,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         if viewController is RecordViewController {
             
-            let index = VideoDataManager.shared.filterData()
+            let index = StorageManager.shared.filterData()
             
             if index.count == 25 {
                 
@@ -50,7 +50,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
 //    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 //
-//        let videoData = VideoDataManager.shared.fetch(VideoData.self)
+//        let videoData = StorageManager.shared.fetch(VideoData.self)
 //
 //        if tabBarController.selectedIndex == 2 && videoData[0].dataPathArray.count == 25 {
 //

@@ -54,7 +54,7 @@ class CameraViewController: UIViewController {
 
         if cameraButtonLayer.path!.contains(point) {
 
-            let index = VideoDataManager.shared.filterData()
+            let index = StorageManager.shared.filterData()
             
             if index.count == 25 {
                 
