@@ -112,11 +112,15 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let audioUrl = URL(string: urlString) else { return }
         
+        guard let duration = rcVideoPlayer.avPlayer.currentItem?.asset.duration else { return }
+        
+        let second = CMTimeGetSeconds(duration)
+        
         do {
             
             player = try AVAudioPlayer(contentsOf: audioUrl)
-
             player.play()
+            player.setVolume(0, fadeDuration: second)
             
             self.audioUrl = audioUrl
             
