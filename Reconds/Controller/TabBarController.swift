@@ -24,6 +24,14 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             
             let index = StorageManager.shared.filterData()
             
+//            if index.count == 0 {
+//
+//                let alert =
+//                    UIAlertController.addConfirmAlertWith(alertTitle: "請先新增專案", alertMessage: "新增專案後即可開始錄製。")
+//
+//                present(alert, animated: true, completion: nil)
+//
+//            } else
             if index.count == 25 {
                 
                 let alert =

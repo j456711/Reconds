@@ -119,9 +119,9 @@ extension StorageManager {
         
         let searchToSearch = ".mp4"
         
-        let filteredArray = videoData[0].dataPathArray.filter({ (item: String) -> Bool in
+        let filteredArray = videoData[0].dataPathArray.filter({ (element: String) -> Bool in
             
-            let stringMatch = item.lowercased().range(of: searchToSearch.lowercased())
+            let stringMatch = element.lowercased().range(of: searchToSearch.lowercased())
             
             return stringMatch != nil ? true : false
         })

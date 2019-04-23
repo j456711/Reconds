@@ -91,6 +91,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createExportedDirectory()
+        
         fetchData()
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
@@ -101,6 +103,7 @@ class HomeViewController: UIViewController {
         collectionView.addGestureRecognizer(tapGesture)
         
         self.navigationItem.title = UserDefaults.standard.string(forKey: "Title")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,6 +156,22 @@ class HomeViewController: UIViewController {
         guard let musicVC = segue.destination as? MusicViewController else { return }
         
         musicVC.videoUrl = videoUrl
+    }
+    
+    func createExportedDirectory() {
+        
+        let savePath = FileManager.documentDirectory.appendingPathComponent("Exported")
+        
+        do {
+            
+            try FileManager.default.createDirectory(atPath: savePath.path,
+                                                    withIntermediateDirectories: true,
+                                                    attributes: nil)
+            
+        } catch {
+            
+            print("Create path error", error.localizedDescription)
+        }
     }
     
     func setUpButtonStyle(for button: UIButton) {

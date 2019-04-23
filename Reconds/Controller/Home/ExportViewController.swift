@@ -33,6 +33,35 @@ class ExportViewController: UIViewController {
                     
                     self?.createData(videoTitle: videoTitle, dataPath: fileName)
                     
+                    StorageManager.shared.delete("VideoData")
+                    
+                    do {
+                        
+                        let fileUrls =
+                            try FileManager.default.contentsOfDirectory(at: FileManager.documentDirectory,
+                                                                        includingPropertiesForKeys: nil,
+                                                                        options: [.skipsHiddenFiles,
+                                                                                  .skipsSubdirectoryDescendants])
+
+                        print(fileUrls)
+                        
+                        for fileUrl in fileUrls {
+                           
+                            do {
+                                
+                                try FileManager.default.removeItem(at: fileUrl)
+                                
+                            } catch {
+                                
+                                print("Can't remove fileUrl", error.localizedDescription)
+                            }
+                        }
+                        
+                    } catch {
+                        
+                        print(error.localizedDescription)
+                    }
+                    
                 } else {
                     
                     print(error as Any)
@@ -56,4 +85,18 @@ extension ExportViewController {
         
         print(videoCollection)
     }
+    
+//    func filterData(fileUrls: [URL]) -> [String] {
+//
+//        let searchToSearch = "exported"
+//
+//        let fileUrl = fileUrls.filter({ (item: URL) -> Bool in
+    
+//            let UrlMatch = item.lowercased().range(of: searchToSearch.lowercased())
+            
+//            return UrlMatch != nil ? true : false
+//        })
+    
+//        return fileUrl
+//    }
 }

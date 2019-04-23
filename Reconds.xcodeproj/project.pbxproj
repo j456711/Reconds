@@ -257,8 +257,8 @@
 		348FBD59225F1D0D000F53F6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				348FBD6C225F1F20000F53F6 /* Reconds.xcdatamodeld */,
 				348FBD68225F1EAE000F53F6 /* StorageManager.swift */,
+				348FBD6C225F1F20000F53F6 /* Reconds.xcdatamodeld */,
 				34300BA1226D9E6800CF3429 /* VideoData */,
 				34300BA2226D9E8800CF3429 /* MyVideos */,
 			);

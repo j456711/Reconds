@@ -219,15 +219,17 @@ class MergeVideoManager {
         
         mutableVideoComposition.renderSize = CGSize(width: 1280, height: 720)
         
+        // Music Fade Out
+        let audioMixInputParameters = AVMutableAudioMixInputParameters(track: mutableCompositionAudioTrack[0])
+        
+        // File Name
         let time = Int(Date().timeIntervalSince1970)
         
         let fileName = "\(time)-exported.mp4"
         
         // Find video on this URL
-        guard let outputUrl = URL(string: FileManager.documentDirectory.absoluteString + fileName) else { return }
-        
-        // Music Fade Out
-        let audioMixInputParameters = AVMutableAudioMixInputParameters(track: mutableCompositionAudioTrack[0])
+        guard let outputUrl =
+            URL(string: FileManager.documentDirectory.absoluteString + "Exported/" + fileName) else { return }
         
         audioMixInputParameters.setVolumeRamp(fromStartVolume: 1, toEndVolume: 0, timeRange: aVideoAssetTrack.timeRange)
         
