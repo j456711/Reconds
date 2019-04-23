@@ -47,17 +47,4 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             return true
         }
     }
-
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//
-//        let videoData = StorageManager.shared.fetch(VideoData.self)
-//
-//        if tabBarController.selectedIndex == 2 && videoData[0].dataPathArray.count == 25 {
-//
-//            let alert = UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片", alertMessage: "影片數量已達上限，快去輸出吧！")
-//
-//            present(alert, animated: true, completion: nil)
-//        }
-//    }
-//
 }

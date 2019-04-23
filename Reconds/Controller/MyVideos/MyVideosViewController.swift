@@ -12,6 +12,8 @@ class MyVideosViewController: UIViewController {
 
     let rcVideoPlayer = RCVideoPlayer()
     
+    lazy var videoCollection: [VideoCollection] = []
+    
     @IBOutlet weak var collectionView: UICollectionView! {
         
         didSet {
@@ -26,6 +28,9 @@ class MyVideosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let videoCollection = StorageManager.shared.fetch(VideoCollection.self)
+        
+        self.videoCollection = videoCollection
     }
 
 }
@@ -34,7 +39,7 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 6
+        return videoCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -46,8 +51,10 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
         
         guard let myVideosCell = cell as? MyVideosCollectionViewCell else { return cell }
         
-//        myVideosCell.titleLabel.text = 
-//        myVideosCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: <#T##URL#>)
+        guard let path = URL(string: FileManager.documentDirectory.absoluteString + videoCollection[indexPath.item].dataPath) else { return cell }
+        
+        myVideosCell.titleLabel.text = videoCollection[indexPath.item].videoTitle
+        myVideosCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: path)
         
         return myVideosCell
     }

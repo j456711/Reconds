@@ -9,14 +9,13 @@
 import Foundation
 import CoreData
 
-
 extension VideoCollection {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<VideoCollection> {
         return NSFetchRequest<VideoCollection>(entityName: "VideoCollection")
     }
 
-    @NSManaged public var dataPath: String?
-    @NSManaged public var videoTitle: String?
+    @NSManaged public var dataPath: String
+    @NSManaged public var videoTitle: String
 
 }

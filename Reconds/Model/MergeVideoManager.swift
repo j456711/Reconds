@@ -159,8 +159,10 @@ class MergeVideoManager {
             }
         })
     }
- 
-    func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL) {
+    
+    typealias VideoExportedHandler = ((String?, Error?) -> Void)
+    
+    func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL, completionHandler: @escaping VideoExportedHandler) {
         
         let audioMix = AVMutableAudioMix()
         let mixComposition = AVMutableComposition()
@@ -217,8 +219,12 @@ class MergeVideoManager {
         
         mutableVideoComposition.renderSize = CGSize(width: 1280, height: 720)
         
+        let time = Int(Date().timeIntervalSince1970)
+        
+        let fileName = "\(time)-exported.mp4"
+        
         // Find video on this URL
-        let savePathUrl = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mp4")
+        guard let outputUrl = URL(string: FileManager.documentDirectory.absoluteString + fileName) else { return }
         
         // Music Fade Out
         let audioMixInputParameters = AVMutableAudioMixInputParameters(track: mutableCompositionAudioTrack[0])
@@ -232,7 +238,7 @@ class MergeVideoManager {
                                                      presetName: AVAssetExportPresetHighestQuality) else { return }
         assetExport.audioMix = audioMix
         assetExport.outputFileType = AVFileType.mp4
-        assetExport.outputURL = savePathUrl
+        assetExport.outputURL = outputUrl
         assetExport.shouldOptimizeForNetworkUse = true
         
         assetExport.exportAsynchronously { () -> Void in
@@ -242,21 +248,27 @@ class MergeVideoManager {
             case AVAssetExportSession.Status.completed:
                 
                 //                Uncomment this if u want to store your video in asset
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
 //                    let assetsLib = PHPhotoLibrary()
 //                    assetsLib.writeVideoAtPath(toSavedPhotosAlbum: savePathUrl, completionBlock: nil)
                     
-                    UISaveVideoAtPathToSavedPhotosAlbum(savePathUrl.path, self, nil, nil)
+                    UISaveVideoAtPathToSavedPhotosAlbum(outputUrl.path, self, nil, nil)
                     
-                    print("success")
+                    completionHandler(fileName, nil)
+                    
+                    print("success", outputUrl.absoluteString)
                 }
                 
             case  AVAssetExportSession.Status.failed:
+                
+                completionHandler(nil, assetExport.error)
                 
                 print("failed:", assetExport.error as Any)
             
             case AVAssetExportSession.Status.cancelled:
             
+                completionHandler(nil, assetExport.error)
+                
                 print("cancelled", assetExport.error as Any)
             
             default:

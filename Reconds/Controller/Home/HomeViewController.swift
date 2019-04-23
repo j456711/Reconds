@@ -135,9 +135,9 @@ class HomeViewController: UIViewController {
                 
                 collectionView.isHidden = false
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
                     
-                    self.merge()
+                    self?.merge()
                 }
                 
             }
@@ -145,7 +145,7 @@ class HomeViewController: UIViewController {
         
         collectionView.reloadData()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let musicVC = segue.destination as? MusicViewController else { return }
@@ -171,27 +171,33 @@ class HomeViewController: UIViewController {
 
         let confirmAction = UIAlertAction(title: "確定", style: .default) { [weak self] (_) in
 
-            guard let textField = alert.textFields?.first,
+            guard let strongSelf = self,
+                  let textField = alert.textFields?.first,
                   let text = textField.text else { return }
 
             if text.isEmpty {
 
-                self?.collectionView.isHidden = false
+                strongSelf.collectionView.isHidden = false
 
-                self?.navigationItem.title = textField.placeholder
-
+                strongSelf.navigationItem.title = textField.placeholder
+                                
             } else {
 
-                self?.collectionView.isHidden = false
+                strongSelf.collectionView.isHidden = false
 
-                self?.navigationItem.title = text
+                strongSelf.navigationItem.title = text
             }
             
-            if self?.videoData.count == 0 {
+            if strongSelf.videoData.count == 0 {
                 
-                StorageManager.shared.createData()
+                StorageManager.shared.createVideoData()
                 
-                self?.collectionView.reloadData()
+                strongSelf.collectionView.reloadData()
+            }
+            
+            if let title = strongSelf.navigationItem.title {
+                
+                UserDefaults.standard.set(title, forKey: "Title")
             }
         }
         

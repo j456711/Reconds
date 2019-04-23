@@ -17,10 +17,43 @@ class ExportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let videoUrl = videoUrl, let audioUrl = audioUrl {
-            
-            MergeVideoManager.shared.mergeVideoAndAudio(videoUrl: videoUrl, audioUrl: audioUrl)
-        }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let videoUrl = videoUrl, let audioUrl = audioUrl {
+            
+            MergeVideoManager.shared.mergeVideoAndAudio(videoUrl: videoUrl,
+                                                        audioUrl: audioUrl,
+                                                        completionHandler: { [weak self] (fileName, error) in
+                                                            
+                if let fileName = fileName,
+                   let videoTitle = UserDefaults.standard.string(forKey: "Title") {
+                    
+                    self?.createData(videoTitle: videoTitle, dataPath: fileName)
+                    
+                } else {
+                    
+                    print(error as Any)
+                }
+            })
+        }
+    }
+}
+
+extension ExportViewController {
+
+    func createData(videoTitle: String, dataPath: String) {
+
+        let videoCollection = VideoCollection(context: StorageManager.shared.persistantContainer.viewContext)
+
+        videoCollection.videoTitle = videoTitle
+        
+        videoCollection.dataPath = dataPath
+
+        StorageManager.shared.save()
+        
+        print(videoCollection)
+    }
 }

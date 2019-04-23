@@ -102,7 +102,7 @@ final class StorageManager {
 
 extension StorageManager {
     
-    func createData() {
+    func createVideoData() {
         
         let videoData = VideoData(context: persistantContainer.viewContext)
         

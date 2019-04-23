@@ -82,8 +82,6 @@ class VideoPlaybackViewController: UIViewController {
 
         controlView.alpha = 0.0
         
-//        controlView.isHidden = true
-        
         playButton.isHidden = true
 
         rcVideoPlayerView.isHidden = false
@@ -160,8 +158,6 @@ class VideoPlaybackViewController: UIViewController {
 
         controlView.alpha = 1.0
         
-//        controlView.isHidden = false
-
         playButton.isHidden = false
         
         rcVideoPlayerView.isHidden = true
@@ -213,7 +209,7 @@ extension VideoPlaybackViewController {
 // MARK: - CoreData Function
 //extension VideoPlaybackViewController {
 //
-//    func createData(fileName: String) {
+//    func createVideoData(fileName: String) {
 //
 //        let videoData = VideoData(context: StorageManager.shared.persistantContainer.viewContext)
 //
