@@ -299,7 +299,7 @@
                                 <rect key="frame" x="155.5" y="593" width="64" height="64"/>
                                 <state key="normal" image="Icon_Check"/>
                                 <connections>
-                                    <segue destination="4bA-38-XYe" kind="show" identifier="showExportPage" id="sRW-WM-8rX"/>
+                                    <segue destination="4bA-38-XYe" kind="presentation" identifier="showExportPage" id="sRW-WM-8rX"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6dQ-1W-fY0">
@@ -332,17 +332,26 @@
             </objects>
             <point key="canvasLocation" x="5436" y="-645.42728635682158"/>
         </scene>
-        <!--輸出-->
+        <!--Export View Controller-->
         <scene sceneID="ed5-sb-7AK">
             <objects>
                 <viewController storyboardIdentifier="ExportViewController" hidesBottomBarWhenPushed="YES" id="4bA-38-XYe" customClass="ExportViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fLM-xr-Op9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ivb-nD-hyp">
+                                <rect key="frame" x="172" y="587" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="返回"/>
+                                <connections>
+                                    <action selector="returnButtonPressed:" destination="4bA-38-XYe" eventType="touchUpInside" id="Xyn-O1-iSs"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="HXG-rb-0Ff"/>
                     </view>
-                    <navigationItem key="navigationItem" title="輸出" id="4Op-yg-vHU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lXv-hK-8Ku" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

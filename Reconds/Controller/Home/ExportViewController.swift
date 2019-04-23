@@ -14,6 +14,19 @@ class ExportViewController: UIViewController {
     
     var audioUrl: URL?
     
+    @IBAction func returnButtonPressed(_ sender: UIButton) {
+    
+        guard let tabBar = self.presentingViewController as? TabBarController,
+            let navVC = tabBar.selectedViewController as? UINavigationController else { return }
+
+        navVC.popToRootViewController(animated: true)
+        
+        tabBar.dismiss(animated: true, completion: {
+            
+            tabBar.selectedIndex = 0
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -85,18 +98,4 @@ extension ExportViewController {
         
         print(videoCollection)
     }
-    
-//    func filterData(fileUrls: [URL]) -> [String] {
-//
-//        let searchToSearch = "exported"
-//
-//        let fileUrl = fileUrls.filter({ (item: URL) -> Bool in
-    
-//            let UrlMatch = item.lowercased().range(of: searchToSearch.lowercased())
-            
-//            return UrlMatch != nil ? true : false
-//        })
-    
-//        return fileUrl
-//    }
 }
