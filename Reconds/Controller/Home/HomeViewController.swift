@@ -99,6 +99,8 @@ class HomeViewController: UIViewController {
         
         collectionView.addGestureRecognizer(longPressGesture)
         collectionView.addGestureRecognizer(tapGesture)
+        
+        self.navigationItem.title = UserDefaults.standard.string(forKey: "Title")
     }
     
     override func viewWillAppear(_ animated: Bool) {
