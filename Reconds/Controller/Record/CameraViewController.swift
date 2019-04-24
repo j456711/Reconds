@@ -54,9 +54,9 @@ class CameraViewController: UIViewController {
 
         if cameraButtonLayer.path!.contains(point) {
 
-            let index = StorageManager.shared.filterData()
+            guard let filteredArray = StorageManager.shared.filterData() else { return }
             
-            if index.count == 25 {
+            if filteredArray.count == 25 {
                 
                 let alert =
                     UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片",

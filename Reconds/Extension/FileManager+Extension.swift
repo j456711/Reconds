@@ -12,7 +12,9 @@ extension FileManager {
     
     static let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
-    func removeItemIfExisted(_ url: URL) {
+    static let exportedDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Exported")
+    
+    func removeItemIfExisted(at url: URL) {
         
         if FileManager.default.fileExists(atPath: url.path) {
         

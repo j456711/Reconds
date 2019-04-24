@@ -141,7 +141,7 @@ class MergeVideoManager {
         let exportUrl = URL.init(fileURLWithPath: path)
         
         // Remove file if existed
-        FileManager.default.removeItemIfExisted(exportUrl)
+        FileManager.default.removeItemIfExisted(at: exportUrl)
         
         // Init exporter
         let exporter = AVAssetExportSession.init(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)
@@ -160,7 +160,7 @@ class MergeVideoManager {
         })
     }
     
-    typealias VideoExportedHandler = ((String?, Error?) -> Void)
+    typealias VideoExportedHandler = ((URL?, String?, Error?) -> Void)
     
     func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL, completionHandler: @escaping VideoExportedHandler) {
         
@@ -228,8 +228,7 @@ class MergeVideoManager {
         let fileName = "\(time)-exported.mp4"
         
         // Find video on this URL
-        guard let outputUrl =
-            URL(string: FileManager.documentDirectory.absoluteString + "Exported/" + fileName) else { return }
+        let outputUrl = FileManager.documentDirectory.appendingPathComponent("Exported/\(fileName)")
         
         audioMixInputParameters.setVolumeRamp(fromStartVolume: 1, toEndVolume: 0, timeRange: aVideoAssetTrack.timeRange)
         
@@ -256,20 +255,20 @@ class MergeVideoManager {
                     
                     UISaveVideoAtPathToSavedPhotosAlbum(outputUrl.path, self, nil, nil)
                     
-                    completionHandler(fileName, nil)
+                    completionHandler(outputUrl, fileName, nil)
                     
                     print("success", outputUrl.absoluteString)
                 }
                 
             case  AVAssetExportSession.Status.failed:
                 
-                completionHandler(nil, assetExport.error)
+                completionHandler(nil, nil, assetExport.error)
                 
                 print("failed:", assetExport.error as Any)
             
             case AVAssetExportSession.Status.cancelled:
             
-                completionHandler(nil, assetExport.error)
+                completionHandler(nil, nil, assetExport.error)
                 
                 print("cancelled", assetExport.error as Any)
             

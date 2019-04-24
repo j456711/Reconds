@@ -108,9 +108,9 @@ class VideoPlaybackViewController: UIViewController {
             
             let videoData = StorageManager.shared.fetch(VideoData.self)
             
-            let index = StorageManager.shared.filterData()
+            guard let filteredArray = StorageManager.shared.filterData() else { return }
             
-            videoData[0].dataPathArray.insert(fileName, at: index.count)
+            videoData[0].dataPathArray.insert(fileName, at: filteredArray.count)
             
             videoData[0].dataPathArray.removeLast()
                 

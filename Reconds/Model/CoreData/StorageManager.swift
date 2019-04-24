@@ -82,6 +82,7 @@ final class StorageManager {
         fetchRequest.returnsObjectsAsFaults = false
         
         do {
+            
             let results = try context.fetch(fetchRequest)
             
             for object in results {
@@ -89,6 +90,8 @@ final class StorageManager {
                 guard let objectData = object as? NSManagedObject else { return }
                 
                 context.delete(objectData)
+                
+                print("Deleted seccessfully")
                 
                 save()
             }
@@ -113,19 +116,26 @@ extension StorageManager {
         save()
     }
     
-    func filterData() -> [String] {
+    func filterData() -> [String]? {
         
         let videoData = fetch(VideoData.self)
         
         let searchToSearch = ".mp4"
         
-        let filteredArray = videoData[0].dataPathArray.filter({ (element: String) -> Bool in
+        if videoData == [] {
+
+            return nil
+
+        } else {
+//
+            let filteredArray = videoData[0].dataPathArray.filter({ (element: String) -> Bool in
+                
+                let stringMatch = element.lowercased().range(of: searchToSearch.lowercased())
+                
+                return stringMatch != nil ? true : false
+            })
             
-            let stringMatch = element.lowercased().range(of: searchToSearch.lowercased())
-            
-            return stringMatch != nil ? true : false
-        })
-        
-        return filteredArray
+            return filteredArray
+        }
     }
 }

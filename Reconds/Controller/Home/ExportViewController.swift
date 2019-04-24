@@ -39,10 +39,22 @@ class ExportViewController: UIViewController {
             
             MergeVideoManager.shared.mergeVideoAndAudio(videoUrl: videoUrl,
                                                         audioUrl: audioUrl,
-                                                        completionHandler: { [weak self] (fileName, error) in
+                                                        completionHandler: { [weak self] (outputUrl, fileName, error) in
                                                             
                 if let fileName = fileName,
+                   let outputUrl = outputUrl,
                    let videoTitle = UserDefaults.standard.string(forKey: "Title") {
+                    
+                    guard let videoData = try? Data(contentsOf: outputUrl) else { return }
+                    
+                    do {
+                        
+                        try videoData.write(to: outputUrl)
+                    
+                    } catch {
+                        
+                        print("Write to directory error", error)
+                    }
                     
                     self?.createData(videoTitle: videoTitle, dataPath: fileName)
                     
@@ -51,7 +63,7 @@ class ExportViewController: UIViewController {
                     do {
                         
                         let fileUrls =
-                            try FileManager.default.contentsOfDirectory(at: FileManager.documentDirectory,
+                            try FileManager.default.contentsOfDirectory(at: FileManager.documentDirectory.appendingPathComponent("Exported"),
                                                                         includingPropertiesForKeys: nil,
                                                                         options: [.skipsHiddenFiles,
                                                                                   .skipsSubdirectoryDescendants])
@@ -59,13 +71,15 @@ class ExportViewController: UIViewController {
                         print(fileUrls)
                         
                         for fileUrl in fileUrls {
-                           
+
                             do {
-                                
+
                                 try FileManager.default.removeItem(at: fileUrl)
-                                
+
+                                UserDefaults.standard.removeObject(forKey: "Title")
+
                             } catch {
-                                
+
                                 print("Can't remove fileUrl", error.localizedDescription)
                             }
                         }

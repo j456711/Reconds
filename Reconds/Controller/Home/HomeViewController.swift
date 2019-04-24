@@ -93,7 +93,14 @@ class HomeViewController: UIViewController {
         
         createExportedDirectory()
         
-        fetchData()
+        if UserDefaults.standard.string(forKey: "Title") == "" {
+
+            self.navigationItem.title = "Reconds"
+        
+        } else {
+            
+            self.navigationItem.title = UserDefaults.standard.string(forKey: "Title")
+        }
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
         
@@ -101,19 +108,24 @@ class HomeViewController: UIViewController {
         
         collectionView.addGestureRecognizer(longPressGesture)
         collectionView.addGestureRecognizer(tapGesture)
-        
-        self.navigationItem.title = UserDefaults.standard.string(forKey: "Title")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if videoData.count != 0 {
+        fetchData()
+        
+        let filteredArray = StorageManager.shared.filterData()
+        
+        if filteredArray != nil {
         
             print("----------\(videoData[0].dataPathArray.count)-----------")
             
-            if videoData[0].dataPathArray.count == 1 {
+            if filteredArray?.count == 0 {
+                
+                exportButton.isHidden = true
+                
+            } else if filteredArray?.count == 1 {
                 
                 exportButton.isHidden = false
                 
@@ -134,7 +146,7 @@ class HomeViewController: UIViewController {
                     strongSelf.rcVideoPlayer.play()
                 }
                 
-            } else if videoData[0].dataPathArray.count >= 2 {
+            } else {
                 
                 exportButton.isHidden = false
                 
@@ -144,8 +156,11 @@ class HomeViewController: UIViewController {
                     
                     self?.merge()
                 }
-                
             }
+            
+        } else {
+
+            reset()
         }
         
         collectionView.reloadData()
@@ -488,12 +503,12 @@ extension HomeViewController {
     
     func merge() {
         
-        let filteredArray = StorageManager.shared.filterData()
-//
+        guard let filteredArray = StorageManager.shared.filterData() else { return }
+
         let stringArray = filteredArray.map({ FileManager.documentDirectory.absoluteString + $0 })
 
         guard let urlArray = stringArray.map({ URL(string: $0) }) as? [URL] else { return }
-//
+
         let avAssetArray = urlArray.map({ AVAsset(url: $0) })
 
         MergeVideoManager.shared.mergeVideos(arrayVideos: avAssetArray,
@@ -503,7 +518,7 @@ extension HomeViewController {
 
             if let error = error {
 
-                print("Error: \(error.localizedDescription)")
+                print("HomeVC merge error: \(error.localizedDescription)")
 
             } else {
 
@@ -514,17 +529,28 @@ extension HomeViewController {
                     strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
                                                            videoUrl: videoUrl,
                                                            videoGravity: .resizeAspect)
-
-//                    strongSelf.rcVideoPlayer.play()
-//                                            PHPhotoLibrary.shared().performChanges({
-//                    
-//                                                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
-//                    
-//                                                print("success")
-//                    
-//                                            }, completionHandler: nil)
                 }
             }
         })
+    }
+    
+    func reset() {
+        
+//        let path = NSTemporaryDirectory().appending("mergedVideo.mp4")
+//
+//        let url = URL.init(fileURLWithPath: path)
+//
+//        print(url)
+        
+//        if let videoUrl = videoUrl {
+//
+//            FileManager.default.removeItemIfExisted(at: videoUrl)
+//        }
+        
+        exportButton.isHidden = true
+        
+        collectionView.isHidden = true
+        
+        self.navigationItem.title = "Reconds"
     }
 }
