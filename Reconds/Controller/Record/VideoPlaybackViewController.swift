@@ -11,8 +11,6 @@ import UIKit
 import AVFoundation
 
 class VideoPlaybackViewController: UIViewController {
-
-    var initialTouchPoint = CGPoint(x: 0, y: 0)
     
     let rcVideoPlayer = RCVideoPlayer()
 
@@ -169,6 +167,8 @@ extension VideoPlaybackViewController {
     
     @objc func panAction(_ gesture: UIGestureRecognizer) {
         
+        var initialTouchPoint = CGPoint(x: 0, y: 0)
+        
         let touchPoint = gesture.location(in: self.view.window)
         
         switch gesture.state {
@@ -205,16 +205,3 @@ extension VideoPlaybackViewController {
         }
     }
 }
-
-// MARK: - CoreData Function
-//extension VideoPlaybackViewController {
-//
-//    func createVideoData(fileName: String) {
-//
-//        let videoData = VideoData(context: StorageManager.shared.persistantContainer.viewContext)
-//
-//        videoData.dataPathArray.append(fileName)
-//
-//        VideoDataManager.shared.save()
-//    }
-//}

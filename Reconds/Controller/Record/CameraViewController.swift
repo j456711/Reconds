@@ -26,7 +26,7 @@ class CameraViewController: UIViewController {
     var activeInput: AVCaptureDeviceInput?
 
     var outputUrl: URL?
-
+    
     let cameraButtonLayer = CAShapeLayer()  //使用CAShapeLayer製作動畫
 
     let cancelButton = UIButton()
@@ -46,9 +46,13 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
+
+        self.view.addGestureRecognizer(gesture)
+        
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
             
-        case .notDetermined,.denied, .restricted:
+        case .notDetermined, .denied, .restricted:
             
             self.view.bringSubviewToFront(authorizedView)
             
@@ -100,11 +104,16 @@ class CameraViewController: UIViewController {
             }
         }
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        return true
+    }
 
     func setUpCancelButton() {
 
         cancelButton.frame = CGRect(x: 16, y: UIScreen.main.bounds.height - 90, width: 45, height: 40)
-        cancelButton.setTitle("取消", for: .normal)
+        cancelButton.setTitle("返回", for: .normal)
         cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
 
@@ -123,6 +132,46 @@ class CameraViewController: UIViewController {
             guard let videoPlaybackVC = segue.destination as? VideoPlaybackViewController else { return }
 
             videoPlaybackVC.videoUrl = sender as? URL
+        }
+    }
+    
+    @objc func panAction(_ gesture: UIGestureRecognizer) {
+        
+        var initialTouchPoint = CGPoint(x: 0, y: 0)
+        
+        let touchPoint = gesture.location(in: self.view.window)
+        
+        switch gesture.state {
+            
+        case .began:
+            initialTouchPoint = touchPoint
+            
+        case .changed:
+            if touchPoint.y - initialTouchPoint.y > 0 {
+                
+                self.view.frame = CGRect(x: 0,
+                                         y: (touchPoint.y - initialTouchPoint.y),
+                                         width: self.view.frame.size.width,
+                                         height: self.view.frame.size.height)
+            }
+            
+        case .ended, .cancelled:
+            if touchPoint.y - initialTouchPoint.y > 100 {
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            } else {
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+                    self.view.frame = CGRect(x: 0,
+                                             y: 0,
+                                             width: self.view.frame.size.width,
+                                             height: self.view.frame.size.height)
+                })
+            }
+            
+        default: break
         }
     }
 }
