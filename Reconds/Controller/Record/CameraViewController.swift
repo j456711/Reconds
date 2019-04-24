@@ -58,16 +58,14 @@ class CameraViewController: UIViewController {
             
             if filteredArray.count == 25 {
                 
-                let alert =
-                    UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片",
-                                                          alertMessage: "影片數量已達到上限，快去輸出吧！",
-                                                          actionHandler: { [weak self] (_) in
+                UIAlertController.addConfirmAlertWith(viewController: self,
+                                                      alertTitle: "無法新增影片",
+                                                      alertMessage: "影片數量已達到上限，快去輸出吧！",
+                                                      actionHandler: { [weak self] (_) in
                                                             
                         self?.dismiss(animated: true, completion: nil)
                     })
-                
-                present(alert, animated: true, completion: nil)
-          
+        
             } else {
             
                 startRecording()

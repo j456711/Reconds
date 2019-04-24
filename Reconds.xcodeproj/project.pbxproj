@@ -33,6 +33,7 @@
 		34300BB0226DB19E00CF3429 /* MyVideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BAF226DB19E00CF3429 /* MyVideosCollectionViewCell.swift */; };
 		34300BB3226DBA5C00CF3429 /* VideoCollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB1226DBA5C00CF3429 /* VideoCollection+CoreDataProperties.swift */; };
 		34300BB4226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB2226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift */; };
+		34300BB8227047DA00CF3429 /* MyVideosDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */; };
 		348FBD69225F1EAE000F53F6 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD68225F1EAE000F53F6 /* StorageManager.swift */; };
 		348FBD6E225F1F20000F53F6 /* Reconds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* Reconds.xcdatamodeld */; };
 		348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */; };
@@ -73,6 +74,7 @@
 		34300BAF226DB19E00CF3429 /* MyVideosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVideosCollectionViewCell.swift; sourceTree = "<group>"; };
 		34300BB1226DBA5C00CF3429 /* VideoCollection+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCollection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		34300BB2226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCollection+CoreDataClass.swift"; sourceTree = "<group>"; };
+		34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVideosDetailViewController.swift; sourceTree = "<group>"; };
 		348FBD68225F1EAE000F53F6 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				34300BAC226DAFF400CF3429 /* MyVideosViewController.swift */,
+				34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */,
 			);
 			path = MyVideos;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */,
 				3416CDA8226CC86B007D9D37 /* ExportViewController.swift in Sources */,
 				1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */,
+				34300BB8227047DA00CF3429 /* MyVideosDetailViewController.swift in Sources */,
 				348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */,
 				1E419A762254D749009B4F49 /* TabBarController.swift in Sources */,
 				1E419A6E22537645009B4F49 /* SettingsViewController.swift in Sources */,

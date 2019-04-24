@@ -20,7 +20,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c0d-jA-mBK">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="6" id="Pno-7G-2Jx">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -37,7 +37,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zGZ-He-RPm">
                                                     <rect key="frame" x="0.0" y="0.0" width="176" height="160"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcz-hv-GSf">
                                                     <rect key="frame" x="0.0" y="125" width="176" height="35"/>
@@ -49,7 +49,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.25" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="6of-fm-LFv" secondAttribute="trailing" constant="8" id="PND-D2-J5x"/>
                                                         <constraint firstItem="6of-fm-LFv" firstAttribute="top" secondItem="Bcz-hv-GSf" secondAttribute="top" constant="10" id="S3Y-Iz-zlX"/>
@@ -80,7 +80,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尚未製作任何影片。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFL-h3-yql">
                                 <rect key="frame" x="96" y="321.5" width="183.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -99,11 +99,83 @@
                     <connections>
                         <outlet property="collectionView" destination="c0d-jA-mBK" id="3Nk-7N-2oq"/>
                         <outlet property="emptyLabel" destination="iFL-h3-yql" id="2e2-sS-HBe"/>
+                        <segue destination="0iw-8D-Lxs" kind="show" identifier="showMyVideosDetail" id="ECX-f8-NPn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uP-fg-TKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4501.6000000000004" y="165.06746626686657"/>
+        </scene>
+        <!--My Videos Detail View Controller-->
+        <scene sceneID="A1v-BK-j4X">
+            <objects>
+                <viewController storyboardIdentifier="MyVideosDetailViewController" hidesBottomBarWhenPushed="YES" id="0iw-8D-Lxs" customClass="MyVideosDetailViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BuL-Ce-59S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uTe-lo-B1k">
+                                <rect key="frame" x="0.0" y="129" width="375" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Web-VD-jr5"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axr-2j-yFd">
+                                <rect key="frame" x="155.5" y="197" width="64" height="64"/>
+                                <state key="normal" image="Icon_Play"/>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="Kgx-NL-8JK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa8-2s-smt">
+                                <rect key="frame" x="127" y="415" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="分享"/>
+                                <connections>
+                                    <action selector="shareButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="pbi-m5-KwB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBd-2X-lR9">
+                                <rect key="frame" x="217" y="415" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="刪除"/>
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="wMX-hz-HDu"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title Label" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WRZ-H9-QG9">
+                                <rect key="frame" x="16" y="354" width="343" height="24"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="textFieldEdited:" destination="0iw-8D-Lxs" eventType="editingDidEnd" id="CHj-k0-Sy4"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uTe-lo-B1k" firstAttribute="leading" secondItem="dL0-4F-pB2" secondAttribute="leading" id="AeD-g4-gVG"/>
+                            <constraint firstItem="WRZ-H9-QG9" firstAttribute="leading" secondItem="dL0-4F-pB2" secondAttribute="leading" constant="16" id="G3G-ed-k28"/>
+                            <constraint firstItem="uTe-lo-B1k" firstAttribute="top" secondItem="dL0-4F-pB2" secondAttribute="top" constant="65" id="GyF-tF-0p7"/>
+                            <constraint firstItem="uTe-lo-B1k" firstAttribute="trailing" secondItem="dL0-4F-pB2" secondAttribute="trailing" id="N5M-vU-QZw"/>
+                            <constraint firstItem="axr-2j-yFd" firstAttribute="centerX" secondItem="uTe-lo-B1k" secondAttribute="centerX" id="gYm-Zl-hSG"/>
+                            <constraint firstItem="axr-2j-yFd" firstAttribute="centerY" secondItem="uTe-lo-B1k" secondAttribute="centerY" id="hcf-vp-urJ"/>
+                            <constraint firstItem="WRZ-H9-QG9" firstAttribute="top" secondItem="uTe-lo-B1k" secondAttribute="bottom" constant="25" id="jLv-FJ-q7J"/>
+                            <constraint firstItem="dL0-4F-pB2" firstAttribute="trailing" secondItem="WRZ-H9-QG9" secondAttribute="trailing" constant="16" id="ndS-XX-zDn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dL0-4F-pB2"/>
+                    </view>
+                    <connections>
+                        <outlet property="playButton" destination="axr-2j-yFd" id="KLU-6b-luc"/>
+                        <outlet property="textField" destination="WRZ-H9-QG9" id="HQO-Tn-Ozw"/>
+                        <outlet property="thumbnail" destination="uTe-lo-B1k" id="WUL-OT-8rs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbJ-ek-DdP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5436" y="164.16791604197903"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pc7-Pi-dug">
@@ -371,6 +443,7 @@
         <image name="Icon_Check" width="64" height="64"/>
         <image name="Icon_Film" width="32" height="32"/>
         <image name="Icon_FilmSelected" width="32" height="32"/>
+        <image name="Icon_Play" width="64" height="64"/>
         <image name="Icon_Remove" width="64" height="64"/>
     </resources>
 </document>

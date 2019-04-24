@@ -80,10 +80,9 @@ class HomeViewController: UIViewController {
 
         } else {
 
-            let alert = UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片",
-                                                              alertMessage: "尚未開放一次可編輯多支影片的功能，敬請期待！")
-
-            present(alert, animated: true, completion: nil)
+            UIAlertController.addConfirmAlertWith(viewController: self,
+                                                  alertTitle: "無法新增影片",
+                                                  alertMessage: "尚未開放可同時編輯多支影片的功能。")
         }
     }
 
@@ -402,9 +401,10 @@ extension HomeViewController {
 
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
         
-        let alert = UIAlertController.addConfirmAndCancelAlertWith(alertTitle: "確定要刪除影片嗎？",
-                                                                   alertMessage: "刪除後不可回復。",
-                                                                   confirmActionHandler: { [weak self] (_) in
+        UIAlertController.addConfirmAndCancelAlertWith(viewController: self,
+                                                       alertTitle: "確定要刪除影片嗎？",
+                                                       alertMessage: "刪除後不可回復。",
+                                                       confirmActionHandler: { [weak self] (_) in
             
             do {
                 
@@ -435,9 +435,7 @@ extension HomeViewController {
                 
                 print("Remove fail", error.localizedDescription)
             }
-        })
-        
-        present(alert, animated: true, completion: nil)
+        })        
     }
     
     @objc func tapAction(_ gesture: UIGestureRecognizer) {

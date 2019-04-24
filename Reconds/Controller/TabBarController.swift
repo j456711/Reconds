@@ -27,17 +27,15 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             // 不能是空 [] 的原因是因為剛開啟專案會沒有mp4檔案，但是已經有collectionView可以拍影片了，所以要修改
             if filteredArray == nil {
 
-                let alert =
-                    UIAlertController.addConfirmAlertWith(alertTitle: "請先新增專案", alertMessage: "新增後即可開始錄製。")
-
-                present(alert, animated: true, completion: nil)
+                UIAlertController.addConfirmAlertWith(viewController: self,
+                                                      alertTitle: "請先新增專案",
+                                                      alertMessage: "新增後即可開始錄製。")
 
             } else if filteredArray?.count == 25 {
                 
-                let alert =
-                    UIAlertController.addConfirmAlertWith(alertTitle: "無法新增影片", alertMessage: "影片數量已達到上限，快去輸出吧！")
-                
-                present(alert, animated: true, completion: nil)
+                UIAlertController.addConfirmAlertWith(viewController: self,
+                                                      alertTitle: "無法新增影片",
+                                                      alertMessage: "影片數量已達到上限，快去輸出吧！")
             
             } else {
             

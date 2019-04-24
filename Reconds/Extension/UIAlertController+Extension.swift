@@ -13,9 +13,10 @@ extension UIAlertController {
 
     typealias UIAlertActionHandler = ((UIAlertAction) -> Void)?
 
-    static func addConfirmAlertWith(alertTitle: String?,
+    static func addConfirmAlertWith(viewController: UIViewController,
+                                    alertTitle: String?,
                                     alertMessage: String?,
-                                    actionHandler: UIAlertActionHandler = nil) -> UIAlertController {
+                                    actionHandler: UIAlertActionHandler = nil) {
 
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
 
@@ -23,12 +24,13 @@ extension UIAlertController {
 
         alert.addAction(confirmAction)
 
-        return alert
+        viewController.present(alert, animated: true, completion: nil)
     }
     
-    static func addConfirmAndCancelAlertWith(alertTitle: String?,
+    static func addConfirmAndCancelAlertWith(viewController: UIViewController,
+                                             alertTitle: String?,
                                              alertMessage: String?,
-                                             confirmActionHandler: UIAlertActionHandler = nil) -> UIAlertController {
+                                             confirmActionHandler: UIAlertActionHandler = nil) {
     
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
@@ -40,6 +42,31 @@ extension UIAlertController {
         
         alert.addAction(cancelAction)
         
-        return alert
+        viewController.present(alert, animated: true, completion: nil)
     }
+    
+//    static func addActionSheetAlert(viewController: UIViewController,
+//                                    alertTitle: String?,
+//                                    alertMessage: String?,
+//                                    actions: [String],
+//                                    actionStyle: [UIAlertAction.Style],
+//                                    actionHandler: UIAlertActionHandler) {
+//
+//        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .actionSheet)
+//
+//        let actions = actions
+//
+//        for action in actions {
+//
+//            let action = UIAlertAction(title: action, style: .style, handler: actionHandler)
+//
+//            alert.addAction(action)
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+//
+//        alert.addAction(cancelAction)
+//
+//        viewController.present(alert, animated: true, completion: nil)
+//    }
 }

@@ -10,6 +10,11 @@ import UIKit
 
 class MyVideosViewController: UIViewController {
 
+    struct Segue {
+        
+        static let showMyVideosDetail = "showMyVideosDetail"
+    }
+    
     let rcVideoPlayer = RCVideoPlayer()
     
     var videoCollection: [VideoCollection] = []
@@ -36,6 +41,11 @@ class MyVideosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         let videoCollection = StorageManager.shared.fetch(VideoCollection.self)
         
         self.videoCollection = videoCollection
@@ -44,8 +54,21 @@ class MyVideosViewController: UIViewController {
             
             emptyLabel.isHidden = true
         }
+        
+        collectionView.reloadData()
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let myVideosDetailVC = segue.destination as? MyVideosDetailViewController else { return }
+        
+        if let sender = sender as? IndexPath {
+        
+            myVideosDetailVC.indexPath = sender
+            myVideosDetailVC.videoTitle = videoCollection[sender.item].videoTitle
+            myVideosDetailVC.videoUrl = FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[sender.item].dataPath)")
+        }
+    }
 }
 
 extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -72,6 +95,11 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
         
         return myVideosCell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: Segue.showMyVideosDetail, sender: indexPath)
+    }
 }
 
 extension MyVideosViewController: UICollectionViewDelegateFlowLayout {
@@ -80,28 +108,28 @@ extension MyVideosViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets(top: 32, left: 16, bottom: 32, right: 16)
+        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: (UIScreen.main.bounds.size.width - 48) / 2,
-                      height: (UIScreen.main.bounds.size.width - 48) / 2)
+        return CGSize(width: (UIScreen.main.bounds.size.width - 57) / 2,
+                      height: (UIScreen.main.bounds.size.width - 57) / 2)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 16
+        return 25
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 16
+        return 25
     }
 }
