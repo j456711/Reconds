@@ -49,7 +49,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="0.25" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="6of-fm-LFv" secondAttribute="trailing" constant="8" id="PND-D2-J5x"/>
                                                         <constraint firstItem="6of-fm-LFv" firstAttribute="top" secondItem="Bcz-hv-GSf" secondAttribute="top" constant="10" id="S3Y-Iz-zlX"/>
@@ -77,12 +77,20 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尚未製作任何影片。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFL-h3-yql">
+                                <rect key="frame" x="96" y="321.5" width="183.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="iFL-h3-yql" firstAttribute="centerY" secondItem="BZw-uN-HY2" secondAttribute="centerY" id="2um-7a-cxq"/>
                             <constraint firstItem="c0d-jA-mBK" firstAttribute="top" secondItem="did-eV-HBA" secondAttribute="top" id="JSh-Qy-y7V"/>
                             <constraint firstItem="c0d-jA-mBK" firstAttribute="trailing" secondItem="did-eV-HBA" secondAttribute="trailing" id="dPM-a3-qKZ"/>
                             <constraint firstItem="c0d-jA-mBK" firstAttribute="leading" secondItem="did-eV-HBA" secondAttribute="leading" id="gmA-jq-6S0"/>
+                            <constraint firstItem="iFL-h3-yql" firstAttribute="centerX" secondItem="BZw-uN-HY2" secondAttribute="centerX" id="n0v-YA-v07"/>
                             <constraint firstItem="c0d-jA-mBK" firstAttribute="bottom" secondItem="did-eV-HBA" secondAttribute="bottom" id="r8q-5L-3Y4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="did-eV-HBA"/>
@@ -90,6 +98,7 @@
                     <navigationItem key="navigationItem" title="我的影片" id="Qd6-rz-zyc"/>
                     <connections>
                         <outlet property="collectionView" destination="c0d-jA-mBK" id="3Nk-7N-2oq"/>
+                        <outlet property="emptyLabel" destination="iFL-h3-yql" id="2e2-sS-HBe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uP-fg-TKC" userLabel="First Responder" sceneMemberID="firstResponder"/>

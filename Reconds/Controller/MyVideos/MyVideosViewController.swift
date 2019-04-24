@@ -12,7 +12,15 @@ class MyVideosViewController: UIViewController {
 
     let rcVideoPlayer = RCVideoPlayer()
     
-    lazy var videoCollection: [VideoCollection] = []
+    var videoCollection: [VideoCollection] = []
+    
+    @IBOutlet weak var emptyLabel: UILabel! {
+        
+        didSet {
+        
+            emptyLabel.isHidden = false
+        }
+    }
     
     @IBOutlet weak var collectionView: UICollectionView! {
         
@@ -31,6 +39,11 @@ class MyVideosViewController: UIViewController {
         let videoCollection = StorageManager.shared.fetch(VideoCollection.self)
         
         self.videoCollection = videoCollection
+        
+        if videoCollection.count > 0 {
+            
+            emptyLabel.isHidden = true
+        }
     }
 
 }
@@ -51,9 +64,8 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
         
         guard let myVideosCell = cell as? MyVideosCollectionViewCell else { return cell }
         
-//        let exportedPath = FileManager.documentDirectory.appendingPathComponent("Exported", isDirectory: true)
-        
-        let filePath = FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
+        let filePath =
+            FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
                 
         myVideosCell.titleLabel.text = videoCollection[indexPath.item].videoTitle
         myVideosCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: filePath)

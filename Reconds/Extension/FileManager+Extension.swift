@@ -10,11 +10,11 @@ import Foundation
 
 extension FileManager {
     
-    static let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    static let exportedDirectory = FileManager.default.urls(for: .documentDirectory,
+                                                            in: .userDomainMask)[0].appendingPathComponent("Exported")
     
-    static let exportedDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Exported")
-    
-    static let videoDataDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("VideoData")
+    static let videoDataDirectory = FileManager.default.urls(for: .documentDirectory,
+                                                             in: .userDomainMask)[0].appendingPathComponent("VideoData")
     
     func removeItemIfExisted(at url: URL) {
         
@@ -33,7 +33,8 @@ extension FileManager {
     
     func jy_createDirectory(_ name: String) {
         
-        let savePath = FileManager.documentDirectory.appendingPathComponent(name)
+        let savePath = FileManager.default.urls(for: .documentDirectory,
+                                                in: .userDomainMask)[0].appendingPathComponent(name)
         
         do {
             

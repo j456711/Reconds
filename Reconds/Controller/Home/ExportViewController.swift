@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class ExportViewController: UIViewController {
-    
+        
     var videoUrl: URL?
     
     var audioUrl: URL?
