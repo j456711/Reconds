@@ -59,7 +59,7 @@ class ExportViewController: UIViewController {
                     
                     self?.createData(videoTitle: videoTitle, dataPath: fileName)
                     
-                    StorageManager.shared.delete("VideoData")
+                    StorageManager.shared.deleteAll("VideoData")
                     
                     do {
                         

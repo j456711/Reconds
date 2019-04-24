@@ -70,7 +70,27 @@ class MyVideosDetailViewController: UIViewController {
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
     
+        let alert = UIAlertController(title: "將刪除此影片，此動作無法還原。", message: nil, preferredStyle: .actionSheet)
         
+        let deleteAction = UIAlertAction(title: "刪除", style: .destructive, handler: { [ weak self] (_) in
+            
+            guard let strongSelf = self else { return }
+            
+            if let indexPath = strongSelf.indexPath {
+                
+                StorageManager.shared.context.delete(strongSelf.videoCollection[indexPath.item])
+                
+                StorageManager.shared.save()
+            }
+        })
+        
+        alert.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -97,6 +117,11 @@ class MyVideosDetailViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
+    }
+    
+    func createActionSheet() {
+        
+        
     }
 }
 

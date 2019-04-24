@@ -75,7 +75,7 @@ final class StorageManager {
         }
     }
     
-    func delete(_ entityName: String) {
+    func deleteAll(_ entityName: String) {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
