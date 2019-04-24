@@ -100,7 +100,7 @@ class VideoPlaybackViewController: UIViewController {
         
         let fileName = "\(time).mp4"
         
-        let dataPath = FileManager.documentDirectory.appendingPathComponent(fileName)
+        let dataPath = FileManager.videoDataDirectory.appendingPathComponent(fileName)
         
         do {
             
@@ -135,7 +135,7 @@ class VideoPlaybackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(videoDidFinishPlaying),
                                                name: .AVPlayerItemDidPlayToEndTime,
@@ -153,7 +153,7 @@ class VideoPlaybackViewController: UIViewController {
         view.bringSubviewToFront(playButton)
         view.bringSubviewToFront(rcVideoPlayerView)
     }
-
+    
     @objc func videoDidFinishPlaying() {
 
         controlView.alpha = 1.0

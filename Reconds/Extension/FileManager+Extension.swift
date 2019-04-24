@@ -14,6 +14,8 @@ extension FileManager {
     
     static let exportedDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Exported")
     
+    static let videoDataDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("VideoData")
+    
     func removeItemIfExisted(at url: URL) {
         
         if FileManager.default.fileExists(atPath: url.path) {
@@ -26,6 +28,22 @@ extension FileManager {
               
                 print("Failed to delete file: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    func jy_createDirectory(_ name: String) {
+        
+        let savePath = FileManager.documentDirectory.appendingPathComponent(name)
+        
+        do {
+            
+            try FileManager.default.createDirectory(atPath: savePath.path,
+                                                    withIntermediateDirectories: true,
+                                                    attributes: nil)
+            
+        } catch {
+            
+            print("Create path error", error.localizedDescription)
         }
     }
 }

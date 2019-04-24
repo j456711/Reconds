@@ -9,7 +9,7 @@
 import UIKit
 
 class ExportViewController: UIViewController {
-
+    
     var videoUrl: URL?
     
     var audioUrl: URL?
@@ -63,7 +63,7 @@ class ExportViewController: UIViewController {
                     do {
                         
                         let fileUrls =
-                            try FileManager.default.contentsOfDirectory(at: FileManager.documentDirectory.appendingPathComponent("Exported"),
+                            try FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
                                                                         includingPropertiesForKeys: nil,
                                                                         options: [.skipsHiddenFiles,
                                                                                   .skipsSubdirectoryDescendants])

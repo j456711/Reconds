@@ -51,9 +51,9 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
         
         guard let myVideosCell = cell as? MyVideosCollectionViewCell else { return cell }
         
-        let exportedPath = FileManager.documentDirectory.appendingPathComponent("Exported", isDirectory: true)
+//        let exportedPath = FileManager.documentDirectory.appendingPathComponent("Exported", isDirectory: true)
         
-        let filePath = exportedPath.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
+        let filePath = FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
                 
         myVideosCell.titleLabel.text = videoCollection[indexPath.item].videoTitle
         myVideosCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: filePath)

@@ -228,7 +228,7 @@ class MergeVideoManager {
         let fileName = "\(time)-exported.mp4"
         
         // Find video on this URL
-        let outputUrl = FileManager.documentDirectory.appendingPathComponent("Exported/\(fileName)")
+        let outputUrl = FileManager.exportedDirectory.appendingPathComponent(fileName)
         
         audioMixInputParameters.setVolumeRamp(fromStartVolume: 1, toEndVolume: 0, timeRange: aVideoAssetTrack.timeRange)
         

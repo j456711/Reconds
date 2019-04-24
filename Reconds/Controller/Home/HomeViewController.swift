@@ -91,7 +91,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        createExportedDirectory()
+        FileManager.default.jy_createDirectory("Exported")
+        FileManager.default.jy_createDirectory("VideoData")
         
         if UserDefaults.standard.string(forKey: "Title") == "" {
 
@@ -132,7 +133,7 @@ class HomeViewController: UIViewController {
                 collectionView.isHidden = false
                 
                 guard let videoUrl =
-                    URL(string: FileManager.documentDirectory.absoluteString + videoData[0].dataPathArray[0])
+                    URL(string: FileManager.videoDataDirectory.absoluteString + videoData[0].dataPathArray[0])
                     else { return }
                 
                 DispatchQueue.main.async { [weak self] in
@@ -152,7 +153,7 @@ class HomeViewController: UIViewController {
                 
                 collectionView.isHidden = false
                 
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.global().async { [weak self] in
                     
                     self?.merge()
                 }
@@ -171,22 +172,6 @@ class HomeViewController: UIViewController {
         guard let musicVC = segue.destination as? MusicViewController else { return }
         
         musicVC.videoUrl = videoUrl
-    }
-    
-    func createExportedDirectory() {
-        
-        let savePath = FileManager.documentDirectory.appendingPathComponent("Exported")
-        
-        do {
-            
-            try FileManager.default.createDirectory(atPath: savePath.path,
-                                                    withIntermediateDirectories: true,
-                                                    attributes: nil)
-            
-        } catch {
-            
-            print("Create path error", error.localizedDescription)
-        }
     }
     
     func setUpButtonStyle(for button: UIButton) {
@@ -297,9 +282,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             } else {
                 
                 let dataPath =
-                    FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
+                    FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
                 
                 homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
+                
             }
 
 //            rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: dataPath, videoGravity: .resizeAspectFill)
@@ -427,7 +413,7 @@ extension HomeViewController {
                 if strongSelf.videoData.count != 0 {
                 
                     let dataPath =
-                        FileManager.documentDirectory.appendingPathComponent(
+                        FileManager.videoDataDirectory.appendingPathComponent(
                             strongSelf.videoData[0].dataPathArray[hitIndex.item])
                     
                     try FileManager.default.removeItem(at: dataPath)
@@ -467,7 +453,7 @@ extension HomeViewController {
         if videoData[0].dataPathArray[hitIndex.item] != "" {
         
             let dataPath =
-                FileManager.documentDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
+                FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
             
             videoPlaybackVC.videoUrl = dataPath
             
@@ -505,7 +491,7 @@ extension HomeViewController {
         
         guard let filteredArray = StorageManager.shared.filterData() else { return }
 
-        let stringArray = filteredArray.map({ FileManager.documentDirectory.absoluteString + $0 })
+        let stringArray = filteredArray.map({ FileManager.videoDataDirectory.absoluteString + $0 })
 
         guard let urlArray = stringArray.map({ URL(string: $0) }) as? [URL] else { return }
 
@@ -525,10 +511,13 @@ extension HomeViewController {
                 if let videoUrl = videoUrl {
 
                     strongSelf.videoUrl = videoUrl
-                    
-                    strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
-                                                           videoUrl: videoUrl,
-                                                           videoGravity: .resizeAspect)
+                   
+                    DispatchQueue.main.async {
+                        
+                        strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
+                                                               videoUrl: videoUrl,
+                                                               videoGravity: .resizeAspect)
+                    }
                 }
             }
         })

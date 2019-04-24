@@ -35,15 +35,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="176" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zGZ-He-RPm">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zGZ-He-RPm">
                                                     <rect key="frame" x="0.0" y="0.0" width="176" height="160"/>
-                                                    <color key="backgroundColor" red="1" green="0.93333128099999996" blue="0.25267507099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcz-hv-GSf">
-                                                    <rect key="frame" x="0.0" y="116" width="176" height="44"/>
+                                                    <rect key="frame" x="0.0" y="125" width="176" height="35"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6of-fm-LFv">
-                                                            <rect key="frame" x="8" y="10" width="160" height="24"/>
+                                                            <rect key="frame" x="8" y="10" width="160" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -51,11 +51,11 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="6of-fm-LFv" secondAttribute="trailing" constant="8" id="3tv-2L-piP"/>
-                                                        <constraint firstAttribute="bottom" secondItem="6of-fm-LFv" secondAttribute="bottom" constant="10" id="FRe-f3-RJq"/>
-                                                        <constraint firstItem="6of-fm-LFv" firstAttribute="leading" secondItem="Bcz-hv-GSf" secondAttribute="leading" constant="8" id="Mv7-ly-EQJ"/>
-                                                        <constraint firstAttribute="height" constant="44" id="arn-Km-tJe"/>
-                                                        <constraint firstItem="6of-fm-LFv" firstAttribute="top" secondItem="Bcz-hv-GSf" secondAttribute="top" constant="10" id="c53-OZ-Lr8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="6of-fm-LFv" secondAttribute="trailing" constant="8" id="PND-D2-J5x"/>
+                                                        <constraint firstItem="6of-fm-LFv" firstAttribute="top" secondItem="Bcz-hv-GSf" secondAttribute="top" constant="10" id="S3Y-Iz-zlX"/>
+                                                        <constraint firstAttribute="bottom" secondItem="6of-fm-LFv" secondAttribute="bottom" constant="10" id="TKf-oh-FfL"/>
+                                                        <constraint firstAttribute="height" constant="35" id="arn-Km-tJe"/>
+                                                        <constraint firstItem="6of-fm-LFv" firstAttribute="leading" secondItem="Bcz-hv-GSf" secondAttribute="leading" constant="8" id="gcC-v8-MnS"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -355,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lXv-hK-8Ku" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6378" y="-645"/>
+            <point key="canvasLocation" x="6376.8000000000002" y="-645.42728635682158"/>
         </scene>
     </scenes>
     <resources>
