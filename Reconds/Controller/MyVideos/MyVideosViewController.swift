@@ -66,7 +66,8 @@ class MyVideosViewController: UIViewController {
         
             myVideosDetailVC.indexPath = sender
             myVideosDetailVC.videoTitle = videoCollection[sender.item].videoTitle
-            myVideosDetailVC.videoUrl = FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[sender.item].dataPath)")
+            myVideosDetailVC.videoUrl =
+                FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[sender.item].dataPath)")
         }
     }
 }

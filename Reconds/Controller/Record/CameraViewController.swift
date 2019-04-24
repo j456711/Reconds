@@ -31,18 +31,43 @@ class CameraViewController: UIViewController {
 
     let cancelButton = UIButton()
 
+    @IBOutlet weak var authorizedView: UIView!
+    
+    @IBAction func authorizedButtonPressed(_ sender: UIButton) {
+    
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if setUpCaptureSession() {
-
-            setUpVideoLayer()
-
-            setUpProgressBar()
-
-            setUpCancelButton()
-
-            startSession()
+        
+        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
+            
+        case .notDetermined,.denied, .restricted:
+            
+            self.view.bringSubviewToFront(authorizedView)
+            
+        case .authorized:
+            
+            if setUpCaptureSession() {
+                
+                authorizedView.isHidden = true
+                
+                setUpVideoLayer()
+                
+                setUpProgressBar()
+                
+                setUpCancelButton()
+                
+                startSession()
+            }
+            
+        default: break
         }
     }
 
@@ -52,23 +77,26 @@ class CameraViewController: UIViewController {
 
         let point = touch.location(in: self.view)
 
-        if cameraButtonLayer.path!.contains(point) {
-
-            guard let filteredArray = StorageManager.shared.filterData() else { return }
-            
-            if filteredArray.count == 25 {
+        if let path = cameraButtonLayer.path {
+        
+            if path.contains(point) {
                 
-                UIAlertController.addConfirmAlertWith(viewController: self,
-                                                      alertTitle: "無法新增影片",
-                                                      alertMessage: "影片數量已達到上限，快去輸出吧！",
-                                                      actionHandler: { [weak self] (_) in
+                guard let filteredArray = StorageManager.shared.filterData() else { return }
+                
+                if filteredArray.count == 25 {
+                    
+                    UIAlertController.addConfirmAlertWith(viewController: self,
+                                                          alertTitle: "無法新增影片",
+                                                          alertMessage: "影片數量已達到上限，快去輸出吧！",
+                                                          actionHandler: { [weak self] (_) in
                                                             
                         self?.dismiss(animated: true, completion: nil)
                     })
-        
-            } else {
-            
-                startRecording()
+                    
+                } else {
+                    
+                    startRecording()
+                }
             }
         }
     }

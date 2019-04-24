@@ -118,11 +118,6 @@ class MyVideosDetailViewController: UIViewController {
         
         self.view.endEditing(true)
     }
-    
-    func createActionSheet() {
-        
-        
-    }
 }
 
 extension MyVideosDetailViewController: UITextFieldDelegate {
