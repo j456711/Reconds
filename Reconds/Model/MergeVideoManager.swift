@@ -248,10 +248,7 @@ class MergeVideoManager {
                 
             case AVAssetExportSession.Status.completed:
                 
-                //                Uncomment this if u want to store your video in asset
                 DispatchQueue.main.async { [weak self] in
-//                    let assetsLib = PHPhotoLibrary()
-//                    assetsLib.writeVideoAtPath(toSavedPhotosAlbum: savePathUrl, completionBlock: nil)
                     
                     UISaveVideoAtPathToSavedPhotosAlbum(outputUrl.path, self, nil, nil)
                     

@@ -78,7 +78,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尚未製作任何影片。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFL-h3-yql">
-                                <rect key="frame" x="96" y="321.5" width="183.5" height="24"/>
+                                <rect key="frame" x="96" y="321.5" width="183" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -210,12 +210,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快來製作屬於你的秒速人生！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDo-ON-gQT">
-                                <rect key="frame" x="55" y="321.5" width="265" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fhU-yD-8eU">
                                 <rect key="frame" x="0.0" y="283" width="375" height="247"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -288,25 +282,45 @@
                                     <segue destination="lfP-wx-OQs" kind="show" identifier="showMusicPage" id="sY9-Id-FZD"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點擊場記板以開拍專案" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDo-ON-gQT">
+                                <rect key="frame" x="72.5" y="402.5" width="230" height="32.5"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="23"/>
+                                <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4i-Ta-YEb">
+                                <rect key="frame" x="70" y="186" width="235" height="235"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="235" id="VJO-g1-fPB"/>
+                                    <constraint firstAttribute="height" constant="235" id="fMm-so-0pr"/>
+                                </constraints>
+                                <color key="tintColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="Icon_512px_Clapperboard"/>
+                                <connections>
+                                    <action selector="clapperButtonPressed:" destination="Dty-Hw-4cZ" eventType="touchUpInside" id="ytD-Si-TxP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="hDo-ON-gQT" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" id="2eU-eI-bvU"/>
+                            <constraint firstItem="m4i-Ta-YEb" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="-30" id="5Yg-bV-JCA"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="frN-1r-8Zr" secondAttribute="trailing" constant="16" id="8Fe-tW-omU"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" id="Cba-mj-hdK"/>
                             <constraint firstItem="frN-1r-8Zr" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" constant="16" id="H2f-MT-4CA"/>
+                            <constraint firstItem="hDo-ON-gQT" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="85" id="HrO-B1-UKD"/>
                             <constraint firstItem="J0n-VM-Ctl" firstAttribute="top" secondItem="fhU-yD-8eU" secondAttribute="bottom" constant="8" id="Mck-LF-Qy4"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="OPo-7H-Lef"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="top" secondItem="kSC-F8-r8y" secondAttribute="bottom" constant="10" id="PHl-SQ-8FO"/>
                             <constraint firstItem="kSC-F8-r8y" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="Rox-GV-mzO"/>
+                            <constraint firstItem="hDo-ON-gQT" firstAttribute="centerX" secondItem="Svg-fk-ATz" secondAttribute="centerX" id="WZM-dw-SkC"/>
                             <constraint firstItem="frN-1r-8Zr" firstAttribute="top" secondItem="fhU-yD-8eU" secondAttribute="bottom" constant="8" id="cmN-bx-MC9"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="J0n-VM-Ctl" secondAttribute="trailing" constant="16" id="fJS-QG-e56"/>
                             <constraint firstItem="kSC-F8-r8y" firstAttribute="top" secondItem="Kde-7M-CNW" secondAttribute="top" id="ge5-rF-e0e"/>
                             <constraint firstItem="kSC-F8-r8y" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" id="hQs-2E-Xaq"/>
                             <constraint firstItem="J0n-VM-Ctl" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" constant="16" id="rKx-sc-Ww3"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="bottom" secondItem="fhU-yD-8eU" secondAttribute="bottom" constant="88" id="ulF-CQ-o2X"/>
-                            <constraint firstItem="hDo-ON-gQT" firstAttribute="centerX" secondItem="Svg-fk-ATz" secondAttribute="centerX" id="unL-z4-CYA"/>
+                            <constraint firstItem="m4i-Ta-YEb" firstAttribute="centerX" secondItem="Svg-fk-ATz" secondAttribute="centerX" id="xK4-GF-WCR"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="top" secondItem="Kde-7M-CNW" secondAttribute="top" constant="219" id="yRH-mk-uFJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kde-7M-CNW"/>
@@ -318,17 +332,13 @@
                                 <segue destination="C3R-xI-Sa8" kind="show" id="TKF-SC-evq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SnK-oP-9X0">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="addVideoButtonPressed:" destination="Dty-Hw-4cZ" id="GvM-0v-MeW"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="clapperButton" destination="m4i-Ta-YEb" id="LkD-xH-asu"/>
                         <outlet property="collectionView" destination="fhU-yD-8eU" id="vYQ-NB-QpV"/>
                         <outlet property="doneButton" destination="frN-1r-8Zr" id="Ocu-KZ-E5F"/>
                         <outlet property="exportButton" destination="J0n-VM-Ctl" id="FNr-j4-7EJ"/>
+                        <outlet property="remindLabel" destination="hDo-ON-gQT" id="MwI-Oc-tAW"/>
                         <outlet property="videoView" destination="kSC-F8-r8y" id="83v-bo-Fd9"/>
                     </connections>
                 </viewController>
@@ -356,7 +366,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oy6-Ds-ndH">
-                                                    <rect key="frame" x="15" y="18" width="345" height="24"/>
+                                                    <rect key="frame" x="15" y="18" width="384" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -440,6 +450,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon_512px_Clapperboard" width="128" height="128"/>
         <image name="Icon_Check" width="64" height="64"/>
         <image name="Icon_Film" width="32" height="32"/>
         <image name="Icon_FilmSelected" width="32" height="32"/>

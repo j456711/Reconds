@@ -102,7 +102,7 @@ class RCVideoPlayer {
 
 extension RCVideoPlayer {
 
-    // Helper Method
+    // MARK: - Private Method
     private func timeFormatConversion(time: Float64) -> String {
 
         let videoLength = Int(time)

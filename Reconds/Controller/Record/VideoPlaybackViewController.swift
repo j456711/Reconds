@@ -72,7 +72,20 @@ class VideoPlaybackViewController: UIViewController {
             controlButton.setImage(UIImage.assets(.Icon_PauseController), for: .normal)
         }
     }
-
+    @IBAction func zoomButtonPressed(_ sender: UIButton) {
+        
+        switch UIDevice.current.orientation.isPortrait {
+            
+        case true:
+            
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+            
+        case false:
+            
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        }
+    }
+    
     @IBAction func playButtonPressed(_ sender: UIButton) {
 
         rcVideoPlayer.avPlayer.seek(to: CMTime.zero)

@@ -27,6 +27,8 @@ class HomeViewController: UIViewController {
     
     var longPressedEnabled = false
     
+    @IBOutlet weak var remindLabel: UILabel!
+    
     @IBOutlet weak var videoView: UIView!
 
     @IBOutlet weak var collectionView: UICollectionView! {
@@ -41,6 +43,9 @@ class HomeViewController: UIViewController {
             collectionView.translatesAutoresizingMaskIntoConstraints = false
         }
     }
+    
+    @IBOutlet weak var clapperButton: UIButton!
+    
     @IBOutlet weak var exportButton: UIButton! {
         
         didSet {
@@ -72,17 +77,11 @@ class HomeViewController: UIViewController {
         collectionView.reloadData()
     }
 
-    @IBAction func addVideoButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction func clapperButtonPressed(_ sender: UIBarButtonItem) {
 
         if collectionView.isHidden == true {
 
             createProjectNameAlert()
-
-        } else {
-
-            UIAlertController.addConfirmAlertWith(viewController: self,
-                                                  alertTitle: "無法新增影片",
-                                                  alertMessage: "尚未開放可同時編輯多支影片的功能。")
         }
     }
 
@@ -165,7 +164,7 @@ class HomeViewController: UIViewController {
         
         collectionView.reloadData()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let musicVC = segue.destination as? MusicViewController else { return }
@@ -219,6 +218,10 @@ class HomeViewController: UIViewController {
                 
                 UserDefaults.standard.set(title, forKey: "Title")
             }
+            
+            strongSelf.remindLabel.isHidden = true
+            
+            strongSelf.clapperButton.isHidden = true
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -515,6 +518,7 @@ extension HomeViewController {
                         strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
                                                                videoUrl: videoUrl,
                                                                videoGravity: .resizeAspect)
+                        
                     }
                 }
             }

@@ -48,7 +48,7 @@ class CameraViewController: UIViewController {
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
 
-        self.view.addGestureRecognizer(gesture)
+        authorizedView.addGestureRecognizer(gesture)
         
         switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
             
@@ -91,7 +91,7 @@ class CameraViewController: UIViewController {
                     
                     UIAlertController.addConfirmAlertWith(viewController: self,
                                                           alertTitle: "無法新增影片",
-                                                          alertMessage: "影片數量已達到上限，快去輸出吧！",
+                                                          alertMessage: "影片數量已達上限，請刪除影片或進行輸出。",
                                                           actionHandler: { [weak self] (_) in
                                                             
                         self?.dismiss(animated: true, completion: nil)
@@ -184,7 +184,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
         let videoLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         videoLayer.frame = self.view.bounds
         videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-
+        
         self.view.layer.addSublayer(videoLayer)
 
         captureSession.startRunning()

@@ -68,8 +68,6 @@ class ExportViewController: UIViewController {
                                                                         includingPropertiesForKeys: nil,
                                                                         options: [.skipsHiddenFiles,
                                                                                   .skipsSubdirectoryDescendants])
-
-                        print(fileUrls)
                         
                         for fileUrl in fileUrls {
 
@@ -82,6 +80,33 @@ class ExportViewController: UIViewController {
                             } catch {
 
                                 print("Can't remove fileUrl", error.localizedDescription)
+                            }
+                        }
+                        
+                    } catch {
+                        
+                        print(error.localizedDescription)
+                    }
+                    
+                    do {
+                        
+                        let temporaryDirectory = FileManager.default.temporaryDirectory
+                        
+                        let tmpUrls = try FileManager.default.contentsOfDirectory(atPath: temporaryDirectory.path)
+                        
+                        print("$$$$$$$$$$$$$$$$", tmpUrls)
+                        
+                        for tmpUrl in tmpUrls {
+                            
+                            do {
+                                
+                                let fullTmpUrl = temporaryDirectory.appendingPathComponent(tmpUrl)
+                                
+                                try FileManager.default.removeItem(atPath: fullTmpUrl.path)
+                                                                
+                            } catch {
+                                
+                                print("Can't remove fullTmpUrl", error.localizedDescription)
                             }
                         }
                         
