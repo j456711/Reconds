@@ -560,6 +560,10 @@ extension HomeViewController {
 //
 //        clapperButton.isHidden = false
         
+        titleLabel.isHidden = true
+        
+        collectionView.isHidden = true
+        
         exportButton.isHidden = true
     }
 }

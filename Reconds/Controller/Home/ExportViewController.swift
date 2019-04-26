@@ -7,13 +7,19 @@
 //
 
 import UIKit
-import NVActivityIndicatorView
 
 class ExportViewController: UIViewController {
         
     var videoUrl: URL?
     
     var audioUrl: URL?
+    
+    @IBOutlet weak var indicatedView: UIView! {
+        
+        didSet {
+            
+        }
+    }
     
     @IBAction func returnButtonPressed(_ sender: UIButton) {
     
@@ -30,7 +36,7 @@ class ExportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,7 +109,7 @@ class ExportViewController: UIViewController {
                                 let fullTmpUrl = temporaryDirectory.appendingPathComponent(tmpUrl)
                                 
                                 try FileManager.default.removeItem(atPath: fullTmpUrl.path)
-                                                                
+                                
                             } catch {
                                 
                                 print("Can't remove fullTmpUrl", error.localizedDescription)

@@ -457,10 +457,25 @@
                                     <action selector="returnButtonPressed:" destination="4bA-38-XYe" eventType="touchUpInside" id="Xyn-O1-iSs"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="bUE-7P-Tfk">
+                                <rect key="frame" x="162.5" y="308.5" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="77g-dw-vYY"/>
+                                    <constraint firstAttribute="height" constant="50" id="P3J-mi-0Da"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bUE-7P-Tfk" firstAttribute="centerY" secondItem="fLM-xr-Op9" secondAttribute="centerY" id="95y-2G-d0L"/>
+                            <constraint firstItem="bUE-7P-Tfk" firstAttribute="centerX" secondItem="fLM-xr-Op9" secondAttribute="centerX" id="N7A-2T-ceu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="HXG-rb-0Ff"/>
                     </view>
+                    <connections>
+                        <outlet property="indicatedView" destination="bUE-7P-Tfk" id="8hG-3q-lik"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lXv-hK-8Ku" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

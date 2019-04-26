@@ -1,22 +1,20 @@
 PODS:
-  - NVActivityIndicatorView (4.7.0):
-    - NVActivityIndicatorView/Presenter (= 4.7.0)
-  - NVActivityIndicatorView/Presenter (4.7.0)
+  - JGProgressHUD (2.0.3)
   - SwiftLint (0.31.0)
 
 DEPENDENCIES:
-  - NVActivityIndicatorView
+  - JGProgressHUD
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - NVActivityIndicatorView
+    - JGProgressHUD
     - SwiftLint
 
 SPEC CHECKSUMS:
-  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
+  JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: d49c577d400330a0b1837e6499f47e8a5f83f96c
+PODFILE CHECKSUM: b5424d15c947cd07e870ecd8ef67124e5facff62
 
 COCOAPODS: 1.6.1
