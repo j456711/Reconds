@@ -7,19 +7,17 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class ExportViewController: UIViewController {
-        
+    
+    let indicator = JGProgressHUD(style: .dark)
+    
     var videoUrl: URL?
     
     var audioUrl: URL?
     
-    @IBOutlet weak var indicatedView: UIView! {
-        
-        didSet {
-            
-        }
-    }
+    @IBOutlet weak var indicatedView: UIView!
     
     @IBAction func returnButtonPressed(_ sender: UIButton) {
     
@@ -30,13 +28,15 @@ class ExportViewController: UIViewController {
         
         tabBar.dismiss(animated: true, completion: {
             
-            tabBar.selectedIndex = 0
+            navVC.pushViewController(MyVideosDetailViewController(), animated: true)
         })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
+        indicator.textLabel.text = "輸出中"
+        indicator.show(in: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,6 +47,8 @@ class ExportViewController: UIViewController {
             MergeVideoManager.shared.mergeVideoAndAudio(videoUrl: videoUrl,
                                                         audioUrl: audioUrl,
                                                         completionHandler: { [weak self] (outputUrl, fileName, error) in
+                
+                guard let strongSelf = self else { return }
                                                             
                 if let fileName = fileName,
                    let outputUrl = outputUrl,
@@ -63,7 +65,7 @@ class ExportViewController: UIViewController {
                         print("Write to directory error", error)
                     }
                     
-                    self?.createData(videoTitle: videoTitle, dataPath: fileName)
+                    strongSelf.createData(videoTitle: videoTitle, dataPath: fileName)
                     
                     StorageManager.shared.deleteAll("VideoData")
                     
@@ -109,6 +111,30 @@ class ExportViewController: UIViewController {
                                 let fullTmpUrl = temporaryDirectory.appendingPathComponent(tmpUrl)
                                 
                                 try FileManager.default.removeItem(atPath: fullTmpUrl.path)
+                                                                
+                                strongSelf.indicator.indicatorView = JGProgressHUDSuccessIndicatorView()
+                                
+                                strongSelf.indicator.textLabel.text = "輸出成功"
+                                                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                    
+                                    guard let tabBar = strongSelf.presentingViewController as? TabBarController,
+                                        let navVC = tabBar.selectedViewController as? UINavigationController
+                                        else { return }
+                                    
+                                    navVC.popToRootViewController(animated: true)
+                                    
+                                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                                    let viewController =
+                                        storyboard.instantiateViewController(withIdentifier: "MyVideosViewController")
+                                    guard let myVideoDetailVC =
+                                        viewController as? MyVideosViewController else { return }
+            
+                                    tabBar.dismiss(animated: true, completion: {
+                                        
+                                        navVC.show(myVideoDetailVC, sender: nil)
+                                    })
+                                })
                                 
                             } catch {
                                 

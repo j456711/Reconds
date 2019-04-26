@@ -45,9 +45,7 @@ class HomeViewController: UIViewController {
 
             collectionView.delegate = self
             collectionView.dataSource = self
-
             collectionView.isHidden = true
-            
             collectionView.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -115,8 +113,6 @@ class HomeViewController: UIViewController {
     @IBAction func doneButtonPressed(_ sender: UIButton) {
 
         doneButton.isHidden = true
-
-        exportButton.isHidden = false
         
         longPressedEnabled = false
 
@@ -170,18 +166,10 @@ class HomeViewController: UIViewController {
                 
                 exportButton.isHidden = true
                 
-//            } else if filteredArray?.count == 1 {
-//
-//                exportButton.isHidden = false
-//
-//                collectionView.isHidden = false
-                
             } else {
                 
                 titleLabel.isHidden = false
-                                
-                exportButton.isHidden = false
-                
+
                 collectionView.isHidden = false
                 
                 DispatchQueue.global().async { [weak self] in
@@ -203,6 +191,8 @@ class HomeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         
         previewButton.isHidden = true
+        
+        exportButton.isHidden = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -523,8 +513,6 @@ extension HomeViewController {
     
     func merge() {
         
-//        guard let filteredArray = StorageManager.shared.filterData() else { return }
-
         guard let filteredArray = self.filteredArray else { return }
         
         let stringArray = filteredArray.map({ FileManager.videoDataDirectory.absoluteString + $0 })
@@ -549,16 +537,14 @@ extension HomeViewController {
                     strongSelf.videoUrl = videoUrl
                    
                     strongSelf.previewButton.isHidden = false
+                    
+                    strongSelf.exportButton.isHidden = false
                 }
             }
         })
     }
     
     func reset() {
-        
-//        remindLabel.isHidden = false
-//
-//        clapperButton.isHidden = false
         
         titleLabel.isHidden = true
         
