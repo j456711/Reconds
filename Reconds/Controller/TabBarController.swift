@@ -28,7 +28,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             if filteredArray == nil {
 
                 UIAlertController.addConfirmAlertWith(viewController: self,
-                                                      alertTitle: "請先新增專案",
+                                                      alertTitle: "請先新增影片",
                                                       alertMessage: "新增後即可開始錄製。")
 
             } else if filteredArray?.count == 25 {

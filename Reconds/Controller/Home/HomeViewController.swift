@@ -12,7 +12,7 @@ import Photos
 
 class HomeViewController: UIViewController {
 
-    struct Segue {
+    private struct Segue {
         
         static let showMusicPage = "showMusicPage"
     }
@@ -23,14 +23,22 @@ class HomeViewController: UIViewController {
     
     lazy var videoUrl: URL? = nil
     
+    var filteredArray: [String]?
+    
     var videoData: [VideoData] = []
     
     var longPressedEnabled = false
     
     @IBOutlet weak var remindLabel: UILabel!
     
-    @IBOutlet weak var videoView: UIView!
-
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet {
+            
+            titleLabel.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView! {
 
         didSet {
@@ -41,6 +49,14 @@ class HomeViewController: UIViewController {
             collectionView.isHidden = true
             
             collectionView.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    @IBOutlet weak var previewButton: UIButton! {
+        
+        didSet {
+            
+            previewButton.isHidden = true
         }
     }
     
@@ -64,6 +80,36 @@ class HomeViewController: UIViewController {
 
             setUpButtonStyle(for: doneButton)
         }
+    }
+    
+    @IBAction func previewButtonPressed(_ sender: UIButton) {
+    
+        let storyboard = UIStoryboard(name: "Record", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
+        guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
+        
+        if filteredArray?.count == 1 {
+        
+            guard let videoUrl =
+                URL(string: FileManager.videoDataDirectory.absoluteString + videoData[0].dataPathArray[0])
+                else { return }
+        
+            videoPlaybackVC.videoUrl = videoUrl
+            
+        } else {
+            
+            videoPlaybackVC.videoUrl = videoUrl
+        }
+        
+        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.controlView)
+        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.retakeButton)
+        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.useButton)
+        
+        videoPlaybackVC.controlView.isHidden = true
+        videoPlaybackVC.retakeButton.isHidden = true
+        videoPlaybackVC.useButton.isHidden = true
+        
+        present(videoPlaybackVC, animated: true, completion: nil)
     }
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
@@ -92,17 +138,17 @@ class HomeViewController: UIViewController {
         FileManager.default.jy_createDirectory("Exported")
         FileManager.default.jy_createDirectory("VideoData")
         
-        if UserDefaults.standard.string(forKey: "Title") == "" {
-
-            self.navigationItem.title = "Reconds"
+        guard let title = UserDefaults.standard.string(forKey: "Title") else { return }
         
-        } else {
+        if title != "" {
+
+            titleLabel.isHidden = false
+            titleLabel.text = RCConstants.videoTitle + title
             
-            self.navigationItem.title = UserDefaults.standard.string(forKey: "Title")
+            collectionView.isHidden = false
         }
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         
         collectionView.addGestureRecognizer(longPressGesture)
@@ -124,35 +170,22 @@ class HomeViewController: UIViewController {
                 
                 exportButton.isHidden = true
                 
-            } else if filteredArray?.count == 1 {
-                
-                exportButton.isHidden = false
-                
-                collectionView.isHidden = false
-                
-                guard let videoUrl =
-                    URL(string: FileManager.videoDataDirectory.absoluteString + videoData[0].dataPathArray[0])
-                    else { return }
-                
-                DispatchQueue.main.async { [weak self] in
-                    
-                    guard let strongSelf = self else { return }
-                    
-                    strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
-                                                           videoUrl: videoUrl,
-                                                           videoGravity: .resizeAspect)
-                    
-                    strongSelf.rcVideoPlayer.play()
-                }
+//            } else if filteredArray?.count == 1 {
+//
+//                exportButton.isHidden = false
+//
+//                collectionView.isHidden = false
                 
             } else {
                 
+                titleLabel.isHidden = false
+                                
                 exportButton.isHidden = false
                 
                 collectionView.isHidden = false
                 
                 DispatchQueue.global().async { [weak self] in
-                    
+
                     self?.merge()
                 }
             }
@@ -162,9 +195,16 @@ class HomeViewController: UIViewController {
             reset()
         }
         
+        self.filteredArray = filteredArray
+        
         collectionView.reloadData()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        previewButton.isHidden = true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let musicVC = segue.destination as? MusicViewController else { return }
@@ -175,8 +215,7 @@ class HomeViewController: UIViewController {
     func setUpButtonStyle(for button: UIButton) {
         
         button.layer.borderWidth = 1
-        button.layer.cornerRadius = 18
-        button.layer.borderColor = UIColor(red: 32 / 255, green: 184 / 255, blue: 221 / 255, alpha: 1).cgColor
+        button.layer.borderColor = UIColor(red: 255 / 255, green: 147 / 255, blue: 0 / 255, alpha: 1).cgColor
     }
     
     func createProjectNameAlert() {
@@ -198,13 +237,17 @@ class HomeViewController: UIViewController {
 
                 strongSelf.collectionView.isHidden = false
 
-                strongSelf.navigationItem.title = textField.placeholder
+                strongSelf.titleLabel.text = RCConstants.videoTitle + textField.placeholder!
+                
+                UserDefaults.standard.set(textField.placeholder!, forKey: "Title")
                                 
             } else {
 
                 strongSelf.collectionView.isHidden = false
 
-                strongSelf.navigationItem.title = text
+                strongSelf.titleLabel.text = RCConstants.videoTitle + text
+                
+                UserDefaults.standard.set(text, forKey: "Title")
             }
             
             if strongSelf.videoData.count == 0 {
@@ -213,15 +256,8 @@ class HomeViewController: UIViewController {
                 
                 strongSelf.collectionView.reloadData()
             }
-            
-            if let title = strongSelf.navigationItem.title {
-                
-                UserDefaults.standard.set(title, forKey: "Title")
-            }
-            
-            strongSelf.remindLabel.isHidden = true
-            
-            strongSelf.clapperButton.isHidden = true
+                        
+            strongSelf.titleLabel.isHidden = false
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -364,7 +400,6 @@ extension HomeViewController {
         switch gesture.state {
 
         case .began:
-            
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
             
             feedbackGenerator?.impactOccurred()
@@ -375,11 +410,9 @@ extension HomeViewController {
             collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
 
         case .changed:
-            
             collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
 
         case .ended, .cancelled, .failed:
-
             feedbackGenerator = nil
             
             collectionView.endInteractiveMovement()
@@ -490,8 +523,10 @@ extension HomeViewController {
     
     func merge() {
         
-        guard let filteredArray = StorageManager.shared.filterData() else { return }
+//        guard let filteredArray = StorageManager.shared.filterData() else { return }
 
+        guard let filteredArray = self.filteredArray else { return }
+        
         let stringArray = filteredArray.map({ FileManager.videoDataDirectory.absoluteString + $0 })
 
         guard let urlArray = stringArray.map({ URL(string: $0) }) as? [URL] else { return }
@@ -513,13 +548,7 @@ extension HomeViewController {
 
                     strongSelf.videoUrl = videoUrl
                    
-                    DispatchQueue.main.async {
-                        
-                        strongSelf.rcVideoPlayer.setUpAVPlayer(with: strongSelf.videoView,
-                                                               videoUrl: videoUrl,
-                                                               videoGravity: .resizeAspect)
-                        
-                    }
+                    strongSelf.previewButton.isHidden = false
                 }
             }
         })
@@ -527,21 +556,10 @@ extension HomeViewController {
     
     func reset() {
         
-//        let path = NSTemporaryDirectory().appending("mergedVideo.mp4")
+//        remindLabel.isHidden = false
 //
-//        let url = URL.init(fileURLWithPath: path)
-//
-//        print(url)
-        
-//        if let videoUrl = videoUrl {
-//
-//            FileManager.default.removeItemIfExisted(at: videoUrl)
-//        }
+//        clapperButton.isHidden = false
         
         exportButton.isHidden = true
-        
-        collectionView.isHidden = true
-        
-        self.navigationItem.title = "Reconds"
     }
 }

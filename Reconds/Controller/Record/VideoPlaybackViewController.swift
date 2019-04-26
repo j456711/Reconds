@@ -14,7 +14,7 @@ class VideoPlaybackViewController: UIViewController {
     
     let rcVideoPlayer = RCVideoPlayer()
 
-    var videoUrl: URL!
+    var videoUrl: URL?
     
     @IBOutlet weak var controlView: UIView!
 
@@ -77,11 +77,9 @@ class VideoPlaybackViewController: UIViewController {
         switch UIDevice.current.orientation.isPortrait {
             
         case true:
-            
             UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
             
         case false:
-            
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         }
     }
@@ -105,7 +103,8 @@ class VideoPlaybackViewController: UIViewController {
 
     @IBAction func useButtonPressed(_ sender: UIButton) {
         
-        guard let videoData = try? Data(contentsOf: videoUrl) else { return }
+        guard let videoUrl = videoUrl,
+              let videoData = try? Data(contentsOf: videoUrl) else { return }
         
         let time = Int(Date().timeIntervalSince1970)
         
@@ -155,6 +154,8 @@ class VideoPlaybackViewController: UIViewController {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
         
         self.view.addGestureRecognizer(gesture)
+        
+        guard let videoUrl = videoUrl else { return }
         
         rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
         rcVideoPlayer.fetchDuration(disPlayOn: endTimeLabel, setMaximumValueOn: slider)

@@ -247,7 +247,6 @@ class MergeVideoManager {
             switch assetExport.status {
                 
             case AVAssetExportSession.Status.completed:
-                
                 DispatchQueue.main.async { [weak self] in
                     
                     UISaveVideoAtPathToSavedPhotosAlbum(outputUrl.path, self, nil, nil)
@@ -258,13 +257,11 @@ class MergeVideoManager {
                 }
                 
             case  AVAssetExportSession.Status.failed:
-                
                 completionHandler(nil, nil, assetExport.error)
                 
                 print("failed:", assetExport.error as Any)
             
             case AVAssetExportSession.Status.cancelled:
-            
                 completionHandler(nil, nil, assetExport.error)
                 
                 print("cancelled", assetExport.error as Any)
