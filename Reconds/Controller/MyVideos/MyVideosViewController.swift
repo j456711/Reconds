@@ -53,6 +53,10 @@ class MyVideosViewController: UIViewController {
         if videoCollection.count > 0 {
             
             emptyLabel.isHidden = true
+            
+        } else {
+            
+            emptyLabel.isHidden = false
         }
         
         collectionView.reloadData()

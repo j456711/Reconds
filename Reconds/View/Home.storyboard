@@ -396,21 +396,32 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oy6-Ds-ndH">
-                                                    <rect key="frame" x="15" y="18" width="345" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                    <rect key="frame" x="61" y="18" width="299" height="24"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQr-Qj-avZ" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                                    <rect key="frame" x="15" y="15" width="30" height="30"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="BAr-8c-bHi"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="oy6-Ds-ndH" firstAttribute="leading" secondItem="nwA-mm-ecc" secondAttribute="leadingMargin" id="Ipr-aY-6Fu"/>
+                                                <constraint firstItem="EQr-Qj-avZ" firstAttribute="bottom" secondItem="nwA-mm-ecc" secondAttribute="bottomMargin" constant="-4" id="OFJ-Rf-Lnh"/>
                                                 <constraint firstItem="oy6-Ds-ndH" firstAttribute="top" secondItem="nwA-mm-ecc" secondAttribute="topMargin" constant="7" id="SIB-oR-sUO"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="oy6-Ds-ndH" secondAttribute="bottom" constant="7" id="T6T-b4-maC"/>
+                                                <constraint firstItem="oy6-Ds-ndH" firstAttribute="leading" secondItem="EQr-Qj-avZ" secondAttribute="trailing" constant="16" id="Waf-vA-UZb"/>
                                                 <constraint firstItem="oy6-Ds-ndH" firstAttribute="trailing" secondItem="nwA-mm-ecc" secondAttribute="trailingMargin" id="n4b-Au-evn"/>
+                                                <constraint firstItem="EQr-Qj-avZ" firstAttribute="leading" secondItem="nwA-mm-ecc" secondAttribute="leadingMargin" id="pcs-iM-aEd"/>
+                                                <constraint firstItem="EQr-Qj-avZ" firstAttribute="top" secondItem="nwA-mm-ecc" secondAttribute="topMargin" constant="4" id="yWO-S7-WFj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="indicatorView" destination="EQr-Qj-avZ" id="LPd-9F-Yyh"/>
                                             <outlet property="titleLabel" destination="oy6-Ds-ndH" id="wXX-Vc-k6y"/>
                                         </connections>
                                     </tableViewCell>

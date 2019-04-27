@@ -81,6 +81,8 @@ class MyVideosDetailViewController: UIViewController {
                 StorageManager.shared.context.delete(strongSelf.videoCollection[indexPath.item])
                 
                 StorageManager.shared.save()
+                
+                strongSelf.navigationController?.popViewController(animated: true)
             }
         })
         

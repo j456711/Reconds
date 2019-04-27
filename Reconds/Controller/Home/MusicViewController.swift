@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import NVActivityIndicatorView
 
 class MusicViewController: UIViewController {
 
@@ -104,6 +105,8 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        guard let cell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
+        
         guard let bundlePath = createBundlePath() else { return }
         
         var stringArray = musicFilesArray.map({ "\($0)" })
@@ -118,6 +121,8 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         do {
             
+            cell.indicatorView.startAnimating()
+            
             player = try AVAudioPlayer(contentsOf: audioUrl)
             player.play()
             player.setVolume(0, fadeDuration: second)
@@ -129,6 +134,8 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
             print(error)
         }
      
+//        cell.indicatorView.stopAnimating()
+        
         rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
         rcVideoPlayer.mute(true)
         rcVideoPlayer.play()

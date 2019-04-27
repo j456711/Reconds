@@ -7,9 +7,18 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class MusicTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var indicatorView: NVActivityIndicatorView! {
+        
+        didSet {
+            
+            indicatorView.type = .audioEqualizer
+        }
+    }
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
