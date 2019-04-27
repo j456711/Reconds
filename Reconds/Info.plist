@@ -23,9 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>開啟相機功能以錄製影片。</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
+	<string>開啟麥克風功能以錄製聲音。</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>

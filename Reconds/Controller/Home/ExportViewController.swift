@@ -116,7 +116,7 @@ class ExportViewController: UIViewController {
                                 
                                 strongSelf.indicator.textLabel.text = "輸出成功"
                                                                 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                     
                                     guard let tabBar = strongSelf.presentingViewController as? TabBarController,
                                         let navVC = tabBar.selectedViewController as? UINavigationController
@@ -125,14 +125,22 @@ class ExportViewController: UIViewController {
                                     navVC.popToRootViewController(animated: true)
                                     
                                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                                    let viewController =
+                                    let vc1 =
                                         storyboard.instantiateViewController(withIdentifier: "MyVideosViewController")
-                                    guard let myVideoDetailVC =
-                                        viewController as? MyVideosViewController else { return }
-            
+                                    guard let myVideosVC =
+                                        vc1 as? MyVideosViewController else { return }
+                                    
+//                                    let vc2 = storyboard.instantiateViewController(withIdentifier: "MyVideosDetailViewController")
+//                                    guard let myVideosDetailVC =
+//                                        vc2 as? MyVideosDetailViewController else { return }
+                                    
                                     tabBar.dismiss(animated: true, completion: {
                                         
-                                        navVC.show(myVideoDetailVC, sender: nil)
+                                        navVC.show(myVideosVC, sender: nil)
+                                        
+//                                        myVideosVC.loadViewIfNeeded()
+//
+//                                        myVideosVC.performSegue(withIdentifier: "showMyVideosDetail", sender: nil)
                                     })
                                 })
                                 

@@ -35,45 +35,50 @@ class CameraViewController: UIViewController {
     
     @IBAction func authorizedButtonPressed(_ sender: UIButton) {
     
-        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { granted in
-        
-            if granted == true {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
             
-                AVAudioSession.sharedInstance().requestRecordPermission({ [weak self] granted in
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { granted in
+                
+                if granted == true {
                     
-                    guard let strongSelf = self else { return }
-                    
-                    if granted == true {
+                    AVAudioSession.sharedInstance().requestRecordPermission({ [weak self] granted in
                         
-                        DispatchQueue.main.async {
+                        guard let strongSelf = self else { return }
+                        
+                        if granted == true {
                             
-                            if strongSelf.setUpCaptureSession() {
+                            DispatchQueue.main.async {
                                 
-                                strongSelf.authorizedView.isHidden = true
-                                
-                                strongSelf.setUpVideoLayer()
-                                
-                                strongSelf.setUpProgressBar()
-                                
-                                strongSelf.setUpCancelButton()
-                                
-                                strongSelf.startSession()
+                                if strongSelf.setUpCaptureSession() {
+                                    
+                                    strongSelf.authorizedView.isHidden = true
+                                    
+                                    strongSelf.setUpVideoLayer()
+                                    
+                                    strongSelf.setUpProgressBar()
+                                    
+                                    strongSelf.setUpCancelButton()
+                                    
+                                    strongSelf.startSession()
+                                }
                             }
                         }
-                    }
-                })
+                    })
+                }
+            })
+            
+        case .denied, .restricted:
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                
+                UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
             }
-        })
-        
-//        DispatchQueue.main.async {
-//
-//            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-//
-//            if UIApplication.shared.canOpenURL(settingsUrl) {
-//
-//                UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
-//            }
-//        }
+
+        case .authorized: break
+        default: break
+        }
     }
     
     override func viewDidLoad() {
@@ -83,7 +88,7 @@ class CameraViewController: UIViewController {
 
         authorizedView.addGestureRecognizer(gesture)
         
-        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
 
         case .notDetermined, .denied, .restricted:
             self.view.bringSubviewToFront(authorizedView)

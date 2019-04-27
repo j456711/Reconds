@@ -137,14 +137,6 @@
                                     <action selector="shareButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="pbi-m5-KwB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBd-2X-lR9">
-                                <rect key="frame" x="217" y="415" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="刪除"/>
-                                <connections>
-                                    <action selector="deleteButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="wMX-hz-HDu"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title Label" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WRZ-H9-QG9">
                                 <rect key="frame" x="16" y="354" width="343" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -155,6 +147,18 @@
                                     <action selector="textFieldEdited:" destination="0iw-8D-Lxs" eventType="editingDidEnd" id="CHj-k0-Sy4"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBd-2X-lR9">
+                                <rect key="frame" x="199" y="402" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="CfW-os-PoT"/>
+                                    <constraint firstAttribute="height" constant="56" id="coa-PW-wdV"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="Icon_256px_Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="wMX-hz-HDu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -300,7 +304,7 @@
                                                 </button>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="q7G-Jy-SiD" firstAttribute="top" secondItem="PGs-dL-7wn" secondAttribute="top" id="65R-mg-S5A"/>
@@ -468,6 +472,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon_256px_Delete" width="128" height="128"/>
         <image name="Icon_512px_Clapperboard" width="128" height="128"/>
         <image name="Icon_Check" width="64" height="64"/>
         <image name="Icon_Film" width="32" height="32"/>

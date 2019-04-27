@@ -10,7 +10,6 @@
 		1E419A4A2251BAB1009B4F49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A492251BAB1009B4F49 /* AppDelegate.swift */; };
 		1E419A4C2251BAB1009B4F49 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A4B2251BAB1009B4F49 /* HomeViewController.swift */; };
 		1E419A4F2251BAB2009B4F49 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E419A4D2251BAB2009B4F49 /* Main.storyboard */; };
-		1E419A512251BAB6009B4F49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E419A502251BAB6009B4F49 /* Assets.xcassets */; };
 		1E419A542251BAB6009B4F49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E419A522251BAB6009B4F49 /* LaunchScreen.storyboard */; };
 		1E419A6622537222009B4F49 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E419A6522537222009B4F49 /* Home.storyboard */; };
 		1E419A68225372D0009B4F49 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E419A67225372CF009B4F49 /* RecordViewController.swift */; };
@@ -52,7 +51,6 @@
 		1E419A492251BAB1009B4F49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E419A4B2251BAB1009B4F49 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1E419A4E2251BAB2009B4F49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1E419A502251BAB6009B4F49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E419A532251BAB6009B4F49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E419A552251BAB6009B4F49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E419A6522537222009B4F49 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -83,6 +81,7 @@
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		349C5DDE227437F600C1EBE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoManager.swift; sourceTree = "<group>"; };
 		34A0FE962265B694009F4D45 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,7 +182,7 @@
 			children = (
 				34300BBB2271EC1100CF3429 /* RCConstants.swift */,
 				3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */,
-				1E419A502251BAB6009B4F49 /* Assets.xcassets */,
+				349C5DDE227437F600C1EBE6 /* Assets.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -348,7 +347,6 @@
 				1E419A542251BAB6009B4F49 /* LaunchScreen.storyboard in Resources */,
 				1E419A72225378F1009B4F49 /* .gitignore in Resources */,
 				1E419A6A225373EA009B4F49 /* Record.storyboard in Resources */,
-				1E419A512251BAB6009B4F49 /* Assets.xcassets in Resources */,
 				1E419A6C225375F7009B4F49 /* Settings.storyboard in Resources */,
 				1E419A6622537222009B4F49 /* Home.storyboard in Resources */,
 				1E419A4F2251BAB2009B4F49 /* Main.storyboard in Resources */,
