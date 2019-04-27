@@ -17,21 +17,6 @@ class ExportViewController: UIViewController {
     
     var audioUrl: URL?
     
-    @IBOutlet weak var indicatedView: UIView!
-    
-    @IBAction func returnButtonPressed(_ sender: UIButton) {
-    
-        guard let tabBar = self.presentingViewController as? TabBarController,
-            let navVC = tabBar.selectedViewController as? UINavigationController else { return }
-
-        navVC.popToRootViewController(animated: true)
-        
-        tabBar.dismiss(animated: true, completion: {
-            
-            navVC.pushViewController(MyVideosDetailViewController(), animated: true)
-        })
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -101,8 +86,6 @@ class ExportViewController: UIViewController {
                         let temporaryDirectory = FileManager.default.temporaryDirectory
                         
                         let tmpUrls = try FileManager.default.contentsOfDirectory(atPath: temporaryDirectory.path)
-                        
-                        print("$$$$$$$$$$$$$$$$", tmpUrls)
                         
                         for tmpUrl in tmpUrls {
                             

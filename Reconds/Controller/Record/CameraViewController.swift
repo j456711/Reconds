@@ -148,9 +148,9 @@ class CameraViewController: UIViewController {
 
     func setUpCancelButton() {
 
-        cancelButton.frame = CGRect(x: 16, y: UIScreen.main.bounds.height - 90, width: 45, height: 40)
+        cancelButton.frame = CGRect(x: 24, y: UIScreen.main.bounds.height - 90, width: 50, height: 45)
         cancelButton.setTitle("返回", for: .normal)
-        cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        cancelButton.titleLabel?.font = UIFont(name: "PingFang TC", size: 22)
         cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
 
         self.view.addSubview(cancelButton)

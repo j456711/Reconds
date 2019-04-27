@@ -182,8 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				34300BBB2271EC1100CF3429 /* RCConstants.swift */,
-				349C5DDF227456B500C1EBE6 /* Assets.xcassets */,
 				3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */,
+				349C5DDF227456B500C1EBE6 /* Assets.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -408,12 +408,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Reconds/Pods-Reconds-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

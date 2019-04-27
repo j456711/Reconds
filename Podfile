@@ -8,5 +8,6 @@ target 'Reconds' do
   # Pods for Reconds
   pod 'SwiftLint'
   pod 'JGProgressHUD'
+  pod 'NVActivityIndicatorView'
 
 end

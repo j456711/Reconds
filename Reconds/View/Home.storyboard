@@ -417,7 +417,11 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JkS-TZ-feF">
-                                <rect key="frame" x="155.5" y="593" width="64" height="64"/>
+                                <rect key="frame" x="159.5" y="591" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="rxk-nf-d4v"/>
+                                    <constraint firstAttribute="height" constant="56" id="thI-nA-aPE"/>
+                                </constraints>
                                 <state key="normal" image="Icon_Check"/>
                                 <connections>
                                     <segue destination="4bA-38-XYe" kind="presentation" identifier="showExportPage" id="sRW-WM-8rX"/>
@@ -430,8 +434,6 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="JkS-TZ-feF" firstAttribute="centerX" secondItem="WpT-l3-fgO" secondAttribute="centerX" id="5Zc-T9-ov2"/>
-                            <constraint firstItem="JkS-TZ-feF" firstAttribute="top" secondItem="pRV-5d-tpG" secondAttribute="bottom" constant="27" id="6Nx-Ai-104"/>
                             <constraint firstItem="6dQ-1W-fY0" firstAttribute="top" secondItem="dHx-IO-BwH" secondAttribute="top" id="8cs-HL-RwF"/>
                             <constraint firstItem="pRV-5d-tpG" firstAttribute="top" secondItem="dHx-IO-BwH" secondAttribute="top" constant="211" id="9DY-sy-AuX"/>
                             <constraint firstItem="pRV-5d-tpG" firstAttribute="leading" secondItem="dHx-IO-BwH" secondAttribute="leading" id="Eyx-0o-Hyw"/>
@@ -439,7 +441,9 @@
                             <constraint firstItem="6dQ-1W-fY0" firstAttribute="trailing" secondItem="dHx-IO-BwH" secondAttribute="trailing" id="TMW-LB-fmT"/>
                             <constraint firstItem="pRV-5d-tpG" firstAttribute="trailing" secondItem="dHx-IO-BwH" secondAttribute="trailing" id="cOf-YN-XEe"/>
                             <constraint firstItem="6dQ-1W-fY0" firstAttribute="leading" secondItem="dHx-IO-BwH" secondAttribute="leading" id="fpp-mi-Cbv"/>
-                            <constraint firstItem="dHx-IO-BwH" firstAttribute="bottom" secondItem="JkS-TZ-feF" secondAttribute="bottom" constant="10" id="i96-yD-R3e"/>
+                            <constraint firstItem="dHx-IO-BwH" firstAttribute="bottom" secondItem="JkS-TZ-feF" secondAttribute="bottom" constant="20" id="jtA-4N-B0T"/>
+                            <constraint firstItem="JkS-TZ-feF" firstAttribute="top" secondItem="pRV-5d-tpG" secondAttribute="bottom" constant="25" id="xLj-qI-zVm"/>
+                            <constraint firstItem="JkS-TZ-feF" firstAttribute="centerX" secondItem="WpT-l3-fgO" secondAttribute="centerX" id="y0j-q3-HqZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dHx-IO-BwH"/>
                     </view>
@@ -460,16 +464,6 @@
                     <view key="view" contentMode="scaleToFill" id="fLM-xr-Op9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ivb-nD-hyp">
-                                <rect key="frame" x="172" y="587" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="返回"/>
-                                <connections>
-                                    <action selector="returnButtonPressed:" destination="4bA-38-XYe" eventType="touchUpInside" id="Xyn-O1-iSs"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="HXG-rb-0Ff"/>
                     </view>
