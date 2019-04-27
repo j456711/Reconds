@@ -39,6 +39,7 @@
 		348FBD6E225F1F20000F53F6 /* Reconds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* Reconds.xcdatamodeld */; };
 		348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */; };
 		348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */; };
+		349C5DE0227456B600C1EBE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 349C5DDF227456B500C1EBE6 /* Assets.xcassets */; };
 		34A0FE9522648F11009F4D45 /* MergeVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */; };
 		34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE962265B694009F4D45 /* FileManager+Extension.swift */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
@@ -81,7 +82,7 @@
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		348FBD70225F1F52000F53F6 /* VideoData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		349C5DDE227437F600C1EBE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		349C5DDF227456B500C1EBE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoManager.swift; sourceTree = "<group>"; };
 		34A0FE962265B694009F4D45 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
@@ -181,8 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				34300BBB2271EC1100CF3429 /* RCConstants.swift */,
+				349C5DDF227456B500C1EBE6 /* Assets.xcassets */,
 				3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */,
-				349C5DDE227437F600C1EBE6 /* Assets.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -349,6 +350,7 @@
 				1E419A6A225373EA009B4F49 /* Record.storyboard in Resources */,
 				1E419A6C225375F7009B4F49 /* Settings.storyboard in Resources */,
 				1E419A6622537222009B4F49 /* Home.storyboard in Resources */,
+				349C5DE0227456B600C1EBE6 /* Assets.xcassets in Resources */,
 				1E419A4F2251BAB2009B4F49 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

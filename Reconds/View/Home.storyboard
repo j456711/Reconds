@@ -129,15 +129,7 @@
                                     <action selector="playButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="Kgx-NL-8JK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa8-2s-smt">
-                                <rect key="frame" x="127" y="415" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="分享"/>
-                                <connections>
-                                    <action selector="shareButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="pbi-m5-KwB"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title Label" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WRZ-H9-QG9">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title Textfield" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WRZ-H9-QG9">
                                 <rect key="frame" x="16" y="354" width="343" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -147,29 +139,45 @@
                                     <action selector="textFieldEdited:" destination="0iw-8D-Lxs" eventType="editingDidEnd" id="CHj-k0-Sy4"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBd-2X-lR9">
-                                <rect key="frame" x="199" y="402" width="56" height="56"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBd-2X-lR9">
+                                <rect key="frame" x="194.5" y="403" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="CfW-os-PoT"/>
                                     <constraint firstAttribute="height" constant="56" id="coa-PW-wdV"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="Icon_256px_Delete"/>
+                                <state key="normal" image="Icon_256px_TrashCan"/>
                                 <connections>
                                     <action selector="deleteButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="wMX-hz-HDu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa8-2s-smt">
+                                <rect key="frame" x="124.5" y="403" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="3E3-cH-7bH"/>
+                                    <constraint firstAttribute="width" constant="56" id="jdc-Bx-pBd"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="Icon_383px_Share"/>
+                                <connections>
+                                    <action selector="shareButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="pbi-m5-KwB"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="yBd-2X-lR9" firstAttribute="centerX" secondItem="BuL-Ce-59S" secondAttribute="centerX" constant="35" id="47S-2U-7iw"/>
                             <constraint firstItem="uTe-lo-B1k" firstAttribute="leading" secondItem="dL0-4F-pB2" secondAttribute="leading" id="AeD-g4-gVG"/>
                             <constraint firstItem="WRZ-H9-QG9" firstAttribute="leading" secondItem="dL0-4F-pB2" secondAttribute="leading" constant="16" id="G3G-ed-k28"/>
                             <constraint firstItem="uTe-lo-B1k" firstAttribute="top" secondItem="dL0-4F-pB2" secondAttribute="top" constant="65" id="GyF-tF-0p7"/>
+                            <constraint firstItem="pa8-2s-smt" firstAttribute="centerX" secondItem="BuL-Ce-59S" secondAttribute="centerX" constant="-35" id="Ig8-s2-ZVr"/>
                             <constraint firstItem="uTe-lo-B1k" firstAttribute="trailing" secondItem="dL0-4F-pB2" secondAttribute="trailing" id="N5M-vU-QZw"/>
                             <constraint firstItem="axr-2j-yFd" firstAttribute="centerX" secondItem="uTe-lo-B1k" secondAttribute="centerX" id="gYm-Zl-hSG"/>
+                            <constraint firstItem="yBd-2X-lR9" firstAttribute="centerY" secondItem="pa8-2s-smt" secondAttribute="centerY" id="grj-bV-WHu"/>
                             <constraint firstItem="axr-2j-yFd" firstAttribute="centerY" secondItem="uTe-lo-B1k" secondAttribute="centerY" id="hcf-vp-urJ"/>
                             <constraint firstItem="WRZ-H9-QG9" firstAttribute="top" secondItem="uTe-lo-B1k" secondAttribute="bottom" constant="25" id="jLv-FJ-q7J"/>
                             <constraint firstItem="dL0-4F-pB2" firstAttribute="trailing" secondItem="WRZ-H9-QG9" secondAttribute="trailing" constant="16" id="ndS-XX-zDn"/>
+                            <constraint firstItem="pa8-2s-smt" firstAttribute="top" secondItem="WRZ-H9-QG9" secondAttribute="bottom" constant="25" id="yPA-jU-7c9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dL0-4F-pB2"/>
                     </view>
@@ -472,7 +480,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon_256px_Delete" width="128" height="128"/>
+        <image name="Icon_256px_TrashCan" width="64" height="64"/>
+        <image name="Icon_383px_Share" width="95.5" height="95.5"/>
         <image name="Icon_512px_Clapperboard" width="128" height="128"/>
         <image name="Icon_Check" width="64" height="64"/>
         <image name="Icon_Film" width="32" height="32"/>

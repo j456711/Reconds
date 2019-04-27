@@ -89,7 +89,7 @@ class MyVideosDetailViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         
         alert.addAction(cancelAction)
-        
+                
         present(alert, animated: true, completion: nil)
     }
     
