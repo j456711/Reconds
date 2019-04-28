@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Icon_Music.png",
+      "filename" : "Icon_128px_Minimize.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Icon_Music@2x.png",
+      "filename" : "Icon_128px_Minimize@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Icon_Music@3x.png",
+      "filename" : "Icon_128px_Minimize@3x.png",
       "scale" : "3x"
     }
   ],

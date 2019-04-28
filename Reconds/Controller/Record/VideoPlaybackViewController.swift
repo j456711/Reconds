@@ -56,6 +56,8 @@ class VideoPlaybackViewController: UIViewController {
     }
 
     @IBOutlet weak var controlButton: UIButton!
+    
+    @IBOutlet weak var zoomButton: UIButton!
 
     @IBAction func controlButtonPressed(_ sender: UIButton) {
 
@@ -74,13 +76,19 @@ class VideoPlaybackViewController: UIViewController {
     }
     @IBAction func zoomButtonPressed(_ sender: UIButton) {
         
-        switch UIDevice.current.orientation.isPortrait {
+        switch zoomButton.imageView?.image {
             
-        case true:
-            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+        case UIImage.assets(.Icon_128px_Expand):
+            zoomButton.setImage(.assets(.Icon_128px_Minimize), for: .normal)
             
-        case false:
-            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform(rotationAngle: .pi / 2))
+            
+        case UIImage.assets(.Icon_128px_Minimize):
+            zoomButton.setImage(.assets(.Icon_128px_Expand), for: .normal)
+            
+            rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform.identity)
+            
+        default: break
         }
     }
     

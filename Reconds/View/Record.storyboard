@@ -236,6 +236,7 @@
                         <outlet property="slider" destination="rkb-d2-uyj" id="mrT-UG-GWK"/>
                         <outlet property="startTimeLabel" destination="tTt-Pg-e5b" id="N6A-gE-bsd"/>
                         <outlet property="useButton" destination="Eo0-Qp-7qq" id="6eO-ZV-h0e"/>
+                        <outlet property="zoomButton" destination="PWw-L8-xT9" id="mzA-Sb-HMW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddp-Z8-5BB" userLabel="First Responder" sceneMemberID="firstResponder"/>

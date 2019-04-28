@@ -148,9 +148,12 @@ Icon made by https://www.freepik.com from www.flaticon.com
 Icon made by https://www.flaticon.com/authors/smashicons from www.flaticon.com
 
 "Expand"
-Icon made by https://www.flaticon.com/authors/kiranshastry from www.flaticon.com</mutableString>
+Icon made by https://www.flaticon.com/authors/kiranshastry from www.flaticon.com
+
+"Minimize"
+Icon made by https://www.flaticon.com/authors/anton-saputro from www.flaticon.com</mutableString>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>

@@ -117,6 +117,11 @@ class HomeViewController: UIViewController {
         longPressedEnabled = false
 
         collectionView.reloadData()
+        
+        DispatchQueue.global().async { [weak self] in
+            
+            self?.merge()
+        }
     }
 
     @IBAction func clapperButtonPressed(_ sender: UIBarButtonItem) {
@@ -513,8 +518,8 @@ extension HomeViewController {
     
     func merge() {
         
-        guard let filteredArray = self.filteredArray else { return }
-        
+        guard let filteredArray = StorageManager.shared.filterData() else { return }
+                
         let stringArray = filteredArray.map({ FileManager.videoDataDirectory.absoluteString + $0 })
 
         guard let urlArray = stringArray.map({ URL(string: $0) }) as? [URL] else { return }
