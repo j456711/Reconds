@@ -101,7 +101,7 @@
                     <connections>
                         <outlet property="collectionView" destination="c0d-jA-mBK" id="3Nk-7N-2oq"/>
                         <outlet property="emptyLabel" destination="iFL-h3-yql" id="2e2-sS-HBe"/>
-                        <segue destination="0iw-8D-Lxs" kind="show" identifier="showMyVideosDetail" id="ECX-f8-NPn"/>
+                        <segue destination="0iw-8D-Lxs" kind="show" identifier="showMyVideosDetailVC" id="ECX-f8-NPn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uP-fg-TKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -250,7 +250,7 @@
                                     <color key="titleColor" red="1" green="0.57647058823529407" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="lfP-wx-OQs" kind="show" identifier="showMusicPage" id="sY9-Id-FZD"/>
+                                    <segue destination="lfP-wx-OQs" kind="show" identifier="showMusicVC" id="sY9-Id-FZD"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點擊場記板以新增影片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDo-ON-gQT">
@@ -393,25 +393,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pRV-5d-tpG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pRV-5d-tpG">
                                 <rect key="frame" x="0.0" y="275" width="375" height="291"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MusicTableViewCell" rowHeight="60" id="dAv-bg-80P" customClass="MusicTableViewCell" customModule="Reconds" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MusicTableViewCell" rowHeight="50" id="dAv-bg-80P" customClass="MusicTableViewCell" customModule="Reconds" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dAv-bg-80P" id="nwA-mm-ecc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oy6-Ds-ndH">
-                                                    <rect key="frame" x="61" y="18" width="299" height="24"/>
+                                                    <rect key="frame" x="61" y="18" width="299" height="14"/>
                                                     <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQr-Qj-avZ" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                                    <rect key="frame" x="15" y="15" width="30" height="30"/>
+                                                    <rect key="frame" x="15" y="15" width="30" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="BAr-8c-bHi"/>
@@ -471,7 +471,7 @@
                     <connections>
                         <outlet property="tableView" destination="pRV-5d-tpG" id="IPA-9v-YdL"/>
                         <outlet property="videoView" destination="6dQ-1W-fY0" id="CT3-15-cjq"/>
-                        <segue destination="4bA-38-XYe" kind="presentation" identifier="showExportPage" id="DAa-cb-146"/>
+                        <segue destination="4bA-38-XYe" kind="presentation" identifier="showExportVC" id="DAa-cb-146"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWG-OI-Kff" userLabel="First Responder" sceneMemberID="firstResponder"/>

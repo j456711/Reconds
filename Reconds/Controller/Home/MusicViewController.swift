@@ -33,7 +33,7 @@ class MusicViewController: UIViewController {
     
     private struct Segue {
         
-        static let showExportPage = "showExportPage"
+        static let showExportVC = "showExportVC"
     }
     
     let rcVideoPlayer = RCVideoPlayer()
@@ -61,7 +61,7 @@ class MusicViewController: UIViewController {
         
         if videoUrl != nil && audioUrl != nil {
             
-            performSegue(withIdentifier: Segue.showExportPage, sender: nil)
+            performSegue(withIdentifier: Segue.showExportVC, sender: nil)
         }
     }
     

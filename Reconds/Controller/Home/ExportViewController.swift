@@ -123,7 +123,7 @@ class ExportViewController: UIViewController {
                                         
 //                                        myVideosVC.loadViewIfNeeded()
 //
-//                                        myVideosVC.performSegue(withIdentifier: "showMyVideosDetail", sender: nil)
+//                                        myVideosVC.performSegue(withIdentifier: "showMyVideosDetailVC", sender: nil)
                                     })
                                 })
                                 

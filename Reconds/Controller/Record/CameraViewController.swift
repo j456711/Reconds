@@ -14,7 +14,7 @@ class CameraViewController: UIViewController {
 
     private struct Segue {
 
-        static let showVideoPlayback = "ShowVideoPlayback"
+        static let showVideoPlaybackVC = "ShowVideoPlaybackVC"
     }
     
     let cameraButton = UIView()
@@ -163,7 +163,7 @@ class CameraViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if segue.identifier == Segue.showVideoPlayback {
+        if segue.identifier == Segue.showVideoPlaybackVC {
 
             guard let videoPlaybackVC = segue.destination as? VideoPlaybackViewController else { return }
 
@@ -402,7 +402,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
             guard let videoUrl = outputUrl else { return }
 
-            self.performSegue(withIdentifier: Segue.showVideoPlayback, sender: videoUrl)
+            self.performSegue(withIdentifier: Segue.showVideoPlaybackVC, sender: videoUrl)
         }
     }
 }

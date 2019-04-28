@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
 
     private struct Segue {
         
-        static let showMusicPage = "showMusicPage"
+        static let showMusicVC = "showMusicVC"
     }
     
     var feedbackGenerator: UIImpactFeedbackGenerator?

@@ -10,9 +10,9 @@ import UIKit
 
 class MyVideosViewController: UIViewController {
 
-    struct Segue {
+    private struct Segue {
         
-        static let showMyVideosDetail = "showMyVideosDetail"
+        static let showMyVideosDetailVC = "showMyVideosDetailVC"
     }
     
     let rcVideoPlayer = RCVideoPlayer()
@@ -66,12 +66,12 @@ class MyVideosViewController: UIViewController {
         
         guard let myVideosDetailVC = segue.destination as? MyVideosDetailViewController else { return }
         
-        if let sender = sender as? IndexPath {
+        if let indexPath = sender as? IndexPath {
         
-            myVideosDetailVC.indexPath = sender
-            myVideosDetailVC.videoTitle = videoCollection[sender.item].videoTitle
+            myVideosDetailVC.indexPath = indexPath
+            myVideosDetailVC.videoTitle = videoCollection[indexPath.item].videoTitle
             myVideosDetailVC.videoUrl =
-                FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[sender.item].dataPath)")
+                FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
         }
     }
 }
@@ -103,7 +103,7 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: Segue.showMyVideosDetail, sender: indexPath)
+        performSegue(withIdentifier: Segue.showMyVideosDetailVC, sender: indexPath)
     }
 }
 
