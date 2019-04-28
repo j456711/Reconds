@@ -124,12 +124,12 @@ class HomeViewController: UIViewController {
 
         collectionView.reloadData()
         
+        indicatorView1.startAnimating()
+        
+        indicatorView2.startAnimating()
+        
         DispatchQueue.global().async { [weak self] in
-            
-            self?.indicatorView1.startAnimating()
-            
-            self?.indicatorView2.startAnimating()
-            
+
             self?.merge()
         }
     }
@@ -187,12 +187,12 @@ class HomeViewController: UIViewController {
 
                 collectionView.isHidden = false
                 
+                indicatorView1.startAnimating()
+                
+                indicatorView2.startAnimating()
+                
                 DispatchQueue.global().async { [weak self] in
-
-                    self?.indicatorView1.startAnimating()
-                    
-                    self?.indicatorView2.startAnimating()
-                    
+ 
                     self?.merge()
                 }
             }

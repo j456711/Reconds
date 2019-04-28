@@ -70,7 +70,7 @@ class MyVideosDetailViewController: UIViewController {
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
     
-        let alert = UIAlertController(title: "將刪除此影片，此動作無法還原。", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "即將刪除此影片，此動作無法還原。", message: nil, preferredStyle: .actionSheet)
         
         let deleteAction = UIAlertAction(title: "刪除", style: .destructive, handler: { [ weak self] (_) in
             

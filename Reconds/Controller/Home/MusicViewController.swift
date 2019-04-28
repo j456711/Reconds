@@ -96,6 +96,29 @@ class MusicViewController: UIViewController {
 
 extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 45
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return "點擊音樂以試聽："
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        
+        headerView.textLabel?.textColor = UIColor.lightGray
+        headerView.textLabel?.font = UIFont(name: "PingFang TC", size: 17)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return musicFilesArray.count
@@ -120,7 +143,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: false)
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
+//        guard let cell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
         
         guard let bundlePath = createBundlePath() else { return }
         
@@ -134,7 +157,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         let second = CMTimeGetSeconds(duration)
         
-        cell.indicatorView.startAnimating()
+//        cell.indicatorView.startAnimating()
         
         rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
         rcVideoPlayer.mute(true)
