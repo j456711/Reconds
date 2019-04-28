@@ -126,38 +126,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+        guard let selectedCell = tableView.cellForRow(at: indexPath) as? SettingsTableViewCell else { return }
+        
         switch indexPath.section {
             
         case 0:
-            
-            switch indexPath.row {
-                
-            case 0: break
-                
-            case 1: break
-                
-            case 2:
-                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-                
-                if UIApplication.shared.canOpenURL(settingsUrl) {
-                    
-                    UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
-                }
-                
-            default: break
-            }
+            selectedCell.didSelectedAuthorizationSection(at: indexPath)
             
         case 1:
-            
-            switch indexPath.row {
-                
-            case 0: break
-                
-            case 1: break
-//                let alert = UIAlertController(title: <#T##String?#>, message: <#T##String?#>, preferredStyle: <#T##UIAlertController.Style#>)
-                
-            default: break
-            }
+            selectedCell.didSelectedAboutSection(at: indexPath)
             
         case 2:
             performSegue(withIdentifier: Segue.showSettingsDetailVC, sender: indexPath)
