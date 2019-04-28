@@ -37,7 +37,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zGZ-He-RPm">
                                                     <rect key="frame" x="0.0" y="0.0" width="176" height="160"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcz-hv-GSf">
                                                     <rect key="frame" x="0.0" y="125" width="176" height="35"/>
@@ -118,6 +118,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uTe-lo-B1k">
                                 <rect key="frame" x="0.0" y="129" width="375" height="200"/>
+                                <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Web-VD-jr5"/>
                                 </constraints>
@@ -129,33 +130,11 @@
                                     <action selector="playButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="Kgx-NL-8JK"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title Textfield" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WRZ-H9-QG9">
-                                <rect key="frame" x="16" y="354" width="343" height="24"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <connections>
-                                    <action selector="textFieldEdited:" destination="0iw-8D-Lxs" eventType="editingDidEnd" id="CHj-k0-Sy4"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBd-2X-lR9">
-                                <rect key="frame" x="194.5" y="403" width="56" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="56" id="CfW-os-PoT"/>
-                                    <constraint firstAttribute="height" constant="56" id="coa-PW-wdV"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="Icon_256px_TrashCan"/>
-                                <connections>
-                                    <action selector="deleteButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="wMX-hz-HDu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa8-2s-smt">
-                                <rect key="frame" x="124.5" y="403" width="56" height="56"/>
+                                <rect key="frame" x="127.5" y="430" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="3E3-cH-7bH"/>
-                                    <constraint firstAttribute="width" constant="56" id="jdc-Bx-pBd"/>
+                                    <constraint firstAttribute="height" constant="50" id="3E3-cH-7bH"/>
+                                    <constraint firstAttribute="width" constant="50" id="jdc-Bx-pBd"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="Icon_383px_Share"/>
@@ -163,10 +142,40 @@
                                     <action selector="shareButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="pbi-m5-KwB"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title Textfield" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WRZ-H9-QG9">
+                                <rect key="frame" x="16" y="354" width="343" height="28"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="textFieldEdited:" destination="0iw-8D-Lxs" eventType="editingDidEnd" id="CHj-k0-Sy4"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBd-2X-lR9">
+                                <rect key="frame" x="197.5" y="430" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="CfW-os-PoT"/>
+                                    <constraint firstAttribute="height" constant="50" id="coa-PW-wdV"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="Icon_256px_TrashCan"/>
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="0iw-8D-Lxs" eventType="touchUpInside" id="wMX-hz-HDu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點擊名稱以編輯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zb3-do-a1S">
+                                <rect key="frame" x="131.5" y="382" width="112" height="23"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Thin" family="PingFang TC" pointSize="16"/>
+                                <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Zb3-do-a1S" firstAttribute="top" secondItem="WRZ-H9-QG9" secondAttribute="bottom" id="2R3-4h-eqA"/>
                             <constraint firstItem="yBd-2X-lR9" firstAttribute="centerX" secondItem="BuL-Ce-59S" secondAttribute="centerX" constant="35" id="47S-2U-7iw"/>
+                            <constraint firstItem="Zb3-do-a1S" firstAttribute="centerX" secondItem="BuL-Ce-59S" secondAttribute="centerX" id="8Ls-eX-Ajj"/>
                             <constraint firstItem="uTe-lo-B1k" firstAttribute="leading" secondItem="dL0-4F-pB2" secondAttribute="leading" id="AeD-g4-gVG"/>
                             <constraint firstItem="WRZ-H9-QG9" firstAttribute="leading" secondItem="dL0-4F-pB2" secondAttribute="leading" constant="16" id="G3G-ed-k28"/>
                             <constraint firstItem="uTe-lo-B1k" firstAttribute="top" secondItem="dL0-4F-pB2" secondAttribute="top" constant="65" id="GyF-tF-0p7"/>
@@ -177,7 +186,7 @@
                             <constraint firstItem="axr-2j-yFd" firstAttribute="centerY" secondItem="uTe-lo-B1k" secondAttribute="centerY" id="hcf-vp-urJ"/>
                             <constraint firstItem="WRZ-H9-QG9" firstAttribute="top" secondItem="uTe-lo-B1k" secondAttribute="bottom" constant="25" id="jLv-FJ-q7J"/>
                             <constraint firstItem="dL0-4F-pB2" firstAttribute="trailing" secondItem="WRZ-H9-QG9" secondAttribute="trailing" constant="16" id="ndS-XX-zDn"/>
-                            <constraint firstItem="pa8-2s-smt" firstAttribute="top" secondItem="WRZ-H9-QG9" secondAttribute="bottom" constant="25" id="yPA-jU-7c9"/>
+                            <constraint firstItem="pa8-2s-smt" firstAttribute="top" secondItem="Zb3-do-a1S" secondAttribute="bottom" constant="25" id="zjY-zf-rFc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dL0-4F-pB2"/>
                     </view>
@@ -195,8 +204,8 @@
         <scene sceneID="pc7-Pi-dug">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ygg-kj-qnV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Icon_Film" selectedImage="Icon_FilmSelected" id="mpr-fD-hKv">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    <tabBarItem key="tabBarItem" title="" image="Icon_128px_FilmStrips" selectedImage="Icon_128px_FilmStrips_Selected" id="mpr-fD-hKv">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -238,7 +247,7 @@
                                 <rect key="frame" x="16" y="538" width="343" height="43"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="22"/>
                                 <state key="normal" title="輸出">
-                                    <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="1" green="0.57647058823529407" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="lfP-wx-OQs" kind="show" identifier="showMusicPage" id="sY9-Id-FZD"/>
@@ -300,7 +309,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q7G-Jy-SiD">
                                                     <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uln-iO-RJs">
                                                     <rect key="frame" x="46" y="3" width="25" height="25"/>
@@ -435,7 +444,7 @@
                                 </constraints>
                                 <state key="normal" image="Icon_Check"/>
                                 <connections>
-                                    <segue destination="4bA-38-XYe" kind="presentation" identifier="showExportPage" id="sRW-WM-8rX"/>
+                                    <action selector="exportButtonPressed:" destination="lfP-wx-OQs" eventType="touchUpInside" id="9YG-JK-dCy"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6dQ-1W-fY0">
@@ -462,6 +471,7 @@
                     <connections>
                         <outlet property="tableView" destination="pRV-5d-tpG" id="IPA-9v-YdL"/>
                         <outlet property="videoView" destination="6dQ-1W-fY0" id="CT3-15-cjq"/>
+                        <segue destination="4bA-38-XYe" kind="presentation" identifier="showExportPage" id="DAa-cb-146"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWG-OI-Kff" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -485,12 +495,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon_128px_FilmStrips" width="32" height="32"/>
+        <image name="Icon_128px_FilmStrips_Selected" width="32" height="32"/>
         <image name="Icon_256px_TrashCan" width="64" height="64"/>
         <image name="Icon_383px_Share" width="95.5" height="95.5"/>
         <image name="Icon_512px_Clapperboard" width="128" height="128"/>
         <image name="Icon_Check" width="64" height="64"/>
-        <image name="Icon_Film" width="32" height="32"/>
-        <image name="Icon_FilmSelected" width="32" height="32"/>
         <image name="Icon_Play" width="64" height="64"/>
         <image name="Icon_Remove" width="64" height="64"/>
     </resources>

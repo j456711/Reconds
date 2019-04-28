@@ -31,6 +31,11 @@ class MusicViewController: UIViewController {
         // swiftlint:enable identifier_name
     }
     
+    private struct Segue {
+        
+        static let showExportPage = "showExportPage"
+    }
+    
     let rcVideoPlayer = RCVideoPlayer()
     
     var player: AVAudioPlayer!
@@ -49,6 +54,14 @@ class MusicViewController: UIViewController {
             
             tableView.delegate = self
             tableView.dataSource = self
+        }
+    }
+    
+    @IBAction func exportButtonPressed(_ sender: UIButton) {
+        
+        if videoUrl != nil && audioUrl != nil {
+            
+            performSegue(withIdentifier: Segue.showExportPage, sender: nil)
         }
     }
     
@@ -99,13 +112,15 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         let titleArray = musicFilesArray.map({ $0.rawValue })
 
         musicCell.titleLabel.text = titleArray[indexPath.row]
-
+        
         return musicCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+//        guard let cell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
         
         guard let bundlePath = createBundlePath() else { return }
         
@@ -121,20 +136,18 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         do {
             
-            cell.indicatorView.startAnimating()
+//            cell.indicatorView.startAnimating()
             
             player = try AVAudioPlayer(contentsOf: audioUrl)
             player.play()
             player.setVolume(0, fadeDuration: second)
-            
+                        
             self.audioUrl = audioUrl
             
         } catch {
             
             print(error)
         }
-     
-//        cell.indicatorView.stopAnimating()
         
         rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
         rcVideoPlayer.mute(true)
