@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Photos
+import NVActivityIndicatorView
 
 class HomeViewController: UIViewController {
 
@@ -39,12 +40,17 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var indicatorView1: NVActivityIndicatorView!
+    
+    @IBOutlet weak var indicatorView2: NVActivityIndicatorView!
+    
     @IBOutlet weak var collectionView: UICollectionView! {
 
         didSet {
 
             collectionView.delegate = self
             collectionView.dataSource = self
+            
             collectionView.isHidden = true
             collectionView.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -120,6 +126,10 @@ class HomeViewController: UIViewController {
         
         DispatchQueue.global().async { [weak self] in
             
+            self?.indicatorView1.startAnimating()
+            
+            self?.indicatorView2.startAnimating()
+            
             self?.merge()
         }
     }
@@ -179,6 +189,10 @@ class HomeViewController: UIViewController {
                 
                 DispatchQueue.global().async { [weak self] in
 
+                    self?.indicatorView1.startAnimating()
+                    
+                    self?.indicatorView2.startAnimating()
+                    
                     self?.merge()
                 }
             }
@@ -553,6 +567,10 @@ extension HomeViewController {
                     strongSelf.previewButton.isHidden = false
                     
                     strongSelf.exportButton.isHidden = false
+                    
+                    strongSelf.indicatorView1.stopAnimating()
+                    
+                    strongSelf.indicatorView2.stopAnimating()
                 }
             }
         })
