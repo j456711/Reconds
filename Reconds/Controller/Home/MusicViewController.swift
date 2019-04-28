@@ -22,7 +22,7 @@ class MusicViewController: UIViewController {
         case CheeryMonday = "Cheery Monday"
         case HappyAlley = "Happy Alley"
         case MemoryLane = "Memory Lane"
-        case OffToOsaka = "Off To Osaka"
+        case OffToOsaka = "Off to Osaka"
         case RadioRock = "Radio Rock"
         case Serenity
         case ThereItIs = "There It Is"

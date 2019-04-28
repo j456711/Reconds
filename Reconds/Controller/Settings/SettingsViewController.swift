@@ -88,17 +88,18 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let settingsCell = cell as? SettingsTableViewCell else { return cell }
         
-        if indexPath.section == 0 {
+        switch indexPath.section {
             
+        case 0:
             settingsCell.titleLabel.text = authorizationSection[indexPath.row]
             
-        } else if indexPath.section == 1 {
-            
+        case 1:
             settingsCell.titleLabel.text = aboutSection[indexPath.row]
-            
-        } else if indexPath.section == 2 {
-            
+
+        case 2:
             settingsCell.titleLabel.text = creditsSection[indexPath.row]
+
+        default: return cell
         }
         
         return settingsCell
@@ -108,15 +109,43 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 0 {
+        switch indexPath.section {
             
+        case 0:
             
-        } else if indexPath.section == 1 {
+            switch indexPath.row {
+                
+            case 0: break
+                
+            case 1: break
+                
+            case 2:
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    
+                    UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+                }
+                
+            default: break
+            }
             
+        case 1:
             
-        } else if indexPath.section == 2 {
+            switch indexPath.row {
+                
+            case 0: break
+                
+            case 1: break
+//                let alert = UIAlertController(title: <#T##String?#>, message: <#T##String?#>, preferredStyle: <#T##UIAlertController.Style#>)
+                
+            default: break
+            }
             
+        case 2:
             performSegue(withIdentifier: Segue.showSettingsDetailVC, sender: indexPath)
+            
+        default: break
         }
     }
 }

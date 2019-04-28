@@ -42,7 +42,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xd7-d1-rDO">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsTableViewCell" id="zZQ-A2-6KF" customClass="SettingsTableViewCell" customModule="Reconds" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
@@ -53,8 +53,8 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vT-L2-Sb9">
                                                     <rect key="frame" x="15" y="11" width="345" height="28"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
-                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -65,6 +65,7 @@
                                                 <constraint firstItem="2vT-L2-Sb9" firstAttribute="top" secondItem="nFe-Ec-74V" secondAttribute="topMargin" id="zee-28-Avs"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="titleLabel" destination="2vT-L2-Sb9" id="m2y-hW-WnQ"/>
                                         </connections>
@@ -94,18 +95,77 @@
         <!--Settings Detail View Controller-->
         <scene sceneID="J2Y-yd-ssI">
             <objects>
-                <viewController id="SKM-Lu-Sjc" customClass="SettingsDetailViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="SKM-Lu-Sjc" customClass="SettingsDetailViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XDy-gW-rqP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u61-OR-Sjh">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <connections>
+                                    <segue destination="3Mh-kG-JPg" kind="embed" id="3nO-GR-2sO"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="u61-OR-Sjh" firstAttribute="leading" secondItem="UJA-iB-l0x" secondAttribute="leading" id="c8R-XE-Aqz"/>
+                            <constraint firstItem="u61-OR-Sjh" firstAttribute="bottom" secondItem="UJA-iB-l0x" secondAttribute="bottom" id="dtm-XP-4t4"/>
+                            <constraint firstItem="u61-OR-Sjh" firstAttribute="trailing" secondItem="UJA-iB-l0x" secondAttribute="trailing" id="rXe-gU-kPG"/>
+                            <constraint firstItem="u61-OR-Sjh" firstAttribute="top" secondItem="UJA-iB-l0x" secondAttribute="top" id="vlF-rb-9Hc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="UJA-iB-l0x"/>
                     </view>
                     <navigationItem key="navigationItem" id="OMi-VG-HiK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ZK-Dw-JMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5609" y="880"/>
+            <point key="canvasLocation" x="5608.8000000000002" y="879.31034482758628"/>
+        </scene>
+        <!--Credits View Controller-->
+        <scene sceneID="CCo-nx-HBG">
+            <objects>
+                <viewController id="3Mh-kG-JPg" customClass="CreditsViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tC9-Fc-QvL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zt4-9G-HM9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">"Acoustic Rock", "Radio Rock", "Serenity" and "Words" 
+Music by Jason Shaw @audionautix.com
+
+"Ambler", "Cheery Monday", "Happy Alley", "Memory Lane", "Off to Osaka" and "There It Is"
+Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/
+
+"FilmStrips" and "Settings"
+Icon made by https://www.freepik.com from www.flaticon.com
+
+"Clapperboard" 
+Icon made by https://www.flaticon.com/authors/smashicons from www.flaticon.com
+
+"Expand"
+Icon made by https://www.flaticon.com/authors/kiranshastry from www.flaticon.com</mutableString>
+                                <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Zt4-9G-HM9" secondAttribute="bottom" id="Gvv-Jy-8hm"/>
+                            <constraint firstAttribute="trailing" secondItem="Zt4-9G-HM9" secondAttribute="trailing" id="Hba-Yo-4Qx"/>
+                            <constraint firstItem="Zt4-9G-HM9" firstAttribute="top" secondItem="tC9-Fc-QvL" secondAttribute="top" id="i5p-cH-2Ju"/>
+                            <constraint firstItem="Zt4-9G-HM9" firstAttribute="leading" secondItem="tC9-Fc-QvL" secondAttribute="leading" id="zop-ma-b6r"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hj1-4y-mVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6496.8000000000002" y="633.28335832083962"/>
         </scene>
     </scenes>
     <resources>
