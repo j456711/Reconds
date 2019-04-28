@@ -352,7 +352,7 @@ extension MergeVideoManager {
             let posX = standardSize.width / 2 - (assetTrack.naturalSize.height * aspectFillRatio) / 2
             let posY = standardSize.height / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
             let moveFactor = CGAffineTransform(translationX: posX, y: posY)
-
+            
             instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor),
                                      at: atTime)
 

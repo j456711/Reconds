@@ -112,6 +112,8 @@ class HomeViewController: UIViewController {
 
         doneButton.isHidden = true
         
+        previewButton.isHidden = true
+        
         longPressedEnabled = false
 
         collectionView.reloadData()
@@ -260,7 +262,6 @@ class HomeViewController: UIViewController {
 
         present(alert, animated: true, completion: nil)
     }
-
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -319,8 +320,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 
             }
 
-//            rcVideoPlayer.setUpAVPlayer(with: homeCell, videoUrl: dataPath, videoGravity: .resizeAspectFill)
-
             return homeCell
         }
     }
@@ -342,14 +341,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         print("Start index: \(sourceIndexPath.item)")
         print("End index: \(destinationIndexPath.item)")
-        
+
         let dataString = videoData[0].dataPathArray.remove(at: sourceIndexPath.item)
 
         videoData[0].dataPathArray.insert(dataString, at: destinationIndexPath.item)
 
         StorageManager.shared.save()
-        
+
         collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
+        
+        if videoData[0].dataPathArray[proposedIndexPath.item] == "" {
+
+            return originalIndexPath
+
+        } else {
+
+            return proposedIndexPath
+        }
     }
 }
 
@@ -405,7 +416,7 @@ extension HomeViewController {
         case .changed:
             collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
 
-        case .ended, .cancelled, .failed:
+        case .ended:
             feedbackGenerator = nil
             
             collectionView.endInteractiveMovement()
@@ -418,8 +429,10 @@ extension HomeViewController {
             
             collectionView.reloadData()
 
+        case  .cancelled, .failed:
+            collectionView.cancelInteractiveMovement()
+            
         default:
-
             collectionView.cancelInteractiveMovement()
         }
     }

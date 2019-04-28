@@ -15,9 +15,11 @@ class SettingsViewController: UIViewController {
         static let showSettingsDetailVC = "showSettingsDetailVC"
     }
     
-    let authorizationSection = ["配樂試聽", "影片輸出後存入相簿", "管理權限"]
+//    let appSettingsSection = ["配樂試聽", "影片輸出後存入相簿", "管理權限"]
     
-    let aboutSection = ["評分鼓勵", "與好友分享 Reconds"]
+    let appSettingsSection = ["管理權限"]
+    
+    let aboutSection = ["評價 Reconds", "與好友分享 Reconds"]
     
     let creditsSection = ["素材來源"]
     
@@ -32,7 +34,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -57,7 +59,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch section {
             
-        case 0: return authorizationSection.count
+        case 0: return appSettingsSection.count
             
         case 1: return aboutSection.count
             
@@ -71,7 +73,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch section {
             
-        case 0: return "權限"
+        case 0: return "設定"
             
         case 1: return "關於"
             
@@ -99,23 +101,23 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
             
         case 0:
-            settingsCell.titleLabel.text = authorizationSection[indexPath.row]
+            settingsCell.titleLabel.text = appSettingsSection[indexPath.row]
+//
+//            if indexPath.row == 0 || indexPath.row == 1 {
+//
+//                settingsCell.switcher.isHidden = false
+//
+//            } else if indexPath.row == 2 {
             
-            if indexPath.row == 2 {
-                
-                settingsCell.switcher.isHidden = true
-            }
+            settingsCell.descriptionLabel.isHidden = false
+//            }
             
         case 1:
             settingsCell.titleLabel.text = aboutSection[indexPath.row]
             
-            settingsCell.switcher.isHidden = true
-
         case 2:
             settingsCell.titleLabel.text = creditsSection[indexPath.row]
             
-            settingsCell.switcher.isHidden = true
-
         default: return cell
         }
         
@@ -131,7 +133,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
             
         case 0:
-            selectedCell.didSelectedAuthorizationSection(at: indexPath)
+            selectedCell.didSelectedAppSettingsSection(at: indexPath)
             
         case 1:
             selectedCell.didSelectedAboutSection(at: indexPath)

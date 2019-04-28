@@ -30,14 +30,9 @@ class MusicTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
 //        if selected == true {
-//            
+//
 //            titleLabel.textColor = UIColor.orange
 //        }
     }
 
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//
-//        indicatorView.isHidden = true
-//    }
 }

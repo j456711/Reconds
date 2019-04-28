@@ -32,7 +32,7 @@ class VideoPlaybackViewController: UIViewController {
 
             rcVideoPlayerView.isHidden = true
         }
-    }
+    }    
 
     @IBOutlet weak var startTimeLabel: UILabel!
 

@@ -120,7 +120,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: false)
         
-//        guard let cell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
         
         guard let bundlePath = createBundlePath() else { return }
         
@@ -134,9 +134,13 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         let second = CMTimeGetSeconds(duration)
         
+        cell.indicatorView.startAnimating()
+        
+        rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
+        rcVideoPlayer.mute(true)
+        rcVideoPlayer.play()
+        
         do {
-            
-//            cell.indicatorView.startAnimating()
             
             player = try AVAudioPlayer(contentsOf: audioUrl)
             player.play()
@@ -148,9 +152,5 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
             
             print(error)
         }
-        
-        rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
-        rcVideoPlayer.mute(true)
-        rcVideoPlayer.play()
     }
 }

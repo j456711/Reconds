@@ -14,26 +14,47 @@ class SettingsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var switcher: UISwitch!
+    @IBOutlet weak var descriptionLabel: UILabel! {
+        
+        didSet {
+            
+            descriptionLabel.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var switcher: UISwitch! {
+        
+        didSet {
+            
+            switcher.isHidden = true
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-    
-    func didSelectedAuthorizationSection(at indexPath: IndexPath) {
+    func didSelectedAppSettingsSection(at indexPath: IndexPath) {
         
         switch indexPath.row {
 
-        case 0: break
+//        case 0: break
+//
+//        case 1:
+//            var status = PHPhotoLibrary.authorizationStatus()
+//
+//            if switcher.isOn {
+//
+//
+//
+//
+//
+//            } else {
+//
+//                status = .denied
+//            }
 
-        case 1: break
-
-        case 2:
+        case 0:
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
             
             if UIApplication.shared.canOpenURL(settingsUrl) {
