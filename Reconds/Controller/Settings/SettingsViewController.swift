@@ -71,7 +71,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch section {
             
-        case 0: return "權限設定"
+        case 0: return "權限"
             
         case 1: return "關於"
             
@@ -79,6 +79,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             
         default: return nil
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        
+        headerView.textLabel?.textColor = UIColor.lightGray
+        headerView.textLabel?.font = UIFont(name: "PingFang TC", size: 17)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,11 +101,20 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             settingsCell.titleLabel.text = authorizationSection[indexPath.row]
             
+            if indexPath.row == 2 {
+                
+                settingsCell.switcher.isHidden = true
+            }
+            
         case 1:
             settingsCell.titleLabel.text = aboutSection[indexPath.row]
+            
+            settingsCell.switcher.isHidden = true
 
         case 2:
             settingsCell.titleLabel.text = creditsSection[indexPath.row]
+            
+            settingsCell.switcher.isHidden = true
 
         default: return cell
         }

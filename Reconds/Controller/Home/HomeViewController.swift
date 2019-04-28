@@ -99,9 +99,7 @@ class HomeViewController: UIViewController {
             videoPlaybackVC.videoUrl = videoUrl
         }
         
-        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.controlView)
-        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.retakeButton)
-        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.useButton)
+        videoPlaybackVC.loadViewIfNeeded()
         
         videoPlaybackVC.controlView.isHidden = true
         videoPlaybackVC.retakeButton.isHidden = true
@@ -486,9 +484,7 @@ extension HomeViewController {
             
             videoPlaybackVC.videoUrl = dataPath
             
-            videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.controlView)
-            videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.retakeButton)
-            videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.useButton)
+            videoPlaybackVC.loadViewIfNeeded()
             
             videoPlaybackVC.controlView.isHidden = true
             videoPlaybackVC.retakeButton.isHidden = true
@@ -519,7 +515,7 @@ extension HomeViewController {
     func merge() {
         
         guard let filteredArray = StorageManager.shared.filterData() else { return }
-                
+        
         let stringArray = filteredArray.map({ FileManager.videoDataDirectory.absoluteString + $0 })
 
         guard let urlArray = stringArray.map({ URL(string: $0) }) as? [URL] else { return }

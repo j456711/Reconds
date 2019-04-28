@@ -82,11 +82,15 @@ class VideoPlaybackViewController: UIViewController {
             zoomButton.setImage(.assets(.Icon_128px_Minimize), for: .normal)
             
             rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform(rotationAngle: .pi / 2))
+            rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
+            rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
             
         case UIImage.assets(.Icon_128px_Minimize):
             zoomButton.setImage(.assets(.Icon_128px_Expand), for: .normal)
             
             rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform.identity)
+            rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
+            rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
             
         default: break
         }
