@@ -365,7 +365,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         collectionView.reloadData()
     }
     
-    func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
+    func collectionView(_ collectionView: UICollectionView,
+                        targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath,
+                        toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
         
         if videoData[0].dataPathArray[proposedIndexPath.item] == "" {
 
