@@ -87,7 +87,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func previewButtonPressed(_ sender: UIButton) {
-    
+        
         let storyboard = UIStoryboard(name: "Record", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
         guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
