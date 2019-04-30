@@ -205,7 +205,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ygg-kj-qnV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Icon_128px_FilmStrips" selectedImage="Icon_128px_FilmStrips_Selected" id="mpr-fD-hKv">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-5"/>
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
