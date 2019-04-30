@@ -56,22 +56,23 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var previewButton: UIButton! {
-        
-        didSet {
-            
-            previewButton.isHidden = true
-        }
-    }
+    @IBOutlet weak var previewButton: UIButton!
+//        {
+//
+//        didSet {
+//
+//            previewButton.isHidden = true
+//        }
+//    }
     
     @IBOutlet weak var clapperButton: UIButton!
     
     @IBOutlet weak var exportButton: UIButton! {
-        
+
         didSet {
-            
-            exportButton.isHidden = true
-            
+
+//            exportButton.isHidden = true
+
             setUpButtonStyle(for: exportButton)
         }
     }
@@ -179,7 +180,7 @@ class HomeViewController: UIViewController {
             
             if filteredArray?.count == 0 {
                 
-                exportButton.isHidden = true
+//                exportButton.isHidden = true
                 
             } else {
                 
@@ -584,6 +585,6 @@ extension HomeViewController {
         
         collectionView.isHidden = true
         
-        exportButton.isHidden = true
+//        exportButton.isHidden = true
     }
 }

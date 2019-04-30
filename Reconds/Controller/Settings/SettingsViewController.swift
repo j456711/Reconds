@@ -19,7 +19,7 @@ class SettingsViewController: UIViewController {
     
     let appSettingsSection = ["管理權限"]
     
-    let aboutSection = ["評價 Reconds", "與好友分享 Reconds"]
+    let aboutSection = ["評價 Reconds"]
     
     let creditsSection = ["素材來源"]
     

@@ -73,7 +73,7 @@ class SettingsTableViewCell: UITableViewCell {
         case 0:
             SKStoreReviewController.requestReview()
             
-        case 1: break
+//        case 1: break
             
         default: break
         }
