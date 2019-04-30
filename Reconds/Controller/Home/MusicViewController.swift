@@ -74,6 +74,11 @@ class MusicViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        rcVideoPlayer.pause()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let exportVC = segue.destination as? ExportViewController else { return }

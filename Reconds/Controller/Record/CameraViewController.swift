@@ -163,12 +163,9 @@ class CameraViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if segue.identifier == Segue.showVideoPlaybackVC {
+        guard let videoPlaybackVC = segue.destination as? VideoPlaybackViewController else { return }
 
-            guard let videoPlaybackVC = segue.destination as? VideoPlaybackViewController else { return }
-
-            videoPlaybackVC.videoUrl = sender as? URL
-        }
+        videoPlaybackVC.videoUrl = sender as? URL
     }
 }
 
