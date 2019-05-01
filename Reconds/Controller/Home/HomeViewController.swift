@@ -111,6 +111,8 @@ class HomeViewController: UIViewController {
         videoPlaybackVC.retakeButton.isHidden = true
         videoPlaybackVC.useButton.isHidden = true
         
+        videoPlaybackVC.modalPresentationStyle = .overFullScreen
+        
         present(videoPlaybackVC, animated: true, completion: nil)
     }
     
