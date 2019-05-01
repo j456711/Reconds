@@ -9,7 +9,6 @@ target 'Reconds' do
   pod 'SwiftLint'
   pod 'JGProgressHUD'
   pod 'NVActivityIndicatorView'
-  pod 'MediaWatermark'
   pod 'Firebase/Core'
   pod 'Fabric', '~> 1.9.0'
   pod 'Crashlytics', '~> 3.12.0'

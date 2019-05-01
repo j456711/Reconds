@@ -39,6 +39,12 @@ class ExportViewController: UIViewController {
                    let outputUrl = outputUrl,
                    let videoTitle = UserDefaults.standard.string(forKey: "Title") {
                     
+                    
+                    
+                    
+                    
+                    
+                    
                     guard let videoData = try? Data(contentsOf: outputUrl) else { return }
                     
                     do {

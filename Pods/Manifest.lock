@@ -48,7 +48,6 @@ PODS:
   - GoogleUtilities/UserDefaults (5.7.0):
     - GoogleUtilities/Logger
   - JGProgressHUD (2.0.3)
-  - MediaWatermark (0.3.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -64,7 +63,6 @@ DEPENDENCIES:
   - Fabric (~> 1.9.0)
   - Firebase/Core
   - JGProgressHUD
-  - MediaWatermark
   - NVActivityIndicatorView
   - SwiftLint
 
@@ -79,7 +77,6 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - JGProgressHUD
-    - MediaWatermark
     - nanopb
     - NVActivityIndicatorView
     - SwiftLint
@@ -94,11 +91,10 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
-  MediaWatermark: a66d86cd40bc01840c6f810ad036828c08408b8b
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: fe05236520abf8658aab007c74580537cc4433eb
+PODFILE CHECKSUM: 5c1da998c4d2c70def6a72aaa857c95520516e09
 
 COCOAPODS: 1.6.1
