@@ -162,7 +162,7 @@ class MergeVideoManager {
     
     typealias VideoExportedHandler = ((URL?, String?, Error?) -> Void)
     
-    func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL, completionHandler: @escaping VideoExportedHandler) {
+    func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL, credits: String, completionHandler: @escaping VideoExportedHandler) {
         
         let audioMix = AVMutableAudioMix()
         let mixComposition = AVMutableComposition()
@@ -214,17 +214,55 @@ class MergeVideoManager {
         totalVideoCompositionInstruction.timeRange =
             CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration)
         
+        let videoTrack = mixComposition.tracks(withMediaType: .video)[0]
+        let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
+        
+        guard let layerInstructionArray =
+            NSArray(object: layerInstruction) as? [AVVideoCompositionLayerInstruction] else { return }
+        totalVideoCompositionInstruction.layerInstructions = layerInstructionArray
+        
+        // Add Music Credits
+        let titleLayer = CATextLayer()
+        titleLayer.foregroundColor = UIColor.lightGray.cgColor
+        titleLayer.string = credits
+        titleLayer.font = UIFont(name: "PingFang TC", size: 10)
+        titleLayer.shadowOpacity = 0.5
+        titleLayer.alignmentMode = .left
+        titleLayer.frame = CGRect(x: 0,
+                                  y: 0,
+                                  width: videoTrack.naturalSize.width,
+                                  height: 50)
+        
+        let videoLayer = CALayer()
+        videoLayer.frame = CGRect(x: 0,
+                                  y: 0,
+                                  width: videoTrack.naturalSize.width,
+                                  height: videoTrack.naturalSize.height)
+        
+        let parentLayer = CALayer()
+        parentLayer.frame = CGRect(x: 0,
+                                   y: 0,
+                                   width: videoTrack.naturalSize.width,
+                                   height: videoTrack.naturalSize.height)
+        parentLayer.addSublayer(videoLayer)
+        parentLayer.addSublayer(titleLayer)
+        
         let mutableVideoComposition = AVMutableVideoComposition()
         mutableVideoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
+        mutableVideoComposition.renderSize = videoTrack.naturalSize
+        mutableVideoComposition.animationTool =
+            AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, in: parentLayer)
         
-        mutableVideoComposition.renderSize = CGSize(width: 1280, height: 720)
+        guard let totalVideoCompositionInstructionArray =
+            NSArray(object: totalVideoCompositionInstruction) as? [AVVideoCompositionInstructionProtocol]
+            else { return }
+        mutableVideoComposition.instructions = totalVideoCompositionInstructionArray
         
         // Music Fade Out
         let audioMixInputParameters = AVMutableAudioMixInputParameters(track: mutableCompositionAudioTrack[0])
         
         // File Name
         let time = Int(Date().timeIntervalSince1970)
-        
         let fileName = "\(time)-exported.mp4"
         
         // Find video on this URL
@@ -238,7 +276,8 @@ class MergeVideoManager {
         guard let assetExport = AVAssetExportSession(asset: mixComposition,
                                                      presetName: AVAssetExportPresetHighestQuality) else { return }
         assetExport.audioMix = audioMix
-        assetExport.outputFileType = AVFileType.mp4
+        assetExport.videoComposition = mutableVideoComposition
+        assetExport.outputFileType = .mp4
         assetExport.outputURL = outputUrl
         assetExport.shouldOptimizeForNetworkUse = true
         

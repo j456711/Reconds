@@ -17,6 +17,8 @@ class ExportViewController: UIViewController {
     
     var audioUrl: URL?
     
+    var credits: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -31,6 +33,7 @@ class ExportViewController: UIViewController {
             
             MergeVideoManager.shared.mergeVideoAndAudio(videoUrl: videoUrl,
                                                         audioUrl: audioUrl,
+                                                        credits: credits,
                                                         completionHandler: { [weak self] (outputUrl, fileName, error) in
                 
                 guard let strongSelf = self else { return }
@@ -38,13 +41,7 @@ class ExportViewController: UIViewController {
                 if let fileName = fileName,
                    let outputUrl = outputUrl,
                    let videoTitle = UserDefaults.standard.string(forKey: "Title") {
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                                
                     guard let videoData = try? Data(contentsOf: outputUrl) else { return }
                     
                     do {

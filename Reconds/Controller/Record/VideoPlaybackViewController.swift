@@ -178,6 +178,11 @@ class VideoPlaybackViewController: UIViewController {
         view.bringSubviewToFront(rcVideoPlayerView)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        
+        return true
+    }
+    
     @objc func videoDidFinishPlaying() {
 
         controlView.alpha = 1.0

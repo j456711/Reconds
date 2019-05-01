@@ -44,6 +44,8 @@ class MusicViewController: UIViewController {
     
     lazy var audioUrl: URL? = nil
     
+    lazy var credits: String = ""
+    
     var musicFilesArray = MusicFiles.allCases
     
     @IBOutlet weak var videoView: UIView!
@@ -85,6 +87,7 @@ class MusicViewController: UIViewController {
         
         exportVC.videoUrl = videoUrl
         exportVC.audioUrl = audioUrl
+        exportVC.credits = credits
     }
     
     func createBundlePath() -> URL? {
@@ -179,6 +182,15 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         } catch {
             
             print(error)
+        }
+        
+        switch musicFilesArray[indexPath.row] {
+            
+        case .AcousticRock, .RadioRock, .Serenity, .Words:
+            self.credits = "Music \(musicFilesArray[indexPath.row].rawValue) © Jason Shaw @audionautix.com"
+            
+        default:
+            self.credits = "Music \(musicFilesArray[indexPath.row].rawValue) © Kevin MacLeod @incompetech.com"
         }
     }
 }
