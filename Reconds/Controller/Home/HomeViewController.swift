@@ -617,6 +617,16 @@ extension HomeViewController {
                     strongSelf.indicatorView1.stopAnimating()
                     
                     strongSelf.indicatorView2.stopAnimating()
+                
+                } else {
+                    
+                    strongSelf.previewButton.isHidden = true
+                    
+                    strongSelf.exportButton.isHidden = true
+                    
+                    strongSelf.indicatorView1.stopAnimating()
+                    
+                    strongSelf.indicatorView2.stopAnimating()
                 }
             }
         })
