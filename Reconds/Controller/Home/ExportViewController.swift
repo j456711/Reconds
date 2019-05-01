@@ -116,17 +116,9 @@ class ExportViewController: UIViewController {
                                     guard let myVideosVC =
                                         vc1 as? MyVideosViewController else { return }
                                     
-//                                    let vc2 = storyboard.instantiateViewController(withIdentifier: "MyVideosDetailViewController")
-//                                    guard let myVideosDetailVC =
-//                                        vc2 as? MyVideosDetailViewController else { return }
-                                    
                                     tabBar.dismiss(animated: true, completion: {
                                         
                                         navVC.show(myVideosVC, sender: nil)
-                                        
-//                                        myVideosVC.loadViewIfNeeded()
-//
-//                                        myVideosVC.performSegue(withIdentifier: "showMyVideosDetailVC", sender: nil)
                                     })
                                 })
                                 

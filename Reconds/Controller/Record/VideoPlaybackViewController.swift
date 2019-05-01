@@ -215,7 +215,7 @@ extension VideoPlaybackViewController {
 
         var initialTouchPoint = CGPoint(x: 0, y: 0)
 
-        let touchPoint = gesture.location(in: self.view)
+        let touchPoint = gesture.location(in: self.view.window)
 
         switch gesture.state {
 
