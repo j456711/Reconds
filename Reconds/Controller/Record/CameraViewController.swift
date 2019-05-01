@@ -86,7 +86,7 @@ class CameraViewController: UIViewController {
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
         
-        self.view.addGestureRecognizer(gesture)
+        authorizedView.addGestureRecognizer(gesture)
         
         switch AVCaptureDevice.authorizationStatus(for: .video) {
 
@@ -145,27 +145,27 @@ class CameraViewController: UIViewController {
         
         return true
     }
-
-    func setUpCancelButton() {
-
-        cancelButton.frame = CGRect(x: 24, y: UIScreen.main.bounds.height - 90, width: 50, height: 45)
-        cancelButton.setTitle("返回", for: .normal)
-        cancelButton.titleLabel?.font = UIFont(name: "PingFang TC", size: 22)
-        cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
-
-        self.view.addSubview(cancelButton)
-    }
-
-    @objc func cancelButtonAction() {
-
-        dismiss(animated: true, completion: nil)
-    }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         guard let videoPlaybackVC = segue.destination as? VideoPlaybackViewController else { return }
 
         videoPlaybackVC.videoUrl = sender as? URL
+    }
+    
+    func setUpCancelButton() {
+        
+        cancelButton.frame = CGRect(x: 24, y: UIScreen.main.bounds.height - 90, width: 50, height: 45)
+        cancelButton.setTitle("返回", for: .normal)
+        cancelButton.titleLabel?.font = UIFont(name: "PingFang TC", size: 22)
+        cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
+        
+        self.view.addSubview(cancelButton)
+    }
+    
+    @objc func cancelButtonAction() {
+        
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -258,7 +258,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
             }
         }
     }
-
+    
     func currentVideoOrientation() -> AVCaptureVideoOrientation {
 
         var orientation: AVCaptureVideoOrientation
@@ -267,10 +267,10 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
         case .portrait:
             orientation = AVCaptureVideoOrientation.portrait
-
+            
         case .landscapeRight:
             orientation = AVCaptureVideoOrientation.landscapeLeft
-
+            
         case .portraitUpsideDown:
             orientation = AVCaptureVideoOrientation.portraitUpsideDown
 
@@ -318,7 +318,8 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
                 do {
 
                     try device.lockForConfiguration()
-                    device.isSmoothAutoFocusEnabled = false
+//                    device.isSmoothAutoFocusEnabled = false
+                    device.focusMode = .continuousAutoFocus
                     device.unlockForConfiguration()
 
                 } catch {

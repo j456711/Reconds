@@ -163,10 +163,10 @@ class VideoPlaybackViewController: UIViewController {
                                                name: .AVPlayerItemDidPlayToEndTime,
                                                object: rcVideoPlayer.avPlayer.currentItem)
         
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
-        
-        self.view.addGestureRecognizer(gesture)
-        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
+        panGesture.delegate = self
+        self.view.addGestureRecognizer(panGesture)
+
         guard let videoUrl = videoUrl else { return }
         
         rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
@@ -194,37 +194,52 @@ class VideoPlaybackViewController: UIViewController {
 }
 
 // MARK: - Gesture
+extension VideoPlaybackViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        if touch.view is UISlider {
+            
+            return false
+            
+        } else {
+            
+            return true
+        }
+    }
+}
+
 extension VideoPlaybackViewController {
     
     @objc func panAction(_ gesture: UIGestureRecognizer) {
-        
+
         var initialTouchPoint = CGPoint(x: 0, y: 0)
-        
-        let touchPoint = gesture.location(in: self.view.window)
-        
+
+        let touchPoint = gesture.location(in: self.view)
+
         switch gesture.state {
-            
+
         case .began:
             initialTouchPoint = touchPoint
 
         case .changed:
             if touchPoint.y - initialTouchPoint.y > 0 {
-                
+
                 self.view.frame = CGRect(x: 0,
                                          y: (touchPoint.y - initialTouchPoint.y),
                                          width: self.view.frame.size.width,
                                          height: self.view.frame.size.height)
             }
-            
+
         case .ended, .cancelled:
             if touchPoint.y - initialTouchPoint.y > 100 {
-                
+
                 self.dismiss(animated: true, completion: nil)
-                
+
             } else {
-                
+
                 UIView.animate(withDuration: 0.3, animations: {
-                    
+
                     self.view.frame = CGRect(x: 0,
                                              y: 0,
                                              width: self.view.frame.size.width,

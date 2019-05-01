@@ -413,7 +413,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Gestures
-extension HomeViewController {
+extension HomeViewController: UIGestureRecognizerDelegate {
     
     @objc func longPressAction(_ gesture: UIGestureRecognizer) {
 
@@ -507,7 +507,11 @@ extension HomeViewController {
         guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
         
         if videoData[0].dataPathArray[hitIndex.item] != "" {
-        
+            
+//            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
+//            panGesture.delegate = self
+//            videoPlaybackVC.view.addGestureRecognizer(gesture)
+            
             let dataPath =
                 FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
             
@@ -522,6 +526,46 @@ extension HomeViewController {
             videoPlaybackVC.modalPresentationStyle = .overFullScreen
             
             present(videoPlaybackVC, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func panAction(_ gesture: UIGestureRecognizer) {
+        
+        var initialTouchPoint = CGPoint(x: 0, y: 0)
+        
+        let touchPoint = gesture.location(in: self.view.window)
+        
+        switch gesture.state {
+            
+        case .began:
+            initialTouchPoint = touchPoint
+            
+        case .changed:
+            if touchPoint.y - initialTouchPoint.y > 0 {
+                
+                self.view.frame = CGRect(x: 0,
+                                         y: (touchPoint.y - initialTouchPoint.y),
+                                         width: self.view.frame.size.width,
+                                         height: self.view.frame.size.height)
+            }
+            
+        case .ended, .cancelled:
+            if touchPoint.y - initialTouchPoint.y > 100 {
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            } else {
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+                    self.view.frame = CGRect(x: 0,
+                                             y: 0,
+                                             width: self.view.frame.size.width,
+                                             height: self.view.frame.size.height)
+                })
+            }
+            
+        default: break
         }
     }
 }
