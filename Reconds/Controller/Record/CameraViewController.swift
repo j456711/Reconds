@@ -318,8 +318,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
                 do {
 
                     try device.lockForConfiguration()
-//                    device.isSmoothAutoFocusEnabled = false
-                    device.focusMode = .continuousAutoFocus
+                    device.isSmoothAutoFocusEnabled = false
                     device.unlockForConfiguration()
 
                 } catch {

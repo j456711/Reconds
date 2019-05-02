@@ -30,7 +30,8 @@ class VideoPlaybackViewController: UIViewController {
 
             rcVideoPlayerView.layer.cornerRadius = 10
 
-            rcVideoPlayerView.isHidden = true
+//            rcVideoPlayerView.isHidden = true
+            rcVideoPlayerView.alpha = 0.0
         }
     }    
 
@@ -105,7 +106,8 @@ class VideoPlaybackViewController: UIViewController {
         
         playButton.isHidden = true
 
-        rcVideoPlayerView.isHidden = false
+//        rcVideoPlayerView.isHidden = false
+        rcVideoPlayerView.alpha = 1.0
     }
 
     @IBAction func retakeButtonPressed(_ sender: UIButton) {
@@ -183,13 +185,33 @@ class VideoPlaybackViewController: UIViewController {
         return true
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if controlView.alpha == 1.0 {
+            
+            rcVideoPlayerView.alpha = 0.0
+            
+        } else {
+            
+            if rcVideoPlayerView.alpha == 1.0 {
+                
+                rcVideoPlayerView.alpha = 0.0
+                
+            } else {
+                
+                rcVideoPlayerView.alpha = 1.0
+            }
+        }
+    }
+    
     @objc func videoDidFinishPlaying() {
 
         controlView.alpha = 1.0
         
         playButton.isHidden = false
         
-        rcVideoPlayerView.isHidden = true
+//        rcVideoPlayerView.isHidden = true
+        rcVideoPlayerView.alpha = 0.0
     }
 }
 
