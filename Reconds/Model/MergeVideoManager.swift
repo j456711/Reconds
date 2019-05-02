@@ -31,7 +31,7 @@ class MergeVideoManager {
         for videoAsset in arrayVideos {
 
             let videoTrack = videoAsset.tracks(withMediaType: AVMediaType.video)[0]
-            
+
             let assetInfo = orientationFromTransform(transform: videoTrack.preferredTransform)
 
             var videoSize = videoTrack.naturalSize
@@ -59,7 +59,7 @@ class MergeVideoManager {
 //        let silenceSoundTrack = silenceAsset.tracks(withMediaType: AVMediaType.audio).first
         
         // Init composition
-        let mixComposition = AVMutableComposition.init()
+        let mixComposition = AVMutableComposition()
         
         for videoAsset in arrayVideos {
             
@@ -127,7 +127,7 @@ class MergeVideoManager {
         
         // Main video composition instruction
         let mainInstruction = AVMutableVideoCompositionInstruction()
-        mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: insertTime)
+        mainInstruction.timeRange = CMTimeRangeMake(start: .zero, duration: insertTime)
         mainInstruction.layerInstructions = arrayLayerInstructions
         
         // Main video composition
@@ -352,7 +352,7 @@ extension MergeVideoManager {
         } else if transform.a == 1.0 && transform.b == 0 && transform.c == 0 && transform.d == 1.0 {
 
             assetOrientation = .up
-
+            
         } else if transform.a == -1.0 && transform.b == 0 && transform.c == 0 && transform.d == -1.0 {
 
             assetOrientation = .down
@@ -372,31 +372,27 @@ extension MergeVideoManager {
 
         let transform = assetTrack.preferredTransform
         let assetInfo = orientationFromTransform(transform: transform)
-
+        
         var aspectFillRatio: CGFloat = 1
-
-        if assetTrack.naturalSize.height > assetTrack.naturalSize.width {
-          
-            aspectFillRatio = standardSize.height / assetTrack.naturalSize.height
-        
-        } else {
-        
-            aspectFillRatio = standardSize.width / assetTrack.naturalSize.width
-        }
 
         if assetInfo.isPortrait {
 
+            aspectFillRatio = standardSize.width / assetTrack.naturalSize.height
+            
             let scaleFactor = CGAffineTransform(scaleX: aspectFillRatio, y: aspectFillRatio)
 
             let posX = standardSize.width / 2 - (assetTrack.naturalSize.height * aspectFillRatio) / 2
             let posY = standardSize.height / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
             let moveFactor = CGAffineTransform(translationX: posX, y: posY)
-            
-            instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor),
-                                     at: atTime)
+
+            let concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor)
+
+            instruction.setTransform(concat, at: atTime)
 
         } else {
 
+            aspectFillRatio = standardSize.width / assetTrack.naturalSize.width
+            
             let scaleFactor = CGAffineTransform(scaleX: aspectFillRatio, y: aspectFillRatio)
 
             let posX = standardSize.width / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
