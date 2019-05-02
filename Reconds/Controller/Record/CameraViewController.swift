@@ -241,9 +241,9 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
         if !captureSession.isRunning {
 
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
 
-                self.captureSession.startRunning()
+                self?.captureSession.startRunning()
             }
         }
     }
@@ -252,9 +252,9 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
         if captureSession.isRunning {
 
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
 
-                self.captureSession.stopRunning()
+                self?.captureSession.stopRunning()
             }
         }
     }
@@ -461,9 +461,9 @@ extension CameraViewController: CAAnimationDelegate {
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
 
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
 
-            self.stopRecording()
+            self?.stopRecording()
         }
     }
 }

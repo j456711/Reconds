@@ -62,7 +62,7 @@ class RCVideoPlayer {
 
         let cmTime = CMTimeMake(value: 1, timescale: 1)
 
-        avPlayer.addPeriodicTimeObserver(forInterval: cmTime, queue: DispatchQueue.main, using: { [weak self] _ in
+        avPlayer.addPeriodicTimeObserver(forInterval: cmTime, queue: DispatchQueue.main, using: { [weak self] (_) in
 
             guard let strongSelf = self else { return }
 

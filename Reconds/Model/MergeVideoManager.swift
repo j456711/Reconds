@@ -153,9 +153,9 @@ class MergeVideoManager {
         // Do export
         exporter?.exportAsynchronously(completionHandler: {
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 
-                self.exportDidFinish(exporter: exporter, videoURL: exportUrl, completion: completion)
+                self?.exportDidFinish(exporter: exporter, videoURL: exportUrl, completion: completion)
             }
         })
     }
@@ -281,11 +281,11 @@ class MergeVideoManager {
         assetExport.outputURL = outputUrl
         assetExport.shouldOptimizeForNetworkUse = true
         
-        assetExport.exportAsynchronously { () -> Void in
+        assetExport.exportAsynchronously { () in
             
             switch assetExport.status {
                 
-            case AVAssetExportSession.Status.completed:
+            case .completed:
                 DispatchQueue.main.async { [weak self] in
                     
                     UISaveVideoAtPathToSavedPhotosAlbum(outputUrl.path, self, nil, nil)
@@ -295,18 +295,17 @@ class MergeVideoManager {
                     print("success", outputUrl.absoluteString)
                 }
                 
-            case  AVAssetExportSession.Status.failed:
+            case  .failed:
                 completionHandler(nil, nil, assetExport.error)
                 
                 print("failed:", assetExport.error as Any)
             
-            case AVAssetExportSession.Status.cancelled:
+            case .cancelled:
                 completionHandler(nil, nil, assetExport.error)
                 
                 print("cancelled", assetExport.error as Any)
             
             default:
-                
                 print("complete")
             }
         }
@@ -318,13 +317,13 @@ extension MergeVideoManager {
     fileprivate func exportDidFinish(exporter: AVAssetExportSession?,
                                      videoURL: URL, completion: @escaping ExportUrlHandler) {
         
-        if exporter?.status == AVAssetExportSession.Status.completed {
+        if exporter?.status == .completed {
         
             print("Exported file: \(videoURL.absoluteString)")
             
             completion(videoURL, nil)
         
-        } else if exporter?.status == AVAssetExportSession.Status.failed {
+        } else if exporter?.status == .failed {
           
             completion(videoURL, exporter?.error)
         }

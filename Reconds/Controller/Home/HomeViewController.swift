@@ -604,6 +604,10 @@ extension HomeViewController {
 
             if let error = error {
 
+                strongSelf.indicatorView1.stopAnimating()
+                
+                strongSelf.indicatorView2.stopAnimating()
+                
                 print("HomeVC merge error: \(error.localizedDescription)")
 
             } else {
@@ -615,16 +619,6 @@ extension HomeViewController {
                     strongSelf.previewButton.isHidden = false
                     
                     strongSelf.exportButton.isHidden = false
-                    
-                    strongSelf.indicatorView1.stopAnimating()
-                    
-                    strongSelf.indicatorView2.stopAnimating()
-                
-                } else {
-                    
-                    strongSelf.previewButton.isHidden = true
-                    
-                    strongSelf.exportButton.isHidden = true
                     
                     strongSelf.indicatorView1.stopAnimating()
                     
