@@ -83,27 +83,15 @@ class VideoPlaybackViewController: UIViewController {
         case UIImage.assets(.Icon_128px_Expand):
             zoomButton.setImage(.assets(.Icon_128px_Minimize), for: .normal)
         
-//            rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform(rotationAngle: .pi / 2))
-//            rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
-//            rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
+            rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform(rotationAngle: .pi / 2))
+            rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
+            rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
             
-            print(rcVideoPlayerView.center)
-            print(rcVideoPlayerView.frame)
-            
-//            rcVideoPlayerView.transform = CGAffineTransform(rotationAngle: .pi / 2)
-//            rcVideoPlayerView.center = CGPoint(x: 0, y: UIScreen.main.bounds.height / 2)
-//
-            
-            rcVideoPlayerView.frame = CGRect(x: 0, y: 0, width: 300, height: 20)
-            let redview = UIView(frame: CGRect.zero)
-            redview.frame.size = CGSize(width: 20, height: 20)
-            redview.center = CGPoint(x: 0, y: UIScreen.main.bounds.height / 2)
-            
-            redview.backgroundColor = UIColor.red
-            rcVideoPlayerView.addSubview(redview)
-            
-            print(rcVideoPlayerView.center)
-            print(rcVideoPlayerView.frame)
+            rcVideoPlayerView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+            rcVideoPlayerView.frame = CGRect(x: 8,
+                                             y: 28,
+                                             width: 74,
+                                             height: UIScreen.main.bounds.height - 36)
             
         case UIImage.assets(.Icon_128px_Minimize):
             zoomButton.setImage(.assets(.Icon_128px_Expand), for: .normal)
@@ -111,6 +99,12 @@ class VideoPlaybackViewController: UIViewController {
             rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform.identity)
             rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
             rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
+            
+            rcVideoPlayerView.transform = CGAffineTransform.identity
+            rcVideoPlayerView.frame = CGRect(x: 8,
+                                             y: UIScreen.main.bounds.height - 82,
+                                             width: UIScreen.main.bounds.width - 16,
+                                             height: 74)
             
         default: break
         }
@@ -179,6 +173,13 @@ class VideoPlaybackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(rcVideoPlayerView)
+        
+        rcVideoPlayerView.frame = CGRect(x: 8,
+                                         y: UIScreen.main.bounds.height - 82,
+                                         width: UIScreen.main.bounds.width - 16,
+                                         height: 74)
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(videoDidFinishPlaying),
                                                name: .AVPlayerItemDidPlayToEndTime,
@@ -205,7 +206,7 @@ class VideoPlaybackViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+
         if controlView.alpha == 1.0 {
             
             rcVideoPlayerView.alpha = 0.0
