@@ -201,6 +201,7 @@
                                     <constraint firstItem="tTt-Pg-e5b" firstAttribute="centerY" secondItem="rkb-d2-uyj" secondAttribute="centerY" id="mLH-53-JTH"/>
                                     <constraint firstItem="csL-zi-ePa" firstAttribute="centerX" secondItem="F3t-5J-ssQ" secondAttribute="centerX" id="pac-Np-sLo"/>
                                     <constraint firstItem="tTt-Pg-e5b" firstAttribute="leading" secondItem="F3t-5J-ssQ" secondAttribute="leading" constant="12" id="t6m-eI-62P"/>
+                                    <constraint firstAttribute="height" constant="74" id="ufN-RF-vHd"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yER-fU-bjx">
@@ -216,12 +217,11 @@
                         <constraints>
                             <constraint firstItem="yER-fU-bjx" firstAttribute="centerX" secondItem="oxa-8W-Khg" secondAttribute="centerX" id="7HH-dP-SRA"/>
                             <constraint firstItem="usc-9b-ZEa" firstAttribute="bottom" secondItem="jDg-As-Zsa" secondAttribute="bottom" id="C17-8z-C1y"/>
-                            <constraint firstItem="usc-9b-ZEa" firstAttribute="bottom" secondItem="F3t-5J-ssQ" secondAttribute="bottom" constant="8" id="GdS-3Z-pTF"/>
+                            <constraint firstAttribute="bottom" secondItem="F3t-5J-ssQ" secondAttribute="bottom" constant="8" id="GdS-3Z-pTF"/>
                             <constraint firstItem="usc-9b-ZEa" firstAttribute="trailing" secondItem="jDg-As-Zsa" secondAttribute="trailing" id="HgU-Rh-3y1"/>
                             <constraint firstItem="F3t-5J-ssQ" firstAttribute="leading" secondItem="jDg-As-Zsa" secondAttribute="leading" constant="8" id="Lcp-gR-mXG"/>
                             <constraint firstItem="usc-9b-ZEa" firstAttribute="leading" secondItem="jDg-As-Zsa" secondAttribute="leading" id="OuH-0H-cuR"/>
                             <constraint firstItem="jDg-As-Zsa" firstAttribute="trailing" secondItem="F3t-5J-ssQ" secondAttribute="trailing" constant="8" id="bqR-wM-35T"/>
-                            <constraint firstItem="F3t-5J-ssQ" firstAttribute="centerY" secondItem="usc-9b-ZEa" secondAttribute="centerY" id="dY6-lg-qFl"/>
                             <constraint firstItem="yER-fU-bjx" firstAttribute="centerY" secondItem="oxa-8W-Khg" secondAttribute="centerY" id="wUr-lX-gxX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jDg-As-Zsa"/>

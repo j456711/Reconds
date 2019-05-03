@@ -15,7 +15,7 @@ class VideoPlaybackViewController: UIViewController {
     let rcVideoPlayer = RCVideoPlayer()
 
     var videoUrl: URL?
-    
+
     @IBOutlet weak var controlView: UIView!
 
     @IBOutlet weak var retakeButton: UIButton!
@@ -75,16 +75,35 @@ class VideoPlaybackViewController: UIViewController {
             controlButton.setImage(UIImage.assets(.Icon_PauseController), for: .normal)
         }
     }
+    
     @IBAction func zoomButtonPressed(_ sender: UIButton) {
         
         switch zoomButton.imageView?.image {
             
         case UIImage.assets(.Icon_128px_Expand):
             zoomButton.setImage(.assets(.Icon_128px_Minimize), for: .normal)
+        
+//            rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform(rotationAngle: .pi / 2))
+//            rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
+//            rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
             
-            rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform(rotationAngle: .pi / 2))
-            rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
-            rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
+            print(rcVideoPlayerView.center)
+            print(rcVideoPlayerView.frame)
+            
+//            rcVideoPlayerView.transform = CGAffineTransform(rotationAngle: .pi / 2)
+//            rcVideoPlayerView.center = CGPoint(x: 0, y: UIScreen.main.bounds.height / 2)
+//
+            
+            rcVideoPlayerView.frame = CGRect(x: 0, y: 0, width: 300, height: 20)
+            let redview = UIView(frame: CGRect.zero)
+            redview.frame.size = CGSize(width: 20, height: 20)
+            redview.center = CGPoint(x: 0, y: UIScreen.main.bounds.height / 2)
+            
+            redview.backgroundColor = UIColor.red
+            rcVideoPlayerView.addSubview(redview)
+            
+            print(rcVideoPlayerView.center)
+            print(rcVideoPlayerView.frame)
             
         case UIImage.assets(.Icon_128px_Minimize):
             zoomButton.setImage(.assets(.Icon_128px_Expand), for: .normal)

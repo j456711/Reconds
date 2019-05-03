@@ -303,7 +303,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             withReuseIdentifier: String(describing: HomeCollectionViewCell.self), for: indexPath)
         
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
-        
+                
         if longPressedEnabled {
 
             homeCell.removeButton.isHidden = false
