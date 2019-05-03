@@ -30,7 +30,7 @@ enum ImageAssets: String {
     case Icon_Play
     case Icon_PlayController
     case Icon_PauseController
-    case Slider_Thumb
+    case Slider_64px_Thumb
 
     // swiftlint:enable identifier_name
 }

@@ -43,7 +43,7 @@ class VideoPlaybackViewController: UIViewController {
 
         didSet {
 
-            slider.setThumbImage(UIImage.assets(.Slider_Thumb), for: .normal)
+            slider.setThumbImage(UIImage.assets(.Slider_64px_Thumb), for: .normal)
         }
     }
 
@@ -207,19 +207,24 @@ class VideoPlaybackViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
-        if controlView.alpha == 1.0 {
-            
-            rcVideoPlayerView.alpha = 0.0
-            
-        } else {
-            
-            if rcVideoPlayerView.alpha == 1.0 {
+        guard let touch = touches.first else { return }
+        
+        if touch.view != rcVideoPlayerView {
+        
+            if controlView.alpha == 1.0 {
                 
                 rcVideoPlayerView.alpha = 0.0
                 
             } else {
                 
-                rcVideoPlayerView.alpha = 1.0
+                if rcVideoPlayerView.alpha == 1.0 {
+                    
+                    rcVideoPlayerView.alpha = 0.0
+                    
+                } else {
+                    
+                    rcVideoPlayerView.alpha = 1.0
+                }
             }
         }
     }
