@@ -12,6 +12,7 @@ enum ImageAssets: String {
 
     // swiftlint:disable identifier_name
     
+    case Icon_128px_FilmReel
     case Icon_128px_FilmStrips_Selected
     case Icon_128px_FilmStrips
     case Icon_128px_Settings_Selected
@@ -22,7 +23,6 @@ enum ImageAssets: String {
     case Icon_512px_Clapperboard
     case Icon_Check
     case Icon_Remove
-    case Icon_Shoot
 
     // RCVideoPlayer
     case Icon_128px_Expand

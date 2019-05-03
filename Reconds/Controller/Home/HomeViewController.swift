@@ -156,7 +156,7 @@ class HomeViewController: UIViewController {
         if title != "" {
 
             titleLabel.isHidden = false
-            titleLabel.text = RCConstants.videoTitle + title
+            titleLabel.text = title
             
             collectionView.isHidden = false
         }
@@ -248,15 +248,15 @@ class HomeViewController: UIViewController {
 
                 strongSelf.collectionView.isHidden = false
 
-                strongSelf.titleLabel.text = RCConstants.videoTitle + textField.placeholder!
+                strongSelf.titleLabel.text = textField.placeholder
                 
-                UserDefaults.standard.set(textField.placeholder!, forKey: "Title")
+                UserDefaults.standard.set(textField.placeholder, forKey: "Title")
                                 
             } else {
 
                 strongSelf.collectionView.isHidden = false
 
-                strongSelf.titleLabel.text = RCConstants.videoTitle + text
+                strongSelf.titleLabel.text = text
                 
                 UserDefaults.standard.set(text, forKey: "Title")
             }
