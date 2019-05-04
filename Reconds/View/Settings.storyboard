@@ -19,7 +19,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="7vH-jg-gkz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="7vH-jg-gkz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -37,11 +37,11 @@
             <objects>
                 <viewController id="sXj-GF-U5i" customClass="SettingsViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iph-kl-FR7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="xd7-d1-rDO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -116,11 +116,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="SKM-Lu-Sjc" customClass="SettingsDetailViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XDy-gW-rqP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u61-OR-Sjh">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <connections>
                                     <segue destination="3Mh-kG-JPg" kind="embed" id="3nO-GR-2sO"/>
                                 </connections>
@@ -152,7 +152,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zt4-9G-HM9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">"Acoustic Rock", "Radio Rock", "Serenity" and "Words" 
+                                <string key="text">"Acoustic Rock", "Radio Rock", "Serenity" and "Words" 
 Music by Jason Shaw @audionautix.com
 
 "Ambler", "Cheery Monday", "Happy Alley", "Memory Lane", "Off to Osaka" and "There It Is"
@@ -170,7 +170,7 @@ Icon made by https://www.flaticon.com/authors/smashicons from www.flaticon.com
 Icon made by https://www.flaticon.com/authors/kiranshastry from www.flaticon.com
 
 "Minimize"
-Icon made by https://www.flaticon.com/authors/anton-saputro from www.flaticon.com</mutableString>
+Icon made by https://www.flaticon.com/authors/anton-saputro from www.flaticon.com</string>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -183,6 +183,7 @@ Icon made by https://www.flaticon.com/authors/anton-saputro from www.flaticon.co
                             <constraint firstItem="Zt4-9G-HM9" firstAttribute="top" secondItem="tC9-Fc-QvL" secondAttribute="top" id="i5p-cH-2Ju"/>
                             <constraint firstItem="Zt4-9G-HM9" firstAttribute="leading" secondItem="tC9-Fc-QvL" secondAttribute="leading" id="zop-ma-b6r"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hfd-Oi-oxw"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hj1-4y-mVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
