@@ -70,6 +70,8 @@ class MusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.jy_registerCellWithNib(indentifier: String(describing: MusicTableViewCell.self), bundle: nil)
+        
         if let videoUrl = videoUrl {
             
             rcVideoPlayer.setUpAVPlayer(with: videoView, videoUrl: videoUrl, videoGravity: .resizeAspect)

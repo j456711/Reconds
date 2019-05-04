@@ -428,32 +428,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dAv-bg-80P" id="nwA-mm-ecc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oy6-Ds-ndH">
-                                                    <rect key="frame" x="15" y="18" width="345" height="14"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uLW-HP-BR6" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                                    <rect key="frame" x="335" y="12" width="25" height="25"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </view>
-                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="oy6-Ds-ndH" secondAttribute="trailing" id="Axy-Uy-IIo"/>
-                                                <constraint firstItem="oy6-Ds-ndH" firstAttribute="leading" secondItem="nwA-mm-ecc" secondAttribute="leadingMargin" id="IUA-Sy-Dz1"/>
-                                                <constraint firstItem="uLW-HP-BR6" firstAttribute="centerY" secondItem="oy6-Ds-ndH" secondAttribute="centerY" id="b8c-ii-5ZL"/>
-                                                <constraint firstItem="uLW-HP-BR6" firstAttribute="trailing" secondItem="nwA-mm-ecc" secondAttribute="trailingMargin" id="jSv-LG-PpM"/>
-                                                <constraint firstItem="oy6-Ds-ndH" firstAttribute="top" secondItem="nwA-mm-ecc" secondAttribute="topMargin" constant="7" id="mj1-4Z-D69"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="oy6-Ds-ndH" secondAttribute="bottom" constant="7" id="zPc-2K-fi2"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <outlet property="titleLabel" destination="oy6-Ds-ndH" id="wXX-Vc-k6y"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

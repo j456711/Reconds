@@ -49,6 +49,7 @@
 		34DBA2E0227D8FB7003C9D55 /* HomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2DF227D8FB7003C9D55 /* HomeCollectionViewCell.xib */; };
 		34DBA2E2227D92EC003C9D55 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2E1227D92EC003C9D55 /* UICollectionView+Extension.swift */; };
 		34DBA2E4227D9366003C9D55 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2E3227D9366003C9D55 /* UITableView+Extension.swift */; };
+		34DBA2E6227D9553003C9D55 /* MusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		34DBA2DF227D8FB7003C9D55 /* HomeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		34DBA2E1227D92EC003C9D55 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		34DBA2E3227D9366003C9D55 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicTableViewCell.xib; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +222,7 @@
 				1E419A732254B261009B4F49 /* HomeCollectionViewCell.swift */,
 				34DBA2DF227D8FB7003C9D55 /* HomeCollectionViewCell.xib */,
 				3416CDA5226C45AA007D9D37 /* MusicTableViewCell.swift */,
+				34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				347856EE2276C8C200A158EA /* GoogleService-Info.plist in Resources */,
 				1E419A72225378F1009B4F49 /* .gitignore in Resources */,
 				1E419A6A225373EA009B4F49 /* Record.storyboard in Resources */,
+				34DBA2E6227D9553003C9D55 /* MusicTableViewCell.xib in Resources */,
 				34DBA2E0227D8FB7003C9D55 /* HomeCollectionViewCell.xib in Resources */,
 				1E419A6C225375F7009B4F49 /* Settings.storyboard in Resources */,
 				1E419A6622537222009B4F49 /* Home.storyboard in Resources */,
