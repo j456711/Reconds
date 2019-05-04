@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyVideosCollectionViewCell" id="i6E-L7-GwY" customClass="MyVideosCollectionViewCell" customModule="Reconds" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fOi-9n-vYL">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                        <color key="backgroundColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgq-ty-Kvx">
+                        <rect key="frame" x="0.0" y="125" width="160" height="35"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titleLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1a-sB-C43">
+                                <rect key="frame" x="8" y="5.5" width="144" height="24"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="6vy-hm-sOd"/>
+                            <constraint firstItem="v1a-sB-C43" firstAttribute="centerY" secondItem="hgq-ty-Kvx" secondAttribute="centerY" id="J2U-dh-teA"/>
+                            <constraint firstAttribute="trailing" secondItem="v1a-sB-C43" secondAttribute="trailing" constant="8" id="Ypu-Pr-Pvd"/>
+                            <constraint firstItem="v1a-sB-C43" firstAttribute="leading" secondItem="hgq-ty-Kvx" secondAttribute="leading" constant="8" id="qSp-Yq-LeS"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="hgq-ty-Kvx" secondAttribute="bottom" id="9vZ-w9-pZx"/>
+                <constraint firstAttribute="trailing" secondItem="hgq-ty-Kvx" secondAttribute="trailing" id="CTn-mh-kvY"/>
+                <constraint firstAttribute="bottom" secondItem="fOi-9n-vYL" secondAttribute="bottom" id="EIs-Gh-twg"/>
+                <constraint firstItem="hgq-ty-Kvx" firstAttribute="leading" secondItem="i6E-L7-GwY" secondAttribute="leading" id="OY4-Ya-4lE"/>
+                <constraint firstItem="fOi-9n-vYL" firstAttribute="leading" secondItem="i6E-L7-GwY" secondAttribute="leading" id="S5g-4H-dVg"/>
+                <constraint firstAttribute="trailing" secondItem="fOi-9n-vYL" secondAttribute="trailing" id="TUr-6V-aXm"/>
+                <constraint firstItem="fOi-9n-vYL" firstAttribute="top" secondItem="i6E-L7-GwY" secondAttribute="top" id="t2w-Vi-kzQ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="BZF-hN-2zH"/>
+            <connections>
+                <outlet property="thumbnail" destination="fOi-9n-vYL" id="tKF-dq-qrv"/>
+                <outlet property="titleLabel" destination="v1a-sB-C43" id="YTT-qo-347"/>
+            </connections>
+            <point key="canvasLocation" x="246.37681159420291" y="-370.3125"/>
+        </collectionViewCell>
+    </objects>
+</document>

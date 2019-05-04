@@ -41,6 +41,7 @@ class MyVideosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        collectionView.jy_registerCellWithNib(indentifier: String(describing: MyVideosCollectionViewCell.self), bundle: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
