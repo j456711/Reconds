@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.jy_registerCellWithNib(indentifier: String(describing: SettingsTableViewCell.self), bundle: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -110,6 +111,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 //            } else if indexPath.row == 2 {
             
             settingsCell.descriptionLabel.isHidden = false
+            settingsCell.descriptionLabel.text = "前往設定"
 //            }
             
         case 1:

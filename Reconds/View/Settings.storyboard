@@ -52,43 +52,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zZQ-A2-6KF" id="nFe-Ec-74V">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vT-L2-Sb9">
-                                                    <rect key="frame" x="15" y="11" width="88" height="28"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前往設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6R-Ay-GCB">
-                                                    <rect key="frame" x="287" y="12" width="73" height="26"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
-                                                    <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Omm-ZS-1UE">
-                                                    <rect key="frame" x="310" y="9.5" width="51" height="31"/>
-                                                    <color key="onTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </switch>
-                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="2vT-L2-Sb9" firstAttribute="leading" secondItem="nFe-Ec-74V" secondAttribute="leadingMargin" id="83Y-0L-Pe7"/>
-                                                <constraint firstItem="Omm-ZS-1UE" firstAttribute="leading" relation="lessThanOrEqual" secondItem="2vT-L2-Sb9" secondAttribute="trailing" constant="210" id="Ikl-vF-HPf"/>
-                                                <constraint firstItem="Z6R-Ay-GCB" firstAttribute="trailing" secondItem="nFe-Ec-74V" secondAttribute="trailingMargin" id="Uy7-cp-JkA"/>
-                                                <constraint firstItem="Omm-ZS-1UE" firstAttribute="centerY" secondItem="2vT-L2-Sb9" secondAttribute="centerY" id="Woo-UE-C3o"/>
-                                                <constraint firstAttribute="trailing" secondItem="Omm-ZS-1UE" secondAttribute="trailing" constant="16" id="gtv-3J-mY1"/>
-                                                <constraint firstItem="2vT-L2-Sb9" firstAttribute="bottom" secondItem="nFe-Ec-74V" secondAttribute="bottomMargin" id="sNZ-AG-QaM"/>
-                                                <constraint firstItem="Z6R-Ay-GCB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2vT-L2-Sb9" secondAttribute="trailing" constant="26" id="uIi-fb-ouw"/>
-                                                <constraint firstItem="Z6R-Ay-GCB" firstAttribute="centerY" secondItem="2vT-L2-Sb9" secondAttribute="centerY" id="w3t-KH-M0U"/>
-                                                <constraint firstItem="2vT-L2-Sb9" firstAttribute="top" secondItem="nFe-Ec-74V" secondAttribute="topMargin" id="zee-28-Avs"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <outlet property="descriptionLabel" destination="Z6R-Ay-GCB" id="uxU-0B-Mxk"/>
-                                            <outlet property="switcher" destination="Omm-ZS-1UE" id="P1w-TJ-dFG"/>
-                                            <outlet property="titleLabel" destination="2vT-L2-Sb9" id="m2y-hW-WnQ"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

@@ -51,6 +51,7 @@
 		34DBA2E4227D9366003C9D55 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2E3227D9366003C9D55 /* UITableView+Extension.swift */; };
 		34DBA2E6227D9553003C9D55 /* MusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */; };
 		34DBA2EA227D98E6003C9D55 /* MyVideosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2E9227D98E6003C9D55 /* MyVideosCollectionViewCell.xib */; };
+		34DBA2EC227D9BA5003C9D55 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2EB227D9BA5003C9D55 /* SettingsTableViewCell.xib */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		34DBA2E3227D9366003C9D55 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicTableViewCell.xib; sourceTree = "<group>"; };
 		34DBA2E9227D98E6003C9D55 /* MyVideosCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyVideosCollectionViewCell.xib; sourceTree = "<group>"; };
+		34DBA2EB227D9BA5003C9D55 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -303,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				349C5DE2227570E200C1EBE6 /* SettingsTableViewCell.swift */,
+				34DBA2EB227D9BA5003C9D55 /* SettingsTableViewCell.xib */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				34DBA2EA227D98E6003C9D55 /* MyVideosCollectionViewCell.xib in Resources */,
 				34DBA2E0227D8FB7003C9D55 /* HomeCollectionViewCell.xib in Resources */,
 				1E419A6C225375F7009B4F49 /* Settings.storyboard in Resources */,
+				34DBA2EC227D9BA5003C9D55 /* SettingsTableViewCell.xib in Resources */,
 				1E419A6622537222009B4F49 /* Home.storyboard in Resources */,
 				34DBA2DC227C6381003C9D55 /* Assets.xcassets in Resources */,
 				1E419A4F2251BAB2009B4F49 /* Main.storyboard in Resources */,
