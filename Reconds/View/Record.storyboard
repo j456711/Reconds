@@ -20,7 +20,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="d7j-Ay-3FF"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="noun_film camera_591204" id="SMq-3W-Jty">
+                    <tabBarItem key="tabBarItem" title="" image="Icon_35px_Shot" id="SMq-3W-Jty">
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-8"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -244,8 +244,8 @@
     <resources>
         <image name="Icon_128px_Expand" width="32" height="32"/>
         <image name="Icon_256px_DownArrow" width="64" height="64"/>
+        <image name="Icon_35px_Shot" width="35" height="35"/>
         <image name="Icon_PauseController" width="64" height="64"/>
         <image name="Icon_Play" width="64" height="64"/>
-        <image name="noun_film camera_591204" width="35" height="35"/>
     </resources>
 </document>

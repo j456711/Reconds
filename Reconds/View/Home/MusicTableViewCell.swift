@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 
 class MusicTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var indicatorView: NVActivityIndicatorView! {
         
         didSet {
@@ -29,10 +29,10 @@ class MusicTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-//        if selected == true {
-//
-//            titleLabel.textColor = UIColor.orange
-//        }
+        if selected == true {
+
+            titleLabel.textColor = UIColor.orange
+        }
     }
 
 }

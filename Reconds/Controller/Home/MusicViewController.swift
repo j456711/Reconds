@@ -38,6 +38,8 @@ class MusicViewController: UIViewController {
     
     let rcVideoPlayer = RCVideoPlayer()
     
+    var keepingRecord = ""
+    
     var player: AVAudioPlayer!
     
     var videoUrl: URL?
@@ -146,14 +148,34 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
 
         musicCell.titleLabel.text = titleArray[indexPath.row]
         
+        
+        
+        if keepingRecord == "" || keepingRecord != musicCell.titleLabel.text {
+
+            musicCell.indicatorView.stopAnimating()
+            
+            musicCell.titleLabel.textColor = UIColor.white
+
+        } else if keepingRecord == musicCell.titleLabel.text {
+
+            musicCell.indicatorView.startAnimating()
+            
+            musicCell.titleLabel.textColor = UIColor.rcOrange
+        }
+        
+
+        
         return musicCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: false)
+        guard let musicCell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
         
-//        guard let cell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
+        musicCell.indicatorView.startAnimating()
+        musicCell.titleLabel.textColor = UIColor.rcOrange
+        
+//        tableView.deselectRow(at: indexPath, animated: false)
         
         guard let bundlePath = createBundlePath() else { return }
         
@@ -167,8 +189,6 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         let second = CMTimeGetSeconds(duration)
         
-//        cell.indicatorView.startAnimating()
-        
         rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
         rcVideoPlayer.mute(true)
         rcVideoPlayer.play()
@@ -178,7 +198,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
             player = try AVAudioPlayer(contentsOf: audioUrl)
             player.play()
             player.setVolume(0, fadeDuration: second)
-                        
+            
             self.audioUrl = audioUrl
             
         } catch {
@@ -191,8 +211,20 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         case .AcousticRock, .RadioRock, .Serenity, .Words:
             self.credits = "Music \(musicFilesArray[indexPath.row].rawValue) © Jason Shaw @audionautix.com"
             
+            keepingRecord = musicFilesArray[indexPath.row].rawValue
+            
         default:
             self.credits = "Music \(musicFilesArray[indexPath.row].rawValue) © Kevin MacLeod @incompetech.com"
+            
+            keepingRecord = musicFilesArray[indexPath.row].rawValue
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        guard let musicCell = tableView.cellForRow(at: indexPath) as? MusicTableViewCell else { return }
+        
+        musicCell.indicatorView.stopAnimating()
+        musicCell.titleLabel.textColor = UIColor.white
     }
 }

@@ -197,8 +197,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frN-1r-8Zr">
-                                <rect key="frame" x="16" y="491" width="343" height="43"/>
-                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="22"/>
+                                <rect key="frame" x="16" y="506" width="343" height="40"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                 <state key="normal" title="完成">
                                     <color key="titleColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -207,8 +207,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0n-VM-Ctl">
-                                <rect key="frame" x="16" y="491" width="343" height="43"/>
-                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="22"/>
+                                <rect key="frame" x="16" y="506" width="343" height="40"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                                 <state key="normal" title="輸出">
                                     <color key="titleColor" red="1" green="0.57647058823529407" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -244,17 +244,17 @@
                                     <action selector="previewButtonPressed:" destination="Dty-Hw-4cZ" eventType="touchUpInside" id="Szf-Mw-8se"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crV-4G-sei">
-                                <rect key="frame" x="8" y="40" width="99.5" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titleLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crV-4G-sei">
+                                <rect key="frame" x="8" y="40" width="88" height="28"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="5gZ-aO-kvL">
-                                <rect key="frame" x="0.0" y="92" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="375"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fhU-yD-8eU">
-                                <rect key="frame" x="0.0" y="92" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="375"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fhU-yD-8eU" secondAttribute="height" multiplier="1:1" id="uCx-Q3-OdT"/>
@@ -279,7 +279,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1yP-Ak-CKF" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="179.5" y="504.5" width="16" height="16"/>
+                                <rect key="frame" x="179.5" y="518" width="16" height="16"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="SQs-3P-PUd"/>
@@ -325,9 +325,9 @@
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" id="Cba-mj-hdK"/>
                             <constraint firstItem="frN-1r-8Zr" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" constant="16" id="H2f-MT-4CA"/>
                             <constraint firstItem="hDo-ON-gQT" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="85" id="HrO-B1-UKD"/>
-                            <constraint firstItem="fhU-yD-8eU" firstAttribute="top" secondItem="crV-4G-sei" secondAttribute="bottom" constant="24" id="IXs-FJ-oYl"/>
+                            <constraint firstItem="fhU-yD-8eU" firstAttribute="top" secondItem="crV-4G-sei" secondAttribute="bottom" constant="16" id="IXs-FJ-oYl"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="OPo-7H-Lef"/>
-                            <constraint firstItem="Kde-7M-CNW" firstAttribute="bottom" secondItem="frN-1r-8Zr" secondAttribute="bottom" constant="20" id="Q3q-kc-fbE"/>
+                            <constraint firstItem="Kde-7M-CNW" firstAttribute="bottom" secondItem="frN-1r-8Zr" secondAttribute="bottom" constant="8" id="Q3q-kc-fbE"/>
                             <constraint firstItem="1yP-Ak-CKF" firstAttribute="centerX" secondItem="Svg-fk-ATz" secondAttribute="centerX" id="U8V-Pw-T8p"/>
                             <constraint firstItem="5gZ-aO-kvL" firstAttribute="centerY" secondItem="fhU-yD-8eU" secondAttribute="centerY" id="VkD-sN-Myy"/>
                             <constraint firstItem="hDo-ON-gQT" firstAttribute="centerX" secondItem="Svg-fk-ATz" secondAttribute="centerX" id="WZM-dw-SkC"/>
@@ -336,7 +336,7 @@
                             <constraint firstItem="ymF-0x-gfi" firstAttribute="top" secondItem="Kde-7M-CNW" secondAttribute="top" constant="16" id="aom-er-Ied"/>
                             <constraint firstItem="5gZ-aO-kvL" firstAttribute="width" secondItem="fhU-yD-8eU" secondAttribute="width" id="b1h-bv-UGV"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="J0n-VM-Ctl" secondAttribute="trailing" constant="16" id="fJS-QG-e56"/>
-                            <constraint firstItem="Kde-7M-CNW" firstAttribute="bottom" secondItem="J0n-VM-Ctl" secondAttribute="bottom" constant="20" id="gY3-c2-rMv"/>
+                            <constraint firstItem="Kde-7M-CNW" firstAttribute="bottom" secondItem="J0n-VM-Ctl" secondAttribute="bottom" constant="8" id="gY3-c2-rMv"/>
                             <constraint firstItem="5gZ-aO-kvL" firstAttribute="centerX" secondItem="fhU-yD-8eU" secondAttribute="centerX" id="hYh-Gg-e9i"/>
                             <constraint firstItem="RQ0-y4-aCF" firstAttribute="centerY" secondItem="crV-4G-sei" secondAttribute="centerY" id="o3i-14-2Ry"/>
                             <constraint firstItem="J0n-VM-Ctl" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" constant="16" id="rKx-sc-Ww3"/>

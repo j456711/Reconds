@@ -162,7 +162,8 @@ class MergeVideoManager {
     
     typealias VideoExportedHandler = ((URL?, String?, Error?) -> Void)
     
-    func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL, credits: String, completionHandler: @escaping VideoExportedHandler) {
+    func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL, credits: String,
+                            completionHandler: @escaping VideoExportedHandler) {
         
         let audioMix = AVMutableAudioMix()
         let mixComposition = AVMutableComposition()

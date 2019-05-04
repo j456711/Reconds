@@ -52,6 +52,7 @@
 		34DBA2E6227D9553003C9D55 /* MusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */; };
 		34DBA2EA227D98E6003C9D55 /* MyVideosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2E9227D98E6003C9D55 /* MyVideosCollectionViewCell.xib */; };
 		34DBA2EC227D9BA5003C9D55 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2EB227D9BA5003C9D55 /* SettingsTableViewCell.xib */; };
+		34DBA2EE227DC24D003C9D55 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2ED227DC24D003C9D55 /* UIColor+Extension.swift */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,7 @@
 		34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicTableViewCell.xib; sourceTree = "<group>"; };
 		34DBA2E9227D98E6003C9D55 /* MyVideosCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyVideosCollectionViewCell.xib; sourceTree = "<group>"; };
 		34DBA2EB227D9BA5003C9D55 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
+		34DBA2ED227DC24D003C9D55 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,6 +252,7 @@
 				34300BB92271CB5000CF3429 /* UIStoryboard+Extension.swift */,
 				34DBA2E1227D92EC003C9D55 /* UICollectionView+Extension.swift */,
 				34DBA2E3227D9366003C9D55 /* UITableView+Extension.swift */,
+				34DBA2ED227DC24D003C9D55 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				34300BB0226DB19E00CF3429 /* MyVideosCollectionViewCell.swift in Sources */,
 				1E419A742254B261009B4F49 /* HomeCollectionViewCell.swift in Sources */,
 				1E419A4C2251BAB1009B4F49 /* HomeViewController.swift in Sources */,
+				34DBA2EE227DC24D003C9D55 /* UIColor+Extension.swift in Sources */,
 				1EF19009225C8689001FEFCA /* UIImage+Extension.swift in Sources */,
 				34DBA2E2227D92EC003C9D55 /* UICollectionView+Extension.swift in Sources */,
 				1E419A68225372D0009B4F49 /* RecordViewController.swift in Sources */,

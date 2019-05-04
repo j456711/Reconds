@@ -228,7 +228,7 @@ class HomeViewController: UIViewController {
     func setUpButtonStyle(for button: UIButton) {
         
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 255 / 255, green: 147 / 255, blue: 0 / 255, alpha: 1).cgColor
+        button.layer.borderColor = UIColor.rcOrange.cgColor
     }
     
     func createProjectNameAlert() {
