@@ -151,6 +151,8 @@ class HomeViewController: UIViewController {
         FileManager.default.jy_createDirectory("Exported")
         FileManager.default.jy_createDirectory("VideoData")
         
+        collectionView.jy_registerCellWithNib(indentifier: String(describing: HomeCollectionViewCell.self), bundle: nil)
+        
         guard let title = UserDefaults.standard.string(forKey: "Title") else { return }
         
         if title != "" {
