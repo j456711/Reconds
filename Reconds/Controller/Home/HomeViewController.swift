@@ -32,11 +32,27 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var remindLabel: UILabel!
     
+    @IBOutlet weak var descriptionTitleLabel: UILabel! {
+        
+        didSet {
+            
+            descriptionTitleLabel.isHidden = true
+        }
+    }
+    
     @IBOutlet weak var titleLabel: UILabel! {
         
         didSet {
             
             titleLabel.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var iconImage: UIImageView! {
+        
+        didSet {
+            
+            iconImage.isHidden = true
         }
     }
     
@@ -157,10 +173,12 @@ class HomeViewController: UIViewController {
         
         if title != "" {
 
+            descriptionTitleLabel.isHidden = false
             titleLabel.isHidden = false
             titleLabel.text = title
             
             collectionView.isHidden = false
+            iconImage.isHidden = false
         }
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
@@ -187,9 +205,13 @@ class HomeViewController: UIViewController {
                 
             } else {
                 
+                descriptionTitleLabel.isHidden = false
+                
                 titleLabel.isHidden = false
 
                 collectionView.isHidden = false
+                
+                iconImage.isHidden = false
                 
                 indicatorView1.startAnimating()
                 
@@ -248,16 +270,16 @@ class HomeViewController: UIViewController {
 
             if text.isEmpty {
 
-                strongSelf.collectionView.isHidden = false
-
                 strongSelf.titleLabel.text = textField.placeholder
                 
                 UserDefaults.standard.set(textField.placeholder, forKey: "Title")
                                 
             } else {
 
-                strongSelf.collectionView.isHidden = false
-
+//                strongSelf.collectionView.isHidden = false
+//
+//                strongSelf.iconImage.isHidden = false
+//
                 strongSelf.titleLabel.text = text
                 
                 UserDefaults.standard.set(text, forKey: "Title")
@@ -269,7 +291,13 @@ class HomeViewController: UIViewController {
                 
                 strongSelf.collectionView.reloadData()
             }
-                        
+            
+            strongSelf.collectionView.isHidden = false
+            
+            strongSelf.iconImage.isHidden = false
+
+            strongSelf.descriptionTitleLabel.isHidden = false
+            
             strongSelf.titleLabel.isHidden = false
         }
         
@@ -308,6 +336,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 
         if longPressedEnabled {
 
+            previewButton.isHidden = true
+            
             homeCell.removeButton.isHidden = false
             
         } else {
@@ -512,10 +542,6 @@ extension HomeViewController: UIGestureRecognizerDelegate {
         
         if videoData[0].dataPathArray[hitIndex.item] != "" {
             
-//            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
-//            panGesture.delegate = self
-//            videoPlaybackVC.view.addGestureRecognizer(gesture)
-            
             let dataPath =
                 FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
             
@@ -635,6 +661,8 @@ extension HomeViewController {
         titleLabel.isHidden = true
         
         collectionView.isHidden = true
+        
+        iconImage.isHidden = true
         
         exportButton.isHidden = true
     }

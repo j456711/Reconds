@@ -15,6 +15,7 @@ class MusicTableViewCell: UITableViewCell {
         
         didSet {
             
+            indicatorView.color = UIColor.rcOrange
             indicatorView.type = .audioEqualizer
         }
     }
@@ -24,15 +25,6 @@ class MusicTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        if selected == true {
-
-            titleLabel.textColor = UIColor.orange
-        }
     }
 
 }

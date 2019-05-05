@@ -358,8 +358,10 @@
                     <connections>
                         <outlet property="clapperButton" destination="m4i-Ta-YEb" id="LkD-xH-asu"/>
                         <outlet property="collectionView" destination="fhU-yD-8eU" id="vYQ-NB-QpV"/>
+                        <outlet property="descriptionTitleLabel" destination="ymF-0x-gfi" id="BDh-5b-mnJ"/>
                         <outlet property="doneButton" destination="frN-1r-8Zr" id="Ocu-KZ-E5F"/>
                         <outlet property="exportButton" destination="J0n-VM-Ctl" id="FNr-j4-7EJ"/>
+                        <outlet property="iconImage" destination="5gZ-aO-kvL" id="aQ8-VB-edd"/>
                         <outlet property="indicatorView1" destination="6HE-md-niw" id="0mo-6S-bW3"/>
                         <outlet property="indicatorView2" destination="1yP-Ak-CKF" id="AQP-sN-fJA"/>
                         <outlet property="previewButton" destination="RQ0-y4-aCF" id="Y1E-bW-Myq"/>
