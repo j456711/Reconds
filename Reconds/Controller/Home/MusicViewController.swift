@@ -184,7 +184,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         let second = CMTimeGetSeconds(duration)
         
-        rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
+        rcVideoPlayer.avPlayer.seek(to: .zero)
         rcVideoPlayer.mute(true)
         rcVideoPlayer.play()
         

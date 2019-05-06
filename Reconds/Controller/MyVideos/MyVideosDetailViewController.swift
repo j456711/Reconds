@@ -72,7 +72,7 @@ class MyVideosDetailViewController: UIViewController {
     
         let alert = UIAlertController(title: "即將刪除此影片，此動作無法還原。", message: nil, preferredStyle: .actionSheet)
         
-        let deleteAction = UIAlertAction(title: "刪除", style: .destructive, handler: { [ weak self] (_) in
+        let deleteAction = UIAlertAction(title: "刪除影片", style: .destructive, handler: { [ weak self] (_) in
             
             guard let strongSelf = self else { return }
             

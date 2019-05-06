@@ -18,6 +18,10 @@ class HomeViewController: UIViewController {
         static let showMusicVC = "showMusicVC"
     }
     
+    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+    
     let rcVideoPlayer = RCVideoPlayer()
     
     var feedbackGenerator: UIImpactFeedbackGenerator?
@@ -181,11 +185,11 @@ class HomeViewController: UIViewController {
             iconImage.isHidden = false
         }
         
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        
+       
         collectionView.addGestureRecognizer(longPressGesture)
         collectionView.addGestureRecognizer(tapGesture)
+        
+        longPressGesture.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -332,6 +336,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
         
+        if filteredArray?.count == 0 {
+            
+            
+        }
+        
         if longPressedEnabled {
 
             previewButton.isHidden = true
@@ -444,6 +453,23 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - Gestures
 extension HomeViewController: UIGestureRecognizerDelegate {
     
+//    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+//        
+//        if let longPressGesture = gestureRecognizer as? UILongPressGestureRecognizer {
+//
+//            if filteredArray?.count == 0 {
+//
+//                return false
+//
+//            } else {
+//
+//                return true
+//            }
+//        }
+//
+//        return true
+//    }
+    
     @objc func longPressAction(_ gesture: UIGestureRecognizer) {
 
         switch gesture.state {
@@ -451,14 +477,14 @@ extension HomeViewController: UIGestureRecognizerDelegate {
         case .began:
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
             
-            if filteredArray?.count == 0 {
+//            if filteredArray?.count == 0 {
+//
+//                feedbackGenerator = nil
+//
+//            } else {
             
-                feedbackGenerator = nil
-            
-            } else {
-                
                 feedbackGenerator?.impactOccurred()
-            }
+//            }
             
             guard let selectedIndexPath =
                 collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else { return }
@@ -470,12 +496,12 @@ extension HomeViewController: UIGestureRecognizerDelegate {
 
         case .ended:
             
-            if filteredArray?.count == 0 {
-                
-                break
-                
-            } else {
-                
+//            if filteredArray?.count == 0 {
+//
+//                break
+//
+//            } else {
+            
                 feedbackGenerator = nil
                 
                 collectionView.endInteractiveMovement()
@@ -487,7 +513,7 @@ extension HomeViewController: UIGestureRecognizerDelegate {
                 longPressedEnabled = true
                 
                 collectionView.reloadData()
-            }
+//            }
             
         case  .cancelled, .failed:
             collectionView.cancelInteractiveMovement()

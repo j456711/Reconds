@@ -30,7 +30,7 @@ class MergeVideoManager {
 //         Determine video output size
         for videoAsset in arrayVideos {
 
-            let videoTrack = videoAsset.tracks(withMediaType: AVMediaType.video)[0]
+            let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
 
             let assetInfo = orientationFromTransform(transform: videoTrack.preferredTransform)
 
@@ -64,14 +64,14 @@ class MergeVideoManager {
         for videoAsset in arrayVideos {
             
             // Get video track
-            guard let videoTrack = videoAsset.tracks(withMediaType: AVMediaType.video).first else { continue }
+            guard let videoTrack = videoAsset.tracks(withMediaType: .video).first else { continue }
             
             // Get audio track
             var audioTrack: AVAssetTrack?
             
-            if videoAsset.tracks(withMediaType: AVMediaType.audio).count > 0 {
+            if videoAsset.tracks(withMediaType: .audio).count > 0 {
             
-                audioTrack = videoAsset.tracks(withMediaType: AVMediaType.audio).first
+                audioTrack = videoAsset.tracks(withMediaType: .audio).first
             }
 //            else {
 //                audioTrack = silenceSoundTrack
@@ -79,17 +79,17 @@ class MergeVideoManager {
             
             // Init video & audio composition track
             let videoCompositionTrack =
-                mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
+                mixComposition.addMutableTrack(withMediaType: .video,
                                                preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             
             let audioCompositionTrack =
-                mixComposition.addMutableTrack(withMediaType: AVMediaType.audio,
+                mixComposition.addMutableTrack(withMediaType: .audio,
                                                preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             
             do {
                 
                 // Add video track to video composition at specific time
-                try videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                try videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: .zero,
                                                                            duration: videoAsset.duration),
                                                            of: videoTrack,
                                                            at: insertTime)
@@ -97,7 +97,7 @@ class MergeVideoManager {
                 // Add audio track to audio composition at specific time
                 if let audioTrack = audioTrack {
                     
-                    try audioCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+                    try audioCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: .zero,
                                                                                duration: videoAsset.duration),
                                                                of: audioTrack,
                                                                at: insertTime)
@@ -146,7 +146,7 @@ class MergeVideoManager {
         // Init exporter
         let exporter = AVAssetExportSession.init(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)
         exporter?.outputURL = exportUrl
-        exporter?.outputFileType = AVFileType.mp4
+        exporter?.outputFileType = .mp4
         exporter?.shouldOptimizeForNetworkUse = true
         exporter?.videoComposition = mainComposition
         
@@ -176,28 +176,28 @@ class MergeVideoManager {
         let aAudioAsset = AVAsset(url: audioUrl)
         
         mutableCompositionVideoTrack.append(
-            mixComposition.addMutableTrack(withMediaType: AVMediaType.video,
+            mixComposition.addMutableTrack(withMediaType: .video,
                                            preferredTrackID: kCMPersistentTrackID_Invalid)!)
         mutableCompositionAudioTrack.append(
-            mixComposition.addMutableTrack(withMediaType: AVMediaType.audio,
+            mixComposition.addMutableTrack(withMediaType: .audio,
                                            preferredTrackID: kCMPersistentTrackID_Invalid)!)
         
-        let aVideoAssetTrack = aVideoAsset.tracks(withMediaType: AVMediaType.video)[0]
-        let aAudioAssetTrack = aAudioAsset.tracks(withMediaType: AVMediaType.audio)[0]
+        let aVideoAssetTrack = aVideoAsset.tracks(withMediaType: .video)[0]
+        let aAudioAssetTrack = aAudioAsset.tracks(withMediaType: .audio)[0]
         
         do {
             try mutableCompositionVideoTrack[0].insertTimeRange(
-                CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration),
+                CMTimeRangeMake(start: .zero, duration: aVideoAssetTrack.timeRange.duration),
                 of: aVideoAssetTrack,
-                at: CMTime.zero)
+                at: .zero)
             
             //In my case my audio file is longer then video file so i took videoAsset duration
             //instead of audioAsset duration
             
             try mutableCompositionAudioTrack[0].insertTimeRange(
-                CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration),
+                CMTimeRangeMake(start: .zero, duration: aVideoAssetTrack.timeRange.duration),
                 of: aAudioAssetTrack,
-                at: CMTime.zero)
+                at: .zero)
             
             //Use this instead above line if your audiofile and video file's playing durations are same
             
@@ -213,7 +213,7 @@ class MergeVideoManager {
         }
         
         totalVideoCompositionInstruction.timeRange =
-            CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration)
+            CMTimeRangeMake(start: .zero, duration: aVideoAssetTrack.timeRange.duration)
         
         let videoTrack = mixComposition.tracks(withMediaType: .video)[0]
         let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
@@ -385,7 +385,7 @@ extension MergeVideoManager {
                                                          atTime: CMTime) -> AVMutableVideoCompositionLayerInstruction {
 
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
-        let assetTrack = asset.tracks(withMediaType: AVMediaType.video)[0]
+        let assetTrack = asset.tracks(withMediaType: .video)[0]
 
         let transform = assetTrack.preferredTransform
         let assetInfo = orientationFromTransform(transform: transform)

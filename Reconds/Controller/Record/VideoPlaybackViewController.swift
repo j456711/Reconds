@@ -112,7 +112,7 @@ class VideoPlaybackViewController: UIViewController {
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
 
-        rcVideoPlayer.avPlayer.seek(to: CMTime.zero)
+        rcVideoPlayer.avPlayer.seek(to: .zero)
         rcVideoPlayer.play()
 
         controlView.alpha = 0.0
