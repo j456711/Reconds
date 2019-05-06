@@ -40,7 +40,8 @@ class MusicViewController: UIViewController {
     
     var keepingRecord = ""
     
-    var player: AVAudioPlayer!
+    var player: AVAudioPlayer?
+//    var player = AVAudioPlayer()
     
     var videoUrl: URL?
     
@@ -82,7 +83,10 @@ class MusicViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         
-        player.stop()
+//        if let player = player {
+        
+            player?.stop()
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -191,8 +195,8 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         do {
             
             player = try AVAudioPlayer(contentsOf: audioUrl)
-            player.play()
-            player.setVolume(0, fadeDuration: second)
+            player?.play()
+            player?.setVolume(0, fadeDuration: second)
             
             self.audioUrl = audioUrl
             

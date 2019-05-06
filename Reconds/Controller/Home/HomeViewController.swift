@@ -18,10 +18,6 @@ class HomeViewController: UIViewController {
         static let showMusicVC = "showMusicVC"
     }
     
-    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
-    
-    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-    
     let rcVideoPlayer = RCVideoPlayer()
     
     var feedbackGenerator: UIImpactFeedbackGenerator?
@@ -81,6 +77,8 @@ class HomeViewController: UIViewController {
         didSet {
 
             previewButton.isHidden = true
+            
+            setUpButtonStyle(for: previewButton, cornerRadius: 17)
         }
     }
     
@@ -92,7 +90,7 @@ class HomeViewController: UIViewController {
 
             exportButton.isHidden = true
 
-            setUpButtonStyle(for: exportButton)
+            setUpButtonStyle(for: exportButton, cornerRadius: 20)
         }
     }
     
@@ -102,7 +100,7 @@ class HomeViewController: UIViewController {
 
             doneButton.isHidden = true
 
-            setUpButtonStyle(for: doneButton)
+            setUpButtonStyle(for: doneButton, cornerRadius: 20)
         }
     }
     
@@ -184,12 +182,14 @@ class HomeViewController: UIViewController {
             collectionView.isHidden = false
             iconImage.isHidden = false
         }
-        
+       
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
        
         collectionView.addGestureRecognizer(longPressGesture)
         collectionView.addGestureRecognizer(tapGesture)
         
-        longPressGesture.delegate = self
+//        longPressGesture.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -251,8 +251,9 @@ class HomeViewController: UIViewController {
         musicVC.videoUrl = videoUrl
     }
     
-    func setUpButtonStyle(for button: UIButton) {
+    func setUpButtonStyle(for button: UIButton, cornerRadius: CGFloat) {
         
+        button.layer.cornerRadius = cornerRadius
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.rcOrange.cgColor
     }
@@ -335,11 +336,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
         
         homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
-        
-        if filteredArray?.count == 0 {
-            
-            
-        }
         
         if longPressedEnabled {
 
@@ -529,17 +525,18 @@ extension HomeViewController: UIGestureRecognizerDelegate {
 
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
         
-        UIAlertController.addConfirmAndCancelAlertWith(viewController: self,
-                                                       alertTitle: "確定要刪除影片嗎？",
-                                                       alertMessage: "刪除後不可回復。",
-                                                       confirmActionHandler: { [weak self] (_) in
+        
+        
+        let alert = UIAlertController(title: "即將刪除此影片，此動作無法還原。", message: nil, preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "刪除影片", style: .destructive, handler: { [ weak self] (_) in
             
             do {
                 
                 guard let strongSelf = self else { return }
                 
                 if strongSelf.videoData.count != 0 {
-                
+                    
                     let dataPath =
                         FileManager.videoDataDirectory.appendingPathComponent(
                             strongSelf.videoData[0].dataPathArray[hitIndex.item])
@@ -563,7 +560,54 @@ extension HomeViewController: UIGestureRecognizerDelegate {
                 
                 print("Remove fail", error.localizedDescription)
             }
-        })        
+        })
+        
+        alert.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+        
+        
+//        UIAlertController.addConfirmAndCancelAlertWith(viewController: self,
+//                                                       alertTitle: "確定要刪除影片嗎？",
+//                                                       alertMessage: "刪除後不可回復。",
+//                                                       confirmActionHandler: { [weak self] (_) in
+//
+//            do {
+//
+//                guard let strongSelf = self else { return }
+//
+//                if strongSelf.videoData.count != 0 {
+//
+//                    let dataPath =
+//                        FileManager.videoDataDirectory.appendingPathComponent(
+//                            strongSelf.videoData[0].dataPathArray[hitIndex.item])
+//
+//                    try FileManager.default.removeItem(at: dataPath)
+//
+//                    strongSelf.videoData[0].dataPathArray.remove(at: hitIndex.item)
+//
+//                    strongSelf.videoData[0].dataPathArray.insert("", at: 24)
+//
+//                    StorageManager.shared.save()
+//
+//                    print("Remove successfully")
+//
+//                    print("**********\(strongSelf.videoData[0].dataPathArray)**********")
+//
+//                    strongSelf.collectionView.reloadData()
+//                }
+//
+//            } catch {
+//
+//                print("Remove fail", error.localizedDescription)
+//            }
+//        })
     }
     
     @objc func tapAction(_ gesture: UIGestureRecognizer) {
@@ -668,25 +712,31 @@ extension HomeViewController {
 
             if let error = error {
 
-                strongSelf.indicatorView1.stopAnimating()
-                
-                strongSelf.indicatorView2.stopAnimating()
-                
-                print("HomeVC merge error: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    
+                    strongSelf.indicatorView1.stopAnimating()
+                    
+                    strongSelf.indicatorView2.stopAnimating()
+                    
+                    print("HomeVC merge error: \(error.localizedDescription)")
+                }
 
             } else {
 
                 if let videoUrl = videoUrl {
 
-                    strongSelf.videoUrl = videoUrl
-                   
-                    strongSelf.previewButton.isHidden = false
-                    
-                    strongSelf.exportButton.isHidden = false
-                    
-                    strongSelf.indicatorView1.stopAnimating()
-                    
-                    strongSelf.indicatorView2.stopAnimating()
+                    DispatchQueue.main.async {
+                        
+                        strongSelf.videoUrl = videoUrl
+                        
+                        strongSelf.previewButton.isHidden = false
+                        
+                        strongSelf.exportButton.isHidden = false
+                        
+                        strongSelf.indicatorView1.stopAnimating()
+                        
+                        strongSelf.indicatorView2.stopAnimating()
+                    }
                 }
             }
         })
