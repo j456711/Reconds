@@ -45,28 +45,18 @@ extension UIAlertController {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-//    static func addActionSheetAlert(viewController: UIViewController,
-//                                    alertTitle: String?,
-//                                    alertMessage: String?,
-//                                    actions: [String],
-//                                    actionStyle: [UIAlertAction.Style],
-//                                    actionHandler: UIAlertActionHandler) {
-//
-//        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .actionSheet)
-//
-//        let actions = actions
-//
-//        for action in actions {
-//
-//            let action = UIAlertAction(title: action, style: .style, handler: actionHandler)
-//
-//            alert.addAction(action)
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-//
-//        alert.addAction(cancelAction)
-//
-//        viewController.present(alert, animated: true, completion: nil)
-//    }
+    static func addDeleteActionSheet(viewController: UIViewController, deleteActionHandler: UIAlertActionHandler) {
+        
+        let alert = UIAlertController(title: "即將刪除此影片，此動作無法還原。", message: nil, preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "刪除影片", style: .destructive, handler: deleteActionHandler)
+        
+        alert.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        
+        viewController.present(alert, animated: true, completion: nil)
+    }
 }

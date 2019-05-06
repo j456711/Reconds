@@ -525,11 +525,7 @@ extension HomeViewController: UIGestureRecognizerDelegate {
 
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
         
-        
-        
-        let alert = UIAlertController(title: "即將刪除此影片，此動作無法還原。", message: nil, preferredStyle: .actionSheet)
-        
-        let deleteAction = UIAlertAction(title: "刪除影片", style: .destructive, handler: { [ weak self] (_) in
+        UIAlertController.addDeleteActionSheet(viewController: self, deleteActionHandler: { [ weak self] (_) in
             
             do {
                 
@@ -561,53 +557,6 @@ extension HomeViewController: UIGestureRecognizerDelegate {
                 print("Remove fail", error.localizedDescription)
             }
         })
-        
-        alert.addAction(deleteAction)
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
-        
-        
-        
-        
-//        UIAlertController.addConfirmAndCancelAlertWith(viewController: self,
-//                                                       alertTitle: "確定要刪除影片嗎？",
-//                                                       alertMessage: "刪除後不可回復。",
-//                                                       confirmActionHandler: { [weak self] (_) in
-//
-//            do {
-//
-//                guard let strongSelf = self else { return }
-//
-//                if strongSelf.videoData.count != 0 {
-//
-//                    let dataPath =
-//                        FileManager.videoDataDirectory.appendingPathComponent(
-//                            strongSelf.videoData[0].dataPathArray[hitIndex.item])
-//
-//                    try FileManager.default.removeItem(at: dataPath)
-//
-//                    strongSelf.videoData[0].dataPathArray.remove(at: hitIndex.item)
-//
-//                    strongSelf.videoData[0].dataPathArray.insert("", at: 24)
-//
-//                    StorageManager.shared.save()
-//
-//                    print("Remove successfully")
-//
-//                    print("**********\(strongSelf.videoData[0].dataPathArray)**********")
-//
-//                    strongSelf.collectionView.reloadData()
-//                }
-//
-//            } catch {
-//
-//                print("Remove fail", error.localizedDescription)
-//            }
-//        })
     }
     
     @objc func tapAction(_ gesture: UIGestureRecognizer) {

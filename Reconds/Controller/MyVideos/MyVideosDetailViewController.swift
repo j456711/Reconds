@@ -70,9 +70,7 @@ class MyVideosDetailViewController: UIViewController {
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
     
-        let alert = UIAlertController(title: "即將刪除此影片，此動作無法還原。", message: nil, preferredStyle: .actionSheet)
-        
-        let deleteAction = UIAlertAction(title: "刪除影片", style: .destructive, handler: { [ weak self] (_) in
+        UIAlertController.addDeleteActionSheet(viewController: self, deleteActionHandler: { [ weak self] (_) in
             
             guard let strongSelf = self else { return }
             
@@ -85,14 +83,6 @@ class MyVideosDetailViewController: UIViewController {
                 strongSelf.navigationController?.popViewController(animated: true)
             }
         })
-        
-        alert.addAction(deleteAction)
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-        
-        alert.addAction(cancelAction)
-                
-        present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
