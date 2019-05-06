@@ -226,7 +226,7 @@ class MergeVideoManager {
         let titleLayer = CATextLayer()
         titleLayer.foregroundColor = UIColor.lightGray.cgColor
         titleLayer.string = credits
-        titleLayer.font = UIFont(name: "PingFang TC", size: 10)
+        titleLayer.font = UIFont(name: "PingFangTC-Regular", size: 10)
         titleLayer.shadowOpacity = 0.5
         titleLayer.alignmentMode = .left
         titleLayer.frame = CGRect(x: 0,
@@ -289,11 +289,28 @@ class MergeVideoManager {
             case .completed:
                 DispatchQueue.main.async { [weak self] in
                     
-                    UISaveVideoAtPathToSavedPhotosAlbum(outputUrl.path, self, nil, nil)
-                    
                     completionHandler(outputUrl, fileName, nil)
                     
                     print("success", outputUrl.absoluteString)
+                    
+                    switch PHPhotoLibrary.authorizationStatus() {
+                    
+                    case .notDetermined:
+                        PHPhotoLibrary.requestAuthorization({ status in
+                            
+                            if status == .authorized {
+                                
+                                UISaveVideoAtPathToSavedPhotosAlbum(outputUrl.path, self, nil, nil)
+                            }
+                        })
+                        
+                    case .authorized:
+                        UISaveVideoAtPathToSavedPhotosAlbum(outputUrl.path, self, nil, nil)
+
+                    case .denied, .restricted: break
+                                    
+                    default: break
+                    }
                 }
                 
             case  .failed:

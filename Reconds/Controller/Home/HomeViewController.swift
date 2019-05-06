@@ -12,15 +12,15 @@ import Photos
 import NVActivityIndicatorView
 
 class HomeViewController: UIViewController {
-
+    
     private struct Segue {
         
         static let showMusicVC = "showMusicVC"
     }
     
-    var feedbackGenerator: UIImpactFeedbackGenerator?
-    
     let rcVideoPlayer = RCVideoPlayer()
+    
+    var feedbackGenerator: UIImpactFeedbackGenerator?
     
     lazy var videoUrl: URL? = nil
     
@@ -276,10 +276,6 @@ class HomeViewController: UIViewController {
                                 
             } else {
 
-//                strongSelf.collectionView.isHidden = false
-//
-//                strongSelf.iconImage.isHidden = false
-//
                 strongSelf.titleLabel.text = text
                 
                 UserDefaults.standard.set(text, forKey: "Title")
@@ -333,7 +329,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             withReuseIdentifier: String(describing: HomeCollectionViewCell.self), for: indexPath)
         
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
-                
+        
+        homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
+        
         if longPressedEnabled {
 
             previewButton.isHidden = true
@@ -344,9 +342,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
             homeCell.removeButton.isHidden = true
         }
-
-        homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
-
+        
         if videoData.count == 0 {
 
             return cell
@@ -365,7 +361,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
                 
                 homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
-                
             }
 
             return homeCell
@@ -456,29 +451,44 @@ extension HomeViewController: UIGestureRecognizerDelegate {
         case .began:
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
             
-            feedbackGenerator?.impactOccurred()
+            if filteredArray?.count == 0 {
+            
+                feedbackGenerator = nil
+            
+            } else {
+                
+                feedbackGenerator?.impactOccurred()
+            }
             
             guard let selectedIndexPath =
                 collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else { return }
-
+            
             collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
-
+            
         case .changed:
             collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
 
         case .ended:
-            feedbackGenerator = nil
             
-            collectionView.endInteractiveMovement()
+            if filteredArray?.count == 0 {
+                
+                break
+                
+            } else {
+                
+                feedbackGenerator = nil
+                
+                collectionView.endInteractiveMovement()
+                
+                exportButton.isHidden = true
+                
+                doneButton.isHidden = false
+                
+                longPressedEnabled = true
+                
+                collectionView.reloadData()
+            }
             
-            exportButton.isHidden = true
-            
-            doneButton.isHidden = false
-
-            longPressedEnabled = true
-            
-            collectionView.reloadData()
-
         case  .cancelled, .failed:
             collectionView.cancelInteractiveMovement()
             
@@ -657,6 +667,8 @@ extension HomeViewController {
     }
     
     func reset() {
+        
+        descriptionTitleLabel.isHidden = true
         
         titleLabel.isHidden = true
         

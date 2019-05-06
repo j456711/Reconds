@@ -89,7 +89,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let headerView = view as? UITableViewHeaderFooterView else { return }
         
         headerView.textLabel?.textColor = UIColor.lightGray
-        headerView.textLabel?.font = UIFont(name: "PingFang TC", size: 17)
+        headerView.textLabel?.font = UIFont(name: "PingFangTC-Regular", size: 17)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

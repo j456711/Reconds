@@ -157,7 +157,7 @@ class CameraViewController: UIViewController {
         
         cancelButton.frame = CGRect(x: 24, y: UIScreen.main.bounds.height - 90, width: 50, height: 45)
         cancelButton.setTitle("返回", for: .normal)
-        cancelButton.titleLabel?.font = UIFont(name: "PingFang TC", size: 22)
+        cancelButton.titleLabel?.font = UIFont(name: "PingFangTC-Semibold", size: 22)
         cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
         
         self.view.addSubview(cancelButton)
@@ -281,13 +281,13 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
         return orientation
     }
 
-    func tempUrl() -> URL? {
+    func tmpUrl() -> URL? {
 
         let directory = NSTemporaryDirectory() as NSString
 
         if directory != "" {
 
-            let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
+            let path = directory.appendingPathComponent(UUID().uuidString + ".mp4")
 
             return URL(fileURLWithPath: path)
         }
@@ -299,7 +299,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
         
         if movieOutput.isRecording == false {
             
-            guard let connection = movieOutput.connection(with: AVMediaType.video) else { return }
+            guard let connection = movieOutput.connection(with: .video) else { return }
 
             if connection.isVideoOrientationSupported {
 
@@ -327,7 +327,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
                 }
             }
 
-            outputUrl = tempUrl()
+            outputUrl = tmpUrl()
             
             movieOutput.startRecording(to: outputUrl!, recordingDelegate: self)
         }

@@ -82,7 +82,7 @@ class MusicViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         
-        rcVideoPlayer.pause()
+        player.stop()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -128,7 +128,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         guard let headerView = view as? UITableViewHeaderFooterView else { return }
         
         headerView.textLabel?.textColor = UIColor.lightGray
-        headerView.textLabel?.font = UIFont(name: "PingFang TC", size: 17)
+        headerView.textLabel?.font = UIFont(name: "PingFangTC-Regular", size: 17)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,8 +148,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
 
         musicCell.titleLabel.text = titleArray[indexPath.row]
         
-        
-        
+        // Reuse Handling
         if keepingRecord == "" || keepingRecord != musicCell.titleLabel.text {
 
             musicCell.indicatorView.stopAnimating()
@@ -162,9 +161,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
             
             musicCell.titleLabel.textColor = UIColor.rcOrange
         }
-        
-
-        
+   
         return musicCell
     }
     
@@ -174,8 +171,6 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         musicCell.indicatorView.startAnimating()
         musicCell.titleLabel.textColor = UIColor.rcOrange
-        
-//        tableView.deselectRow(at: indexPath, animated: false)
         
         guard let bundlePath = createBundlePath() else { return }
         
