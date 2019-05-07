@@ -227,8 +227,7 @@
 			children = (
 				1E419A732254B261009B4F49 /* HomeCollectionViewCell.swift */,
 				34DBA2DF227D8FB7003C9D55 /* HomeCollectionViewCell.xib */,
-				3416CDA5226C45AA007D9D37 /* MusicTableViewCell.swift */,
-				34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */,
+				34DBA2EF22814E15003C9D55 /* Music */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -329,6 +328,15 @@
 				349C5DE92275804E00C1EBE6 /* CreditsViewController.swift */,
 			);
 			path = Credits;
+			sourceTree = "<group>";
+		};
+		34DBA2EF22814E15003C9D55 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				3416CDA5226C45AA007D9D37 /* MusicTableViewCell.swift */,
+				34DBA2E5227D9553003C9D55 /* MusicTableViewCell.xib */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 		C9E2E0CA29339BF3F85861F5 /* Frameworks */ = {

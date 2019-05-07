@@ -196,7 +196,6 @@ class CameraViewController: UIViewController {
 
             if device.isFlashAvailable {
 
-
             }
 
         } else if flashButton.imageView?.image == UIImage.assets(.Icon_35px_Flash_Off) {
