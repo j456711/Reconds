@@ -14,6 +14,8 @@ enum ImageAssets: String {
     
     case Icon_35px_FilmStrips_Selected
     case Icon_35px_FilmStrips
+    case Icon_35px_Flash_Off
+    case Icon_35px_Flash_On
     case Icon_35px_Shot
     case Icon_128px_FilmReel
     case Icon_128px_Settings_Selected

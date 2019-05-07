@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 import AVFoundation
+import AVKit
 
 class RCVideoPlayer {
-
+    
     let avPlayer = AVPlayer()
 
     var avPlayerlayer: AVPlayerLayer!

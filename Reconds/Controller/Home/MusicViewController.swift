@@ -41,7 +41,6 @@ class MusicViewController: UIViewController {
     var keepingRecord = ""
     
     var player: AVAudioPlayer?
-//    var player = AVAudioPlayer()
     
     var videoUrl: URL?
     
@@ -83,10 +82,7 @@ class MusicViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         
-//        if let player = player {
-        
-            player?.stop()
-//        }
+        player?.stop()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

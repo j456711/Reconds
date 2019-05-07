@@ -12,13 +12,17 @@ import AVFoundation
 
 class CameraViewController: UIViewController {
 
+    let aaa = AVPlayerViewController()
+    
     private struct Segue {
 
         static let showVideoPlaybackVC = "ShowVideoPlaybackVC"
     }
     
-    let cameraButton = UIView()
+    let cameraButton = UIButton()
 
+    let flashButton = UIButton()
+    
     let captureSession = AVCaptureSession()
     
     var movieOutput = AVCaptureMovieFileOutput()
@@ -104,6 +108,8 @@ class CameraViewController: UIViewController {
 
                 setUpCancelButton()
 
+//                setUpFlashButton()
+                
                 startSession()
             }
 
@@ -163,9 +169,40 @@ class CameraViewController: UIViewController {
         self.view.addSubview(cancelButton)
     }
     
+    func setUpFlashButton() {
+        
+        flashButton.frame =  CGRect(x: UIScreen.main.bounds.width - 80,
+                                    y: UIScreen.main.bounds.height - 90,
+                                    width: 50,
+                                    height: 45)
+        flashButton.setImage(UIImage.assets(.Icon_35px_Flash_Off), for: .normal)
+        flashButton.addTarget(self, action: #selector(flashButtonAction), for: .touchUpInside)
+        
+        self.view.addSubview(flashButton)
+    }
+    
     @objc func cancelButtonAction() {
         
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func flashButtonAction() {
+    
+         guard let device = activeInput?.device else { return }
+
+        if flashButton.imageView?.image == UIImage.assets(.Icon_35px_Flash_On) {
+
+            flashButton.setImage(UIImage.assets(.Icon_35px_Flash_Off), for: .normal)
+
+            if device.isFlashAvailable {
+
+
+            }
+
+        } else if flashButton.imageView?.image == UIImage.assets(.Icon_35px_Flash_Off) {
+
+            flashButton.setImage(UIImage.assets(.Icon_35px_Flash_On), for: .normal)
+        }
     }
 }
 
@@ -189,7 +226,7 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
         // Setup Camera
         guard let camera = AVCaptureDevice.default(for: .video) else { return false }
-
+        
         do {
             
             let input = try AVCaptureDeviceInput(device: camera)

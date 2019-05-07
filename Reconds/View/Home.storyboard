@@ -218,13 +218,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點擊場記板以新增影片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDo-ON-gQT">
-                                <rect key="frame" x="72.5" y="370.5" width="230" height="32.5"/>
+                                <rect key="frame" x="72.5" y="365.5" width="230" height="32.5"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="23"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4i-Ta-YEb">
-                                <rect key="frame" x="70" y="154" width="235" height="235"/>
+                                <rect key="frame" x="70" y="134" width="235" height="235"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="235" id="VJO-g1-fPB"/>
                                     <constraint firstAttribute="height" constant="235" id="fMm-so-0pr"/>
@@ -321,13 +321,13 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="1yP-Ak-CKF" firstAttribute="centerY" secondItem="J0n-VM-Ctl" secondAttribute="centerY" id="2MG-xh-Ysl"/>
-                            <constraint firstItem="m4i-Ta-YEb" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="-30" id="5Yg-bV-JCA"/>
+                            <constraint firstItem="m4i-Ta-YEb" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="-50" id="5Yg-bV-JCA"/>
                             <constraint firstItem="ymF-0x-gfi" firstAttribute="leading" secondItem="crV-4G-sei" secondAttribute="leading" id="6xD-lX-vKD"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="frN-1r-8Zr" secondAttribute="trailing" constant="16" id="8Fe-tW-omU"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="6HE-md-niw" secondAttribute="trailing" constant="8" id="9jp-VR-QpV"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" id="Cba-mj-hdK"/>
                             <constraint firstItem="frN-1r-8Zr" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" constant="16" id="H2f-MT-4CA"/>
-                            <constraint firstItem="hDo-ON-gQT" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="85" id="HrO-B1-UKD"/>
+                            <constraint firstItem="hDo-ON-gQT" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="80" id="HrO-B1-UKD"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="top" secondItem="crV-4G-sei" secondAttribute="bottom" constant="16" id="IXs-FJ-oYl"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="OPo-7H-Lef"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="bottom" secondItem="frN-1r-8Zr" secondAttribute="bottom" constant="28" id="Q3q-kc-fbE"/>
