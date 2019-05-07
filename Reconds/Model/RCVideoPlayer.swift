@@ -80,13 +80,15 @@ class RCVideoPlayer {
     
     func generateThumbnail(path: URL) -> UIImage? {
         
+        let asset = AVURLAsset(url: path, options: nil)
+        
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        
+        imageGenerator.appliesPreferredTrackTransform = true
+        
+        imageGenerator.maximumSize = CGSize(width: 300, height: 300)
+        
         do {
-            
-            let asset = AVURLAsset(url: path, options: nil)
-            
-            let imageGenerator = AVAssetImageGenerator(asset: asset)
-            
-            imageGenerator.appliesPreferredTrackTransform = true
             
             let cgImage = try imageGenerator.copyCGImage(at: .zero, actualTime: nil)
             

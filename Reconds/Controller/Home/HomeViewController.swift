@@ -150,7 +150,7 @@ class HomeViewController: UIViewController {
         
         DispatchQueue.global().async { [weak self] in
 
-            self?.merge()
+//            self?.merge()
         }
     }
 
@@ -223,7 +223,7 @@ class HomeViewController: UIViewController {
                 
                 DispatchQueue.global().async { [weak self] in
  
-                    self?.merge()
+//                    self?.merge()
                 }
             }
             
@@ -365,7 +365,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 let dataPath =
                     FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
                 
-                homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
+                    homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
             }
 
             return homeCell

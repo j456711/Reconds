@@ -179,8 +179,8 @@
 			isa = PBXGroup;
 			children = (
 				34300BAB226DAFD400CF3429 /* MyVideos */,
-				1E419A7722563EE8009B4F49 /* Record */,
 				1E419A6F22537659009B4F49 /* Home */,
+				1E419A7722563EE8009B4F49 /* Record */,
 				349C5DE42275712F00C1EBE6 /* Settings */,
 				1E419A752254D749009B4F49 /* TabBarController.swift */,
 			);
