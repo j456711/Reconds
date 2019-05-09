@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-final class RCVideoPlayerView: UIView {
+class RCVideoPlayerView: UIView {
     
     var avPlayer: AVPlayer?
     
