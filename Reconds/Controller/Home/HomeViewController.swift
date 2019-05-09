@@ -470,15 +470,8 @@ extension HomeViewController: UIGestureRecognizerDelegate {
 
         case .began:
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-            
-//            if filteredArray?.count == 0 {
-//
-//                feedbackGenerator = nil
-//
-//            } else {
-            
-                feedbackGenerator?.impactOccurred()
-//            }
+
+            feedbackGenerator?.impactOccurred()
             
             guard let selectedIndexPath =
                 collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else { return }
@@ -489,30 +482,26 @@ extension HomeViewController: UIGestureRecognizerDelegate {
             collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
 
         case .ended:
+            feedbackGenerator = nil
             
-//            if filteredArray?.count == 0 {
-//
-//                break
-//
-//            } else {
+            collectionView.endInteractiveMovement()
             
-                feedbackGenerator = nil
-                
-                collectionView.endInteractiveMovement()
-                
-                exportButton.isHidden = true
-                
-                doneButton.isHidden = false
-                
-                longPressedEnabled = true
-                
-                collectionView.reloadData()
-//            }
+            exportButton.isHidden = true
+            
+            doneButton.isHidden = false
+            
+            longPressedEnabled = true
+            
+            collectionView.reloadData()
             
         case  .cancelled, .failed:
+            feedbackGenerator = nil
+            
             collectionView.cancelInteractiveMovement()
             
         default:
+            feedbackGenerator = nil
+            
             collectionView.cancelInteractiveMovement()
         }
     }

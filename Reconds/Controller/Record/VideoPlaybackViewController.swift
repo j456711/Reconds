@@ -33,9 +33,9 @@ class VideoPlaybackViewController: UIViewController {
 
         controlView.alpha = 0.0
         
-        playButton.isHidden = true
-
         rcVideoPlayerView.alpha = 1.0
+
+        playButton.isHidden = true
     }
 
     @IBAction func retakeButtonPressed(_ sender: UIButton) {
@@ -111,7 +111,6 @@ class VideoPlaybackViewController: UIViewController {
         
         view.bringSubviewToFront(controlView)
         view.bringSubviewToFront(playButton)
-        view.bringSubviewToFront(rcVideoPlayerView)
     }
    
     override var prefersStatusBarHidden: Bool {
