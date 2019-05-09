@@ -110,11 +110,9 @@ class ExportViewController: UIViewController {
                                     
                                     navVC.popToRootViewController(animated: true)
                                     
-                                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                                    let vc1 =
-                                        storyboard.instantiateViewController(withIdentifier: "MyVideosViewController")
-                                    guard let myVideosVC =
-                                        vc1 as? MyVideosViewController else { return }
+                                    let viewController = UIStoryboard.home.instantiateViewController(
+                                        withIdentifier: String(describing: MyVideosViewController.self))
+                                    guard let myVideosVC = viewController as? MyVideosViewController else { return }
                                     
                                     tabBar.dismiss(animated: true, completion: {
                                         

@@ -39,9 +39,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             
             } else {
             
-                let storyboard = UIStoryboard(name: "Record", bundle: nil)
-                
-                let cameraVC = storyboard.instantiateViewController(withIdentifier: "CameraViewController")
+                let cameraVC = UIStoryboard.record.instantiateViewController(
+                    withIdentifier: String(describing: CameraViewController.self))
                 
                 present(cameraVC, animated: true, completion: nil)
             }

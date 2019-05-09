@@ -162,90 +162,20 @@
                         <viewLayoutGuide key="safeArea" id="jDg-As-Zsa"/>
                     </view>
                     <connections>
-                        <outlet property="controlButton" destination="csL-zi-ePa" id="hKN-s9-p4n"/>
                         <outlet property="controlView" destination="usc-9b-ZEa" id="75p-7l-f57"/>
-                        <outlet property="endTimeLabel" destination="yyU-JC-sSt" id="OdY-yy-cdF"/>
                         <outlet property="playButton" destination="yER-fU-bjx" id="XdT-W7-TP2"/>
-                        <outlet property="rcVideoPlayerView" destination="F3t-5J-ssQ" id="PCY-qa-Fsb"/>
                         <outlet property="retakeButton" destination="79U-qe-t8X" id="2Th-56-SCO"/>
-                        <outlet property="slider" destination="rkb-d2-uyj" id="mrT-UG-GWK"/>
-                        <outlet property="startTimeLabel" destination="tTt-Pg-e5b" id="N6A-gE-bsd"/>
                         <outlet property="useButton" destination="Eo0-Qp-7qq" id="6eO-ZV-h0e"/>
-                        <outlet property="zoomButton" destination="PWw-L8-xT9" id="mzA-Sb-HMW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddp-Z8-5BB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3t-5J-ssQ">
-                    <rect key="frame" x="0.0" y="0.0" width="359" height="74"/>
-                    <subviews>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rkb-d2-uyj">
-                            <rect key="frame" x="58" y="32" width="243" height="31"/>
-                            <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="sliderMoved:" destination="bBr-pZ-qkV" eventType="valueChanged" id="7GH-hn-0HJ"/>
-                            </connections>
-                        </slider>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTt-Pg-e5b">
-                            <rect key="frame" x="12" y="36.5" width="40" height="21"/>
-                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="15"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyU-JC-sSt">
-                            <rect key="frame" x="307" y="36.5" width="40" height="21"/>
-                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="15"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csL-zi-ePa">
-                            <rect key="frame" x="165.5" y="12" width="28" height="28"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="28" id="Fbh-gU-eDi"/>
-                                <constraint firstAttribute="height" constant="28" id="JSf-hT-FaZ"/>
-                            </constraints>
-                            <state key="normal" image="Icon_PauseController"/>
-                            <connections>
-                                <action selector="controlButtonPressed:" destination="bBr-pZ-qkV" eventType="touchUpInside" id="FbQ-xS-e1Q"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWw-L8-xT9">
-                            <rect key="frame" x="318" y="13.5" width="25" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="25" id="Gid-Dl-Zct"/>
-                                <constraint firstAttribute="width" constant="25" id="Hg7-fo-VMg"/>
-                            </constraints>
-                            <state key="normal" image="Icon_128px_Expand"/>
-                            <connections>
-                                <action selector="zoomButtonPressed:" destination="bBr-pZ-qkV" eventType="touchUpInside" id="TKZ-Ss-fDT"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="yyU-JC-sSt" firstAttribute="centerY" secondItem="rkb-d2-uyj" secondAttribute="centerY" id="3Z6-Aj-MOZ"/>
-                        <constraint firstAttribute="trailing" secondItem="yyU-JC-sSt" secondAttribute="trailing" constant="12" id="EP3-6y-3Ql"/>
-                        <constraint firstAttribute="bottom" secondItem="rkb-d2-uyj" secondAttribute="bottom" constant="12" id="F6X-GM-DIh"/>
-                        <constraint firstAttribute="trailing" secondItem="PWw-L8-xT9" secondAttribute="trailing" constant="16" id="GCV-1m-PND"/>
-                        <constraint firstItem="PWw-L8-xT9" firstAttribute="centerY" secondItem="csL-zi-ePa" secondAttribute="centerY" id="Xd0-n2-ai9"/>
-                        <constraint firstItem="csL-zi-ePa" firstAttribute="top" secondItem="F3t-5J-ssQ" secondAttribute="top" constant="12" id="YLL-5I-DrF"/>
-                        <constraint firstItem="yyU-JC-sSt" firstAttribute="leading" secondItem="rkb-d2-uyj" secondAttribute="trailing" constant="8" id="fZ9-xH-pzZ"/>
-                        <constraint firstItem="rkb-d2-uyj" firstAttribute="leading" secondItem="tTt-Pg-e5b" secondAttribute="trailing" constant="8" id="gnh-jI-CQH"/>
-                        <constraint firstItem="rkb-d2-uyj" firstAttribute="centerX" secondItem="F3t-5J-ssQ" secondAttribute="centerX" id="hi1-B8-d3v"/>
-                        <constraint firstItem="tTt-Pg-e5b" firstAttribute="centerY" secondItem="rkb-d2-uyj" secondAttribute="centerY" id="mLH-53-JTH"/>
-                        <constraint firstItem="csL-zi-ePa" firstAttribute="centerX" secondItem="F3t-5J-ssQ" secondAttribute="centerX" id="pac-Np-sLo"/>
-                        <constraint firstItem="tTt-Pg-e5b" firstAttribute="leading" secondItem="F3t-5J-ssQ" secondAttribute="leading" constant="12" id="t6m-eI-62P"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="qCR-pg-o9y"/>
-                </view>
             </objects>
             <point key="canvasLocation" x="6144.8000000000002" y="133.5832083958021"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Icon_128px_Expand" width="32" height="32"/>
         <image name="Icon_256px_DownArrow" width="64" height="64"/>
         <image name="Icon_35px_Shot" width="35" height="35"/>
-        <image name="Icon_PauseController" width="64" height="64"/>
         <image name="Icon_Play" width="64" height="64"/>
     </resources>
 </document>

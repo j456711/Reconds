@@ -28,9 +28,9 @@ class MyVideosDetailViewController: UIViewController {
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
         
-        let storyboard = UIStoryboard(name: "Record", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
-        guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
+        let viewController = UIStoryboard.record.instantiateViewController(
+            withIdentifier: String(describing: VideoPlaybackViewController.self))
+        guard let videoPlaybackVC = viewController as? VideoPlaybackViewController else { return }
         
         videoPlaybackVC.videoUrl = videoUrl
         

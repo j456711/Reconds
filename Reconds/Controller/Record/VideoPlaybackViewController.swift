@@ -13,9 +13,11 @@ import AVFoundation
 class VideoPlaybackViewController: UIViewController {
     
     let rcVideoPlayer = RCVideoPlayer()
-
+    
+    lazy var rcVideoPlayerView = rcVideoPlayer.rcVideoPlayerView
+    
     var videoUrl: URL?
-
+    
     @IBOutlet weak var controlView: UIView!
 
     @IBOutlet weak var retakeButton: UIButton!
@@ -23,92 +25,6 @@ class VideoPlaybackViewController: UIViewController {
     @IBOutlet weak var useButton: UIButton!
     
     @IBOutlet weak var playButton: UIButton!
-
-    @IBOutlet weak var rcVideoPlayerView: UIView! {
-
-        didSet {
-
-            rcVideoPlayerView.layer.cornerRadius = 10
-
-//            rcVideoPlayerView.isHidden = true
-            rcVideoPlayerView.alpha = 0.0
-        }
-    }    
-
-    @IBOutlet weak var startTimeLabel: UILabel!
-
-    @IBOutlet weak var endTimeLabel: UILabel!
-
-    @IBOutlet weak var slider: UISlider! {
-
-        didSet {
-
-            slider.setThumbImage(UIImage.assets(.Slider_64px_Thumb), for: .normal)
-        }
-    }
-
-    @IBAction func sliderMoved(_ sender: UISlider) {
-
-        let seconds = Int64(slider.value)
-
-        let targetTime = CMTimeMake(value: seconds, timescale: 1)
-
-        rcVideoPlayer.avPlayer.seek(to: targetTime)
-    }
-
-    @IBOutlet weak var controlButton: UIButton!
-    
-    @IBOutlet weak var zoomButton: UIButton!
-
-    @IBAction func controlButtonPressed(_ sender: UIButton) {
-
-        if controlButton.imageView?.image == UIImage.assets(.Icon_PauseController) {
-
-            rcVideoPlayer.pause()
-
-            controlButton.setImage(UIImage.assets(.Icon_PlayController), for: .normal)
-
-        } else {
-
-            rcVideoPlayer.play()
-
-            controlButton.setImage(UIImage.assets(.Icon_PauseController), for: .normal)
-        }
-    }
-    
-    @IBAction func zoomButtonPressed(_ sender: UIButton) {
-        
-        switch zoomButton.imageView?.image {
-            
-        case UIImage.assets(.Icon_128px_Expand):
-            zoomButton.setImage(.assets(.Icon_128px_Minimize), for: .normal)
-        
-            rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform(rotationAngle: .pi / 2))
-            rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
-            rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
-            
-            rcVideoPlayerView.transform = CGAffineTransform(rotationAngle: .pi / 2)
-            rcVideoPlayerView.frame = CGRect(x: 8,
-                                             y: 28,
-                                             width: 74,
-                                             height: UIScreen.main.bounds.height - 36)
-            
-        case UIImage.assets(.Icon_128px_Minimize):
-            zoomButton.setImage(.assets(.Icon_128px_Expand), for: .normal)
-            
-            rcVideoPlayer.avPlayerlayer.setAffineTransform(CGAffineTransform.identity)
-            rcVideoPlayer.avPlayerlayer.frame = self.view.layer.bounds
-            rcVideoPlayer.avPlayerlayer.videoGravity = .resizeAspect
-            
-            rcVideoPlayerView.transform = CGAffineTransform.identity
-            rcVideoPlayerView.frame = CGRect(x: 8,
-                                             y: UIScreen.main.bounds.height - 82,
-                                             width: UIScreen.main.bounds.width - 16,
-                                             height: 74)
-            
-        default: break
-        }
-    }
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
 
@@ -119,7 +35,6 @@ class VideoPlaybackViewController: UIViewController {
         
         playButton.isHidden = true
 
-//        rcVideoPlayerView.isHidden = false
         rcVideoPlayerView.alpha = 1.0
     }
 
@@ -173,6 +88,11 @@ class VideoPlaybackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let videoUrl = videoUrl {
+            
+            rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
+        }
+        
         view.addSubview(rcVideoPlayerView)
         
         rcVideoPlayerView.frame = CGRect(x: 8,
@@ -188,18 +108,12 @@ class VideoPlaybackViewController: UIViewController {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
         panGesture.delegate = self
         self.view.addGestureRecognizer(panGesture)
-
-        guard let videoUrl = videoUrl else { return }
-        
-        rcVideoPlayer.setUpAVPlayer(with: self.view, videoUrl: videoUrl, videoGravity: .resizeAspect)
-        rcVideoPlayer.fetchDuration(disPlayOn: endTimeLabel, setMaximumValueOn: slider)
-        rcVideoPlayer.fetchCurrentTime(disPlayOn: startTimeLabel, setValueOn: slider)
         
         view.bringSubviewToFront(controlView)
         view.bringSubviewToFront(playButton)
         view.bringSubviewToFront(rcVideoPlayerView)
     }
-    
+   
     override var prefersStatusBarHidden: Bool {
         
         return true
@@ -235,7 +149,6 @@ class VideoPlaybackViewController: UIViewController {
         
         playButton.isHidden = false
         
-//        rcVideoPlayerView.isHidden = true
         rcVideoPlayerView.alpha = 0.0
     }
 }

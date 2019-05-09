@@ -17,9 +17,9 @@ class MergeVideoManager {
     
     let defaultSize = CGSize(width: 1920, height: 1080)
     
-    typealias ExportUrlHandler = (URL?, Error?) -> Void
+    typealias ExportedHandler = ((URL?, String?, Error?) -> Void)
     
-    func mergeVideos(arrayVideos: [AVAsset], completion: @escaping ExportUrlHandler) {
+    func mergeVideos(arrayVideos: [AVAsset], completionHandler: @escaping ExportedHandler) {
         
         var insertTime = CMTime.zero
         
@@ -52,19 +52,14 @@ class MergeVideoManager {
 
             outputSize = defaultSize
         }
-        
-        // Silence sound (in case of video has no sound track)
-//        let silenceURL = Bundle.main.url(forResource: "silence", withExtension: "mp3")
-//        let silenceAsset = AVAsset(url:silenceURL!)
-//        let silenceSoundTrack = silenceAsset.tracks(withMediaType: AVMediaType.audio).first
-        
+
         // Init composition
         let mixComposition = AVMutableComposition()
         
         for videoAsset in arrayVideos {
             
             // Get video track
-            guard let videoTrack = videoAsset.tracks(withMediaType: .video).first else { continue }
+            guard let videoTrack = videoAsset.tracks(withMediaType: .video).first else { return }
             
             // Get audio track
             var audioTrack: AVAssetTrack?
@@ -73,9 +68,6 @@ class MergeVideoManager {
             
                 audioTrack = videoAsset.tracks(withMediaType: .audio).first
             }
-//            else {
-//                audioTrack = silenceSoundTrack
-//            }
             
             // Init video & audio composition track
             let videoCompositionTrack =
@@ -144,26 +136,39 @@ class MergeVideoManager {
         FileManager.default.removeItemIfExisted(at: exportUrl)
         
         // Init exporter
-        let exporter = AVAssetExportSession.init(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)
-        exporter?.outputURL = exportUrl
-        exporter?.outputFileType = .mp4
-        exporter?.shouldOptimizeForNetworkUse = true
-        exporter?.videoComposition = mainComposition
+        guard let assetExport = AVAssetExportSession.init(asset: mixComposition,
+                                                          presetName: AVAssetExportPresetHighestQuality) else { return }
+        assetExport.outputURL = exportUrl
+        assetExport.outputFileType = .mp4
+//        assetExport.shouldOptimizeForNetworkUse = true
+        assetExport.videoComposition = mainComposition
         
         // Do export
-        exporter?.exportAsynchronously(completionHandler: {
+        assetExport.exportAsynchronously(completionHandler: { [weak self] in
             
-            DispatchQueue.main.async { [weak self] in
+            switch assetExport.status {
                 
-                self?.exportDidFinish(exporter: exporter, videoURL: exportUrl, completion: completion)
+            case .completed:
+                self?.exportDidFinish(exporter: assetExport, videoURL: exportUrl, completion: completionHandler)
+                
+            case  .failed:
+                completionHandler(nil, nil, assetExport.error)
+                
+                print("failed:", assetExport.error as Any)
+                
+            case .cancelled:
+                completionHandler(nil, nil, assetExport.error)
+                
+                print("cancelled", assetExport.error as Any)
+                
+            default:
+                print("complete")
             }
         })
     }
     
-    typealias VideoExportedHandler = ((URL?, String?, Error?) -> Void)
-    
     func mergeVideoAndAudio(videoUrl: URL, audioUrl: URL, credits: String,
-                            completionHandler: @escaping VideoExportedHandler) {
+                            completionHandler: @escaping ExportedHandler) {
         
         let audioMix = AVMutableAudioMix()
         let mixComposition = AVMutableComposition()
@@ -198,14 +203,6 @@ class MergeVideoManager {
                 CMTimeRangeMake(start: .zero, duration: aVideoAssetTrack.timeRange.duration),
                 of: aAudioAssetTrack,
                 at: .zero)
-            
-            //Use this instead above line if your audiofile and video file's playing durations are same
-            
-//            try mutableCompositionAudioTrack[0].insertTimeRange(
-//            CMTimeRangeMake(kCMTimeZero,
-//                            aVideoAssetTrack.timeRange.duration),
-//            ofTrack: aAudioAssetTrack,
-//            atTime: kCMTimeZero)
             
         } catch {
          
@@ -282,7 +279,7 @@ class MergeVideoManager {
         assetExport.outputURL = outputUrl
         assetExport.shouldOptimizeForNetworkUse = true
         
-        assetExport.exportAsynchronously { () in
+        assetExport.exportAsynchronously(completionHandler: { [weak self] in
             
             switch assetExport.status {
                 
@@ -326,24 +323,24 @@ class MergeVideoManager {
             default:
                 print("complete")
             }
-        }
+        })
     }
 }
 
 extension MergeVideoManager {
     
     fileprivate func exportDidFinish(exporter: AVAssetExportSession?,
-                                     videoURL: URL, completion: @escaping ExportUrlHandler) {
+                                     videoURL: URL, completion: @escaping ExportedHandler) {
         
         if exporter?.status == .completed {
         
             print("Exported file: \(videoURL.absoluteString)")
             
-            completion(videoURL, nil)
+            completion(videoURL, nil, nil)
         
         } else if exporter?.status == .failed {
           
-            completion(videoURL, exporter?.error)
+            completion(videoURL, nil, exporter?.error)
         }
     }
     

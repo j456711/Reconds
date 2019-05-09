@@ -106,9 +106,9 @@ class HomeViewController: UIViewController {
     
     @IBAction func previewButtonPressed(_ sender: UIButton) {
         
-        let storyboard = UIStoryboard(name: "Record", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
-        guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
+        let viewController = UIStoryboard.record.instantiateViewController(
+            withIdentifier: String(describing: VideoPlaybackViewController.self))
+        guard let videoPlaybackVC = viewController as? VideoPlaybackViewController else { return }
         
         if filteredArray?.count == 1 {
         
@@ -126,8 +126,6 @@ class HomeViewController: UIViewController {
         videoPlaybackVC.loadViewIfNeeded()
         
         videoPlaybackVC.controlView.isHidden = true
-        videoPlaybackVC.retakeButton.isHidden = true
-        videoPlaybackVC.useButton.isHidden = true
         
         videoPlaybackVC.modalPresentationStyle = .overFullScreen
         
@@ -150,7 +148,7 @@ class HomeViewController: UIViewController {
         
         DispatchQueue.global().async { [weak self] in
 
-//            self?.merge()
+            self?.merge()
         }
     }
 
@@ -223,7 +221,7 @@ class HomeViewController: UIViewController {
                 
                 DispatchQueue.global().async { [weak self] in
  
-//                    self?.merge()
+                    self?.merge()
                 }
             }
             
@@ -565,25 +563,23 @@ extension HomeViewController: UIGestureRecognizerDelegate {
         
         guard let hitIndex = collectionView.indexPathForItem(at: hitPoint) else { return }
         
-        let storyboard = UIStoryboard(name: "Record", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlaybackViewController")
-        guard let videoPlaybackVC = controller as? VideoPlaybackViewController else { return }
-        
+        let viewController = UIStoryboard.record.instantiateViewController(
+            withIdentifier: String(describing: VideoPlaybackViewController.self))
+        guard let videoPlaybackVC = viewController as? VideoPlaybackViewController else { return }
+
         if videoData[0].dataPathArray[hitIndex.item] != "" {
-            
+
             let dataPath =
                 FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
-            
+
             videoPlaybackVC.videoUrl = dataPath
-            
+
             videoPlaybackVC.loadViewIfNeeded()
-            
+
             videoPlaybackVC.controlView.isHidden = true
-            videoPlaybackVC.retakeButton.isHidden = true
-            videoPlaybackVC.useButton.isHidden = true
-            
+
             videoPlaybackVC.modalPresentationStyle = .overFullScreen
-            
+
             present(videoPlaybackVC, animated: true, completion: nil)
         }
     }
@@ -655,7 +651,7 @@ extension HomeViewController {
         let avAssetArray = urlArray.map({ AVAsset(url: $0) })
 
         MergeVideoManager.shared.mergeVideos(arrayVideos: avAssetArray,
-                                         completion: { [weak self] (videoUrl, error) in
+                                             completionHandler: { [weak self] (videoUrl, _, error) in
 
             guard let strongSelf = self else { return }
 
