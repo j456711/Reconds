@@ -32,27 +32,19 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var remindLabel: UILabel!
     
-    @IBOutlet weak var descriptionTitleLabel: UILabel! {
-        
-        didSet {
-            
-            descriptionTitleLabel.isHidden = true
-        }
-    }
-    
-    @IBOutlet weak var titleLabel: UILabel! {
-        
-        didSet {
-            
-            titleLabel.isHidden = true
-        }
-    }
-    
     @IBOutlet weak var iconImage: UIImageView! {
         
         didSet {
             
             iconImage.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var videoTitleView: VideoTitleView! {
+        
+        didSet {
+            
+            videoTitleView.isHidden = true
         }
     }
     
@@ -169,14 +161,9 @@ class HomeViewController: UIViewController {
         
         collectionView.jy_registerCellWithNib(indentifier: String(describing: HomeCollectionViewCell.self), bundle: nil)
         
-        guard let title = UserDefaults.standard.string(forKey: "Title") else { return }
-        
-        if title != "" {
+        if UserDefaults.standard.string(forKey: "Title") != nil {
 
-            descriptionTitleLabel.isHidden = false
-            titleLabel.isHidden = false
-            titleLabel.text = title
-            
+            videoTitleView.isHidden = false
             collectionView.isHidden = false
             iconImage.isHidden = false
         }
@@ -207,10 +194,8 @@ class HomeViewController: UIViewController {
                 
             } else {
                 
-                descriptionTitleLabel.isHidden = false
+                videoTitleView.isHidden = false
                 
-                titleLabel.isHidden = false
-
                 collectionView.isHidden = false
                 
                 iconImage.isHidden = false
@@ -273,13 +258,13 @@ class HomeViewController: UIViewController {
 
             if text.isEmpty {
 
-                strongSelf.titleLabel.text = textField.placeholder
+                strongSelf.videoTitleView.titleLabel.text = textField.placeholder
                 
                 UserDefaults.standard.set(textField.placeholder, forKey: "Title")
                                 
             } else {
 
-                strongSelf.titleLabel.text = text
+                strongSelf.videoTitleView.titleLabel.text = text
                 
                 UserDefaults.standard.set(text, forKey: "Title")
             }
@@ -295,9 +280,7 @@ class HomeViewController: UIViewController {
             
             strongSelf.iconImage.isHidden = false
 
-            strongSelf.descriptionTitleLabel.isHidden = false
-            
-            strongSelf.titleLabel.isHidden = false
+            strongSelf.videoTitleView.isHidden = false
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -678,9 +661,7 @@ extension HomeViewController {
     
     func reset() {
         
-        descriptionTitleLabel.isHidden = true
-        
-        titleLabel.isHidden = true
+        videoTitleView.isHidden = true
         
         collectionView.isHidden = true
         
