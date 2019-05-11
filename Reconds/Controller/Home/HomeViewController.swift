@@ -82,7 +82,7 @@ class HomeViewController: UIViewController {
 
             exportButton.isHidden = true
 
-            setUpButtonStyle(for: exportButton, cornerRadius: 20)
+            setUpButtonStyle(for: exportButton)
         }
     }
     
@@ -92,7 +92,7 @@ class HomeViewController: UIViewController {
 
             doneButton.isHidden = true
 
-            setUpButtonStyle(for: doneButton, cornerRadius: 20)
+            setUpButtonStyle(for: doneButton)
         }
     }
     
@@ -637,7 +637,7 @@ extension HomeViewController {
                         
                         strongSelf.exportButton.isHidden = false
                         
-                        strongSelf.indicatorViewAnimated(false)                        
+                        strongSelf.indicatorViewAnimated(false)
                     }
                 }
             }
@@ -648,7 +648,7 @@ extension HomeViewController {
 // MARK: - Element Settings
 extension HomeViewController {
     
-    func setUpButtonStyle(for button: UIButton, cornerRadius: CGFloat) {
+    func setUpButtonStyle(for button: UIButton, cornerRadius: CGFloat = 20) {
         
         button.layer.cornerRadius = cornerRadius
         button.layer.borderWidth = 1

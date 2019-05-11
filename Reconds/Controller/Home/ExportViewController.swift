@@ -57,79 +57,31 @@ class ExportViewController: UIViewController {
                     
                     StorageManager.shared.deleteAll("VideoData")
                     
-                    do {
-                        
-                        let fileUrls =
-                            try FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
-                                                                        includingPropertiesForKeys: nil,
-                                                                        options: [.skipsHiddenFiles,
-                                                                                  .skipsSubdirectoryDescendants])
-                        
-                        for fileUrl in fileUrls {
-
-                            do {
-
-                                try FileManager.default.removeItem(at: fileUrl)
-
-                                UserDefaults.standard.removeObject(forKey: "Title")
-
-                            } catch {
-
-                                print("Can't remove fileUrl", error.localizedDescription)
-                            }
-                        }
-                        
-                    } catch {
-                        
-                        print(error.localizedDescription)
-                    }
+                    strongSelf.deleteFilesInVideoDataDirectory()
                     
-                    do {
+                    strongSelf.deleteFilesInTemporaryDirectory()
+                    
+                    strongSelf.indicator.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    
+                    strongSelf.indicator.textLabel.text = "輸出成功"
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         
-                        let temporaryDirectory = FileManager.default.temporaryDirectory
+                        guard let tabBar = strongSelf.presentingViewController as? TabBarController,
+                              let navVC = tabBar.selectedViewController as? UINavigationController
+                            else { return }
                         
-                        let tmpUrls = try FileManager.default.contentsOfDirectory(atPath: temporaryDirectory.path)
+                        navVC.popToRootViewController(animated: true)
                         
-                        for tmpUrl in tmpUrls {
+                        let viewController = UIStoryboard.home.instantiateViewController(
+                            withIdentifier: String(describing: MyVideosViewController.self))
+                        guard let myVideosVC = viewController as? MyVideosViewController else { return }
+                        
+                        tabBar.dismiss(animated: true, completion: {
                             
-                            do {
-                                
-                                let fullTmpUrl = temporaryDirectory.appendingPathComponent(tmpUrl)
-                                
-                                try FileManager.default.removeItem(atPath: fullTmpUrl.path)
-                                                                
-                                strongSelf.indicator.indicatorView = JGProgressHUDSuccessIndicatorView()
-                                
-                                strongSelf.indicator.textLabel.text = "輸出成功"
-                                                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                                    
-                                    guard let tabBar = strongSelf.presentingViewController as? TabBarController,
-                                        let navVC = tabBar.selectedViewController as? UINavigationController
-                                        else { return }
-                                    
-                                    navVC.popToRootViewController(animated: true)
-                                    
-                                    let viewController = UIStoryboard.home.instantiateViewController(
-                                        withIdentifier: String(describing: MyVideosViewController.self))
-                                    guard let myVideosVC = viewController as? MyVideosViewController else { return }
-                                    
-                                    tabBar.dismiss(animated: true, completion: {
-                                        
-                                        navVC.show(myVideosVC, sender: nil)
-                                    })
-                                })
-                                
-                            } catch {
-                                
-                                print("Can't remove fullTmpUrl", error.localizedDescription)
-                            }
-                        }
-                        
-                    } catch {
-                        
-                        print(error.localizedDescription)
-                    }
+                            navVC.show(myVideosVC, sender: nil)
+                        })
+                    })
                     
                 } else {
                     
@@ -153,5 +105,62 @@ extension ExportViewController {
         StorageManager.shared.save()
         
         print(videoCollection)
+    }
+    
+    func deleteFilesInVideoDataDirectory() {
+        
+        do {
+            
+            let fileUrls = try FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
+                                                                       includingPropertiesForKeys: nil,
+                                                                       options: [.skipsHiddenFiles,
+                                                                                 .skipsSubdirectoryDescendants])
+            
+            for fileUrl in fileUrls {
+                
+                do {
+                    
+                    try FileManager.default.removeItem(at: fileUrl)
+                    
+                    UserDefaults.standard.removeObject(forKey: "Title")
+                    
+                } catch {
+                    
+                    print("Can't remove fileUrl", error.localizedDescription)
+                }
+            }
+            
+        } catch {
+            
+            print(error.localizedDescription)
+        }
+    }
+    
+    func deleteFilesInTemporaryDirectory() {
+        
+        do {
+            
+            let temporaryDirectory = FileManager.default.temporaryDirectory
+            
+            let tmpUrls = try FileManager.default.contentsOfDirectory(atPath: temporaryDirectory.path)
+            
+            for tmpUrl in tmpUrls {
+                
+                do {
+                    
+                    let fullTmpUrl = temporaryDirectory.appendingPathComponent(tmpUrl)
+                    
+                    try FileManager.default.removeItem(atPath: fullTmpUrl.path)
+                    
+                } catch {
+                    
+                    print("Can't remove fullTmpUrl", error.localizedDescription)
+                }
+            }
+            
+        } catch {
+            
+            print(error.localizedDescription)
+        }
     }
 }

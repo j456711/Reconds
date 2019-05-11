@@ -11,8 +11,6 @@ import AVKit
 import AVFoundation
 
 class CameraViewController: UIViewController {
-
-    let aaa = AVPlayerViewController()
     
     private struct Segue {
 
