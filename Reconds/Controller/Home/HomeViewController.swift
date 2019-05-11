@@ -134,9 +134,7 @@ class HomeViewController: UIViewController {
 
         collectionView.reloadData()
         
-        indicatorView1.startAnimating()
-        
-        indicatorView2.startAnimating()
+        indicatorViewAnimated(true)
         
         DispatchQueue.global().async { [weak self] in
 
@@ -200,9 +198,7 @@ class HomeViewController: UIViewController {
                 
                 iconImage.isHidden = false
                 
-                indicatorView1.startAnimating()
-                
-                indicatorView2.startAnimating()
+                indicatorViewAnimated(true)
                 
                 DispatchQueue.global().async { [weak self] in
  
@@ -233,14 +229,7 @@ class HomeViewController: UIViewController {
         
         musicVC.videoUrl = videoUrl
     }
-    
-    func setUpButtonStyle(for button: UIButton, cornerRadius: CGFloat) {
-        
-        button.layer.cornerRadius = cornerRadius
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.rcOrange.cgColor
-    }
-    
+
     func createProjectNameAlert() {
         
         let alert = UIAlertController(title: "請輸入影片名稱", message: "命名後仍可更改，若未輸入名稱將預設為「未命名」。", preferredStyle: .alert)
@@ -631,9 +620,7 @@ extension HomeViewController {
 
                 DispatchQueue.main.async {
                     
-                    strongSelf.indicatorView1.stopAnimating()
-                    
-                    strongSelf.indicatorView2.stopAnimating()
+                    strongSelf.indicatorViewAnimated(false)
                     
                     print("HomeVC merge error: \(error.localizedDescription)")
                 }
@@ -650,13 +637,36 @@ extension HomeViewController {
                         
                         strongSelf.exportButton.isHidden = false
                         
-                        strongSelf.indicatorView1.stopAnimating()
-                        
-                        strongSelf.indicatorView2.stopAnimating()
+                        strongSelf.indicatorViewAnimated(false)                        
                     }
                 }
             }
         })
+    }
+}
+
+// MARK: - Element Settings
+extension HomeViewController {
+    
+    func setUpButtonStyle(for button: UIButton, cornerRadius: CGFloat) {
+        
+        button.layer.cornerRadius = cornerRadius
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.rcOrange.cgColor
+    }
+    
+    func indicatorViewAnimated(_ status: Bool) {
+        
+        if status == true {
+            
+            indicatorView1.startAnimating()
+            indicatorView2.startAnimating()
+            
+        } else {
+            
+            indicatorView1.stopAnimating()
+            indicatorView2.stopAnimating()
+        }
     }
     
     func reset() {
