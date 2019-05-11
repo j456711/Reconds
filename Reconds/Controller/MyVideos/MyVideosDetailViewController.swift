@@ -34,13 +34,9 @@ class MyVideosDetailViewController: UIViewController {
         
         videoPlaybackVC.videoUrl = videoUrl
         
-        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.controlView)
-        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.retakeButton)
-        videoPlaybackVC.view.bringSubviewToFront(videoPlaybackVC.useButton)
+        videoPlaybackVC.loadViewIfNeeded()
         
         videoPlaybackVC.controlView.isHidden = true
-        videoPlaybackVC.retakeButton.isHidden = true
-        videoPlaybackVC.useButton.isHidden = true
         
         videoPlaybackVC.modalPresentationStyle = .overFullScreen
         
@@ -70,7 +66,7 @@ class MyVideosDetailViewController: UIViewController {
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
     
-        UIAlertController.addDeleteActionSheet(viewController: self, deleteActionHandler: { [ weak self] (_) in
+        UIAlertController.addDeleteActionSheet(viewController: self, deleteActionHandler: { [weak self] (_) in
             
             guard let strongSelf = self else { return }
             
