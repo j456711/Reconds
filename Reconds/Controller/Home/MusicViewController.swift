@@ -44,9 +44,9 @@ class MusicViewController: UIViewController {
     
     var videoUrl: URL?
     
-    lazy var audioUrl: URL? = nil
+    var audioUrl: URL?
     
-    lazy var credits: String = ""
+    var credits: String = ""
     
     var musicFilesArray = MusicFiles.allCases
     
@@ -136,17 +136,16 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         return musicFilesArray.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MusicTableViewCell.self),
                                                  for: indexPath)
         
         guard let musicCell = cell as? MusicTableViewCell else { return cell }
         
-        let titleArray = musicFilesArray.map({ $0.rawValue })
+        let musicTitleArray = musicFilesArray.map({ $0.rawValue })
 
-        musicCell.titleLabel.text = titleArray[indexPath.row]
+        musicCell.titleLabel.text = musicTitleArray[indexPath.row]
         
         // Reuse Handling
         if keepingRecord == "" || keepingRecord != musicCell.titleLabel.text {

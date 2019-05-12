@@ -21,13 +21,16 @@ class MergeVideoManager {
     
     func mergeVideos(arrayVideos: [AVAsset], completionHandler: @escaping ExportedHandler) {
         
+        // Init composition
+        let mixComposition = AVMutableComposition()
+        
         var insertTime = CMTime.zero
         
         var arrayLayerInstructions: [AVMutableVideoCompositionLayerInstruction] = []
         
         var outputSize = CGSize(width: 0, height: 0)
 
-//         Determine video output size
+        // Determine video output size
         for videoAsset in arrayVideos {
 
             let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
@@ -53,22 +56,19 @@ class MergeVideoManager {
             outputSize = defaultSize
         }
 
-        // Init composition
-        let mixComposition = AVMutableComposition()
-        
         for videoAsset in arrayVideos {
-            
-            // Get video track and audio track
-            let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
-            let audioTrack = videoAsset.tracks(withMediaType: .audio)[0]
             
             // Init video & audio composition track
             guard let videoCompositionTrack =
                 mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
-                  let audioCompositionTrack =
+                let audioCompositionTrack =
                 mixComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
                 else { return }
             
+            // Get video track and audio track
+            let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
+            let audioTrack = videoAsset.tracks(withMediaType: .audio)[0]
+
             let timeRange = CMTimeRangeMake(start: .zero, duration: videoAsset.duration)
             
             do {

@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
     
     var feedbackGenerator: UIImpactFeedbackGenerator?
     
-    lazy var videoUrl: URL? = nil
+    var videoUrl: URL?
     
     var filteredArray: [String]?
     
@@ -335,7 +335,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 let dataPath =
                     FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
                 
-                    homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
+                homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
             }
 
             return homeCell
