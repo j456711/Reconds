@@ -11,6 +11,12 @@ import AVFoundation
 import Photos
 import UIKit
 
+enum MergeVideoError: LocalizedError {
+    
+    case loadVideoTrackError
+    case loadAudioTrackError
+}
+
 class MergeVideoManager {
     
     static let shared = MergeVideoManager()
@@ -78,7 +84,7 @@ class MergeVideoManager {
                 
             } catch {
                 
-                print("Load video track error", error.localizedDescription)
+                completionHandler(nil, nil, MergeVideoError.loadVideoTrackError)
             }
             
             do {
@@ -88,7 +94,7 @@ class MergeVideoManager {
                 
             } catch {
                 
-                print("Load audio track error", error.localizedDescription)
+                completionHandler(nil, nil, MergeVideoError.loadAudioTrackError)
             }
             
             // Add instruction for video track
@@ -141,18 +147,11 @@ class MergeVideoManager {
             case .completed:
                 self?.exportDidFinish(exporter: assetExport, videoURL: exportUrl, completion: completionHandler)
                 
-            case  .failed:
+            case  .failed, .cancelled:
                 completionHandler(nil, nil, assetExport.error)
-                
-                print("failed:", assetExport.error as Any)
-                
-            case .cancelled:
-                completionHandler(nil, nil, assetExport.error)
-                
-                print("cancelled", assetExport.error as Any)
                 
             default:
-                print("complete")
+                completionHandler(nil, nil, assetExport.error)
             }
         })
     }
@@ -188,7 +187,7 @@ class MergeVideoManager {
 
         } catch {
          
-            print("Load video track error", error.localizedDescription)
+            completionHandler(nil, nil, MergeVideoError.loadVideoTrackError)
         }
         
         do {
@@ -199,7 +198,7 @@ class MergeVideoManager {
             
         } catch {
             
-            print("Load audio track error", error.localizedDescription)
+            completionHandler(nil, nil, MergeVideoError.loadAudioTrackError)
         }
         
         totalVideoCompositionInstruction.timeRange =
@@ -303,18 +302,11 @@ class MergeVideoManager {
                     }
                 }
                 
-            case  .failed:
+            case  .failed, .cancelled:
                 completionHandler(nil, nil, assetExport.error)
                 
-                print("failed:", assetExport.error as Any)
-            
-            case .cancelled:
-                completionHandler(nil, nil, assetExport.error)
-                
-                print("cancelled", assetExport.error as Any)
-            
             default:
-                print("complete")
+                completionHandler(nil, nil, assetExport.error)
             }
         })
     }
