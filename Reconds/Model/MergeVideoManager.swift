@@ -58,63 +58,54 @@ class MergeVideoManager {
         
         for videoAsset in arrayVideos {
             
-            // Get video track
-            guard let videoTrack = videoAsset.tracks(withMediaType: .video).first else { return }
-            
-            // Get audio track
-            var audioTrack: AVAssetTrack?
-            
-            if videoAsset.tracks(withMediaType: .audio).count > 0 {
-            
-                audioTrack = videoAsset.tracks(withMediaType: .audio).first
-            }
+            // Get video track and audio track
+            let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
+            let audioTrack = videoAsset.tracks(withMediaType: .audio)[0]
             
             // Init video & audio composition track
-            let videoCompositionTrack =
-                mixComposition.addMutableTrack(withMediaType: .video,
-                                               preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            guard let videoCompositionTrack =
+                mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
+                  let audioCompositionTrack =
+                mixComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
+                else { return }
             
-            let audioCompositionTrack =
-                mixComposition.addMutableTrack(withMediaType: .audio,
-                                               preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            let timeRange = CMTimeRangeMake(start: .zero, duration: videoAsset.duration)
             
             do {
                 
                 // Add video track to video composition at specific time
-                try videoCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: .zero,
-                                                                           duration: videoAsset.duration),
-                                                           of: videoTrack,
-                                                           at: insertTime)
-                
-                // Add audio track to audio composition at specific time
-                if let audioTrack = audioTrack {
-                    
-                    try audioCompositionTrack?.insertTimeRange(CMTimeRangeMake(start: .zero,
-                                                                               duration: videoAsset.duration),
-                                                               of: audioTrack,
-                                                               at: insertTime)
-                }
-                
-                // Add instruction for video track
-                let layerInstruction = videoCompositionInstructionForTrack(track: videoCompositionTrack!,
-                                                                           asset: videoAsset,
-                                                                           standardSize: outputSize,
-                                                                           atTime: insertTime)
-                
-                // Hide video track before changing to new track
-                let endTime = CMTimeAdd(insertTime, videoAsset.duration)
-                
-                layerInstruction.setOpacity(0.0, at: endTime)
-                
-                arrayLayerInstructions.append(layerInstruction)
-                
-                // Increase the insert time
-                insertTime = CMTimeAdd(insertTime, videoAsset.duration)
+                try videoCompositionTrack.insertTimeRange(timeRange, of: videoTrack, at: insertTime)
                 
             } catch {
                 
-                print("Load track error")
+                print("Load video track error", error.localizedDescription)
             }
+            
+            do {
+                
+                // Add audio track to audio composition at specific time
+                try audioCompositionTrack.insertTimeRange(timeRange, of: audioTrack, at: insertTime)
+                
+            } catch {
+                
+                print("Load audio track error", error.localizedDescription)
+            }
+            
+            // Add instruction for video track
+            let layerInstruction = videoCompositionInstructionForTrack(track: videoCompositionTrack,
+                                                                       asset: videoAsset,
+                                                                       standardSize: outputSize,
+                                                                       atTime: insertTime)
+            
+            // Hide video track before changing to new track
+            let endTime = CMTimeAdd(insertTime, videoAsset.duration)
+            
+            layerInstruction.setOpacity(0.0, at: endTime)
+            
+            arrayLayerInstructions.append(layerInstruction)
+            
+            // Increase the insert time
+            insertTime = CMTimeAdd(insertTime, videoAsset.duration)
         }
         
         // Main video composition instruction
@@ -136,12 +127,11 @@ class MergeVideoManager {
         FileManager.default.removeItemIfExisted(at: exportUrl)
         
         // Init exporter
-        guard let assetExport = AVAssetExportSession.init(asset: mixComposition,
-                                                          presetName: AVAssetExportPresetHighestQuality) else { return }
+        guard let assetExport = AVAssetExportSession(asset: mixComposition,
+                                                     presetName: AVAssetExportPresetHighestQuality) else { return }
+        assetExport.videoComposition = mainComposition
         assetExport.outputURL = exportUrl
         assetExport.outputFileType = .mp4
-//        assetExport.shouldOptimizeForNetworkUse = true
-        assetExport.videoComposition = mainComposition
         
         // Do export
         assetExport.exportAsynchronously(completionHandler: { [weak self] in
@@ -177,8 +167,8 @@ class MergeVideoManager {
         let totalVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
         
         // Start Merge
-        let aVideoAsset = AVAsset(url: videoUrl)
-        let aAudioAsset = AVAsset(url: audioUrl)
+        let videoAsset = AVAsset(url: videoUrl)
+        let audioAsset = AVAsset(url: audioUrl)
         
         mutableCompositionVideoTrack.append(
             mixComposition.addMutableTrack(withMediaType: .video,
@@ -187,33 +177,36 @@ class MergeVideoManager {
             mixComposition.addMutableTrack(withMediaType: .audio,
                                            preferredTrackID: kCMPersistentTrackID_Invalid)!)
         
-        let aVideoAssetTrack = aVideoAsset.tracks(withMediaType: .video)[0]
-        let aAudioAssetTrack = aAudioAsset.tracks(withMediaType: .audio)[0]
+        let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
+        let audioTrack = audioAsset.tracks(withMediaType: .audio)[0]
+        
+        let timeRange = CMTimeRangeMake(start: .zero, duration: videoTrack.timeRange.duration)
         
         do {
-            try mutableCompositionVideoTrack[0].insertTimeRange(
-                CMTimeRangeMake(start: .zero, duration: aVideoAssetTrack.timeRange.duration),
-                of: aVideoAssetTrack,
-                at: .zero)
+            
+            try mutableCompositionVideoTrack[0].insertTimeRange(timeRange, of: videoTrack, at: .zero)
+
+        } catch {
+         
+            print("Load video track error", error.localizedDescription)
+        }
+        
+        do {
             
             //In my case my audio file is longer then video file so i took videoAsset duration
             //instead of audioAsset duration
-            
-            try mutableCompositionAudioTrack[0].insertTimeRange(
-                CMTimeRangeMake(start: .zero, duration: aVideoAssetTrack.timeRange.duration),
-                of: aAudioAssetTrack,
-                at: .zero)
+            try mutableCompositionAudioTrack[0].insertTimeRange(timeRange, of: audioTrack, at: .zero)
             
         } catch {
-         
-            print(error)
+            
+            print("Load audio track error", error.localizedDescription)
         }
         
         totalVideoCompositionInstruction.timeRange =
-            CMTimeRangeMake(start: .zero, duration: aVideoAssetTrack.timeRange.duration)
+            CMTimeRangeMake(start: .zero, duration: videoTrack.timeRange.duration)
         
-        let videoTrack = mixComposition.tracks(withMediaType: .video)[0]
-        let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
+        let mixVideoTrack = mixComposition.tracks(withMediaType: .video)[0]
+        let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: mixVideoTrack)
         
         guard let layerInstructionArray =
             NSArray(object: layerInstruction) as? [AVVideoCompositionLayerInstruction] else { return }
@@ -266,7 +259,7 @@ class MergeVideoManager {
         // Find video on this URL
         let outputUrl = FileManager.exportedDirectory.appendingPathComponent(fileName)
         
-        audioMixInputParameters.setVolumeRamp(fromStartVolume: 1, toEndVolume: 0, timeRange: aVideoAssetTrack.timeRange)
+        audioMixInputParameters.setVolumeRamp(fromStartVolume: 1, toEndVolume: 0, timeRange: videoTrack.timeRange)
         
         audioMix.inputParameters = [audioMixInputParameters]
         
