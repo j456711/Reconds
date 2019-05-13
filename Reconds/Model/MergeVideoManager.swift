@@ -367,38 +367,38 @@ extension MergeVideoManager {
                                                          atTime: CMTime) -> AVMutableVideoCompositionLayerInstruction {
 
         let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
-        let assetTrack = asset.tracks(withMediaType: .video)[0]
+        let videoTrack = asset.tracks(withMediaType: .video)[0]
 
-        let transform = assetTrack.preferredTransform
+        let transform = videoTrack.preferredTransform
         let assetInfo = orientationFromTransform(transform: transform)
         
         var aspectFillRatio: CGFloat = 1
 
         if assetInfo.isPortrait {
 
-            aspectFillRatio = standardSize.width / assetTrack.naturalSize.height
+            aspectFillRatio = standardSize.width / videoTrack.naturalSize.height
             
             let scaleFactor = CGAffineTransform(scaleX: aspectFillRatio, y: aspectFillRatio)
 
-            let posX = standardSize.width / 2 - (assetTrack.naturalSize.height * aspectFillRatio) / 2
-            let posY = standardSize.height / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
+            let posX = standardSize.width / 2 - (videoTrack.naturalSize.height * aspectFillRatio) / 2
+            let posY = standardSize.height / 2 - (videoTrack.naturalSize.width * aspectFillRatio) / 2
             let moveFactor = CGAffineTransform(translationX: posX, y: posY)
 
-            let concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor)
+            let concat = videoTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor)
 
             instruction.setTransform(concat, at: atTime)
 
         } else {
 
-            aspectFillRatio = standardSize.width / assetTrack.naturalSize.width
+            aspectFillRatio = standardSize.width / videoTrack.naturalSize.width
             
             let scaleFactor = CGAffineTransform(scaleX: aspectFillRatio, y: aspectFillRatio)
 
-            let posX = standardSize.width / 2 - (assetTrack.naturalSize.width * aspectFillRatio) / 2
-            let posY = standardSize.height / 2 - (assetTrack.naturalSize.height * aspectFillRatio) / 2
+            let posX = standardSize.width / 2 - (videoTrack.naturalSize.width * aspectFillRatio) / 2
+            let posY = standardSize.height / 2 - (videoTrack.naturalSize.height * aspectFillRatio) / 2
             let moveFactor = CGAffineTransform(translationX: posX, y: posY)
 
-            var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor)
+            var concat = videoTrack.preferredTransform.concatenating(scaleFactor).concatenating(moveFactor)
 
             if assetInfo.orientation == .down {
 

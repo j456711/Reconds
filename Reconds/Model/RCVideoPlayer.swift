@@ -11,7 +11,7 @@ import AVFoundation
 
 enum ThumbnailGeneratedError: LocalizedError {
     
-    case 
+    case failToGenerateThumbnail
 }
 
 class RCVideoPlayer {
