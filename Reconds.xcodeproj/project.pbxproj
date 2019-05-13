@@ -45,6 +45,7 @@
 		349C5DEA2275804E00C1EBE6 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349C5DE92275804E00C1EBE6 /* CreditsViewController.swift */; };
 		34A0FE9522648F11009F4D45 /* MergeVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */; };
 		34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE962265B694009F4D45 /* FileManager+Extension.swift */; };
+		34D95C3B228908360055C540 /* RecondsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D95C3A228908360055C540 /* RecondsTests.swift */; };
 		34DBA2DC227C6381003C9D55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2DB227C6381003C9D55 /* Assets.xcassets */; };
 		34DBA2E0227D8FB7003C9D55 /* HomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2DF227D8FB7003C9D55 /* HomeCollectionViewCell.xib */; };
 		34DBA2E2227D92EC003C9D55 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2E1227D92EC003C9D55 /* UICollectionView+Extension.swift */; };
@@ -59,6 +60,16 @@
 		34F111092287105E006D70B8 /* VideoTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F111082287105E006D70B8 /* VideoTitleView.swift */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		34D95C3D228908360055C540 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E419A3E2251BAB1009B4F49 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E419A452251BAB1009B4F49;
+			remoteInfo = Reconds;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reconds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +114,9 @@
 		349C5DE92275804E00C1EBE6 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoManager.swift; sourceTree = "<group>"; };
 		34A0FE962265B694009F4D45 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		34D95C38228908360055C540 /* RecondsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecondsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		34D95C3A228908360055C540 /* RecondsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecondsTests.swift; sourceTree = "<group>"; };
+		34D95C3C228908360055C540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34DBA2DB227C6381003C9D55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34DBA2DF227D8FB7003C9D55 /* HomeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		34DBA2E1227D92EC003C9D55 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
@@ -127,6 +141,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		34D95C35228908360055C540 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -145,6 +166,7 @@
 				347856ED2276C8C200A158EA /* GoogleService-Info.plist */,
 				1E419A71225378F0009B4F49 /* .gitignore */,
 				1E419A482251BAB1009B4F49 /* Reconds */,
+				34D95C39228908360055C540 /* RecondsTests */,
 				1E419A472251BAB1009B4F49 /* Products */,
 				0EB57E45D23C87AA74EB4F9D /* Pods */,
 				C9E2E0CA29339BF3F85861F5 /* Frameworks */,
@@ -155,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				1E419A462251BAB1009B4F49 /* Reconds.app */,
+				34D95C38228908360055C540 /* RecondsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -340,6 +363,15 @@
 			path = Credits;
 			sourceTree = "<group>";
 		};
+		34D95C39228908360055C540 /* RecondsTests */ = {
+			isa = PBXGroup;
+			children = (
+				34D95C3A228908360055C540 /* RecondsTests.swift */,
+				34D95C3C228908360055C540 /* Info.plist */,
+			);
+			path = RecondsTests;
+			sourceTree = "<group>";
+		};
 		34DBA2EF22814E15003C9D55 /* MusicTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,19 +431,41 @@
 			productReference = 1E419A462251BAB1009B4F49 /* Reconds.app */;
 			productType = "com.apple.product-type.application";
 		};
+		34D95C37228908360055C540 /* RecondsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34D95C41228908360055C540 /* Build configuration list for PBXNativeTarget "RecondsTests" */;
+			buildPhases = (
+				34D95C34228908360055C540 /* Sources */,
+				34D95C35228908360055C540 /* Frameworks */,
+				34D95C36228908360055C540 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34D95C3E228908360055C540 /* PBXTargetDependency */,
+			);
+			name = RecondsTests;
+			productName = RecondsTests;
+			productReference = 34D95C38228908360055C540 /* RecondsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		1E419A3E2251BAB1009B4F49 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Yu-Hsin Yeh";
 				TargetAttributes = {
 					1E419A452251BAB1009B4F49 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
+					};
+					34D95C37228908360055C540 = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = 1E419A452251BAB1009B4F49;
 					};
 				};
 			};
@@ -429,6 +483,7 @@
 			projectRoot = "";
 			targets = (
 				1E419A452251BAB1009B4F49 /* Reconds */,
+				34D95C37228908360055C540 /* RecondsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -452,6 +507,13 @@
 				1E419A6622537222009B4F49 /* Home.storyboard in Resources */,
 				34DBA2DC227C6381003C9D55 /* Assets.xcassets in Resources */,
 				1E419A4F2251BAB2009B4F49 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34D95C36228908360055C540 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,7 +652,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		34D95C34228908360055C540 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34D95C3B228908360055C540 /* RecondsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		34D95C3E228908360055C540 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E419A452251BAB1009B4F49 /* Reconds */;
+			targetProxy = 34D95C3D228908360055C540 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1E419A4D2251BAB2009B4F49 /* Main.storyboard */ = {
@@ -771,6 +849,46 @@
 			};
 			name = Release;
 		};
+		34D95C3F228908360055C540 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RecondsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.YuHsinYeh.RecondsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reconds.app/Reconds";
+			};
+			name = Debug;
+		};
+		34D95C40228908360055C540 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RecondsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.YuHsinYeh.RecondsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reconds.app/Reconds";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -788,6 +906,15 @@
 			buildConfigurations = (
 				1E419A592251BAB6009B4F49 /* Debug */,
 				1E419A5A2251BAB6009B4F49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34D95C41228908360055C540 /* Build configuration list for PBXNativeTarget "RecondsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34D95C3F228908360055C540 /* Debug */,
+				34D95C40228908360055C540 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

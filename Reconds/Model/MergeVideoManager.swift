@@ -42,8 +42,10 @@ class MergeVideoManager {
             let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
 
             let assetInfo = orientationFromTransform(transform: videoTrack.preferredTransform)
-
+            
             var videoSize = videoTrack.naturalSize
+            
+//            print(assetInfo, videoSize)
 
             if assetInfo.isPortrait == true {
 
@@ -55,6 +57,8 @@ class MergeVideoManager {
 
                 outputSize = videoSize
             }
+            
+//            print("Outputsize:", outputSize)
         }
 
         if outputSize.width == 0 || outputSize.height == 0 {
@@ -329,6 +333,7 @@ extension MergeVideoManager {
         }
     }
     
+    // Analyzes an affine transform to determine the input video’s orientation
     fileprivate func orientationFromTransform(transform: CGAffineTransform) ->
                     (orientation: UIImage.Orientation, isPortrait: Bool) {
 
@@ -370,6 +375,9 @@ extension MergeVideoManager {
         let videoTrack = asset.tracks(withMediaType: .video)[0]
 
         let transform = videoTrack.preferredTransform
+        
+//        print("^^^^^^^^^^^^^^^^^^", transform)
+        
         let assetInfo = orientationFromTransform(transform: transform)
         
         var aspectFillRatio: CGFloat = 1
