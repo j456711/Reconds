@@ -13,8 +13,8 @@ import UIKit
 
 enum MergeVideoError: LocalizedError {
     
-    case loadVideoTrackError
-    case loadAudioTrackError
+    case failedToLoadVideoTrack
+    case failedToLoadAudioTrack
 }
 
 class MergeVideoManager {
@@ -84,7 +84,7 @@ class MergeVideoManager {
                 
             } catch {
                 
-                completionHandler(nil, nil, MergeVideoError.loadVideoTrackError)
+                completionHandler(nil, nil, MergeVideoError.failedToLoadVideoTrack)
             }
             
             do {
@@ -94,7 +94,7 @@ class MergeVideoManager {
                 
             } catch {
                 
-                completionHandler(nil, nil, MergeVideoError.loadAudioTrackError)
+                completionHandler(nil, nil, MergeVideoError.failedToLoadAudioTrack)
             }
             
             // Add instruction for video track
@@ -187,7 +187,7 @@ class MergeVideoManager {
 
         } catch {
          
-            completionHandler(nil, nil, MergeVideoError.loadVideoTrackError)
+            completionHandler(nil, nil, MergeVideoError.failedToLoadVideoTrack)
         }
         
         do {
@@ -198,7 +198,7 @@ class MergeVideoManager {
             
         } catch {
             
-            completionHandler(nil, nil, MergeVideoError.loadAudioTrackError)
+            completionHandler(nil, nil, MergeVideoError.failedToLoadAudioTrack)
         }
         
         totalVideoCompositionInstruction.timeRange =

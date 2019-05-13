@@ -9,6 +9,11 @@
 import UIKit
 import AVFoundation
 
+enum ThumbnailGeneratedError: LocalizedError {
+    
+    case 
+}
+
 class RCVideoPlayer {
     
     let avPlayer = AVPlayer()
