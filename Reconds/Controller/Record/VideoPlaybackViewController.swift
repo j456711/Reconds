@@ -45,44 +45,17 @@ class VideoPlaybackViewController: UIViewController {
 
     @IBAction func useButtonPressed(_ sender: UIButton) {
         
-        guard let videoUrl = videoUrl,
-              let videoData = try? Data(contentsOf: videoUrl) else { return }
-        
-        let time = Int(Date().timeIntervalSince1970)
-        
-        let fileName = "\(time).mp4"
-        
-        let dataPath = FileManager.videoDataDirectory.appendingPathComponent(fileName)
-        
-        do {
+        DataSavingManager.shared.dataSaved(videoUrl: videoUrl, completionHandler: { [weak self] result in
             
-            try videoData.write(to: dataPath)
-            
-            let videoData = StorageManager.shared.fetch(VideoData.self)
-            
-            guard let filteredArray = StorageManager.shared.filterData() else { return }
-            
-            videoData[0].dataPathArray.insert(fileName, at: filteredArray.count)
-            
-            videoData[0].dataPathArray.removeLast()
+            switch result {
                 
-            StorageManager.shared.save()
-//            }
-            
-//            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-//                let tabbar = appDelegate.window?.rootViewController as? TabBarController,
-//                let navVC = tabbar.viewControllers?.first as? UINavigationController,
-//                let homeVC = navVC.viewControllers.first as? HomeViewController {
-//
-//                homeVC.tmpVideoData.append(fileName)
-//            }
-
-        } catch {
-            
-            print(error)
-        }
-        
-        self.dismiss(animated: true, completion: nil)
+            case .success:
+                self?.dismiss(animated: true, completion: nil)
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
 
     override func viewDidLoad() {
