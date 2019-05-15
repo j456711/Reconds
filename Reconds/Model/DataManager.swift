@@ -8,10 +8,13 @@
 
 import Foundation
 
-enum DataSavingError: Error {
+enum DataManagingError: Error {
     
     case failedToSaveAsVideoData
     case failedToSaveInDirectory
+    
+    case failedToRetrieveContents
+    case failedToDeleteUrls
 }
 
 class DataManager {
@@ -20,7 +23,7 @@ class DataManager {
     
     private init() {}
     
-    typealias DataSavingHandler = (Result<(), DataSavingError>) -> Void
+    typealias DataSavingHandler = (Result<(), DataManagingError>) -> Void
     
     func dataSaved(videoUrl: URL?, completionHandler: @escaping DataSavingHandler) {
         
@@ -60,6 +63,67 @@ class DataManager {
         } catch {
             
             completionHandler(Result.failure(.failedToSaveAsVideoData))
+        }
+    }
+    
+    func deleteFilesInVideoDataDirectory(completionHandler: (Result<(), DataManagingError>) -> Void) {
+        
+        do {
+            
+            let fileUrls = try FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
+                                                                       includingPropertiesForKeys: nil,
+                                                                       options: [.skipsHiddenFiles,
+                                                                                 .skipsSubdirectoryDescendants])
+            
+            for fileUrl in fileUrls {
+                
+                do {
+                    
+                    try FileManager.default.removeItem(at: fileUrl)
+                    
+                    UserDefaults.standard.removeObject(forKey: "Title")
+                    
+                    completionHandler(Result.success(()))
+                    
+                } catch {
+                    
+                    completionHandler(Result.failure(.failedToDeleteUrls))
+                }
+            }
+            
+        } catch {
+            
+            completionHandler(Result.failure(.failedToRetrieveContents))
+        }
+    }
+    
+    func deleteFilesInTemporaryDirectory(completionHandler: (Result<(), DataManagingError>) -> Void) {
+        
+        do {
+            
+            let temporaryDirectory = FileManager.default.temporaryDirectory
+            
+            let tmpUrls = try FileManager.default.contentsOfDirectory(atPath: temporaryDirectory.path)
+            
+            for tmpUrl in tmpUrls {
+                
+                do {
+                    
+                    let fullTmpUrl = temporaryDirectory.appendingPathComponent(tmpUrl)
+                    
+                    try FileManager.default.removeItem(atPath: fullTmpUrl.path)
+                    
+                    completionHandler(Result.success(()))
+                    
+                } catch {
+                    
+                    completionHandler(Result.failure(.failedToDeleteUrls))
+                }
+            }
+            
+        } catch {
+            
+            completionHandler(Result.failure(.failedToRetrieveContents))
         }
     }
 }

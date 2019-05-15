@@ -56,30 +56,47 @@ class ExportViewController: UIViewController {
                     
                     StorageManager.shared.deleteAll("VideoData")
                     
-                    strongSelf.deleteFilesInVideoDataDirectory()
-                    
-                    strongSelf.deleteFilesInTemporaryDirectory()
-                    
-                    strongSelf.indicator.indicatorView = JGProgressHUDSuccessIndicatorView()
-
-                    strongSelf.indicator.textLabel.text = "輸出成功"
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    DataManager.shared.deleteFilesInVideoDataDirectory(completionHandler: { result in
                         
-                        guard let tabBar = strongSelf.presentingViewController as? TabBarController,
-                              let navVC = tabBar.selectedViewController as? UINavigationController
-                            else { return }
-                        
-                        navVC.popToRootViewController(animated: true)
-                        
-                        let viewController = UIStoryboard.home.instantiateViewController(
-                            withIdentifier: String(describing: MyVideosViewController.self))
-                        guard let myVideosVC = viewController as? MyVideosViewController else { return }
-                        
-                        tabBar.dismiss(animated: true, completion: {
+                        switch result {
                             
-                            navVC.show(myVideosVC, sender: nil)
-                        })
+                        case .success:
+                            
+                            DataManager.shared.deleteFilesInTemporaryDirectory(completionHandler: { result in
+                                
+                                switch result {
+                                    
+                                case .success:
+                                    strongSelf.indicator.indicatorView = JGProgressHUDSuccessIndicatorView()
+                                    
+                                    strongSelf.indicator.textLabel.text = "輸出成功"
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                        
+                                        guard let tabBar = strongSelf.presentingViewController as? TabBarController,
+                                            let navVC = tabBar.selectedViewController as? UINavigationController
+                                            else { return }
+                                        
+                                        navVC.popToRootViewController(animated: true)
+                                        
+                                        let viewController = UIStoryboard.home.instantiateViewController(
+                                            withIdentifier: String(describing: MyVideosViewController.self))
+                                        guard let myVideosVC = viewController as? MyVideosViewController else { return }
+                                        
+                                        tabBar.dismiss(animated: true, completion: {
+                                            
+                                            navVC.show(myVideosVC, sender: nil)
+                                        })
+                                    })
+                                    
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            })
+                            
+                        case .failure(let error):                            
+                            print(error)
+                        }
                     })
                     
                 } else {
@@ -104,62 +121,5 @@ extension ExportViewController {
         StorageManager.shared.save()
         
         print(videoCollection)
-    }
-    
-    func deleteFilesInVideoDataDirectory() {
-        
-        do {
-            
-            let fileUrls = try FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
-                                                                       includingPropertiesForKeys: nil,
-                                                                       options: [.skipsHiddenFiles,
-                                                                                 .skipsSubdirectoryDescendants])
-            
-            for fileUrl in fileUrls {
-                
-                do {
-                    
-                    try FileManager.default.removeItem(at: fileUrl)
-                    
-                    UserDefaults.standard.removeObject(forKey: "Title")
-                    
-                } catch {
-                    
-                    print("Can't remove fileUrl", error.localizedDescription)
-                }
-            }
-            
-        } catch {
-            
-            print(error.localizedDescription)
-        }
-    }
-    
-    func deleteFilesInTemporaryDirectory() {
-        
-        do {
-            
-            let temporaryDirectory = FileManager.default.temporaryDirectory
-            
-            let tmpUrls = try FileManager.default.contentsOfDirectory(atPath: temporaryDirectory.path)
-            
-            for tmpUrl in tmpUrls {
-                
-                do {
-                    
-                    let fullTmpUrl = temporaryDirectory.appendingPathComponent(tmpUrl)
-                    
-                    try FileManager.default.removeItem(atPath: fullTmpUrl.path)
-                    
-                } catch {
-                    
-                    print("Can't remove fullTmpUrl", error.localizedDescription)
-                }
-            }
-            
-        } catch {
-            
-            print(error.localizedDescription)
-        }
     }
 }
