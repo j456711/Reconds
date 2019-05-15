@@ -31,9 +31,4 @@ class MusicTableViewCell: UITableViewCell {
         
         titleLabel.text = title
     }
-    
-    func cellStatus() {
-        
-        
-    }
 }

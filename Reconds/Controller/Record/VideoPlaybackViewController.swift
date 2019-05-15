@@ -45,7 +45,7 @@ class VideoPlaybackViewController: UIViewController {
 
     @IBAction func useButtonPressed(_ sender: UIButton) {
         
-        DataSavingManager.shared.dataSaved(videoUrl: videoUrl, completionHandler: { [weak self] result in
+        DataManager.shared.dataSaved(videoUrl: videoUrl, completionHandler: { [weak self] result in
             
             guard let strongSelf = self else { return }
             

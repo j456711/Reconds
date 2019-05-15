@@ -1,5 +1,5 @@
 //
-//  DataSavingManager.swift
+//  DataManager.swift
 //  Reconds
 //
 //  Created by YU HSIN YEH on 2019/5/15.
@@ -14,9 +14,9 @@ enum DataSavingError: Error {
     case failedToSaveInDirectory
 }
 
-class DataSavingManager {
+class DataManager {
     
-    static let shared = DataSavingManager()
+    static let shared = DataManager()
     
     private init() {}
     
