@@ -18,6 +18,8 @@ class DataSavingManager {
     
     static let shared = DataSavingManager()
     
+    private init() {}
+    
     typealias DataSavingHandler = (Result<(), DataSavingError>) -> Void
     
     func dataSaved(videoUrl: URL?, completionHandler: @escaping DataSavingHandler) {

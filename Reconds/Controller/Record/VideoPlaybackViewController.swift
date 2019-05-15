@@ -9,8 +9,11 @@
 import Foundation
 import UIKit
 import AVFoundation
+import JGProgressHUD
 
 class VideoPlaybackViewController: UIViewController {
+    
+    let indicator = JGProgressHUD(style: .dark)
     
     let rcVideoPlayer = RCVideoPlayer()
     
@@ -47,14 +50,23 @@ class VideoPlaybackViewController: UIViewController {
         
         DataSavingManager.shared.dataSaved(videoUrl: videoUrl, completionHandler: { [weak self] result in
             
+            guard let strongSelf = self else { return }
+            
             switch result {
                 
             case .success:
-                self?.dismiss(animated: true, completion: nil)
+                JYProgressHUD.shared.showSuccess(in: strongSelf.view)
                 
             case .failure(let error):
-                print(error)
+                JYProgressHUD.shared.showFailure(in: strongSelf.view)
+                
+                print(error.localizedDescription)
             }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                
+                strongSelf.dismiss(animated: true, completion: nil)
+            })
         })
     }
 
