@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Reconds
 
 class RecondsTests: XCTestCase {
 
@@ -34,64 +35,64 @@ class RecondsTests: XCTestCase {
 
     // swiftlint:disable identifier_name
     
-    func fibonacci(n: Int) -> Int {
-        
-        if n <= 1 {
-            
-            return 1
-        
-        } else if n < 0 {
-            
-            return 0
-        }
-        
-        var array: [Int] = Array(repeating: 1, count: n + 1)
-        
-        print("------", array)
-        
-        for i in 0...n {
-            
-            if i <= 1 {
-                
-                array[i] = 1
-                
-            } else {
-            
-                array[i] = array[i - 1] + array[i - 2]
-            }
-        }
-        
-        print(array)
-        
-        return array[n]
-    }
-    
-    func testFibonacci() {
-        
-        let expectResult = 0
-        
-        let actualResult = fibonacci(n: 1)
-        
-        XCTAssertEqual(actualResult, expectResult)
-    }
-    
-    func testCorrect() {
-        
-        let n8 = fibonacci(n: 8)
-        let n9 = fibonacci(n: 9)
-        let n10 = fibonacci(n: 10)
-        
-        XCTAssertEqual(n10, n8 + n9)
-    }
-    
-    func testNegative() {
-        
-        let expectResult = 1
-        
-        let actualResult = fibonacci(n: -1)
-        
-        XCTAssertEqual(actualResult, expectResult)
-    }
+//    func fibonacci(n: Int) -> Int {
+//
+//        if n <= 1 {
+//
+//            return 1
+//
+//        } else if n < 0 {
+//
+//            return 0
+//        }
+//
+//        var array: [Int] = Array(repeating: 1, count: n + 1)
+//
+//        print("------", array)
+//
+//        for i in 0...n {
+//
+//            if i <= 1 {
+//
+//                array[i] = 1
+//
+//            } else {
+//
+//                array[i] = array[i - 1] + array[i - 2]
+//            }
+//        }
+//
+//        print(array)
+//
+//        return array[n]
+//    }
+//
+//    func testFibonacci() {
+//
+//        let expectResult = 0
+//
+//        let actualResult = fibonacci(n: 1)
+//
+//        XCTAssertEqual(actualResult, expectResult)
+//    }
+//
+//    func testCorrect() {
+//
+//        let n8 = fibonacci(n: 8)
+//        let n9 = fibonacci(n: 9)
+//        let n10 = fibonacci(n: 10)
+//
+//        XCTAssertEqual(n10, n8 + n9)
+//    }
+//
+//    func testNegative() {
+//
+//        let expectResult = 1
+//
+//        let actualResult = fibonacci(n: -1)
+//
+//        XCTAssertEqual(actualResult, expectResult)
+//    }
     
     // swiftlint:enable identifier_name
     
