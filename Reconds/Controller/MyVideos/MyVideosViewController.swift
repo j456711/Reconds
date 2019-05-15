@@ -96,9 +96,9 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
         
         let filePath =
             FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
-                
-        myVideosCell.titleLabel.text = videoCollection[indexPath.item].videoTitle
-        myVideosCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: filePath)
+        
+        myVideosCell.layoutCell(title: videoCollection[indexPath.item].videoTitle,
+                                thumbnail: rcVideoPlayer.generateThumbnail(path: filePath))
         
         return myVideosCell
     }
