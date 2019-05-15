@@ -22,8 +22,7 @@ class ExportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        indicator.textLabel.text = "輸出中"
-        indicator.show(in: self.view)
+        JYProgressHUD.shared.showIndeterminate(in: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,10 +61,10 @@ class ExportViewController: UIViewController {
                     strongSelf.deleteFilesInTemporaryDirectory()
                     
                     strongSelf.indicator.indicatorView = JGProgressHUDSuccessIndicatorView()
-                    
+
                     strongSelf.indicator.textLabel.text = "輸出成功"
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                         
                         guard let tabBar = strongSelf.presentingViewController as? TabBarController,
                               let navVC = tabBar.selectedViewController as? UINavigationController

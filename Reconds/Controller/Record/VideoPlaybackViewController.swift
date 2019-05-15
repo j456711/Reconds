@@ -9,12 +9,9 @@
 import Foundation
 import UIKit
 import AVFoundation
-import JGProgressHUD
 
 class VideoPlaybackViewController: UIViewController {
-    
-    let indicator = JGProgressHUD(style: .dark)
-    
+        
     let rcVideoPlayer = RCVideoPlayer()
     
     lazy var rcVideoPlayerView = rcVideoPlayer.rcVideoPlayerView

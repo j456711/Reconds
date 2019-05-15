@@ -251,8 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				34300BBB2271EC1100CF3429 /* RCConstants.swift */,
-				3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */,
 				34DBA2DB227C6381003C9D55 /* Assets.xcassets */,
+				3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */,
 			);
 			path = Resource;
 			sourceTree = "<group>";

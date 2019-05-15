@@ -31,4 +31,16 @@ class JYProgressHUD {
         
         hud.show(in: view)
     }
+    
+    func showIndeterminate(in view: UIView, with text: String = "輸出中") {
+        
+        hud.textLabel.text = text
+
+        hud.show(in: view)
+    }
+    
+    func dismiss() {
+        
+        hud.dismiss()
+    }
 }
