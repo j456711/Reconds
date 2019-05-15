@@ -27,4 +27,13 @@ class MusicTableViewCell: UITableViewCell {
 
     }
 
+    func layoutCell(title: String) {
+        
+        titleLabel.text = title
+    }
+    
+    func cellStatus() {
+        
+        
+    }
 }

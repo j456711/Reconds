@@ -145,7 +145,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         let musicTitleArray = musicFilesArray.map({ $0.rawValue })
 
-        musicCell.titleLabel.text = musicTitleArray[indexPath.row]
+        musicCell.layoutCell(title: musicTitleArray[indexPath.row])
         
         // Reuse Handling
         if keepingRecord == "" || keepingRecord != musicCell.titleLabel.text {
