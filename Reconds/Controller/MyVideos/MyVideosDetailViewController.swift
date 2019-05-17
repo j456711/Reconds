@@ -56,12 +56,15 @@ class MyVideosDetailViewController: UIViewController {
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {
     
-        let activityController = UIActivityViewController(activityItems: [videoUrl as Any], applicationActivities: nil)
+        if let videoUrl = videoUrl {
         
-        activityController.popoverPresentationController?.sourceView = view
-        activityController.popoverPresentationController?.sourceRect = view.frame
-        
-        present(activityController, animated: true, completion: nil)
+            let activityController = UIActivityViewController(activityItems: [videoUrl], applicationActivities: nil)
+            
+            activityController.popoverPresentationController?.sourceView = view
+            activityController.popoverPresentationController?.sourceRect = view.frame
+            
+            present(activityController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {

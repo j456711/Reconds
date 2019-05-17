@@ -10,8 +10,15 @@ import UIKit
 import Photos
 import StoreKit
 
+protocol SettingsTableViewCellDelegate: class {
+    
+    func shareApp(_ cell: SettingsTableViewCell)
+}
+
 class SettingsTableViewCell: UITableViewCell {
 
+    weak var delegate: SettingsTableViewCellDelegate?
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UILabel! {
@@ -38,22 +45,6 @@ class SettingsTableViewCell: UITableViewCell {
         
         switch indexPath.row {
 
-//        case 0: break
-//
-//        case 1:
-//            var status = PHPhotoLibrary.authorizationStatus()
-//
-//            if switcher.isOn {
-//
-//
-//
-//
-//
-//            } else {
-//
-//                status = .denied
-//            }
-
         case 0:
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
             
@@ -73,7 +64,8 @@ class SettingsTableViewCell: UITableViewCell {
         case 0:
             SKStoreReviewController.requestReview()
             
-//        case 1: break
+        case 1:
+            delegate?.shareApp(self)
             
         default: break
         }

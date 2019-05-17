@@ -19,7 +19,7 @@ class SettingsViewController: UIViewController {
     
     let appSettingsSection = ["管理權限"]
     
-    let aboutSection = ["評價 Reconds"]
+    let aboutSection = ["評價 Reconds", "分享 Reconds 給好友"]
     
     let creditsSection = ["素材來源"]
     
@@ -99,20 +99,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let settingsCell = cell as? SettingsTableViewCell else { return cell }
         
+        settingsCell.delegate = self
+        
         switch indexPath.section {
             
         case 0:
             settingsCell.titleLabel.text = appSettingsSection[indexPath.row]
-//
-//            if indexPath.row == 0 || indexPath.row == 1 {
-//
-//                settingsCell.switcher.isHidden = false
-//
-//            } else if indexPath.row == 2 {
             
             settingsCell.descriptionLabel.isHidden = false
             settingsCell.descriptionLabel.text = "前往設定"
-//            }
             
         case 1:
             settingsCell.titleLabel.text = aboutSection[indexPath.row]
@@ -131,7 +126,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let selectedCell = tableView.cellForRow(at: indexPath) as? SettingsTableViewCell else { return }
-        
+                
         switch indexPath.section {
             
         case 0:
@@ -145,5 +140,20 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             
         default: break
         }
+    }
+}
+
+extension SettingsViewController: SettingsTableViewCellDelegate {
+    
+    func shareApp(_ cell: SettingsTableViewCell) {
+        
+        let activityItem = ["快使用 Reconds 紀錄你的秒速人生！下載去：\nhttps://itunes.apple.com/tw/app/reconds-秒速人生/id1461732748"]
+        
+        let activityController = UIActivityViewController(activityItems: activityItem, applicationActivities: nil)
+        
+        activityController.popoverPresentationController?.sourceView = view
+        activityController.popoverPresentationController?.sourceRect = view.frame
+        
+        present(activityController, animated: true, completion: nil)
     }
 }
