@@ -21,7 +21,7 @@ class DataManager {
     
     static let shared = DataManager()
     
-    private init() {}
+//    private init() {}
     
     typealias DataSavingHandler = (Result<(), DataManagingError>) -> Void
     

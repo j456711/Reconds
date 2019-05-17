@@ -127,7 +127,7 @@ class CameraViewController: UIViewController {
                 
                 guard let filteredArray = StorageManager.shared.filterData() else { return }
                 
-                if filteredArray.count == 25 {
+                if filteredArray.count == 9 {
                     
                     UIAlertController.addConfirmAlertWith(viewController: self,
                                                           alertTitle: "無法新增影片",

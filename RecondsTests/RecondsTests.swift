@@ -11,23 +11,14 @@ import XCTest
 
 class RecondsTests: XCTestCase {
 
-    var sut: VideoPlaybackViewController!
+    let sut = DataManager()
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
         
         // Arrange
-        let viewController = UIStoryboard.record.instantiateViewController(
-            withIdentifier: String(describing: VideoPlaybackViewController.self))
         
-        // swiftlint:disable force_cast
-        let sut = viewController as! VideoPlaybackViewController
-        // swiftlint:enable force_cast
-        
-        sut.loadViewIfNeeded()
-        
-        self.sut = sut
     }
 
     override func tearDown() {
@@ -49,40 +40,43 @@ class RecondsTests: XCTestCase {
         }
 
     }
-
-    func test_useButton_IsInitialized() {
-
-        // Assert
-        XCTAssertNotNil(sut.useButton, "Button is not being initialized")
+    
+    func test_DataManager_IsInitialized() {
+        
+        XCTAssertNotNil(sut)
     }
     
-    func test_IsPressed() {
+    func test_DataManager_DidWriteDataToFileManager() {
         
-        // Arrange
-        let actions = sut.useButton.actions(forTarget: self.sut, forControlEvent: .touchUpInside)
-
-        // Action
-        let actualActionMethod = actions?.first
+        let videoUrl = Bundle.main.url(forResource: "Reconds-Music",
+                                       withExtension: "bundle")!.appendingPathComponent("Ambler.mp3")
         
-        let expectedActionMethod = "useButtonPressed:"
+//        guard let videoData = try? Data(contentsOf: videoUrl) else { return }
+//
+//        do {
+//
+//            try videoData.write(to: <#T##URL#>)
+//
+//        } catch {
+//
+//        }
         
-        // Assert
-        XCTAssertEqual(actualActionMethod, expectedActionMethod)
+        sut.dataSaved(videoUrl: videoUrl, completionHandler: { result in
+                
+            let directory = try? FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
+                                                                         includingPropertiesForKeys: nil,
+                                                                         options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+            
+            let count = directory!.count
+            
+            switch result {
+                
+            case .success:
+                XCTAssertEqual(count, 1)
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
-
-//    func test_useButton_DidSaveDataToDirectory() {
-//
-//        // Arrange
-//        let unitTestDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("VideoData")
-//
-//        let time = Int(Date().timeIntervalSince1970)
-//
-//        let fileName = "\(time).mp4"
-//
-//        let dataPath = unitTestDirectory.appendingPathComponent(fileName)
-//
-//
-//
-////        sut.useButton.sendActions(for: .touchUpInside)
-//    }
 }

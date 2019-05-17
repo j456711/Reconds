@@ -31,7 +31,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
                                                       alertTitle: "請先新增影片",
                                                       alertMessage: "新增後即可開始錄製。")
 
-            } else if filteredArray?.count == 25 {
+            } else if filteredArray?.count == 9 {
                 
                 UIAlertController.addConfirmAlertWith(viewController: self,
                                                       alertTitle: "無法新增影片",

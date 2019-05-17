@@ -36,13 +36,6 @@ class MergeVideoManager {
         
         var outputSize = CGSize(width: 0, height: 0)
 
-        // Init video & audio composition track
-        guard let videoCompositionTrack =
-            mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
-            let audioCompositionTrack =
-            mixComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
-            else { return }
-        
         // Determine video output size
         for videoAsset in arrayVideos {
 
@@ -79,6 +72,13 @@ class MergeVideoManager {
 
         for videoAsset in arrayVideos {
 
+            // Init video & audio composition track
+            guard let videoCompositionTrack =
+                mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
+                let audioCompositionTrack =
+                mixComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
+                else { return }
+            
             // 這裡出來的結果是：會幫 videoAsset 個別製作一個 video 跟 audio 的 mutable track
             // 假設總共有 4 個 videoAsset，就會產生 8 個 mutable track， video 跟 audio 各 4 個
 //            print("videoCompositionTrack", videoCompositionTrack)

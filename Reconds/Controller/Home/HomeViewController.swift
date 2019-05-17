@@ -289,7 +289,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         if videoData.count == 0 {
 
-            return 25
+            return 9
 
         } else {
 
@@ -500,7 +500,7 @@ extension HomeViewController: UIGestureRecognizerDelegate {
                     
                     strongSelf.videoData[0].dataPathArray.remove(at: hitIndex.item)
                     
-                    strongSelf.videoData[0].dataPathArray.insert("", at: 24)
+                    strongSelf.videoData[0].dataPathArray.insert("", at: 8)
                     
                     StorageManager.shared.save()
                     

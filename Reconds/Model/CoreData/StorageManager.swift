@@ -109,9 +109,7 @@ extension StorageManager {
         
         let videoData = VideoData(context: persistantContainer.viewContext)
         
-        videoData.dataPathArray.append(contentsOf: ["", "", "", "", "", "", "", "", "", "",
-                                                    "", "", "", "", "", "", "", "", "", "",
-                                                    "", "", "", "", ""])
+        videoData.dataPathArray.append(contentsOf: ["", "", "", "", "", "", "", "", ""])
         
         save()
     }
