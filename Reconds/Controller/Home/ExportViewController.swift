@@ -22,7 +22,8 @@ class ExportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        JYProgressHUD.shared.showIndeterminate(in: self.view)
+        indicator.textLabel.text = "輸出中"
+        indicator.show(in: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,13 +41,13 @@ class ExportViewController: UIViewController {
                 if let fileName = fileName,
                    let outputUrl = outputUrl,
                    let videoTitle = UserDefaults.standard.string(forKey: "Title") {
-                                
+                    
                     guard let videoData = try? Data(contentsOf: outputUrl) else { return }
                     
                     do {
                         
                         try videoData.write(to: outputUrl)
-                    
+                        
                     } catch {
                         
                         print("Write to directory error", error)
@@ -61,33 +62,12 @@ class ExportViewController: UIViewController {
                         switch result {
                             
                         case .success:
-                            
                             DataManager.shared.deleteFilesInTemporaryDirectory(completionHandler: { result in
                                 
                                 switch result {
                                     
                                 case .success:
-                                    strongSelf.indicator.indicatorView = JGProgressHUDSuccessIndicatorView()
-                                    
-                                    strongSelf.indicator.textLabel.text = "輸出成功"
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                                        
-                                        guard let tabBar = strongSelf.presentingViewController as? TabBarController,
-                                            let navVC = tabBar.selectedViewController as? UINavigationController
-                                            else { return }
-                                        
-                                        navVC.popToRootViewController(animated: true)
-                                        
-                                        let viewController = UIStoryboard.home.instantiateViewController(
-                                            withIdentifier: String(describing: MyVideosViewController.self))
-                                        guard let myVideosVC = viewController as? MyVideosViewController else { return }
-                                        
-                                        tabBar.dismiss(animated: true, completion: {
-                                            
-                                            navVC.show(myVideosVC, sender: nil)
-                                        })
-                                    })
+                                    break
                                     
                                 case .failure(let error):
                                     print(error)
@@ -97,6 +77,28 @@ class ExportViewController: UIViewController {
                         case .failure(let error):                            
                             print(error)
                         }
+                    })
+                    
+                    strongSelf.indicator.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    
+                    strongSelf.indicator.textLabel.text = "輸出成功"
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                        
+                        guard let tabBar = strongSelf.presentingViewController as? TabBarController,
+                            let navVC = tabBar.selectedViewController as? UINavigationController
+                            else { return }
+                        
+                        navVC.popToRootViewController(animated: true)
+                        
+                        let viewController = UIStoryboard.home.instantiateViewController(
+                            withIdentifier: String(describing: MyVideosViewController.self))
+                        guard let myVideosVC = viewController as? MyVideosViewController else { return }
+                        
+                        tabBar.dismiss(animated: true, completion: {
+                            
+                            navVC.show(myVideosVC, sender: nil)
+                        })
                     })
                     
                 } else {

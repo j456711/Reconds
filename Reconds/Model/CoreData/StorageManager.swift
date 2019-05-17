@@ -91,7 +91,7 @@ final class StorageManager {
                 
                 context.delete(objectData)
                 
-                print("Deleted seccessfully")
+                print("Deleted successfully")
                 
                 save()
             }

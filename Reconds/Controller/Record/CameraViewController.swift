@@ -487,7 +487,7 @@ extension CameraViewController: CAAnimationDelegate {
 
         strokeAnimation.delegate = self
         strokeAnimation.toValue = 1
-        strokeAnimation.duration = 1.0 //動畫維持
+        strokeAnimation.duration = 3.0 //動畫維持
         strokeAnimation.fillMode = .forwards
 
         cameraButtonLayer.add(strokeAnimation, forKey: "basic")
