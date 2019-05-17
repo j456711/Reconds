@@ -397,15 +397,15 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: (UIScreen.main.bounds.size.width - 4) / 5,
-                      height: (UIScreen.main.bounds.size.width - 4) / 5)
+        return CGSize(width: (UIScreen.main.bounds.size.width - 2) / 3,
+                      height: (UIScreen.main.bounds.size.width - 40) / 3)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 1
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView,

@@ -35,7 +35,7 @@
 		34300BB8227047DA00CF3429 /* MyVideosDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */; };
 		34300BBA2271CB5000CF3429 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB92271CB5000CF3429 /* UIStoryboard+Extension.swift */; };
 		34300BBC2271EC1100CF3429 /* RCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BBB2271EC1100CF3429 /* RCConstants.swift */; };
-		347856EE2276C8C200A158EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 347856ED2276C8C200A158EA /* GoogleService-Info.plist */; };
+		3467B045228ECC1C00F5B89E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3467B044228ECC1C00F5B89E /* GoogleService-Info.plist */; };
 		348FBD69225F1EAE000F53F6 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD68225F1EAE000F53F6 /* StorageManager.swift */; };
 		348FBD6E225F1F20000F53F6 /* Reconds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* Reconds.xcdatamodeld */; };
 		348FBD71225F1F52000F53F6 /* VideoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */; };
@@ -107,7 +107,7 @@
 		34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVideosDetailViewController.swift; sourceTree = "<group>"; };
 		34300BB92271CB5000CF3429 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		34300BBB2271EC1100CF3429 /* RCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCConstants.swift; sourceTree = "<group>"; };
-		347856ED2276C8C200A158EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3467B044228ECC1C00F5B89E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		348FBD68225F1EAE000F53F6 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		348FBD6F225F1F52000F53F6 /* VideoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 		1E419A3D2251BAB1009B4F49 = {
 			isa = PBXGroup;
 			children = (
-				347856ED2276C8C200A158EA /* GoogleService-Info.plist */,
+				3467B044228ECC1C00F5B89E /* GoogleService-Info.plist */,
 				1E419A71225378F0009B4F49 /* .gitignore */,
 				1E419A482251BAB1009B4F49 /* Reconds */,
 				34D95C39228908360055C540 /* RecondsTests */,
@@ -520,7 +520,7 @@
 				34DBA2F722826AC0003C9D55 /* RCVideoPlayerView.xib in Resources */,
 				3416CDA2226AC396007D9D37 /* Reconds-Music.bundle in Resources */,
 				1E419A542251BAB6009B4F49 /* LaunchScreen.storyboard in Resources */,
-				347856EE2276C8C200A158EA /* GoogleService-Info.plist in Resources */,
+				3467B045228ECC1C00F5B89E /* GoogleService-Info.plist in Resources */,
 				1E419A72225378F1009B4F49 /* .gitignore in Resources */,
 				1E419A6A225373EA009B4F49 /* Record.storyboard in Resources */,
 				34DBA2E6227D9553003C9D55 /* MusicTableViewCell.xib in Resources */,

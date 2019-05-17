@@ -27,7 +27,7 @@ class RCVideoPlayer {
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
         avPlayerLayer.videoGravity = videoGravity
-        
+                
         view.layer.addSublayer(avPlayerLayer)
         
         let playerItem = AVPlayerItem(url: videoUrl)

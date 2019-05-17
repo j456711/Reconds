@@ -65,7 +65,8 @@ class RecondsTests: XCTestCase {
                 
             let directory = try? FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
                                                                          includingPropertiesForKeys: nil,
-                                                                         options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+                                                                         options: [.skipsHiddenFiles,
+                                                                                   .skipsSubdirectoryDescendants])
             
             let count = directory!.count
             

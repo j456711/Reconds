@@ -27,9 +27,6 @@ class MergeVideoManager {
     
     func mergeVideos(arrayVideos: [AVAsset], completionHandler: @escaping ExportedHandler) {
         
-        // Init composition
-        let mixComposition = AVMutableComposition()
-        
         var insertTime = CMTime.zero
         
         var arrayLayerInstructions: [AVMutableVideoCompositionLayerInstruction] = []
@@ -70,8 +67,15 @@ class MergeVideoManager {
             outputSize = defaultSize
         }
 
+        // Init composition
+        let mixComposition = AVMutableComposition()
+        
         for videoAsset in arrayVideos {
 
+            // 取得影像軌道和聲音軌道
+            let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
+            let audioTrack = videoAsset.tracks(withMediaType: .audio)[0]
+            
             // Init video & audio composition track
             guard let videoCompositionTrack =
                 mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid),
@@ -81,13 +85,9 @@ class MergeVideoManager {
             
             // 這裡出來的結果是：會幫 videoAsset 個別製作一個 video 跟 audio 的 mutable track
             // 假設總共有 4 個 videoAsset，就會產生 8 個 mutable track， video 跟 audio 各 4 個
-//            print("videoCompositionTrack", videoCompositionTrack)
-//            print("audioCompositionTrack", audioCompositionTrack)
-
-            // 取得影像軌道和聲音軌道
-            let videoTrack = videoAsset.tracks(withMediaType: .video)[0]
-            let audioTrack = videoAsset.tracks(withMediaType: .audio)[0]
-
+            //            print("videoCompositionTrack", videoCompositionTrack)
+            //            print("audioCompositionTrack", audioCompositionTrack)
+            
             let timeRange = CMTimeRangeMake(start: .zero, duration: videoAsset.duration)
 
             do {
@@ -119,12 +119,12 @@ class MergeVideoManager {
                                                                        asset: videoAsset,
                                                                        standardSize: outputSize,
                                                                        atTime: insertTime)
-
+            
             // Hide video track before changing to new track
             let endTime = CMTimeAdd(insertTime, videoAsset.duration)
-
+            
             layerInstruction.setOpacity(0.0, at: endTime)
-
+            
             arrayLayerInstructions.append(layerInstruction)
             
             // Increase the insert time
@@ -144,7 +144,7 @@ class MergeVideoManager {
         
         // Export to file
         let path = NSTemporaryDirectory().appending("mergedVideo.mp4")
-        let exportUrl = URL.init(fileURLWithPath: path)
+        let exportUrl = URL(fileURLWithPath: path)
         
         // Remove file if existed
         FileManager.default.removeItemIfExisted(at: exportUrl)
@@ -155,6 +155,7 @@ class MergeVideoManager {
         assetExport.videoComposition = mainComposition
         assetExport.outputURL = exportUrl
         assetExport.outputFileType = .mp4
+        assetExport.shouldOptimizeForNetworkUse = true
         
         // Do export
         assetExport.exportAsynchronously(completionHandler: { [weak self] in

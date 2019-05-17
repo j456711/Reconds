@@ -16,7 +16,6 @@ class MusicViewController: UIViewController {
         
         // swiftlint:disable identifier_name
         
-//        case NoMusic = "No Music"
         case AcousticRock = "Acoustic Rock"
         case Ambler
         case CheeryMonday = "Cheery Monday"
@@ -73,6 +72,10 @@ class MusicViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.jy_registerCellWithNib(indentifier: String(describing: MusicTableViewCell.self), bundle: nil)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         if let videoUrl = videoUrl {
             
@@ -81,6 +84,7 @@ class MusicViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
         player?.stop()
     }
