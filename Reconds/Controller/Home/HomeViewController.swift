@@ -171,8 +171,6 @@ class HomeViewController: UIViewController {
        
         collectionView.addGestureRecognizer(longPressGesture)
         collectionView.addGestureRecognizer(tapGesture)
-        
-//        longPressGesture.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -398,14 +396,14 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: (UIScreen.main.bounds.size.width - 2) / 3,
-                      height: (UIScreen.main.bounds.size.width - 40) / 3)
+                      height: (UIScreen.main.bounds.size.width - 2) / 3)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 20
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -418,23 +416,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Gestures
 extension HomeViewController: UIGestureRecognizerDelegate {
-    
-//    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-//        
-//        if let longPressGesture = gestureRecognizer as? UILongPressGestureRecognizer {
-//
-//            if filteredArray?.count == 0 {
-//
-//                return false
-//
-//            } else {
-//
-//                return true
-//            }
-//        }
-//
-//        return true
-//    }
     
     @objc func longPressAction(_ gesture: UIGestureRecognizer) {
 
