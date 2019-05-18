@@ -209,8 +209,14 @@ class HomeViewController: UIViewController {
             reset()
         }
         
-        self.filteredArray = filteredArray
+        if previewButton.isHidden == false || exportButton.isHidden == false || doneButton.isHidden == false {
+            
+            indicatorView1.isHidden = true
+            indicatorView2.isHidden = true
+        }
         
+        self.filteredArray = filteredArray
+
         collectionView.reloadData()
     }
 
