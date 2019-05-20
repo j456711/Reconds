@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsTableViewCell" rowHeight="50" id="Igp-h5-pUf" customClass="SettingsTableViewCell" customModule="Reconds" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Igp-h5-pUf" id="2ux-RS-n1n">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9R9-qU-MUF">
+                        <rect key="frame" x="16" y="9" width="78" height="26"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="decriptionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwP-6K-Wkk">
+                        <rect key="frame" x="268" y="9" width="130" height="26"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                        <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vev-Zu-e9v">
+                        <rect key="frame" x="349" y="6.5" width="51" height="31"/>
+                        <color key="onTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Vev-Zu-e9v" secondAttribute="trailing" constant="16" id="7QP-Pi-bCT"/>
+                    <constraint firstAttribute="trailing" secondItem="jwP-6K-Wkk" secondAttribute="trailing" constant="16" id="Gsb-IW-xe0"/>
+                    <constraint firstItem="Vev-Zu-e9v" firstAttribute="centerY" secondItem="9R9-qU-MUF" secondAttribute="centerY" id="bQt-NW-l0f"/>
+                    <constraint firstItem="9R9-qU-MUF" firstAttribute="centerY" secondItem="2ux-RS-n1n" secondAttribute="centerY" id="d3b-I2-GRM"/>
+                    <constraint firstItem="9R9-qU-MUF" firstAttribute="leading" secondItem="2ux-RS-n1n" secondAttribute="leading" constant="16" id="k4r-6y-kOs"/>
+                    <constraint firstItem="jwP-6K-Wkk" firstAttribute="centerY" secondItem="9R9-qU-MUF" secondAttribute="centerY" id="yl8-n0-d4l"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="jwP-6K-Wkk" id="4H6-py-3Ps"/>
+                <outlet property="switcher" destination="Vev-Zu-e9v" id="fBq-wf-Vyt"/>
+                <outlet property="titleLabel" destination="9R9-qU-MUF" id="rXv-gS-Ch8"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

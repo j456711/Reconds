@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PnX-aH-SlX">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Record View Controller-->
+        <scene sceneID="ors-U1-6kY">
+            <objects>
+                <viewController storyboardIdentifier="RecordViewController" id="PnX-aH-SlX" customClass="RecordViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ggT-Ua-RcA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="d7j-Ay-3FF"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="Icon_35px_Shot" id="SMq-3W-Jty">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-8"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="elg-MB-t5c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4602" y="134"/>
+        </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="pV1-BI-wNN">
+            <objects>
+                <viewController storyboardIdentifier="CameraViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dam-r6-hpi" customClass="CameraViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rZI-co-e5R">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTm-nh-IUD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="允許 Reconds 存取你的相機和麥克風，以便製作影片。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKu-37-4ba">
+                                        <rect key="frame" x="48" y="305.5" width="279" height="56"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Thin" family="PingFang TC" pointSize="20"/>
+                                        <color key="textColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="紀錄你的秒速人生" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOn-Pb-4g6">
+                                        <rect key="frame" x="87.5" y="260.5" width="200" height="35"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZaQ-Fg-Zz4">
+                                        <rect key="frame" x="143.5" y="401.5" width="88" height="43"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="22"/>
+                                        <state key="normal" title="啟用權限"/>
+                                        <connections>
+                                            <action selector="authorizedButtonPressed:" destination="dam-r6-hpi" eventType="touchUpInside" id="cXS-hR-04G"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon_256px_DownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="PBA-2N-ze6">
+                                        <rect key="frame" x="171.5" y="20" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="6wT-52-WJH"/>
+                                            <constraint firstAttribute="height" constant="32" id="ZaZ-Zl-Fwl"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="WKu-37-4ba" secondAttribute="trailing" constant="48" id="1lC-ql-IZq"/>
+                                    <constraint firstItem="PBA-2N-ze6" firstAttribute="centerX" secondItem="CTm-nh-IUD" secondAttribute="centerX" id="Bfu-Zt-8Zg"/>
+                                    <constraint firstItem="ZaQ-Fg-Zz4" firstAttribute="centerX" secondItem="CTm-nh-IUD" secondAttribute="centerX" id="Eca-gE-OV1"/>
+                                    <constraint firstItem="NOn-Pb-4g6" firstAttribute="centerX" secondItem="CTm-nh-IUD" secondAttribute="centerX" id="FZb-C8-Je7"/>
+                                    <constraint firstItem="WKu-37-4ba" firstAttribute="centerY" secondItem="CTm-nh-IUD" secondAttribute="centerY" id="I69-ev-kbf"/>
+                                    <constraint firstItem="WKu-37-4ba" firstAttribute="centerX" secondItem="CTm-nh-IUD" secondAttribute="centerX" id="IBM-Gh-RdY"/>
+                                    <constraint firstItem="WKu-37-4ba" firstAttribute="leading" secondItem="CTm-nh-IUD" secondAttribute="leading" constant="48" id="WKg-p5-Boq"/>
+                                    <constraint firstItem="ZaQ-Fg-Zz4" firstAttribute="top" secondItem="WKu-37-4ba" secondAttribute="bottom" constant="40" id="cZE-Wx-kdm"/>
+                                    <constraint firstItem="WKu-37-4ba" firstAttribute="top" secondItem="NOn-Pb-4g6" secondAttribute="bottom" constant="10" id="yLu-TF-gDa"/>
+                                    <constraint firstItem="PBA-2N-ze6" firstAttribute="top" secondItem="CTm-nh-IUD" secondAttribute="top" constant="20" id="yxh-T0-77h"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CTm-nh-IUD" firstAttribute="bottom" secondItem="EOb-ob-rzI" secondAttribute="bottom" id="I8y-oY-AfZ"/>
+                            <constraint firstItem="CTm-nh-IUD" firstAttribute="leading" secondItem="EOb-ob-rzI" secondAttribute="leading" id="Umi-uv-v0F"/>
+                            <constraint firstItem="CTm-nh-IUD" firstAttribute="trailing" secondItem="EOb-ob-rzI" secondAttribute="trailing" id="hRl-8c-L9y"/>
+                            <constraint firstItem="CTm-nh-IUD" firstAttribute="top" secondItem="rZI-co-e5R" secondAttribute="top" id="hl2-oh-qWq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EOb-ob-rzI"/>
+                    </view>
+                    <connections>
+                        <outlet property="authorizedView" destination="CTm-nh-IUD" id="91S-N4-WVZ"/>
+                        <segue destination="bBr-pZ-qkV" kind="show" identifier="ShowVideoPlaybackVC" id="HXo-Fw-13o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B9V-f0-TQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5373.6000000000004" y="133.5832083958021"/>
+        </scene>
+        <!--Video Playback View Controller-->
+        <scene sceneID="B6M-bg-2kq">
+            <objects>
+                <viewController storyboardIdentifier="VideoPlaybackViewController" id="bBr-pZ-qkV" customClass="VideoPlaybackViewController" customModule="Reconds" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oxa-8W-Khg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usc-9b-ZEa">
+                                <rect key="frame" x="0.0" y="577" width="375" height="90"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eo0-Qp-7qq">
+                                        <rect key="frame" x="277" y="27" width="82" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="使用影片">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="useButtonPressed:" destination="bBr-pZ-qkV" eventType="touchUpInside" id="2fK-TY-0FX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79U-qe-t8X">
+                                        <rect key="frame" x="16" y="27" width="82" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="重新拍攝">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="retakeButtonPressed:" destination="bBr-pZ-qkV" eventType="touchUpInside" id="zqc-bb-wnU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Eo0-Qp-7qq" secondAttribute="trailing" constant="16" id="Fpy-Qz-ioa"/>
+                                    <constraint firstItem="79U-qe-t8X" firstAttribute="leading" secondItem="usc-9b-ZEa" secondAttribute="leading" constant="16" id="Px5-vf-1Uc"/>
+                                    <constraint firstItem="Eo0-Qp-7qq" firstAttribute="centerY" secondItem="usc-9b-ZEa" secondAttribute="centerY" id="XBN-az-bKD"/>
+                                    <constraint firstAttribute="height" constant="90" id="diL-V5-sQx"/>
+                                    <constraint firstItem="79U-qe-t8X" firstAttribute="centerY" secondItem="usc-9b-ZEa" secondAttribute="centerY" id="i9D-rj-dGA"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yER-fU-bjx">
+                                <rect key="frame" x="155.5" y="301.5" width="64" height="64"/>
+                                <state key="normal" image="Icon_Play"/>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="bBr-pZ-qkV" eventType="touchUpInside" id="8YU-xc-w5A"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="yER-fU-bjx" firstAttribute="centerX" secondItem="oxa-8W-Khg" secondAttribute="centerX" id="7HH-dP-SRA"/>
+                            <constraint firstItem="usc-9b-ZEa" firstAttribute="bottom" secondItem="jDg-As-Zsa" secondAttribute="bottom" id="C17-8z-C1y"/>
+                            <constraint firstItem="usc-9b-ZEa" firstAttribute="trailing" secondItem="jDg-As-Zsa" secondAttribute="trailing" id="HgU-Rh-3y1"/>
+                            <constraint firstItem="usc-9b-ZEa" firstAttribute="leading" secondItem="jDg-As-Zsa" secondAttribute="leading" id="OuH-0H-cuR"/>
+                            <constraint firstItem="yER-fU-bjx" firstAttribute="centerY" secondItem="oxa-8W-Khg" secondAttribute="centerY" id="wUr-lX-gxX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jDg-As-Zsa"/>
+                    </view>
+                    <connections>
+                        <outlet property="controlView" destination="usc-9b-ZEa" id="75p-7l-f57"/>
+                        <outlet property="playButton" destination="yER-fU-bjx" id="XdT-W7-TP2"/>
+                        <outlet property="retakeButton" destination="79U-qe-t8X" id="2Th-56-SCO"/>
+                        <outlet property="useButton" destination="Eo0-Qp-7qq" id="6eO-ZV-h0e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ddp-Z8-5BB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6144.8000000000002" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon_256px_DownArrow" width="64" height="64"/>
+        <image name="Icon_35px_Shot" width="35" height="35"/>
+        <image name="Icon_Play" width="64" height="64"/>
+    </resources>
+</document>

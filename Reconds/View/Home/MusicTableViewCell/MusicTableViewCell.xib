@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MusicTableViewCell" rowHeight="50" id="mZd-R9-5LS" customClass="MusicTableViewCell" customModule="Reconds" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mZd-R9-5LS" id="eqv-Rl-VSS">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qT0-6m-pCb" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                        <rect key="frame" x="373" y="9.5" width="25" height="25"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="aya-5M-mre"/>
+                            <constraint firstAttribute="height" constant="25" id="hJp-Gq-Ebc"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gs4-nd-buf">
+                        <rect key="frame" x="16" y="7" width="75" height="29.5"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="gs4-nd-buf" secondAttribute="bottom" constant="7" id="5Se-EM-W0e"/>
+                    <constraint firstAttribute="trailing" secondItem="qT0-6m-pCb" secondAttribute="trailing" constant="16" id="9N4-dv-7Rh"/>
+                    <constraint firstItem="gs4-nd-buf" firstAttribute="top" secondItem="eqv-Rl-VSS" secondAttribute="top" constant="7" id="IKR-Xh-8qr"/>
+                    <constraint firstItem="qT0-6m-pCb" firstAttribute="centerY" secondItem="gs4-nd-buf" secondAttribute="centerY" id="doy-aG-puV"/>
+                    <constraint firstItem="gs4-nd-buf" firstAttribute="leading" secondItem="eqv-Rl-VSS" secondAttribute="leading" constant="16" id="eYu-P4-XxE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="indicatorView" destination="qT0-6m-pCb" id="y7t-yv-9ZZ"/>
+                <outlet property="titleLabel" destination="gs4-nd-buf" id="ukG-qg-Szs"/>
+            </connections>
+            <point key="canvasLocation" x="-75.362318840579718" y="143.97321428571428"/>
+        </tableViewCell>
+    </objects>
+</document>

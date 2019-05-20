@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="VideoCollection" representedClassName="VideoCollection" syncable="YES">
+        <attribute name="dataPath" attributeType="String" syncable="YES"/>
+        <attribute name="videoTitle" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="VideoData" representedClassName=".VideoData" syncable="YES">
+        <attribute name="dataPathArray" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="VideoData" positionX="-36" positionY="9" width="128" height="60"/>
+        <element name="VideoCollection" positionX="-36" positionY="18" width="128" height="75"/>
+    </elements>
+</model>

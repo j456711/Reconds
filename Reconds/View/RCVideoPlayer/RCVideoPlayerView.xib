@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RCVideoPlayerView" customModule="Reconds" customModuleProvider="target">
+            <connections>
+                <outlet property="aspectButton" destination="vPb-AK-eeh" id="hER-o3-0nh"/>
+                <outlet property="contentView" destination="Fms-OA-u85" id="hp6-2E-7r2"/>
+                <outlet property="currentTimeLabel" destination="KzY-DR-a2k" id="NuT-15-050"/>
+                <outlet property="endTimeLabel" destination="eLg-Pt-9aH" id="0p4-Fm-GWU"/>
+                <outlet property="playPauseButton" destination="ZKB-3V-13T" id="nnW-ZQ-KPq"/>
+                <outlet property="slider" destination="T0I-fe-gy0" id="JlI-P5-Niw"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Fms-OA-u85">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzY-DR-a2k">
+                    <rect key="frame" x="12" y="36.5" width="40" height="21"/>
+                    <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLg-Pt-9aH">
+                    <rect key="frame" x="323" y="36.5" width="40" height="21"/>
+                    <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="T0I-fe-gy0">
+                    <rect key="frame" x="58" y="32" width="259" height="31"/>
+                    <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <action selector="sliderMoved:" destination="-1" eventType="valueChanged" id="v58-bW-XFO"/>
+                    </connections>
+                </slider>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKB-3V-13T">
+                    <rect key="frame" x="173.5" y="12" width="28" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="eHF-ls-qVe"/>
+                        <constraint firstAttribute="width" constant="28" id="yCP-Md-HaU"/>
+                    </constraints>
+                    <state key="normal" image="Icon_PauseController"/>
+                    <connections>
+                        <action selector="playPauseButtonPressed:" destination="-1" eventType="touchUpInside" id="0dm-1Y-XZp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPb-AK-eeh">
+                    <rect key="frame" x="334" y="13.5" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="ifq-1c-RNA"/>
+                        <constraint firstAttribute="height" constant="25" id="keq-PL-LW9"/>
+                    </constraints>
+                    <state key="normal" image="Icon_128px_Expand"/>
+                    <connections>
+                        <action selector="aspectButtonPressed:" destination="-1" eventType="touchUpInside" id="mlh-Bw-wb2"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="T0I-fe-gy0" firstAttribute="leading" secondItem="KzY-DR-a2k" secondAttribute="trailing" constant="8" id="2Kc-tp-8ke"/>
+                <constraint firstItem="vPb-AK-eeh" firstAttribute="centerY" secondItem="ZKB-3V-13T" secondAttribute="centerY" id="3z6-oZ-96M"/>
+                <constraint firstItem="ZKB-3V-13T" firstAttribute="centerX" secondItem="Fms-OA-u85" secondAttribute="centerX" id="SA8-YK-vQT"/>
+                <constraint firstItem="KzY-DR-a2k" firstAttribute="centerY" secondItem="T0I-fe-gy0" secondAttribute="centerY" id="aph-3A-cs2"/>
+                <constraint firstAttribute="trailing" secondItem="vPb-AK-eeh" secondAttribute="trailing" constant="16" id="fL9-Vd-njX"/>
+                <constraint firstItem="eLg-Pt-9aH" firstAttribute="centerY" secondItem="T0I-fe-gy0" secondAttribute="centerY" id="jTt-Ft-fx8"/>
+                <constraint firstItem="KzY-DR-a2k" firstAttribute="leading" secondItem="HGI-C7-OOi" secondAttribute="leading" constant="12" id="kQp-LE-7Ma"/>
+                <constraint firstItem="ZKB-3V-13T" firstAttribute="top" secondItem="Fms-OA-u85" secondAttribute="top" constant="12" id="lz4-XC-jmP"/>
+                <constraint firstItem="eLg-Pt-9aH" firstAttribute="leading" secondItem="T0I-fe-gy0" secondAttribute="trailing" constant="8" id="nNl-Ov-Idd"/>
+                <constraint firstItem="T0I-fe-gy0" firstAttribute="centerX" secondItem="Fms-OA-u85" secondAttribute="centerX" id="o4x-DQ-brh"/>
+                <constraint firstAttribute="bottom" secondItem="T0I-fe-gy0" secondAttribute="bottom" constant="12" id="oUn-pH-dUO"/>
+                <constraint firstItem="HGI-C7-OOi" firstAttribute="trailing" secondItem="eLg-Pt-9aH" secondAttribute="trailing" constant="12" id="xy7-4D-8iM"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="HGI-C7-OOi"/>
+            <point key="canvasLocation" x="-331.15942028985512" y="-427.23214285714283"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Icon_128px_Expand" width="32" height="32"/>
+        <image name="Icon_PauseController" width="64" height="64"/>
+    </resources>
+</document>
