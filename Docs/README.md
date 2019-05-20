@@ -17,7 +17,6 @@ Reconds 是一款影像紀錄 App，讓使用者一次拍攝 3 秒的影片，�
 
 <img src="https://i.imgur.com/gAXpOwT.gif" height="500"></a> <img src="https://i.imgur.com/yEziEMn.gif" height="500"></a>
 
-
 #### 挑選音樂
 
    + 內建十首配樂隨意搭配
@@ -38,7 +37,6 @@ Reconds 是一款影像紀錄 App，讓使用者一次拍攝 3 秒的影片，�
   + NVActivityIndicatorView
   + Swift Lint
 
-
 ## Version History
 
   + 2.0     2019/05/20
@@ -50,12 +48,10 @@ Reconds 是一款影像紀錄 App，讓使用者一次拍攝 3 秒的影片，�
   + 1.1     2019/05/07
     + UI更新
     + 修正錯誤
-    + 
 
   + 1.0.5   2019/05/07
     + UI更新
     + 修正錯誤
-    + 
 
 ## Requirement
   + iOS 11.0+
