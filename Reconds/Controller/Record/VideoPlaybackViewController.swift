@@ -101,11 +101,12 @@ class VideoPlaybackViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        super.touchesBegan(touches, with: event)
+        
         guard let touch = touches.first else { return }
         
-        if touch.view != rcVideoPlayerView {
-        
+        if touch.view != rcVideoPlayerView.contentView {
+            
             if controlView.alpha == 1.0 {
                 
                 rcVideoPlayerView.alpha = 0.0
