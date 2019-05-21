@@ -1,4 +1,4 @@
-# Reconds：秒速人生 <img src="https://i.imgur.com/1pBvWTq.png" height="40"></a> <a href="https://itunes.apple.com/app/reconds-秒速人生/id1461732748?mt=8"><img src="https://i.imgur.com/Pc1KdHw.png" height="40"></a>
+# Reconds：秒速人生 <img src="https://i.imgur.com/1pBvWTq.png" height="40"></a> <a href="https://itunes.apple.com/app/id1461732748"><img src="https://i.imgur.com/Pc1KdHw.png" height="40"></a>
 
 Reconds 是一款影像紀錄 App，讓使用者一次拍攝 3 秒的影片，再輸出為最長 27 秒並搭配音樂的短片。不論是在生活中、在旅途上，讓 Reconds 為你製作珍貴的人生紀錄。
 
@@ -55,7 +55,7 @@ Reconds 是一款影像紀錄 App，讓使用者一次拍攝 3 秒的影片，�
 
 ## Requirement
   + iOS 11.0+
-  + Xcode 9.2
+  + Xcode 10.2
 
   
 ## Contacts
