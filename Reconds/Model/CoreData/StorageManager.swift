@@ -130,6 +130,7 @@ extension StorageManager {
                 
                 let stringMatch = element.lowercased().range(of: searchToSearch.lowercased())
                 
+                // question ? answer1 : answer2
                 return stringMatch != nil ? true : false
             })
             

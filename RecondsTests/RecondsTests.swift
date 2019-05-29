@@ -10,15 +10,11 @@ import XCTest
 @testable import Reconds
 
 class RecondsTests: XCTestCase {
-
-    let sut = DataManager()
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        
-        // Arrange
-        
+    
     }
 
     override func tearDown() {
@@ -41,43 +37,31 @@ class RecondsTests: XCTestCase {
 
     }
     
-    func test_DataManager_IsInitialized() {
+    func filterData() -> [String]? {
         
-        XCTAssertNotNil(sut)
+        let videoData = VideoData()
+        
+        let searchToSearch = ".mp4"
+        
+        if videoData.dataPathArray == [] {
+            
+            return nil
+            
+        } else {
+            //
+            let filteredArray = videoData.dataPathArray?.filter({ (element: String) -> Bool in
+                
+                let stringMatch = element.lowercased().range(of: searchToSearch.lowercased())
+                
+                return stringMatch != nil ? true : false
+            })
+            
+            return filteredArray
+        }
     }
+}
+
+struct VideoData {
     
-    func test_DataManager_DidWriteDataToFileManager() {
-        
-        let videoUrl = Bundle.main.url(forResource: "Reconds-Music",
-                                       withExtension: "bundle")!.appendingPathComponent("Ambler.mp3")
-        
-//        guard let videoData = try? Data(contentsOf: videoUrl) else { return }
-//
-//        do {
-//
-//            try videoData.write(to: <#T##URL#>)
-//
-//        } catch {
-//
-//        }
-        
-        sut.dataSaved(videoUrl: videoUrl, completionHandler: { result in
-                
-            let directory = try? FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
-                                                                         includingPropertiesForKeys: nil,
-                                                                         options: [.skipsHiddenFiles,
-                                                                                   .skipsSubdirectoryDescendants])
-            
-            let count = directory!.count
-            
-            switch result {
-                
-            case .success:
-                XCTAssertEqual(count, 1)
-                
-            case .failure(let error):
-                print(error)
-            }
-        })
-    }
+    var dataPathArray: [String]?
 }
