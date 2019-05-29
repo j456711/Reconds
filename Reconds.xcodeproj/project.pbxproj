@@ -60,6 +60,7 @@
 		34DBA2FA228273F9003C9D55 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2F9228273F9003C9D55 /* UIView+Extension.swift */; };
 		34DBA2FC22827D6E003C9D55 /* RCVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2FB22827D6E003C9D55 /* RCVideoPlayer.swift */; };
 		34F111092287105E006D70B8 /* VideoTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F111082287105E006D70B8 /* VideoTitleView.swift */; };
+		34FD1B73229E500400F73F49 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FD1B72229E500400F73F49 /* CameraManager.swift */; };
 		BCD7A2F6F91B7095DBF7DFD6 /* Pods_RecondsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 515B2B971EA8285298091608 /* Pods_RecondsTests.framework */; };
 		E676519397AAC4529F277A2A /* Pods_Reconds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02067C339529F8DFBDD6D0CB /* Pods_Reconds.framework */; };
 /* End PBXBuildFile section */
@@ -134,6 +135,7 @@
 		34DBA2F9228273F9003C9D55 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		34DBA2FB22827D6E003C9D55 /* RCVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCVideoPlayer.swift; sourceTree = "<group>"; };
 		34F111082287105E006D70B8 /* VideoTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTitleView.swift; sourceTree = "<group>"; };
+		34FD1B72229E500400F73F49 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		515B2B971EA8285298091608 /* Pods_RecondsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecondsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EEB751CF20B6FF5B0601BD /* Pods-Reconds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reconds.debug.xcconfig"; path = "Target Support Files/Pods-Reconds/Pods-Reconds.debug.xcconfig"; sourceTree = "<group>"; };
 		A343B0CA21CDDFF23D9B2687 /* Pods-RecondsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecondsTests.release.xcconfig"; path = "Target Support Files/Pods-RecondsTests/Pods-RecondsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				34D95C42228C03C80055C540 /* DataManager.swift */,
+				34FD1B72229E500400F73F49 /* CameraManager.swift */,
 				34DBA2FB22827D6E003C9D55 /* RCVideoPlayer.swift */,
 				34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */,
 				348FBD59225F1D0D000F53F6 /* CoreData */,
@@ -684,6 +687,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34300BB0226DB19E00CF3429 /* MyVideosCollectionViewCell.swift in Sources */,
+				34FD1B73229E500400F73F49 /* CameraManager.swift in Sources */,
 				1E419A742254B261009B4F49 /* HomeCollectionViewCell.swift in Sources */,
 				1E419A4C2251BAB1009B4F49 /* HomeViewController.swift in Sources */,
 				34F111092287105E006D70B8 /* VideoTitleView.swift in Sources */,

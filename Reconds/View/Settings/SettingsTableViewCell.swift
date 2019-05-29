@@ -58,16 +58,17 @@ class SettingsTableViewCell: UITableViewCell {
     }
     
     func didSelectedAboutSection(at indexPath: IndexPath) {
-        
+
         switch indexPath.row {
-            
+
         case 0:
             SKStoreReviewController.requestReview()
-            
+
         case 1:
             delegate?.shareApp(self)
-            
+
         default: break
         }
     }
+
 }

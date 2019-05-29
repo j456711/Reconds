@@ -17,21 +17,17 @@ class CameraViewController: UIViewController {
         static let showVideoPlaybackVC = "ShowVideoPlaybackVC"
     }
     
+    let cameraManager = CameraManager()
+
     let cameraButton = UIButton()
 
     let flashButton = UIButton()
     
-    let captureSession = AVCaptureSession()
-    
-    var movieOutput = AVCaptureMovieFileOutput()
-    
-    var activeInput: AVCaptureDeviceInput?
-
-    var outputUrl: URL?
+    let cancelButton = UIButton()
     
     let cameraButtonLayer = CAShapeLayer()  //使用CAShapeLayer製作動畫
 
-    let cancelButton = UIButton()
+    var outputUrl: URL?
 
     @IBOutlet weak var authorizedView: UIView!
     
@@ -52,17 +48,17 @@ class CameraViewController: UIViewController {
                             
                             DispatchQueue.main.async {
                                 
-                                if strongSelf.setUpCaptureSession() {
+                                if strongSelf.cameraManager.setUpCaptureSession() {
                                     
                                     strongSelf.authorizedView.isHidden = true
                                     
-                                    strongSelf.setUpVideoLayer()
+                                    strongSelf.cameraManager.setUpVideoLayer(in: strongSelf.view)
                                     
                                     strongSelf.setUpProgressBar()
                                     
                                     strongSelf.setUpCancelButton()
                                     
-                                    strongSelf.startSession()
+                                    strongSelf.cameraManager.startSession()
                                 }
                             }
                         }
@@ -86,6 +82,8 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cameraManager.delegate = self
+        
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panAction))
         
         authorizedView.addGestureRecognizer(gesture)
@@ -96,11 +94,11 @@ class CameraViewController: UIViewController {
             self.view.bringSubviewToFront(authorizedView)
 
         case .authorized:
-            if setUpCaptureSession() {
+            if cameraManager.setUpCaptureSession() {
 
                 authorizedView.isHidden = true
 
-                setUpVideoLayer()
+                cameraManager.setUpVideoLayer(in: self.view)
 
                 setUpProgressBar()
 
@@ -108,7 +106,7 @@ class CameraViewController: UIViewController {
 
 //                setUpFlashButton()
                 
-                startSession()
+                cameraManager.startSession()
             }
 
         default: break
@@ -139,7 +137,8 @@ class CameraViewController: UIViewController {
                     
                 } else {
                     
-                    startRecording()
+                    let movieOutput = cameraManager.startRecording()
+                    movieOutput?.startRecording(to: outputUrl!, recordingDelegate: self)
                 }
             }
         }
@@ -167,215 +166,53 @@ class CameraViewController: UIViewController {
         self.view.addSubview(cancelButton)
     }
     
-    func setUpFlashButton() {
-        
-        flashButton.frame =  CGRect(x: UIScreen.main.bounds.width - 80,
-                                    y: UIScreen.main.bounds.height - 90,
-                                    width: 50,
-                                    height: 45)
-        flashButton.setImage(UIImage.assets(.Icon_35px_Flash_Off), for: .normal)
-        flashButton.addTarget(self, action: #selector(flashButtonAction), for: .touchUpInside)
-        
-        self.view.addSubview(flashButton)
-    }
-    
     @objc func cancelButtonAction() {
         
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func flashButtonAction() {
+//    func setUpFlashButton() {
+//
+//        flashButton.frame =  CGRect(x: UIScreen.main.bounds.width - 80,
+//                                    y: UIScreen.main.bounds.height - 90,
+//                                    width: 50,
+//                                    height: 45)
+//        flashButton.setImage(UIImage.assets(.Icon_35px_Flash_Off), for: .normal)
+//        flashButton.addTarget(self, action: #selector(flashButtonAction), for: .touchUpInside)
+//
+//        self.view.addSubview(flashButton)
+//    }
     
-         guard let device = activeInput?.device else { return }
-
-        if flashButton.imageView?.image == UIImage.assets(.Icon_35px_Flash_On) {
-
-            flashButton.setImage(UIImage.assets(.Icon_35px_Flash_Off), for: .normal)
-
-            if device.isFlashAvailable {
-
-            }
-
-        } else if flashButton.imageView?.image == UIImage.assets(.Icon_35px_Flash_Off) {
-
-            flashButton.setImage(UIImage.assets(.Icon_35px_Flash_On), for: .normal)
-        }
-    }
+//    @objc func flashButtonAction() {
+//
+//         guard let device = activeInput?.device else { return }
+//
+//        if flashButton.imageView?.image == UIImage.assets(.Icon_35px_Flash_On) {
+//
+//            flashButton.setImage(UIImage.assets(.Icon_35px_Flash_Off), for: .normal)
+//
+//            if device.isFlashAvailable {
+//
+//            }
+//
+//        } else if flashButton.imageView?.image == UIImage.assets(.Icon_35px_Flash_Off) {
+//
+//            flashButton.setImage(UIImage.assets(.Icon_35px_Flash_On), for: .normal)
+//        }
+//    }
 }
 
 // MARK: - Camera Setting
+extension CameraViewController: CameraManagerDelegate {
+    
+    func manager(_ manager: CameraManager, outputUrl: URL?) {
+        
+        self.outputUrl = outputUrl
+    }
+}
+
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
 
-    func setUpVideoLayer() {
-        
-        let videoLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        videoLayer.frame = self.view.bounds
-        videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        
-        self.view.layer.addSublayer(videoLayer)
-
-        captureSession.startRunning()
-    }
-
-    func setUpCaptureSession() -> Bool {
-
-        captureSession.sessionPreset = AVCaptureSession.Preset.high
-
-        // Setup Camera
-        guard let camera = AVCaptureDevice.default(for: .video) else { return false }
-        
-        do {
-            
-            let input = try AVCaptureDeviceInput(device: camera)
-
-            if captureSession.canAddInput(input) {
-
-                captureSession.addInput(input)
-
-                activeInput = input
-            }
-
-        } catch {
-
-            print("Error setting device video input: \(error)")
-
-            return false
-        }
-
-        // Setup Microphone
-        guard let microphone = AVCaptureDevice.default(for: .audio) else { return false }
-
-        do {
-
-            let microphoneInput = try AVCaptureDeviceInput(device: microphone)
-
-            if captureSession.canAddInput(microphoneInput) {
-
-                captureSession.addInput(microphoneInput)
-            }
-
-        } catch {
-
-            print("Error setting device audio input: \(error)")
-
-            return false
-        }
-
-        // Movie Output
-        if captureSession.canAddOutput(movieOutput) {
-            
-            captureSession.addOutput(movieOutput)
-        }
-
-        return true
-    }
-
-    // Camera Sesion
-    func startSession() {
-
-        if !captureSession.isRunning {
-
-            DispatchQueue.main.async { [weak self] in
-
-                self?.captureSession.startRunning()
-            }
-        }
-    }
-
-    func stopSession() {
-
-        if captureSession.isRunning {
-
-            DispatchQueue.main.async { [weak self] in
-
-                self?.captureSession.stopRunning()
-            }
-        }
-    }
-    
-    func currentVideoOrientation() -> AVCaptureVideoOrientation {
-
-        var orientation: AVCaptureVideoOrientation
-
-        switch UIDevice.current.orientation {
-
-        case .portrait:
-            orientation = AVCaptureVideoOrientation.portrait
-            
-        case .landscapeRight:
-            orientation = AVCaptureVideoOrientation.landscapeLeft
-            
-        case .portraitUpsideDown:
-            orientation = AVCaptureVideoOrientation.portraitUpsideDown
-
-        default:
-            orientation = AVCaptureVideoOrientation.landscapeRight
-        }
-
-        return orientation
-    }
-
-    func tmpUrl() -> URL? {
-
-        let directory = NSTemporaryDirectory() as NSString
-
-        if directory != "" {
-
-            let path = directory.appendingPathComponent(UUID().uuidString + ".mp4")
-
-            return URL(fileURLWithPath: path)
-        }
-
-        return nil
-    }
-
-    func startRecording() {
-        
-        if movieOutput.isRecording == false {
-            
-            guard let connection = movieOutput.connection(with: .video) else { return }
-
-            if connection.isVideoOrientationSupported {
-
-                connection.videoOrientation = currentVideoOrientation()
-            }
-
-            if connection.isVideoStabilizationSupported {
-
-                connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationMode.auto
-            }
-
-            guard let device = activeInput?.device else { return }
-
-            if device.isSmoothAutoFocusEnabled {
-
-                do {
-
-                    try device.lockForConfiguration()
-                    device.isSmoothAutoFocusEnabled = false
-                    device.unlockForConfiguration()
-
-                } catch {
-
-                    print("Error setting configuration: \(error)")
-                }
-            }
-
-            outputUrl = tmpUrl()
-            
-            movieOutput.startRecording(to: outputUrl!, recordingDelegate: self)
-        }
-    }
-
-    func stopRecording() {
-
-        if movieOutput.isRecording == true {
-            
-            movieOutput.stopRecording()
-        }
-    }
-
-    // AVCaptureFileOutputRecordingDelegate Method
     func fileOutput(_ output: AVCaptureFileOutput,
                     didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
         
@@ -443,9 +280,9 @@ extension CameraViewController {
 }
 
 // MARK: - Animation
-extension CameraViewController: CAAnimationDelegate {
+extension CameraViewController {
 
-    func setUpProgressBar() {
+    private func setUpProgressBar() {
 
         let center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 70)  //設定圖案的位置
 
@@ -463,7 +300,7 @@ extension CameraViewController: CAAnimationDelegate {
         view.layer.addSublayer(cameraButtonLayer)
     }
 
-    func setUpTrackLayer() {
+    private func setUpTrackLayer() {
 
         let center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 70)  //設定圖案的位置
 
@@ -481,23 +318,26 @@ extension CameraViewController: CAAnimationDelegate {
     }
 
     //紅線動畫
-    func strokeAnimationStarted() {
-
+    private func strokeAnimationStarted() {
+        
         let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-
+        
         strokeAnimation.delegate = self
         strokeAnimation.toValue = 1
         strokeAnimation.duration = 3.0 //動畫維持
         strokeAnimation.fillMode = .forwards
-
+        
         cameraButtonLayer.add(strokeAnimation, forKey: "basic")
     }
+}
+
+extension CameraViewController: CAAnimationDelegate {
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-
+        
         DispatchQueue.main.async { [weak self] in
-
-            self?.stopRecording()
+            
+            self?.cameraManager.stopRecording()
         }
     }
 }
