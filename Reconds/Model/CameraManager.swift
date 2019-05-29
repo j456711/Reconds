@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AVKit
+import UIKit
 import AVFoundation
 
 protocol CameraManagerDelegate: AnyObject {
