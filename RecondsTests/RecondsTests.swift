@@ -37,19 +37,52 @@ class RecondsTests: XCTestCase {
 
     }
     
-    func filterData() -> [String]? {
+    func test_FilterData_function() {
         
-        let videoData = VideoData()
+        // Arrange
+        let mockVideoData = MockVideoData()
+        mockVideoData.dataPathArray = ["", "1559048802.mp4", "1559048810.mp4", "", "1559048825.mp4", "1559048833.mp4"]
+        
+        let expectFilteredArray = ["1559048802.mp4", "1559048810.mp4", "1559048825.mp4", "1559048833.mp4"]
+        
+        // Act
+        let filteredArray = mockVideoData.filterData()
+        
+        // Assert
+        XCTAssertEqual(filteredArray, expectFilteredArray)
+    }
+    
+    func test_FilterData_nil() {
+        
+        // Arrange
+        let mockVideoData = MockVideoData()
+        mockVideoData.dataPathArray = ["", "", "", ""]
+        
+        let expectFilteredArray: [String]? = []
+        
+        // Act
+        let filteredArray = mockVideoData.filterData()
+        
+        // Assert
+        XCTAssertEqual(filteredArray, expectFilteredArray)
+    }
+}
+
+class MockVideoData {
+    
+    var dataPathArray: [String]?
+    
+    func filterData() -> [String]? {
         
         let searchToSearch = ".mp4"
         
-        if videoData.dataPathArray == [] {
+        if dataPathArray == [] {
             
             return nil
             
         } else {
-            //
-            let filteredArray = videoData.dataPathArray?.filter({ (element: String) -> Bool in
+            
+            let filteredArray = dataPathArray?.filter({ (element: String) -> Bool in
                 
                 let stringMatch = element.lowercased().range(of: searchToSearch.lowercased())
                 
@@ -59,9 +92,4 @@ class RecondsTests: XCTestCase {
             return filteredArray
         }
     }
-}
-
-struct VideoData {
-    
-    var dataPathArray: [String]?
 }
