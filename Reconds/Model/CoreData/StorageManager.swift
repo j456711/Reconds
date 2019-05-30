@@ -15,9 +15,9 @@ final class StorageManager {
     
     static let shared = StorageManager()
     
-    lazy var context = persistantContainer.viewContext
+    lazy var context = persistentContainer.viewContext
         
-    lazy var persistantContainer: NSPersistentContainer = {
+    lazy var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "Reconds")
         
@@ -107,7 +107,7 @@ extension StorageManager {
     
     func createVideoData() {
         
-        let videoData = VideoData(context: persistantContainer.viewContext)
+        let videoData = VideoData(context: persistentContainer.viewContext)
         
         videoData.dataPathArray.append(contentsOf: ["", "", "", "", "", "", "", "", ""])
         

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AVKit
+import UIKit
 import AVFoundation
 
 protocol CameraManagerDelegate: AnyObject {
@@ -40,7 +40,7 @@ class CameraManager {
         
         captureSession.sessionPreset = AVCaptureSession.Preset.high
         
-        // Setup Camera
+        // Set Up Camera
         guard let camera = AVCaptureDevice.default(for: .video) else { return false }
         
         do {
@@ -61,7 +61,7 @@ class CameraManager {
             return false
         }
         
-        // Setup Microphone
+        // Set Up Microphone
         guard let microphone = AVCaptureDevice.default(for: .audio) else { return false }
         
         do {
@@ -89,7 +89,7 @@ class CameraManager {
         return true
     }
     
-    // Camera Sesion
+    // Camera Session
     func startSession() {
         
         if !captureSession.isRunning {
@@ -112,6 +112,56 @@ class CameraManager {
         }
     }
     
+    func startRecording() -> AVCaptureMovieFileOutput? {
+        
+        if movieOutput.isRecording == false {
+            
+            guard let connection = movieOutput.connection(with: .video) else { return nil }
+            
+            if connection.isVideoOrientationSupported {
+                
+                connection.videoOrientation = currentVideoOrientation()
+            }
+            
+            if connection.isVideoStabilizationSupported {
+                
+                connection.preferredVideoStabilizationMode = .off
+            }
+            
+            guard let device = activeInput?.device else { return nil }
+            
+            if device.isSmoothAutoFocusEnabled {
+                
+                do {
+                    
+                    try device.lockForConfiguration()
+                    device.isSmoothAutoFocusEnabled = false
+                    device.unlockForConfiguration()
+                    
+                } catch {
+                    
+                    print("Error setting configuration: \(error)")
+                }
+            }
+            
+            delegate?.manager(self, outputUrl: tmpUrl())
+        }
+        
+        return movieOutput
+    }
+    
+    func stopRecording() {
+        
+        if movieOutput.isRecording == true {
+            
+            movieOutput.stopRecording()
+        }
+    }
+}
+
+extension CameraManager {
+    
+    // Private Method
     private func currentVideoOrientation() -> AVCaptureVideoOrientation {
         
         var orientation: AVCaptureVideoOrientation
@@ -146,51 +196,5 @@ class CameraManager {
         }
         
         return nil
-    }
-    
-    func startRecording() -> AVCaptureMovieFileOutput? {
-        
-        if movieOutput.isRecording == false {
-            
-            guard let connection = movieOutput.connection(with: .video) else { return nil }
-            
-            if connection.isVideoOrientationSupported {
-                
-                connection.videoOrientation = currentVideoOrientation()
-            }
-            
-            if connection.isVideoStabilizationSupported {
-                
-                connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationMode.auto
-            }
-            
-            guard let device = activeInput?.device else { return nil }
-            
-            if device.isSmoothAutoFocusEnabled {
-                
-                do {
-                    
-                    try device.lockForConfiguration()
-                    device.isSmoothAutoFocusEnabled = false
-                    device.unlockForConfiguration()
-                    
-                } catch {
-                    
-                    print("Error setting configuration: \(error)")
-                }
-            }
-            
-            delegate?.manager(self, outputUrl: tmpUrl())
-        }
-        
-        return movieOutput
-    }
-    
-    func stopRecording() {
-        
-        if movieOutput.isRecording == true {
-            
-            movieOutput.stopRecording()
-        }
     }
 }

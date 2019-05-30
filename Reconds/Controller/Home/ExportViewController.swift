@@ -114,7 +114,7 @@ extension ExportViewController {
 
     func createData(videoTitle: String, dataPath: String) {
 
-        let videoCollection = VideoCollection(context: StorageManager.shared.persistantContainer.viewContext)
+        let videoCollection = VideoCollection(context: StorageManager.shared.persistentContainer.viewContext)
 
         videoCollection.videoTitle = videoTitle
         
