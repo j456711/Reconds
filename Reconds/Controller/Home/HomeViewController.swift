@@ -345,18 +345,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return homeCell
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-
-        if videoData[0].dataPathArray[indexPath.item] == "" {
-            
-            return false
-        
-        } else {
-        
-            return true
-        }
-    }
 
     func collectionView(_ collectionView: UICollectionView,
                         moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
