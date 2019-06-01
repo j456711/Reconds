@@ -519,46 +519,6 @@ extension HomeViewController: UIGestureRecognizerDelegate {
             present(videoPlaybackVC, animated: true, completion: nil)
         }
     }
-    
-    @objc func panAction(_ gesture: UIGestureRecognizer) {
-        
-        var initialTouchPoint = CGPoint(x: 0, y: 0)
-        
-        let touchPoint = gesture.location(in: self.view.window)
-        
-        switch gesture.state {
-            
-        case .began:
-            initialTouchPoint = touchPoint
-            
-        case .changed:
-            if touchPoint.y - initialTouchPoint.y > 0 {
-                
-                self.view.frame = CGRect(x: 0,
-                                         y: (touchPoint.y - initialTouchPoint.y),
-                                         width: self.view.frame.size.width,
-                                         height: self.view.frame.size.height)
-            }
-            
-        case .ended, .cancelled:
-            if touchPoint.y - initialTouchPoint.y > 100 {
-                
-                self.dismiss(animated: true, completion: nil)
-                
-            } else {
-                
-                UIView.animate(withDuration: 0.3, animations: {
-                    
-                    self.view.frame = CGRect(x: 0,
-                                             y: 0,
-                                             width: self.view.frame.size.width,
-                                             height: self.view.frame.size.height)
-                })
-            }
-            
-        default: break
-        }
-    }
 }
 
 // MARK: - CoreData Function
