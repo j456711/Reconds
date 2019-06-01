@@ -154,9 +154,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FileManager.default.jy_createDirectory("Exported")
-        FileManager.default.jy_createDirectory("VideoData")
-        
         collectionView.jy_registerCellWithNib(indentifier: String(describing: HomeCollectionViewCell.self), bundle: nil)
         
         if UserDefaults.standard.string(forKey: "Title") != nil {

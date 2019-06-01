@@ -34,7 +34,6 @@
 		34300BB4226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB2226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift */; };
 		34300BB8227047DA00CF3429 /* MyVideosDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */; };
 		34300BBA2271CB5000CF3429 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB92271CB5000CF3429 /* UIStoryboard+Extension.swift */; };
-		34300BBC2271EC1100CF3429 /* RCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BBB2271EC1100CF3429 /* RCConstants.swift */; };
 		3467B045228ECC1C00F5B89E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3467B044228ECC1C00F5B89E /* GoogleService-Info.plist */; };
 		348FBD69225F1EAE000F53F6 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD68225F1EAE000F53F6 /* StorageManager.swift */; };
 		348FBD6E225F1F20000F53F6 /* Reconds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* Reconds.xcdatamodeld */; };
@@ -57,7 +56,6 @@
 		34DBA2EC227D9BA5003C9D55 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2EB227D9BA5003C9D55 /* SettingsTableViewCell.xib */; };
 		34DBA2EE227DC24D003C9D55 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2ED227DC24D003C9D55 /* UIColor+Extension.swift */; };
 		34DBA2F722826AC0003C9D55 /* RCVideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34DBA2F622826AC0003C9D55 /* RCVideoPlayerView.xib */; };
-		34DBA2FA228273F9003C9D55 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2F9228273F9003C9D55 /* UIView+Extension.swift */; };
 		34DBA2FC22827D6E003C9D55 /* RCVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBA2FB22827D6E003C9D55 /* RCVideoPlayer.swift */; };
 		34F111092287105E006D70B8 /* VideoTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F111082287105E006D70B8 /* VideoTitleView.swift */; };
 		34FD1B73229E500400F73F49 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FD1B72229E500400F73F49 /* CameraManager.swift */; };
@@ -107,7 +105,6 @@
 		34300BB2226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCollection+CoreDataClass.swift"; sourceTree = "<group>"; };
 		34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVideosDetailViewController.swift; sourceTree = "<group>"; };
 		34300BB92271CB5000CF3429 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
-		34300BBB2271EC1100CF3429 /* RCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCConstants.swift; sourceTree = "<group>"; };
 		3467B044228ECC1C00F5B89E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		348FBD68225F1EAE000F53F6 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -132,7 +129,6 @@
 		34DBA2EB227D9BA5003C9D55 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		34DBA2ED227DC24D003C9D55 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		34DBA2F622826AC0003C9D55 /* RCVideoPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RCVideoPlayerView.xib; sourceTree = "<group>"; };
-		34DBA2F9228273F9003C9D55 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		34DBA2FB22827D6E003C9D55 /* RCVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCVideoPlayer.swift; sourceTree = "<group>"; };
 		34F111082287105E006D70B8 /* VideoTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTitleView.swift; sourceTree = "<group>"; };
 		34FD1B72229E500400F73F49 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
@@ -253,7 +249,6 @@
 		1E419A642253714E009B4F49 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				34300BBB2271EC1100CF3429 /* RCConstants.swift */,
 				34DBA2DB227C6381003C9D55 /* Assets.xcassets */,
 				3416CDA1226AC396007D9D37 /* Reconds-Music.bundle */,
 			);
@@ -300,7 +295,6 @@
 				34DBA2E1227D92EC003C9D55 /* UICollectionView+Extension.swift */,
 				34DBA2E3227D9366003C9D55 /* UITableView+Extension.swift */,
 				34DBA2ED227DC24D003C9D55 /* UIColor+Extension.swift */,
-				34DBA2F9228273F9003C9D55 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -714,10 +708,8 @@
 				349C5DE72275788C00C1EBE6 /* SettingsDetailViewController.swift in Sources */,
 				34DBA2FC22827D6E003C9D55 /* RCVideoPlayer.swift in Sources */,
 				34300BBA2271CB5000CF3429 /* UIStoryboard+Extension.swift in Sources */,
-				34DBA2FA228273F9003C9D55 /* UIView+Extension.swift in Sources */,
 				3416CDA8226CC86B007D9D37 /* ExportViewController.swift in Sources */,
 				34D95C45228C37E60055C540 /* JGProgressHUDWrapper.swift in Sources */,
-				34300BBC2271EC1100CF3429 /* RCConstants.swift in Sources */,
 				1E419A7922563FCA009B4F49 /* CameraViewController.swift in Sources */,
 				34300BB8227047DA00CF3429 /* MyVideosDetailViewController.swift in Sources */,
 				348FBD72225F1F52000F53F6 /* VideoData+CoreDataProperties.swift in Sources */,

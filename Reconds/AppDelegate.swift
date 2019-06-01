@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        FileManager.default.jy_createDirectory("Exported")
+        FileManager.default.jy_createDirectory("VideoData")
+        
         return true
     }
 
