@@ -292,34 +292,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1yP-Ak-CKF" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="199" y="669" width="16" height="16"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="SQs-3P-PUd"/>
-                                    <constraint firstAttribute="width" constant="16" id="qYO-NS-Bjn"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="lineScale"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HE-md-niw" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="355.66666666666669" y="34" width="16" height="16"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="3ap-14-7j3"/>
-                                    <constraint firstAttribute="width" constant="16" id="9u0-3L-CEi"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="lineScale"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ0-y4-aCF">
                                 <rect key="frame" x="321" y="25.666666666666671" width="85" height="33"/>
                                 <constraints>
@@ -337,18 +309,14 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="1yP-Ak-CKF" firstAttribute="centerY" secondItem="J0n-VM-Ctl" secondAttribute="centerY" id="2MG-xh-Ysl"/>
                             <constraint firstItem="m4i-Ta-YEb" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="-80" id="5Yg-bV-JCA"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="frN-1r-8Zr" secondAttribute="trailing" constant="16" id="8Fe-tW-omU"/>
                             <constraint firstItem="RQ0-y4-aCF" firstAttribute="centerY" secondItem="KL7-bm-zT0" secondAttribute="centerY" id="AOZ-S1-0BJ"/>
-                            <constraint firstItem="6HE-md-niw" firstAttribute="centerX" secondItem="RQ0-y4-aCF" secondAttribute="centerX" id="Ayo-zT-pbR"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" id="Cba-mj-hdK"/>
                             <constraint firstItem="frN-1r-8Zr" firstAttribute="leading" secondItem="Kde-7M-CNW" secondAttribute="leading" constant="16" id="H2f-MT-4CA"/>
                             <constraint firstItem="hDo-ON-gQT" firstAttribute="centerY" secondItem="Svg-fk-ATz" secondAttribute="centerY" constant="50" id="HrO-B1-UKD"/>
-                            <constraint firstItem="6HE-md-niw" firstAttribute="centerY" secondItem="RQ0-y4-aCF" secondAttribute="centerY" id="Lqx-BG-6vr"/>
                             <constraint firstItem="fhU-yD-8eU" firstAttribute="trailing" secondItem="Kde-7M-CNW" secondAttribute="trailing" id="OPo-7H-Lef"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="bottom" secondItem="frN-1r-8Zr" secondAttribute="bottom" constant="28" id="Q3q-kc-fbE"/>
-                            <constraint firstItem="1yP-Ak-CKF" firstAttribute="centerX" secondItem="Svg-fk-ATz" secondAttribute="centerX" id="U8V-Pw-T8p"/>
                             <constraint firstItem="5gZ-aO-kvL" firstAttribute="centerY" secondItem="fhU-yD-8eU" secondAttribute="centerY" id="VkD-sN-Myy"/>
                             <constraint firstItem="hDo-ON-gQT" firstAttribute="centerX" secondItem="Svg-fk-ATz" secondAttribute="centerX" id="WZM-dw-SkC"/>
                             <constraint firstItem="Kde-7M-CNW" firstAttribute="trailing" secondItem="RQ0-y4-aCF" secondAttribute="trailing" constant="8" id="Xjy-0C-Bbf"/>
@@ -380,8 +348,6 @@
                         <outlet property="doneButton" destination="frN-1r-8Zr" id="Ocu-KZ-E5F"/>
                         <outlet property="exportButton" destination="J0n-VM-Ctl" id="FNr-j4-7EJ"/>
                         <outlet property="iconImage" destination="5gZ-aO-kvL" id="aQ8-VB-edd"/>
-                        <outlet property="indicatorView1" destination="6HE-md-niw" id="0mo-6S-bW3"/>
-                        <outlet property="indicatorView2" destination="1yP-Ak-CKF" id="AQP-sN-fJA"/>
                         <outlet property="previewButton" destination="RQ0-y4-aCF" id="Y1E-bW-Myq"/>
                         <outlet property="remindLabel" destination="hDo-ON-gQT" id="MwI-Oc-tAW"/>
                         <outlet property="videoTitleView" destination="KL7-bm-zT0" id="kL1-8e-AfD"/>

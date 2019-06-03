@@ -48,10 +48,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var indicatorView1: NVActivityIndicatorView!
-    
-    @IBOutlet weak var indicatorView2: NVActivityIndicatorView!
-    
     @IBOutlet weak var collectionView: UICollectionView! {
 
         didSet {
@@ -98,6 +94,11 @@ class HomeViewController: UIViewController {
     
     @IBAction func previewButtonPressed(_ sender: UIButton) {
         
+        DispatchQueue.global().async { [weak self] in
+            
+            self?.merge()
+        }
+        
         let viewController = UIStoryboard.record.instantiateViewController(
             withIdentifier: String(describing: VideoPlaybackViewController.self))
         guard let videoPlaybackVC = viewController as? VideoPlaybackViewController else { return }
@@ -133,8 +134,6 @@ class HomeViewController: UIViewController {
         longPressedEnabled = false
 
         collectionView.reloadData()
-        
-        indicatorViewAnimated(true)
         
         DispatchQueue.global().async { [weak self] in
 
@@ -193,12 +192,14 @@ class HomeViewController: UIViewController {
                 
                 iconImage.isHidden = false
                 
-                indicatorViewAnimated(true)
+                previewButton.isHidden = false
                 
-                DispatchQueue.global().async { [weak self] in
- 
-                    self?.merge()
-                }
+                exportButton.isHidden = false
+                
+//                DispatchQueue.global().async { [weak self] in
+//
+//                    self?.merge()
+//                }
             }
             
         } else {
@@ -206,22 +207,9 @@ class HomeViewController: UIViewController {
             reset()
         }
         
-        if previewButton.isHidden == false || exportButton.isHidden == false || doneButton.isHidden == false {
-            
-            indicatorView1.isHidden = true
-            indicatorView2.isHidden = true
-        }
-        
         self.filteredArray = filteredArray
 
         collectionView.reloadData()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        previewButton.isHidden = true
-        
-        exportButton.isHidden = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -309,8 +297,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
         
         if longPressedEnabled {
-
-            previewButton.isHidden = true
             
             homeCell.removeButton.isHidden = false
             
@@ -552,8 +538,6 @@ extension HomeViewController {
 
                 DispatchQueue.main.async {
                     
-                    strongSelf.indicatorViewAnimated(false)
-                    
                     print("HomeVC merge error: \(error.localizedDescription)")
                 }
 
@@ -564,12 +548,6 @@ extension HomeViewController {
                     DispatchQueue.main.async {
                         
                         strongSelf.videoUrl = videoUrl
-                        
-                        strongSelf.previewButton.isHidden = false
-                        
-                        strongSelf.exportButton.isHidden = false
-                        
-                        strongSelf.indicatorViewAnimated(false)
                     }
                 }
             }
@@ -585,20 +563,6 @@ extension HomeViewController {
         button.layer.cornerRadius = cornerRadius
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.rcOrange.cgColor
-    }
-    
-    func indicatorViewAnimated(_ status: Bool) {
-        
-        if status == true {
-            
-            indicatorView1.startAnimating()
-            indicatorView2.startAnimating()
-            
-        } else {
-            
-            indicatorView1.stopAnimating()
-            indicatorView2.stopAnimating()
-        }
     }
     
     func reset() {
