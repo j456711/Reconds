@@ -11,7 +11,7 @@ import AVFoundation
 import Photos
 import NVActivityIndicatorView
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     
     private struct Segue {
         
@@ -94,53 +94,68 @@ class HomeViewController: UIViewController {
     
     @IBAction func previewButtonPressed(_ sender: UIButton) {
         
+        JYProgressHUD.shared.showIndeterminate(in: self.view, with: "預覽載入中")
+        
         DispatchQueue.global().async { [weak self] in
             
-            self?.merge()
-        }
-        
-        let viewController = UIStoryboard.record.instantiateViewController(
-            withIdentifier: String(describing: VideoPlaybackViewController.self))
-        guard let videoPlaybackVC = viewController as? VideoPlaybackViewController else { return }
-        
-        if filteredArray?.count == 1 {
-        
-            guard let videoUrl =
-                URL(string: FileManager.videoDataDirectory.absoluteString + videoData[0].dataPathArray[0])
-                else { return }
-        
-            videoPlaybackVC.videoUrl = videoUrl
+            guard let strongSelf = self else { return }
             
-        } else {
-            
-            videoPlaybackVC.videoUrl = videoUrl
+            strongSelf.merge(completionHandler: {
+                
+                let viewController = UIStoryboard.record.instantiateViewController(
+                    withIdentifier: String(describing: VideoPlaybackViewController.self))
+                guard let videoPlaybackVC = viewController as? VideoPlaybackViewController else { return }
+                
+                if strongSelf.filteredArray?.count == 1 {
+                    
+                    guard let videoUrl =
+                        URL(string: FileManager.videoDataDirectory.absoluteString + strongSelf.videoData[0].dataPathArray[0])
+                        else { return }
+                    
+                    videoPlaybackVC.videoUrl = videoUrl
+                    
+                } else {
+                    
+                    videoPlaybackVC.videoUrl = strongSelf.videoUrl
+                }
+                
+                videoPlaybackVC.loadViewIfNeeded()
+                
+                videoPlaybackVC.controlView.isHidden = true
+                
+                videoPlaybackVC.modalPresentationStyle = .overFullScreen
+                
+                strongSelf.present(videoPlaybackVC, animated: true, completion: nil)
+            })
         }
-        
-        videoPlaybackVC.loadViewIfNeeded()
-        
-        videoPlaybackVC.controlView.isHidden = true
-        
-        videoPlaybackVC.modalPresentationStyle = .overFullScreen
-        
-        present(videoPlaybackVC, animated: true, completion: nil)
     }
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
 
         doneButton.isHidden = true
         
-        previewButton.isHidden = true
+//        previewButton.isHidden = false
+        
+        exportButton.isHidden = false
         
         longPressedEnabled = false
 
         collectionView.reloadData()
-        
-        DispatchQueue.global().async { [weak self] in
-
-            self?.merge()
-        }
     }
 
+    @IBAction func exportButtonPressed(_ sender: UIButton) {
+    
+        JYProgressHUD.shared.showIndeterminate(in: self.view)
+        
+        DispatchQueue.global().async { [weak self] in
+            
+            self?.merge(completionHandler: {
+                
+                self?.performSegue(withIdentifier: Segue.showMusicVC, sender: self?.videoUrl)
+            })
+        }
+    }
+    
     @IBAction func clapperButtonPressed(_ sender: UIBarButtonItem) {
 
         if collectionView.isHidden == true {
@@ -195,11 +210,6 @@ class HomeViewController: UIViewController {
                 previewButton.isHidden = false
                 
                 exportButton.isHidden = false
-                
-//                DispatchQueue.global().async { [weak self] in
-//
-//                    self?.merge()
-//                }
             }
             
         } else {
@@ -216,7 +226,10 @@ class HomeViewController: UIViewController {
         
         guard let musicVC = segue.destination as? MusicViewController else { return }
         
-        musicVC.videoUrl = videoUrl
+        if let videoUrl = sender as? URL {
+        
+            musicVC.videoUrl = videoUrl
+        }
     }
 
     func createProjectNameAlert() {
@@ -519,7 +532,7 @@ extension HomeViewController {
 
 extension HomeViewController {
     
-    func merge() {
+    func merge(completionHandler: @escaping () -> Void) {
         
         guard let filteredArray = StorageManager.shared.filterData() else { return }
         
@@ -548,6 +561,10 @@ extension HomeViewController {
                     DispatchQueue.main.async {
                         
                         strongSelf.videoUrl = videoUrl
+                        
+                        JYProgressHUD.shared.dismiss()
+                        
+                        completionHandler()
                     }
                 }
             }

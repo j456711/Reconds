@@ -23,7 +23,7 @@ class MergeVideoManager {
     
     let defaultSize = CGSize(width: 1920, height: 1080)
     
-    typealias ExportedHandler = ((URL?, String?, Error?) -> Void)
+    typealias ExportedHandler = (URL?, String?, Error?) -> Void
     
     func mergeVideos(arrayVideos: [AVAsset], completionHandler: @escaping ExportedHandler) {
         

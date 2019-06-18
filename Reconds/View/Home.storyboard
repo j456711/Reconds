@@ -243,7 +243,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="lfP-wx-OQs" kind="show" identifier="showMusicVC" id="sY9-Id-FZD"/>
+                                    <action selector="exportButtonPressed:" destination="Dty-Hw-4cZ" eventType="touchUpInside" id="cYT-59-lQn"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點擊場記板以新增影片" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDo-ON-gQT">
@@ -351,6 +351,7 @@
                         <outlet property="previewButton" destination="RQ0-y4-aCF" id="Y1E-bW-Myq"/>
                         <outlet property="remindLabel" destination="hDo-ON-gQT" id="MwI-Oc-tAW"/>
                         <outlet property="videoTitleView" destination="KL7-bm-zT0" id="kL1-8e-AfD"/>
+                        <segue destination="lfP-wx-OQs" kind="show" identifier="showMusicVC" id="Wgl-NY-0Fa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oJ-aC-eXr" sceneMemberID="firstResponder"/>
