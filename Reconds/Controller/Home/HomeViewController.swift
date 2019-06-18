@@ -109,7 +109,8 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
                 if strongSelf.filteredArray?.count == 1 {
                     
                     guard let videoUrl =
-                        URL(string: FileManager.videoDataDirectory.absoluteString + strongSelf.videoData[0].dataPathArray[0])
+                        URL(string: FileManager.videoDataDirectory.absoluteString +
+                                    strongSelf.videoData[0].dataPathArray[0])
                         else { return }
                     
                     videoPlaybackVC.videoUrl = videoUrl
@@ -132,14 +133,27 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
 
+        let filteredArray = StorageManager.shared.filterData()
+        
+        if filteredArray?.count == 0 {
+            
+            previewButton.isHidden = true
+
+            exportButton.isHidden = true
+        
+        } else {
+         
+            previewButton.isHidden = false
+            
+            exportButton.isHidden = false
+        }
+        
         doneButton.isHidden = true
-        
-//        previewButton.isHidden = false
-        
-        exportButton.isHidden = false
         
         longPressedEnabled = false
 
+        self.filteredArray = filteredArray
+        
         collectionView.reloadData()
     }
 
@@ -178,6 +192,8 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
         }
        
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
+        longPressGesture.delegate = self
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
        
         collectionView.addGestureRecognizer(longPressGesture)
@@ -357,6 +373,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         collectionView.reloadData()
     }
     
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        
+        if videoData[0].dataPathArray[indexPath.item] == "" {
+            
+            return false
+            
+        } else {
+            
+            return true
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath,
                         toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
@@ -406,6 +434,19 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Gestures
 extension HomeViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        if gestureRecognizer is UILongPressGestureRecognizer {
+            
+            if filteredArray?.count == 0 {
+                
+                return false
+            }
+        }
+        
+        return true
+    }
     
     @objc func longPressAction(_ gesture: UIGestureRecognizer) {
 
