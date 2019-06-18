@@ -439,7 +439,7 @@ extension HomeViewController: UIGestureRecognizerDelegate {
         
         if gestureRecognizer is UILongPressGestureRecognizer {
             
-            if filteredArray?.count == 0 {
+            if filteredArray?.count == 0 || filteredArray?.count == nil {
                 
                 return false
             }
@@ -630,6 +630,8 @@ extension HomeViewController {
         collectionView.isHidden = true
         
         iconImage.isHidden = true
+        
+        previewButton.isHidden = true
         
         exportButton.isHidden = true
     }
