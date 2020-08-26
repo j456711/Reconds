@@ -177,7 +177,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let bundlePath = createBundlePath() else { return }
         
-        var stringArray = musicFilesArray.map({ "\($0)" })
+        let stringArray = musicFilesArray.map({ "\($0)" })
         
         let urlString = bundlePath.absoluteString + stringArray[indexPath.row] + ".mp3"
         

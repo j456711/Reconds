@@ -52,9 +52,8 @@ class RCVideoPlayerView: UIView {
 
     @IBAction func aspectButtonPressed(_ sender: UIButton) {
 
-        switch aspectButton.imageView?.image {
-
-        case UIImage.assets(.Icon_128px_Expand):
+        if aspectButton.imageView?.image == UIImage.assets(.Icon_128px_Expand) {
+            
             aspectButton.setImage(.assets(.Icon_128px_Minimize), for: .normal)
 
             avPlayerLayer?.setAffineTransform(CGAffineTransform(rotationAngle: .pi / 2))
@@ -66,8 +65,9 @@ class RCVideoPlayerView: UIView {
                                 y: 28,
                                 width: 74,
                                 height: UIScreen.main.bounds.height - 36)
-
-        case UIImage.assets(.Icon_128px_Minimize):
+            
+        } else {
+            
             aspectButton.setImage(.assets(.Icon_128px_Expand), for: .normal)
 
             avPlayerLayer?.setAffineTransform(CGAffineTransform.identity)
@@ -79,8 +79,6 @@ class RCVideoPlayerView: UIView {
                                 y: UIScreen.main.bounds.height - 82,
                                 width: UIScreen.main.bounds.width - 16,
                                 height: 74)
-
-        default: break
         }
     }
 
