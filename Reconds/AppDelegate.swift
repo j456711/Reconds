@@ -12,6 +12,12 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // swiftlint:disable force_cast
+    
+    static let shared = UIApplication.shared.delegate as! AppDelegate
+    
+    // swiftlint:enable force_cast
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication,
@@ -19,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        FileManager.default.jy_createDirectory("Exported")
-        FileManager.default.jy_createDirectory("VideoData")
+        JYFileManager.shared.createDirectory("Exported")
+        JYFileManager.shared.createDirectory("VideoData")
         
         return true
     }

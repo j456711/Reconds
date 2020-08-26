@@ -73,7 +73,7 @@ class MyVideosViewController: UIViewController {
             myVideosDetailVC.indexPath = indexPath
             myVideosDetailVC.videoTitle = videoCollection[indexPath.item].videoTitle
             myVideosDetailVC.videoUrl =
-                FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
+                JYFileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
         }
     }
 }
@@ -95,7 +95,7 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
         guard let myVideosCell = cell as? MyVideosCollectionViewCell else { return cell }
         
         let filePath =
-            FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
+            JYFileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
         
         myVideosCell.layoutCell(title: videoCollection[indexPath.item].videoTitle,
                                 thumbnail: rcVideoPlayer.generateThumbnail(path: filePath))

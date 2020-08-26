@@ -94,7 +94,7 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBAction func previewButtonPressed(_ sender: UIButton) {
         
-        JYProgressHUD.shared.showIndeterminate(in: self.view, with: "預覽載入中")
+        JYProgressHUD.show(.loading(text: "預覽載入中"))
         
         DispatchQueue.global().async { [weak self] in
             
@@ -109,7 +109,7 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
                 if strongSelf.filteredArray?.count == 1 {
                     
                     guard let videoUrl =
-                        URL(string: FileManager.videoDataDirectory.absoluteString +
+                        URL(string: JYFileManager.videoDataDirectory.absoluteString +
                                     strongSelf.videoData[0].dataPathArray[0])
                         else { return }
                     
@@ -159,7 +159,7 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
 
     @IBAction func exportButtonPressed(_ sender: UIButton) {
     
-        JYProgressHUD.shared.showIndeterminate(in: self.view)
+        JYProgressHUD.show(.loading())
         
         DispatchQueue.global().async { [weak self] in
             
@@ -349,7 +349,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             } else {
                 
                 let dataPath =
-                    FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
+                    JYFileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[indexPath.item])
                 
                 homeCell.thumbnail.image = rcVideoPlayer.generateThumbnail(path: dataPath)
             }
@@ -505,7 +505,7 @@ extension HomeViewController: UIGestureRecognizerDelegate {
                 if strongSelf.videoData.count != 0 {
                     
                     let dataPath =
-                        FileManager.videoDataDirectory.appendingPathComponent(
+                        JYFileManager.videoDataDirectory.appendingPathComponent(
                             strongSelf.videoData[0].dataPathArray[hitIndex.item])
                     
                     try FileManager.default.removeItem(at: dataPath)
@@ -543,7 +543,7 @@ extension HomeViewController: UIGestureRecognizerDelegate {
         if videoData[0].dataPathArray[hitIndex.item] != "" {
 
             let dataPath =
-                FileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
+                JYFileManager.videoDataDirectory.appendingPathComponent(videoData[0].dataPathArray[hitIndex.item])
 
             videoPlaybackVC.videoUrl = dataPath
 
@@ -577,7 +577,7 @@ extension HomeViewController {
         
         guard let filteredArray = StorageManager.shared.filterData() else { return }
         
-        let stringArray = filteredArray.map({ FileManager.videoDataDirectory.absoluteString + $0 })
+        let stringArray = filteredArray.map({ JYFileManager.videoDataDirectory.absoluteString + $0 })
 
         guard let urlArray = stringArray.map({ URL(string: $0) }) as? [URL] else { return }
 
@@ -603,7 +603,7 @@ extension HomeViewController {
                         
                         strongSelf.videoUrl = videoUrl
                         
-                        JYProgressHUD.shared.dismiss()
+                        JYProgressHUD.dismiss()
                         
                         completionHandler()
                     }

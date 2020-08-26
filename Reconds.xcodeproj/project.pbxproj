@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,6 +34,7 @@
 		34300BB4226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB2226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift */; };
 		34300BB8227047DA00CF3429 /* MyVideosDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */; };
 		34300BBA2271CB5000CF3429 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300BB92271CB5000CF3429 /* UIStoryboard+Extension.swift */; };
+		3435528024F3BA8C00E79346 /* JYFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3435527F24F3BA8C00E79346 /* JYFileManager.swift */; };
 		3467B045228ECC1C00F5B89E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3467B044228ECC1C00F5B89E /* GoogleService-Info.plist */; };
 		348FBD69225F1EAE000F53F6 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD68225F1EAE000F53F6 /* StorageManager.swift */; };
 		348FBD6E225F1F20000F53F6 /* Reconds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348FBD6C225F1F20000F53F6 /* Reconds.xcdatamodeld */; };
@@ -105,6 +106,7 @@
 		34300BB2226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCollection+CoreDataClass.swift"; sourceTree = "<group>"; };
 		34300BB7227047DA00CF3429 /* MyVideosDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVideosDetailViewController.swift; sourceTree = "<group>"; };
 		34300BB92271CB5000CF3429 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		3435527F24F3BA8C00E79346 /* JYFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYFileManager.swift; sourceTree = "<group>"; };
 		3467B044228ECC1C00F5B89E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		348FBD68225F1EAE000F53F6 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		348FBD6D225F1F20000F53F6 /* VideoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				34DBA2E1227D92EC003C9D55 /* UICollectionView+Extension.swift */,
 				34DBA2E3227D9366003C9D55 /* UITableView+Extension.swift */,
 				34DBA2ED227DC24D003C9D55 /* UIColor+Extension.swift */,
+				3435527F24F3BA8C00E79346 /* JYFileManager.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -605,18 +608,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RecondsTests/Pods-RecondsTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-RecondsTests/Pods-RecondsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-RecondsTests/Pods-RecondsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -651,22 +647,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Reconds/Pods-Reconds-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Reconds/Pods-Reconds-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Reconds/Pods-Reconds-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -700,6 +685,7 @@
 				34D95C43228C03C80055C540 /* DataManager.swift in Sources */,
 				34300BB4226DBA5C00CF3429 /* VideoCollection+CoreDataClass.swift in Sources */,
 				1EF18FDF2259D06C001FEFCA /* UIAlertController+Extension.swift in Sources */,
+				3435528024F3BA8C00E79346 /* JYFileManager.swift in Sources */,
 				348FBD69225F1EAE000F53F6 /* StorageManager.swift in Sources */,
 				3416CDA6226C45AA007D9D37 /* MusicTableViewCell.swift in Sources */,
 				34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */,

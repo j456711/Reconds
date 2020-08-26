@@ -147,7 +147,7 @@ class MergeVideoManager {
         let exportUrl = URL(fileURLWithPath: path)
         
         // Remove file if existed
-        FileManager.default.removeItemIfExisted(at: exportUrl)
+        JYFileManager.shared.removeItemIfExisted(at: exportUrl)
         
         // Init exporter
         guard let assetExport = AVAssetExportSession(asset: mixComposition,
@@ -274,7 +274,7 @@ class MergeVideoManager {
         let fileName = "\(time)-exported.mp4"
         
         // Find video on this URL
-        let outputUrl = FileManager.exportedDirectory.appendingPathComponent(fileName)
+        let outputUrl = JYFileManager.exportedDirectory.appendingPathComponent(fileName)
         
         audioMixInputParameters.setVolumeRamp(fromStartVolume: 1, toEndVolume: 0, timeRange: videoTrack.timeRange)
         

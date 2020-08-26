@@ -8,43 +8,97 @@
 
 import JGProgressHUD
 
+enum HUDType {
+    
+    case success
+    case failure
+    case loading(text: String = "輸出中")
+    
+    var indicatorView: JGProgressHUDIndicatorView {
+        switch self {
+        case .success:
+            return JGProgressHUDSuccessIndicatorView()
+            
+        case .failure:
+            return JGProgressHUDErrorIndicatorView()
+            
+        case .loading(_):
+            return JGProgressHUDIndeterminateIndicatorView()
+        }
+    }
+    
+    var text: String {
+        switch self {
+        case .success:
+            return "輸出成功"
+            
+        case .failure:
+            return "輸出失敗"
+            
+        case .loading(let text):
+            return text
+        }
+    }
+}
+
 class JYProgressHUD {
     
-    static let shared = JYProgressHUD()
+    static private let shared = JYProgressHUD()
     
     private init() {}
+    
+    private var view: UIView {
+        
+        return AppDelegate.shared.window!.rootViewController!.view
+    }
     
     private let hud = JGProgressHUD(style: .dark)
 }
 
 extension JYProgressHUD {
     
-    func showSuccess(in view: UIView) {
+    static func show(_ hudType: HUDType) {
         
-        hud.textLabel.text = "儲存成功"
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        if !Thread.isMainThread {
+            
+            DispatchQueue.main.async { show(hudType) }
+            
+            return
+        }
         
-        hud.show(in: view)
+        shared.hud.textLabel.text = hudType.text
+        shared.hud.indicatorView = hudType.indicatorView
+        
+        shared.hud.show(in: shared.view)
+        shared.hud.dismiss(afterDelay: 1.5)
     }
     
-    func showFailure(in view: UIView) {
-        
-        hud.textLabel.text = "儲存失敗"
-        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        
-        hud.show(in: view)
-    }
+//    func showSuccess(in view: UIView) {
+//
+//        hud.textLabel.text = "儲存成功"
+//        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+//
+//        hud.show(in: view)
+//    }
+//
+//    func showFailure(in view: UIView) {
+//
+//        hud.textLabel.text = "儲存失敗"
+//        hud.indicatorView = JGProgressHUDErrorIndicatorView()
+//
+//        hud.show(in: view)
+//    }
+//
+//    func showIndeterminate(in view: UIView, with text: String = "輸出中") {
+//
+//        hud.textLabel.text = text
+//        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+//
+//        hud.show(in: view)
+//    }
     
-    func showIndeterminate(in view: UIView, with text: String = "輸出中") {
+    static func dismiss() {
         
-        hud.textLabel.text = text
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        
-        hud.show(in: view)
-    }
-    
-    func dismiss() {
-        
-        hud.dismiss()
+        shared.hud.dismiss()
     }
 }

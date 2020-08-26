@@ -58,7 +58,7 @@ PODS:
   - NVActivityIndicatorView (4.7.0):
     - NVActivityIndicatorView/Presenter (= 4.7.0)
   - NVActivityIndicatorView/Presenter (4.7.0)
-  - SwiftLint (0.31.0)
+  - SwiftLint (0.40.0)
 
 DEPENDENCIES:
   - Crashlytics (~> 3.12.0)
@@ -70,7 +70,7 @@ DEPENDENCIES:
   - SwiftLint
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Crashlytics
     - Fabric
     - Firebase
@@ -82,6 +82,7 @@ SPEC REPOS:
     - JGProgressHUD
     - nanopb
     - NVActivityIndicatorView
+  trunk:
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -96,8 +97,8 @@ SPEC CHECKSUMS:
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
-  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
+  SwiftLint: 4154893c73a4c52d6240195507eb7a3e3c64087e
 
 PODFILE CHECKSUM: 1d5489e0ac60831fc61f891fe9ef6e091a5de784
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4
