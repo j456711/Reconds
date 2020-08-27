@@ -11,27 +11,36 @@ import AVFoundation
 
 class RCVideoPlayerView: UIView {
     
-    var avPlayer: AVPlayer?
-    
-    var avPlayerLayer: AVPlayerLayer?
-    
     @IBOutlet var contentView: UIView!
-    
     @IBOutlet weak var currentTimeLabel: UILabel!
-    
     @IBOutlet weak var endTimeLabel: UILabel!
     
     @IBOutlet weak var playPauseButton: UIButton!
-    
     @IBOutlet weak var aspectButton: UIButton!
     
     @IBOutlet weak var slider: UISlider! {
-        
         didSet {
-            
             slider?.setThumbImage(UIImage.assets(.Slider_64px_Thumb), for: .normal)
         }
     }
+    
+    var avPlayer: AVPlayer?
+    var avPlayerLayer: AVPlayerLayer?
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        initView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        
+        super.init(coder: aDecoder)
+    }
+}
+
+// MARK: - Actions
+extension RCVideoPlayerView {
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
 
@@ -60,10 +69,8 @@ class RCVideoPlayerView: UIView {
             avPlayerLayer?.videoGravity = .resizeAspect
 
             self.transform = CGAffineTransform(rotationAngle: .pi / 2)
-            self.frame = CGRect(x: 8,
-                                y: 28,
-                                width: 74,
-                                height: UIScreen.main.bounds.height - 36)
+            self.frame = CGRect(x: 8, y: 28,
+                                width: 74, height: UIScreen.main.bounds.height - 36)
             
         } else {
             
@@ -74,31 +81,17 @@ class RCVideoPlayerView: UIView {
             avPlayerLayer?.videoGravity = .resizeAspect
 
             self.transform = CGAffineTransform.identity
-            self.frame = CGRect(x: 8,
-                                y: UIScreen.main.bounds.height - 82,
-                                width: UIScreen.main.bounds.width - 16,
-                                height: 74)
+            self.frame = CGRect(x: 8, y: UIScreen.main.bounds.height - 82,
+                                width: UIScreen.main.bounds.width - 16, height: 74)
         }
     }
 
     @IBAction func sliderMoved(_ sender: UISlider) {
 
         let seconds = Int64(slider.value)
-
         let targetTime = CMTimeMake(value: seconds, timescale: 1)
 
         avPlayer?.seek(to: targetTime)
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        initView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        
-        super.init(coder: aDecoder)
     }
 }
 
@@ -141,22 +134,20 @@ extension RCVideoPlayerView {
     }
 }
 
+// MARK: - Private Methods
 extension RCVideoPlayerView {
     
-    // MARK: - Private Method
     private func initView() {
         
         Bundle.main.loadNibNamed(String(describing: RCVideoPlayerView.self),
                                  owner: self,
                                  options: nil)
+                
+        contentView.frame = self.bounds
+        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        contentView.layer.cornerRadius = 10
         
         addSubview(contentView)
-        
-        contentView.frame = self.bounds
-        
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        
-        contentView.layer.cornerRadius = 10        
     }
     
     private func timeFormatConversion(time: Float64) -> String {
@@ -164,7 +155,6 @@ extension RCVideoPlayerView {
         let videoLength = Int(time)
 
         let minutes = Int(videoLength / 60) // 求 songLength 的商，為分鐘數
-
         let seconds = Int(videoLength % 60) // 求 songLength 的餘數，為秒數
 
         var time = ""
