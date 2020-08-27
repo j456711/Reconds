@@ -13,9 +13,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var thumbnail: UIImageView!
     
     @IBOutlet weak var removeButton: UIButton! {
-        
         didSet {
-
             removeButton.isHidden = true
         }
     }
