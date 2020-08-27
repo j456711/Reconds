@@ -44,7 +44,6 @@
 		349C5DE72275788C00C1EBE6 /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349C5DE62275788C00C1EBE6 /* SettingsDetailViewController.swift */; };
 		349C5DEA2275804E00C1EBE6 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349C5DE92275804E00C1EBE6 /* CreditsViewController.swift */; };
 		34A0FE9522648F11009F4D45 /* MergeVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */; };
-		34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0FE962265B694009F4D45 /* FileManager+Extension.swift */; };
 		34D95C3B228908360055C540 /* RecondsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D95C3A228908360055C540 /* RecondsTests.swift */; };
 		34D95C43228C03C80055C540 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D95C42228C03C80055C540 /* DataManager.swift */; };
 		34D95C45228C37E60055C540 /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D95C44228C37E60055C540 /* JGProgressHUDWrapper.swift */; };
@@ -116,7 +115,6 @@
 		349C5DE62275788C00C1EBE6 /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		349C5DE92275804E00C1EBE6 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		34A0FE9422648F11009F4D45 /* MergeVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeVideoManager.swift; sourceTree = "<group>"; };
-		34A0FE962265B694009F4D45 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		34D95C38228908360055C540 /* RecondsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecondsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34D95C3A228908360055C540 /* RecondsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecondsTests.swift; sourceTree = "<group>"; };
 		34D95C3C228908360055C540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -290,7 +288,6 @@
 		1EF18FDD2259D016001FEFCA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				34A0FE962265B694009F4D45 /* FileManager+Extension.swift */,
 				1EF18FDE2259D06C001FEFCA /* UIAlertController+Extension.swift */,
 				1EF19008225C8689001FEFCA /* UIImage+Extension.swift */,
 				34300BB92271CB5000CF3429 /* UIStoryboard+Extension.swift */,
@@ -688,7 +685,6 @@
 				3435528024F3BA8C00E79346 /* JYFileManager.swift in Sources */,
 				348FBD69225F1EAE000F53F6 /* StorageManager.swift in Sources */,
 				3416CDA6226C45AA007D9D37 /* MusicTableViewCell.swift in Sources */,
-				34A0FE972265B694009F4D45 /* FileManager+Extension.swift in Sources */,
 				349C5DE3227570E200C1EBE6 /* SettingsTableViewCell.swift in Sources */,
 				349C5DEA2275804E00C1EBE6 /* CreditsViewController.swift in Sources */,
 				349C5DE72275788C00C1EBE6 /* SettingsDetailViewController.swift in Sources */,
