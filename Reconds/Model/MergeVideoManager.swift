@@ -6,10 +6,9 @@
 //  Copyright © 2019 Yu-Hsin Yeh. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import AVFoundation
 import Photos
-import UIKit
 
 enum MergeVideoError: LocalizedError {
     

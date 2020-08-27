@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MobileCoreServices
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
