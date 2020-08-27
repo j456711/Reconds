@@ -15,10 +15,10 @@ class JYFileManager {
     private init() {}
     
     static let exportedDirectory = FileManager.default.urls(for: .documentDirectory,
-                                                     in: .userDomainMask)[0].appendingPathComponent("Exported")
+                                                            in: .userDomainMask)[0].appendingPathComponent("Exported")
     
     static let videoDataDirectory = FileManager.default.urls(for: .documentDirectory,
-                                                      in: .userDomainMask)[0].appendingPathComponent("VideoData")
+                                                             in: .userDomainMask)[0].appendingPathComponent("VideoData")
 }
 
 extension JYFileManager {

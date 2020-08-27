@@ -35,7 +35,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.jy_registerCellWithNib(indentifier: String(describing: SettingsTableViewCell.self), bundle: nil)
+        tableView.registerCellWithNib(indentifier: String(describing: SettingsTableViewCell.self), bundle: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

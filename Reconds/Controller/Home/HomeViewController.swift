@@ -182,7 +182,7 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.jy_registerCellWithNib(indentifier: String(describing: HomeCollectionViewCell.self), bundle: nil)
+        collectionView.registerCellWithNib(indentifier: String(describing: HomeCollectionViewCell.self), bundle: nil)
         
         if UserDefaults.standard.string(forKey: "Title") != nil {
 

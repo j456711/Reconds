@@ -71,7 +71,7 @@ class MusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.jy_registerCellWithNib(indentifier: String(describing: MusicTableViewCell.self), bundle: nil)
+        tableView.registerCellWithNib(indentifier: String(describing: MusicTableViewCell.self), bundle: nil)
     }
 
     override func viewDidLayoutSubviews() {

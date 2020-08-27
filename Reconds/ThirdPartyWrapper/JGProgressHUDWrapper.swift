@@ -42,10 +42,10 @@ enum HUDType {
 }
 
 class JYProgressHUD {
-    
-    static private let shared = JYProgressHUD()
-    
+
     private init() {}
+
+    static private let shared = JYProgressHUD()    
     
     private var view: UIView {
         
