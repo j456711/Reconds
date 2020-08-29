@@ -31,27 +31,20 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     var longPressedEnabled = false
     
     @IBOutlet weak var remindLabel: UILabel!
-    
     @IBOutlet weak var iconImage: UIImageView! {
-        
         didSet {
-            
             iconImage.isHidden = true
         }
     }
     
     @IBOutlet weak var videoTitleView: VideoTitleView! {
-        
         didSet {
-            
             videoTitleView.isHidden = true
         }
     }
     
     @IBOutlet weak var collectionView: UICollectionView! {
-
         didSet {
-
             collectionView.delegate = self
             collectionView.dataSource = self
             
@@ -61,9 +54,7 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     @IBOutlet weak var previewButton: UIButton! {
-
         didSet {
-
             previewButton.isHidden = true
             
             setUpButtonStyle(for: previewButton, cornerRadius: 17)
@@ -71,11 +62,8 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     @IBOutlet weak var clapperButton: UIButton!
-    
     @IBOutlet weak var exportButton: UIButton! {
-
         didSet {
-
             exportButton.isHidden = true
 
             setUpButtonStyle(for: exportButton)
@@ -83,98 +71,10 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     @IBOutlet weak var doneButton: UIButton! {
-
         didSet {
-
             doneButton.isHidden = true
 
             setUpButtonStyle(for: doneButton)
-        }
-    }
-    
-    @IBAction func previewButtonPressed(_ sender: UIButton) {
-        
-        JYProgressHUD.show(.loading(text: "預覽載入中"))
-        
-        DispatchQueue.global().async { [weak self] in
-            
-            guard let strongSelf = self else { return }
-            
-            strongSelf.merge(completionHandler: {
-                
-                let viewController = UIStoryboard.record.instantiateViewController(
-                    withIdentifier: String(describing: VideoPlaybackViewController.self))
-                guard let videoPlaybackVC = viewController as? VideoPlaybackViewController else { return }
-                
-                if strongSelf.filteredArray?.count == 1 {
-                    
-                    guard let videoUrl =
-                        URL(string: JYFileManager.videoDataDirectory.absoluteString +
-                                    strongSelf.videoData[0].dataPathArray[0])
-                        else { return }
-                    
-                    videoPlaybackVC.videoUrl = videoUrl
-                    
-                } else {
-                    
-                    videoPlaybackVC.videoUrl = strongSelf.videoUrl
-                }
-                
-                videoPlaybackVC.loadViewIfNeeded()
-                
-                videoPlaybackVC.controlView.isHidden = true
-                
-                videoPlaybackVC.modalPresentationStyle = .overFullScreen
-                
-                strongSelf.present(videoPlaybackVC, animated: true, completion: nil)
-            })
-        }
-    }
-    
-    @IBAction func doneButtonPressed(_ sender: UIButton) {
-
-        let filteredArray = StorageManager.shared.filterData()
-        
-        if filteredArray?.count == 0 {
-            
-            previewButton.isHidden = true
-
-            exportButton.isHidden = true
-        
-        } else {
-         
-            previewButton.isHidden = false
-            
-            exportButton.isHidden = false
-        }
-        
-        doneButton.isHidden = true
-        
-        longPressedEnabled = false
-
-        self.filteredArray = filteredArray
-        
-        collectionView.reloadData()
-    }
-
-    @IBAction func exportButtonPressed(_ sender: UIButton) {
-    
-        JYProgressHUD.show(.loading())
-        
-        DispatchQueue.global().async { [weak self] in
-            
-            self?.merge(completionHandler: {
-                
-                self?.performSegue(withIdentifier: Segue.showMusicVC, sender: self?.videoUrl)
-            })
-        }
-    }
-    
-    @IBAction func clapperButtonPressed(_ sender: UIBarButtonItem) {
-
-        if collectionView.isHidden == true {
-
-            createProjectNameAlert()
         }
     }
 
@@ -299,20 +199,102 @@ class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     }
 }
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+// MARK: - Actions
+extension HomeViewController {
+    
+    @IBAction func previewButtonPressed(_ sender: UIButton) {
+        
+        JYProgressHUD.show(.loading(text: "預覽載入中"))
+        
+        DispatchQueue.global().async { [weak self] in
+            
+            guard let strongSelf = self else { return }
+            
+            strongSelf.merge(completionHandler: {
+                
+                let viewController = UIStoryboard.record.instantiateViewController(
+                    withIdentifier: String(describing: VideoPlaybackViewController.self))
+                guard let videoPlaybackVC = viewController as? VideoPlaybackViewController else { return }
+                
+                if strongSelf.filteredArray?.count == 1 {
+                    
+                    guard let videoUrl =
+                        URL(string: JYFileManager.videoDataDirectory.absoluteString +
+                                    strongSelf.videoData[0].dataPathArray[0])
+                        else { return }
+                    
+                    videoPlaybackVC.videoUrl = videoUrl
+                    
+                } else {
+                    
+                    videoPlaybackVC.videoUrl = strongSelf.videoUrl
+                }
+                
+                videoPlaybackVC.loadViewIfNeeded()
+                videoPlaybackVC.controlView.isHidden = true
+                videoPlaybackVC.modalPresentationStyle = .overFullScreen
+                
+                strongSelf.present(videoPlaybackVC, animated: true, completion: nil)
+            })
+        }
+    }
+    
+    @IBAction func doneButtonPressed(_ sender: UIButton) {
+
+        let filteredArray = StorageManager.shared.filterData()
+        
+        previewButton.isHidden = (filteredArray?.count == 0)
+        exportButton.isHidden = (filteredArray?.count == 0)
+//
+//        if filteredArray?.count == 0 {
+//
+//            previewButton.isHidden = true
+//
+//            exportButton.isHidden = true
+//
+//        } else {
+//
+//            previewButton.isHidden = false
+//
+//            exportButton.isHidden = false
+//        }
+        
+        doneButton.isHidden = true
+        
+        longPressedEnabled = false
+
+        self.filteredArray = filteredArray
+        
+        collectionView.reloadData()
+    }
+
+    @IBAction func exportButtonPressed(_ sender: UIButton) {
+    
+        JYProgressHUD.show(.loading())
+        
+        DispatchQueue.global().async { [weak self] in
+            
+            self?.merge(completionHandler: {
+                
+                self?.performSegue(withIdentifier: Segue.showMusicVC, sender: self?.videoUrl)
+            })
+        }
+    }
+    
+    @IBAction func clapperButtonPressed(_ sender: UIBarButtonItem) {
+
+        if collectionView.isHidden { createProjectNameAlert() }
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         fetchData()
         
-        if videoData.count == 0 {
-
-            return 9
-
-        } else {
-
-            return videoData[0].dataPathArray.count
-        }
+        return (videoData.count == 0) ? 9 : videoData[0].dataPathArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -324,15 +306,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let homeCell = cell as? HomeCollectionViewCell else { return cell }
         
         homeCell.removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
-        
-        if longPressedEnabled {
-            
-            homeCell.removeButton.isHidden = false
-            
-        } else {
-
-            homeCell.removeButton.isHidden = true
-        }
+        homeCell.removeButton.isHidden = longPressedEnabled ? false : true
         
         if videoData.count == 0 {
 
@@ -343,7 +317,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if videoData[0].dataPathArray[indexPath.item] == "" {
                 
                 homeCell.removeButton.isHidden = true
-                
                 homeCell.thumbnail.image = nil
                 
             } else {
@@ -357,6 +330,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return homeCell
         }
     }
+}
+
+// MARK: - UICollectionViewDelegate
+extension HomeViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView,
                         moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -374,32 +351,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        
-        if videoData[0].dataPathArray[indexPath.item] == "" {
-            
-            return false
-            
-        } else {
-            
-            return true
-        }
+
+        return (videoData[0].dataPathArray[indexPath.item] == "") ? false : true
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath,
                         toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
         
-        if videoData[0].dataPathArray[proposedIndexPath.item] == "" {
-
-            return originalIndexPath
-
-        } else {
-
-            return proposedIndexPath
-        }
+        return (videoData[0].dataPathArray[proposedIndexPath.item] == "") ? originalIndexPath : proposedIndexPath
     }
+    
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
@@ -432,17 +397,14 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - Gestures
+// MARK: - UIGestureRecognizerDelegate
 extension HomeViewController: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
         if gestureRecognizer is UILongPressGestureRecognizer {
             
-            if filteredArray?.count == 0 || filteredArray?.count == nil {
-                
-                return false
-            }
+            if filteredArray?.count == 0 || filteredArray?.count == nil { return false }
         }
         
         return true
@@ -451,7 +413,6 @@ extension HomeViewController: UIGestureRecognizerDelegate {
     @objc func longPressAction(_ gesture: UIGestureRecognizer) {
 
         switch gesture.state {
-
         case .began:
             feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 
