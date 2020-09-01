@@ -37,7 +37,7 @@ class DataManager {
             
             let fileName = "\(time).mp4"
             
-            let dataPath = FileManager.videoDataDirectory.appendingPathComponent(fileName)
+            let dataPath = JYFileManager.videoDataDirectory.appendingPathComponent(fileName)
             
             do {
                 
@@ -70,7 +70,7 @@ class DataManager {
         
         do {
             
-            let fileUrls = try FileManager.default.contentsOfDirectory(at: FileManager.videoDataDirectory,
+            let fileUrls = try FileManager.default.contentsOfDirectory(at: JYFileManager.videoDataDirectory,
                                                                        includingPropertiesForKeys: nil,
                                                                        options: [.skipsHiddenFiles,
                                                                                  .skipsSubdirectoryDescendants])

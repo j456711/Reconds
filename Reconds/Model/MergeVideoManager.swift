@@ -6,10 +6,9 @@
 //  Copyright © 2019 Yu-Hsin Yeh. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import AVFoundation
 import Photos
-import UIKit
 
 enum MergeVideoError: LocalizedError {
     
@@ -23,7 +22,7 @@ class MergeVideoManager {
     
     let defaultSize = CGSize(width: 1920, height: 1080)
     
-    typealias ExportedHandler = ((URL?, String?, Error?) -> Void)
+    typealias ExportedHandler = (URL?, String?, Error?) -> Void
     
     func mergeVideos(arrayVideos: [AVAsset], completionHandler: @escaping ExportedHandler) {
         
@@ -147,7 +146,7 @@ class MergeVideoManager {
         let exportUrl = URL(fileURLWithPath: path)
         
         // Remove file if existed
-        FileManager.default.removeItemIfExisted(at: exportUrl)
+        JYFileManager.shared.removeItemIfExisted(at: exportUrl)
         
         // Init exporter
         guard let assetExport = AVAssetExportSession(asset: mixComposition,
@@ -274,7 +273,7 @@ class MergeVideoManager {
         let fileName = "\(time)-exported.mp4"
         
         // Find video on this URL
-        let outputUrl = FileManager.exportedDirectory.appendingPathComponent(fileName)
+        let outputUrl = JYFileManager.exportedDirectory.appendingPathComponent(fileName)
         
         audioMixInputParameters.setVolumeRamp(fromStartVolume: 1, toEndVolume: 0, timeRange: videoTrack.timeRange)
         

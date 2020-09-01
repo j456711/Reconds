@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MobileCoreServices
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
@@ -41,6 +40,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             
                 let cameraVC = UIStoryboard.record.instantiateViewController(
                     withIdentifier: String(describing: CameraViewController.self))
+                cameraVC.modalPresentationStyle = .fullScreen
                 
                 present(cameraVC, animated: true, completion: nil)
             }

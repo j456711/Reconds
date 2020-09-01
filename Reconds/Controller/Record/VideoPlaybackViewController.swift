@@ -6,7 +6,6 @@
 //  Copyright © 2019 Yu-Hsin Yeh. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import AVFoundation
 
@@ -52,10 +51,10 @@ class VideoPlaybackViewController: UIViewController {
             switch result {
                 
             case .success:
-                JYProgressHUD.shared.showSuccess(in: strongSelf.view)
+                JYProgressHUD.show(.success)
                 
             case .failure(let error):
-                JYProgressHUD.shared.showFailure(in: strongSelf.view)
+                JYProgressHUD.show(.failure)
                 
                 print(error.localizedDescription)
             }

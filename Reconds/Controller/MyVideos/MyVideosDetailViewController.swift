@@ -9,22 +9,49 @@
 import UIKit
 
 class MyVideosDetailViewController: UIViewController {
+        
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var thumbnail: UIImageView!
+    @IBOutlet weak var textField: UITextField! {
+        didSet {
+            textField.delegate = self
+        }
+    }
 
     let rcVideoPlayer = RCVideoPlayer()
     
     var indexPath: IndexPath?
-    
     var videoTitle: String?
-    
     var videoUrl: URL?
-    
     var videoCollection: [VideoCollection] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if let videoUrl = videoUrl {
+            
+            thumbnail.image = rcVideoPlayer.generateThumbnail(path: videoUrl)
+        }
         
-    @IBOutlet weak var playButton: UIButton!
+        textField.text = videoTitle
+    }
     
-    @IBOutlet weak var thumbnail: UIImageView!
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let videoCollection = StorageManager.shared.fetch(VideoCollection.self)
+        
+        self.videoCollection = videoCollection
+    }
     
-    @IBOutlet weak var textField: UITextField!
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    }
+}
+
+// MARK: - Actions
+extension MyVideosDetailViewController {
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
         
@@ -76,41 +103,15 @@ class MyVideosDetailViewController: UIViewController {
             if let indexPath = strongSelf.indexPath {
                 
                 StorageManager.shared.context.delete(strongSelf.videoCollection[indexPath.item])
-                
                 StorageManager.shared.save()
                 
                 strongSelf.navigationController?.popViewController(animated: true)
             }
         })
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        textField.delegate = self
-        
-        if let videoUrl = videoUrl {
-            
-            thumbnail.image = rcVideoPlayer.generateThumbnail(path: videoUrl)
-        }
-        
-        textField.text = videoTitle
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let videoCollection = StorageManager.shared.fetch(VideoCollection.self)
-        
-        self.videoCollection = videoCollection
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.view.endEditing(true)
-    }
 }
 
+// MARK: - UITextFieldDelegate
 extension MyVideosDetailViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

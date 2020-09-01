@@ -9,28 +9,15 @@
 import UIKit
 
 class MyVideosViewController: UIViewController {
-
-    private struct Segue {
-        
-        static let showMyVideosDetailVC = "showMyVideosDetailVC"
-    }
-    
-    let rcVideoPlayer = RCVideoPlayer()
-    
-    var videoCollection: [VideoCollection] = []
     
     @IBOutlet weak var emptyLabel: UILabel! {
-        
         didSet {
-        
             emptyLabel.isHidden = false
         }
     }
     
     @IBOutlet weak var collectionView: UICollectionView! {
-        
         didSet {
-            
             collectionView.delegate = self
             collectionView.dataSource = self
             
@@ -38,10 +25,14 @@ class MyVideosViewController: UIViewController {
         }
     }
     
+    let rcVideoPlayer = RCVideoPlayer()
+    
+    var videoCollection: [VideoCollection] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.jy_registerCellWithNib(indentifier: String(describing: MyVideosCollectionViewCell.self),
+        collectionView.registerCellWithNib(indentifier: String(describing: MyVideosCollectionViewCell.self),
                                               bundle: nil)
     }
     
@@ -52,14 +43,7 @@ class MyVideosViewController: UIViewController {
         
         self.videoCollection = videoCollection
         
-        if videoCollection.count > 0 {
-            
-            emptyLabel.isHidden = true
-            
-        } else {
-            
-            emptyLabel.isHidden = false
-        }
+        emptyLabel.isHidden = (videoCollection.count > 0) ? true : false
         
         collectionView.reloadData()
     }
@@ -73,12 +57,22 @@ class MyVideosViewController: UIViewController {
             myVideosDetailVC.indexPath = indexPath
             myVideosDetailVC.videoTitle = videoCollection[indexPath.item].videoTitle
             myVideosDetailVC.videoUrl =
-                FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
+                JYFileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
         }
     }
 }
 
-extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+// MARK: - Segue
+private extension MyVideosViewController {
+    
+    struct Segue {
+        
+        static let showMyVideosDetailVC = "showMyVideosDetailVC"
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+extension MyVideosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -95,13 +89,17 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
         guard let myVideosCell = cell as? MyVideosCollectionViewCell else { return cell }
         
         let filePath =
-            FileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
+            JYFileManager.exportedDirectory.appendingPathComponent("\(videoCollection[indexPath.item].dataPath)")
         
         myVideosCell.layoutCell(title: videoCollection[indexPath.item].videoTitle,
                                 thumbnail: rcVideoPlayer.generateThumbnail(path: filePath))
         
         return myVideosCell
     }
+}
+
+// MARK: - UICollectionViewDelegate
+extension MyVideosViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -109,6 +107,7 @@ extension MyVideosViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension MyVideosViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,

@@ -8,41 +8,73 @@
 
 import JGProgressHUD
 
-class JYProgressHUD {
+enum HUDType {
     
-    static let shared = JYProgressHUD()
+    case success
+    case failure
+    case loading(text: String = "輸出中")
     
-    let hud = JGProgressHUD(style: .dark)
-    
-    func showSuccess(in view: UIView, with text: String = "儲存成功") {
-        
-        hud.textLabel.text = text
-        
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        
-        hud.show(in: view)
+    var indicatorView: JGProgressHUDIndicatorView {
+        switch self {
+        case .success:
+            return JGProgressHUDSuccessIndicatorView()
+            
+        case .failure:
+            return JGProgressHUDErrorIndicatorView()
+            
+        case .loading(_):
+            return JGProgressHUDIndeterminateIndicatorView()
+        }
     }
     
-    func showFailure(in view: UIView, with text: String = "儲存失敗") {
-        
-        hud.textLabel.text = text
-        
-        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        
-        hud.show(in: view)
+    var text: String {
+        switch self {
+        case .success:
+            return "輸出成功"
+            
+        case .failure:
+            return "輸出失敗"
+            
+        case .loading(let text):
+            return text
+        }
     }
-    
-    func showIndeterminate(in view: UIView, with text: String = "輸出中") {
-        
-        hud.textLabel.text = text
+}
 
-        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+class JYProgressHUD {
+
+    private init() {}
+
+    static private let shared = JYProgressHUD()    
+    
+    private var view: UIView {
         
-        hud.show(in: view)
+        return AppDelegate.shared.window!.rootViewController!.view
     }
     
-    func dismiss() {
+    private let hud = JGProgressHUD(style: .dark)
+}
+
+extension JYProgressHUD {
+    
+    static func show(_ hudType: HUDType) {
         
-        hud.dismiss()
+        if !Thread.isMainThread {
+            
+            DispatchQueue.main.async { show(hudType) }
+            
+            return
+        }
+        
+        shared.hud.textLabel.text = hudType.text
+        shared.hud.indicatorView = hudType.indicatorView
+        
+        shared.hud.show(in: shared.view)
+        shared.hud.dismiss(afterDelay: 1.5)
+    }
+    
+    static func dismiss() {
+        
+        shared.hud.dismiss()
     }
 }

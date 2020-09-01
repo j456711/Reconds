@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVKit
 import AVFoundation
 
 class CameraViewController: UIViewController {

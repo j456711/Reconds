@@ -71,7 +71,7 @@ class MusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.jy_registerCellWithNib(indentifier: String(describing: MusicTableViewCell.self), bundle: nil)
+        tableView.registerCellWithNib(indentifier: String(describing: MusicTableViewCell.self), bundle: nil)
     }
 
     override func viewDidLayoutSubviews() {
@@ -177,7 +177,7 @@ extension MusicViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let bundlePath = createBundlePath() else { return }
         
-        var stringArray = musicFilesArray.map({ "\($0)" })
+        let stringArray = musicFilesArray.map({ "\($0)" })
         
         let urlString = bundlePath.absoluteString + stringArray[indexPath.row] + ".mp3"
         

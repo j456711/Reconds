@@ -9,15 +9,13 @@
 import UIKit
 
 class MyVideosCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var thumbnail: UIImageView!
-    
+
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var thumbnail: UIImageView!
  
     func layoutCell(title: String, thumbnail: UIImage?) {
         
         titleLabel.text = title
-        
         self.thumbnail.image = thumbnail
     }
 }

@@ -10,21 +10,17 @@ import UIKit
 import NVActivityIndicatorView
 
 class MusicTableViewCell: UITableViewCell {
-    
+
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var indicatorView: NVActivityIndicatorView! {
-        
         didSet {
-            
             indicatorView.color = UIColor.rcOrange
             indicatorView.type = .audioEqualizer
         }
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-
     }
 
     func layoutCell(title: String) {

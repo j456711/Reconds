@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RCVideoPlayerView" customModule="Reconds" customModuleProvider="target">
             <connections>
-                <outlet property="aspectButton" destination="vPb-AK-eeh" id="hER-o3-0nh"/>
+                <outlet property="aspectButton" destination="vPb-AK-eeh" id="z2R-eU-ptj"/>
                 <outlet property="contentView" destination="Fms-OA-u85" id="hp6-2E-7r2"/>
                 <outlet property="currentTimeLabel" destination="KzY-DR-a2k" id="NuT-15-050"/>
                 <outlet property="endTimeLabel" destination="eLg-Pt-9aH" id="0p4-Fm-GWU"/>
-                <outlet property="playPauseButton" destination="ZKB-3V-13T" id="nnW-ZQ-KPq"/>
+                <outlet property="playPauseButton" destination="ZKB-3V-13T" id="R4c-cu-Smj"/>
                 <outlet property="slider" destination="T0I-fe-gy0" id="JlI-P5-Niw"/>
             </connections>
         </placeholder>
@@ -52,7 +50,7 @@
                     </constraints>
                     <state key="normal" image="Icon_PauseController"/>
                     <connections>
-                        <action selector="playPauseButtonPressed:" destination="-1" eventType="touchUpInside" id="0dm-1Y-XZp"/>
+                        <action selector="playPauseButtonPressed:" destination="-1" eventType="touchUpInside" id="VfZ-Eg-KOD"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPb-AK-eeh">
@@ -63,7 +61,7 @@
                     </constraints>
                     <state key="normal" image="Icon_128px_Expand"/>
                     <connections>
-                        <action selector="aspectButtonPressed:" destination="-1" eventType="touchUpInside" id="mlh-Bw-wb2"/>
+                        <action selector="aspectButtonPressed:" destination="-1" eventType="touchUpInside" id="QAJ-Yr-Pm6"/>
                     </connections>
                 </button>
             </subviews>

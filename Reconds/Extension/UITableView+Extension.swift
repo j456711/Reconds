@@ -10,7 +10,7 @@ import UIKit
 
 extension UITableView {
     
-    func jy_registerCellWithNib(indentifier: String, bundle: Bundle?) {
+    func registerCellWithNib(indentifier: String, bundle: Bundle?) {
         
         let nib = UINib(nibName: indentifier, bundle: bundle)
         
